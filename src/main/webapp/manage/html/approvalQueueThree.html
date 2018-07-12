@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>互联网信贷业务管理系统</title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <!-- page -->
+    <script src="../js/libs/page/kkpager.min.js"></script>
+    <link rel="stylesheet" href="../js/libs/page/kkpager.css" />
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="../css/customerInfo.css">
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box">
+    <h2>审批队列3</h2>
+    <div class="search-box">
+        <ul>
+            <li class="search">
+                <span class="s-tit">客户姓名</span>
+                <span class="s-ipt"><input type="text" class="i-ipt" id="name"></span>
+            </li>
+            <li class="search">
+                <span class="s-tit">手机号码</span>
+                <span class="s-ipt"><input type="text" class="i-ipt" id="phone" maxlength="11" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();"></span>
+            </li>
+        </ul>
+        <div class="find noselect">查询</div>
+        <img src="../images/ic_lantiao.svg">
+    </div>
+    <div class="main-con">
+        <div class="table-con">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>进件编号</th>
+                    <th>客户姓名</th>
+                    <th>手机号码</th>
+                    <th>申请提交时间</th>
+                    <th>业务类型</th>
+                    <th>申请金额/元</th>
+                    <th>申请期限/月</th>
+                    <th>审批状态</th>
+                    <!--<th>当前队列</th>-->
+                    <th>客户来源</th>
+                    <th>终端来源</th>
+                    <th>渠道来源</th>
+                    <th>进件渠道</th>
+                    <th style="padding: 8px 10px 8px;">订单锁定</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="tableCon"></tbody>
+            </table>
+        </div>
+        <div class="checkPending">
+            <span>总数<span class="checkPendingNum totalNum"></span>条</span>
+            <span style="margin: 0 10px;">未锁定<span class="checkPendingNum unlockNum"></span>条</span>
+            <span>已锁定<span class="checkPendingNum lockNum"></span>条</span>
+        </div>
+        <!--页码-->
+        <div class="page-nav-box noselect" id="kkpager">分页</div>
+    </div>
+</div>
+<div class="error-msg"></div>
+<!--修改密码-->
+<div class="reset-password"></div>
+<script src="../js/libs/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/util.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/menu.js"></script>
+<script src="../js/approvalQueueThree.js"></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.befloan.ClTIntoContactsDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.befloan.ClTIntoContacts" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="cust_code" property="custCode" jdbcType="VARCHAR" />
+    <result column="into_code" property="intoCode" jdbcType="VARCHAR" />
+    <result column="con_type" property="conType" jdbcType="VARCHAR" />
+    <result column="con_relation" property="conRelation" jdbcType="VARCHAR" />
+    <result column="con_name" property="conName" jdbcType="VARCHAR" />
+    <result column="con_phone" property="conPhone" jdbcType="VARCHAR" />
+    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cust_code, into_code, con_type, con_relation, con_name, con_phone, remark1, remark2, 
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cl_t_into_contacts
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cl_t_into_contacts
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bns.model.befloan.ClTIntoContacts" >
+    insert into cl_t_into_contacts (id, cust_code, into_code, 
+      con_type, con_relation, con_name, 
+      con_phone, remark1, remark2, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{custCode,jdbcType=VARCHAR}, #{intoCode,jdbcType=VARCHAR}, 
+      #{conType,jdbcType=VARCHAR}, #{conRelation,jdbcType=VARCHAR}, #{conName,jdbcType=VARCHAR}, 
+      #{conPhone,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bns.model.befloan.ClTIntoContacts" >
+    insert into cl_t_into_contacts
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="custCode != null" >
+        cust_code,
+      </if>
+      <if test="intoCode != null" >
+        into_code,
+      </if>
+      <if test="conType != null" >
+        con_type,
+      </if>
+      <if test="conRelation != null" >
+        con_relation,
+      </if>
+      <if test="conName != null" >
+        con_name,
+      </if>
+      <if test="conPhone != null" >
+        con_phone,
+      </if>
+      <if test="remark1 != null" >
+        remark1,
+      </if>
+      <if test="remark2 != null" >
+        remark2,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="custCode != null" >
+        #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="intoCode != null" >
+        #{intoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="conType != null" >
+        #{conType,jdbcType=VARCHAR},
+      </if>
+      <if test="conRelation != null" >
+        #{conRelation,jdbcType=VARCHAR},
+      </if>
+      <if test="conName != null" >
+        #{conName,jdbcType=VARCHAR},
+      </if>
+      <if test="conPhone != null" >
+        #{conPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bns.model.befloan.ClTIntoContacts" >
+    update cl_t_into_contacts
+    <set >
+      <if test="custCode != null" >
+        cust_code = #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="intoCode != null" >
+        into_code = #{intoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="conType != null" >
+        con_type = #{conType,jdbcType=VARCHAR},
+      </if>
+      <if test="conRelation != null" >
+        con_relation = #{conRelation,jdbcType=VARCHAR},
+      </if>
+      <if test="conName != null" >
+        con_name = #{conName,jdbcType=VARCHAR},
+      </if>
+      <if test="conPhone != null" >
+        con_phone = #{conPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.befloan.ClTIntoContacts" >
+    update cl_t_into_contacts
+    set cust_code = #{custCode,jdbcType=VARCHAR},
+      into_code = #{intoCode,jdbcType=VARCHAR},
+      con_type = #{conType,jdbcType=VARCHAR},
+      con_relation = #{conRelation,jdbcType=VARCHAR},
+      con_name = #{conName,jdbcType=VARCHAR},
+      con_phone = #{conPhone,jdbcType=VARCHAR},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByIntoCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+        ctic.con_name,
+        ctic.con_relation,
+        ctic.con_phone
+    FROM
+        cl_t_into_contacts ctic
+    WHERE
+        ctic.into_code = #{intoCode}
+  </select>
+</mapper>

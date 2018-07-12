@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>劳务人员管理系统</title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="../js/libs/build_standalone.css">
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <!-- page -->
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/customerInfo.css">
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box newWrap">
+    <div class="newTitle">
+        <img src="../images/address.png" />
+        <span>权限管理 > <a href="role.html">角色列表</a> > 修改角色</span>
+        <!--<span>权限管理 > 角色列表 > 修改角色</span>-->
+    </div>
+    <div class="queryWrap addRoleWrap">
+        <div class="addRoleTit">
+            <div class="listOfOptions">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6"><label class="com-lab">角色名称</label><input class="com-span role-name-edit" minlength="1" maxlength="8" /><span class="reminder">最多8个字符</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="addRoleBox">
+            <div class="addRoleLeft">基本权限</div>
+            <div class="addRoleRight">
+                <form class="menuListAll"></form>
+            </div>
+        </div>
+        <div class="submitBox">
+            <button id="submitBtn_editRole">提交</button>
+        </div>
+    </div>
+</div>
+<div class="mask" style="display: none;"></div>
+
+<div class="error-msg"></div>
+<!--修改密码-->
+<div class="reset-password"></div>
+<script src="../js/libs/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/util.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/menu.js"></script>
+<script src="../js/role.js"></script>
+<script src="../js/role_edit.js"></script>
+</body>
+</html>

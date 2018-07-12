@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.sys.SysRefuseDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.sys.SysRefuseDTO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="refuse_code" property="refuseCode" jdbcType="VARCHAR" />
+    <result column="refuse_des" property="refuseDes" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="validate_state" property="validateState" jdbcType="INTEGER" />
+    <result column="refuse_days" property="refuseDays" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="ResultMap" type="com.bns.api.sys.bo.RefuseRespBo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="leve1_code" property="leve1Code" jdbcType="VARCHAR" />
+    <result column="leve1_des" property="leve1Des" jdbcType="VARCHAR" />
+    <result column="leve2_code" property="leve2Code" jdbcType="VARCHAR" />
+    <result column="leve2_des" property="leve2Des" jdbcType="VARCHAR" />
+    <result column="leve3_code" property="leve3Code" jdbcType="VARCHAR" />
+    <result column="leve3_des" property="leve3Des" jdbcType="VARCHAR" />
+    <result column="validate_state" property="validateState" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, refuse_code, refuse_des, parent_id, validate_state, refuse_days, level, create_user, 
+    create_time, update_user, update_time
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_refuse
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.bns.model.sys.SysRefuseDTO" >
+    insert into sys_refuse
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="refuseCode != null" >
+        refuse_code,
+      </if>
+      <if test="refuseDes != null" >
+        refuse_des,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="validateState != null" >
+        validate_state,
+      </if>
+      <if test="refuseDays != null" >
+        refuse_days,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="refuseCode != null" >
+        #{refuseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="refuseDes != null" >
+        #{refuseDes,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="validateState != null" >
+        #{validateState,jdbcType=INTEGER},
+      </if>
+      <if test="refuseDays != null" >
+        #{refuseDays,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bns.model.sys.SysRefuseDTO" >
+    update sys_refuse
+    <set >
+      <if test="refuseCode != null" >
+        refuse_code = #{refuseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="refuseDes != null" >
+        refuse_des = #{refuseDes,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="validateState != null" >
+        validate_state = #{validateState,jdbcType=INTEGER},
+      </if>
+      <if test="refuseDays != null" >
+        refuse_days = #{refuseDays,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+  <!--查询所有 决绝代码-->
+  <select id="queryRefuseAll" resultMap="ResultMap" >
+    select
+        r3.id,
+        r1.refuse_code as 'leve1_code',r1.refuse_des as 'leve1_des',
+        r2.refuse_code as 'leve2_code',r2.refuse_des as 'leve2_des',
+        r3.refuse_code as 'leve3_code',r3.refuse_des as 'leve3_des' ,
+        r3.validate_state ,
+        r3.create_time
+    from
+        (select * from sys_refuse r where r.`level` = 3) r3
+    LEFT JOIN
+        (select * from sys_refuse r where r.`level` = 2) r2
+    ON
+        r3.parent_id = r2.id
+    LEFT JOIN
+        (select * from sys_refuse r where r.`level` = 1) r1
+    ON
+        r2.parent_id = r1.id
+
+    ORDER BY r1.id
+  </select>
+  <!--三级联动-->
+  <select id="queryRefuseByParent" resultType="java.util.Map" parameterType="java.lang.Integer">
+    SELECT
+        id,
+        refuse_code,
+        refuse_des,
+        refuse_days
+    FROM
+        sys_refuse
+    WHERE
+        parent_id = #{parentId,jdbcType=INTEGER}
+    AND validate_state = 1
+  </select>
+  <!--多条插入-->
+  <insert id="insertMore" parameterType="java.util.Map" >
+    insert into sys_refuse (refuse_code, refuse_des,
+    parent_id, validate_state, refuse_days,
+    level, create_user, create_time)
+    values
+    <foreach collection="refuseDTOS" item="dto" index="index" separator="," >
+      (#{dto.refuseCode,jdbcType=VARCHAR}, #{dto.refuseDes,jdbcType=VARCHAR},
+      #{dto.parentId,jdbcType=INTEGER}, 1, #{dto.refuseDays,jdbcType=INTEGER},
+      #{dto.level,jdbcType=INTEGER}, #{createUser,jdbcType=VARCHAR}, now())
+    </foreach>
+  </insert>
+  <!--单条插入-->
+  <insert id="insert" parameterType="com.bns.model.sys.SysRefuseDTO" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_refuse (refuse_code, refuse_des,
+    parent_id, validate_state, refuse_days,
+    level, create_user, create_time)
+    values (#{refuseCode,jdbcType=VARCHAR}, #{refuseDes,jdbcType=VARCHAR},
+      #{parentId,jdbcType=INTEGER}, 1, #{refuseDays,jdbcType=INTEGER},
+      #{level,jdbcType=INTEGER}, #{createUser,jdbcType=VARCHAR}, now())
+  </insert>
+  <!--修改状态-->
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.sys.SysRefuseDTO" >
+    update sys_refuse
+    set
+    validate_state = #{validateState,jdbcType=INTEGER},
+    update_user = #{updateUser,jdbcType=VARCHAR},
+    update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--拒绝编码查询-->
+  <select id="selectByRefuseCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT
+    *
+    FROM
+    sys_refuse
+    WHERE
+    refuse_code = #{refuseCode,jdbcType=VARCHAR}
+    AND validate_state = 1
+  </select>
+</mapper>

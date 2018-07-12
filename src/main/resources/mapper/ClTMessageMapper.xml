@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bns.dao.user.ClTMessageDao">
+  <resultMap id="BaseResultMap" type="com.bns.model.user.ClTMessageDTO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sys_msg_id" jdbcType="INTEGER" property="sysMsgId" />
+    <result column="cust_code" jdbcType="VARCHAR" property="custCode" />
+    <result column="bis_type" jdbcType="VARCHAR" property="bisType" />
+    <result column="msg_title" jdbcType="VARCHAR" property="msgTitle" />
+    <result column="msg_content" jdbcType="VARCHAR" property="msgContent" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="push_type" jdbcType="VARCHAR" property="pushType" />
+    <result column="is_read" jdbcType="VARCHAR" property="isRead" />
+    <result column="validate_state" jdbcType="VARCHAR" property="validateState" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cl_t_message
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bns.model.user.ClTMessageDTO">
+    insert into cl_t_message (id, sys_msg_id, cust_code,
+      bis_type, msg_title, update_time,
+      msg_content, create_time, push_type, 
+      is_read, validate_state)
+    values (#{id,jdbcType=INTEGER}, #{sysMsgId,jdbcType=INTEGER}, #{custCode,jdbcType=VARCHAR},
+      #{bisType,jdbcType=VARCHAR}, #{msgTitle,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR},
+      #{msgContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{pushType,jdbcType=VARCHAR}, 
+      #{isRead,jdbcType=VARCHAR}, #{validateState,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.user.ClTMessageDTO">
+    update cl_t_message
+    set sys_msg_id = #{sysMsgId,jdbcType=INTEGER},
+      cust_code = #{custCode,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      bis_type = #{bisType,jdbcType=VARCHAR},
+      msg_title = #{msgTitle,jdbcType=VARCHAR},
+      msg_content = #{msgContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      push_type = #{pushType,jdbcType=VARCHAR},
+      is_read = #{isRead,jdbcType=VARCHAR},
+      validate_state = #{validateState,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, sys_msg_id, cust_code, bis_type, msg_title, msg_content, create_time, update_time
+    push_type, is_read, validate_state
+    from cl_t_message
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, sys_msg_id, cust_code, bis_type, msg_title, msg_content, create_time, update_time
+    push_type, is_read, validate_state
+    from cl_t_message
+  </select>
+
+  <insert id="insertSelective" parameterType="com.bns.model.user.ClTMessageDTO" useGeneratedKeys="true" keyProperty="id">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cl_t_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sysMsgId != null" >
+        sys_msg_id,
+      </if>
+      <if test="custCode != null" >
+        cust_code,
+      </if>
+      <if test="bisType != null" >
+        bis_type,
+      </if>
+      <if test="msgTitle != null" >
+        msg_title,
+      </if>
+      <if test="msgContent != null" >
+        msg_content,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="pushType != null" >
+        push_type,
+      </if>
+      <if test="isRead != null" >
+        is_read,
+      </if>
+      <if test="validateState != null" >
+        validate_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sysMsgId != null" >
+        #{sysMsgId,jdbcType=VARCHAR},
+      </if>
+      <if test="custCode != null" >
+        #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bisType != null" >
+        #{bisType,jdbcType=VARCHAR},
+      </if>
+      <if test="msgTitle != null" >
+        #{msgTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="msgContent != null" >
+        #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushType != null" >
+        #{pushType,jdbcType=VARCHAR},
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=VARCHAR},
+      </if>
+      <if test="validateState != null" >
+        #{validateState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

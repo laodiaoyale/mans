@@ -1,0 +1,94 @@
+.customer-box .item-position{
+    font-size:14px;
+    color:#2383E2;
+    height:50px;
+    line-height: 50px;
+    border-bottom:1px solid #A0D5FF;
+}
+.customer-box .item-position img{
+    margin-right:5px;
+    vertical-align:middle;
+}
+.customer-box .rejectCodeList-box{
+    font-size:16px;
+    color:#2383E2;
+    height:60px;
+    line-height: 60px;
+    padding-left: 20px;
+    background: #fff;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+    margin-bottom:20px;
+}
+.customer-box .rejectCodeList-box span{
+    cursor: pointer;
+    display: inline-block;
+}
+.customer-box .rejectCodeList-box span img{
+    margin-left:5px;
+    vertical-align:middle;
+}
+.table-con .table{
+    border:1px solid #EEEFF0;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+}
+.tableConWrap .table .icon-tingyong{
+    vertical-align:middle;
+    width:10px;
+    height:10px;
+    margin-right:4px;
+}
+.tableConWrap .table thead tr{
+    background:#F0F7FC;
+    color:#5474A4;
+}
+/*拒绝代码增加*/
+.rejectCodeAddWrap{
+    width:100%;
+    background:#fff;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+    padding:10px 0;
+    display: none;
+}
+.rejectCodeAddWrap .rejectCodeAddCon{
+    padding:10px 20px;
+    border-bottom:1px dashed #D9D9D9;
+}
+.rejectCodeAddWrap .rejectCodeAddCon .rejectCodeFirst-box{
+    padding:20px 0;
+    color:#8B94A0;
+    font-size:14px;
+    position: relative;
+}
+.rejectCodeAddWrap .rejectCodeAddCon .rejectCodeFirst-box select,
+.rejectCodeAddWrap .rejectCodeAddCon .rejectCodeFirst-box .rejectReasonIpt{
+    border:1px solid #D9D9D9;
+    border-radius: 5px;
+    overflow: hidden;
+    width:200px;
+    min-width:150px;
+    height:30px;
+    padding:0 5px;
+    margin:0 40px 0 10px;
+}
+.rejectCodeAddWrap .rejectCodeAddCon .rejectCodeFirst-box .rejectReasonCodeIpt{
+    position: absolute;
+    left:86px;
+    top:25px;
+    padding-left:10px;
+}
+.rejectCodeAddWrap .rejectCodeAddButton-box{
+    padding:15px 0 5px 0 ;
+}
+.rejectCodeAddWrap .rejectCodeAddButton-box .submit-button{
+    width:100px;
+    height:30px;
+    line-height: 30px;
+    color:#fff;
+    font-size:14px;
+    background:#398BF8;
+    border-radius: 5px;
+    overflow: hidden;
+    margin:0 auto;
+    text-align: center;
+    cursor: pointer;
+}

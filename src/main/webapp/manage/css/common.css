@@ -1,0 +1,427 @@
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+   not supported by any browser */
+}
+#header{
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    z-index:1000;
+    position:fixed;
+    top:0;
+    left:0;
+    background: #fff;
+}
+#menu{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index: 999;
+}
+.blue{color: #398BF8;}
+.red{color: #F83939;}
+.black{color: #1F242C;}
+
+/*header s*/
+.loan-header {
+    width: 100%;
+    height: 50px;
+    line-height:50px;
+    font-size: 18px;
+}
+.loan-header>div{
+    padding: 0 22px;
+    height :50px;
+    width:100%;
+    position: relative;
+}
+
+.loan-header .company {
+    float: left;
+    position: relative;
+}
+
+.loan-header .company img {
+    width: 30px;
+    heihgt: 30px;
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+}
+
+.loan-header .company span {
+    margin-left: 50px;
+}
+
+.loan-header .person {
+    float: right;
+}
+
+.loan-header .person .name {
+    color: #707D8F;
+    margin-right : 30px;
+    cursor: pointer;
+}
+
+.loan-header .person .esc {
+    color:#2592F2;
+    margin-right : 20px;
+    cursor: pointer;
+}
+.loan-header .person img{
+    margin-right:5px;
+}
+.loan-header .name .loginName{
+    font-weight: normal;
+}
+.loan-header  div .mine-info-box{
+    width:266px;
+    height : 106px;
+    border: 1px solid #E1E1E1;
+    position: absolute;
+    top:45px;
+    right :50px;
+    background:#fff;
+    border-radius: 3px;
+    border:1px solid #E1E1E1;
+    font-size:12px;
+    color:#707D8F;
+    padding:5px 10px 0 10px;
+    display: none;
+}
+.loan-header  div .mine-info-box>div{
+    float: left;
+    width:55%;
+}
+.loan-header  div .mine-info-box>div:nth-child(1){
+    width:45%;
+}
+.loan-header  div .mine-info-box>div>div{
+    height:30px;
+    line-height:30px;
+}
+.mine-info-box .mine-info-reset{
+    border-top:1px dashed #E5E5E5;
+    clear: both;
+    width:100%!important;
+    text-align: center;
+    height:40px;
+    line-height: 40px;
+    color:#398BF8;
+    cursor: pointer;
+}
+.mine-info-box .mine-info-reset img{
+    vertical-align: middle;
+    margin:0 5px 3px 0;
+}
+.mine-info-box .triangle img{
+    /*width: 0!important;*/
+    /*height: 0;*/
+    /*border-width: 8px;*/
+    /*border-style: solid;*/
+    /*border-color:transparent transparent #E1E1E1 transparent;*/
+    position:absolute;
+    top:-8px;
+    left:115px;
+}
+
+/*header e*/
+/*一级导航s*/
+.menu-box {
+    background: #242A33;
+    width: 200px;
+    height :100%;
+    color:#677383;
+    position: fixed;
+    top : 0;
+    left:0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /*z-index:999;*/
+    margin-top : 50px;
+}
+.menu-box aside {
+    background:#242A33;
+    overflow-y: auto;
+    overflow-x: hidden;
+    color:#677383;
+    overflow: hidden;
+}
+
+.first-menu .first-con {
+    font-size: 14px;
+}
+
+.first-menu .menu-item {
+    padding-left: 62px;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+    border-bottom:1px solid #2E363F;
+}
+.first-menu .menu-item.arrow {
+    background: url(../images/arrow.png) right 14px center no-repeat;
+}
+.first-menu .menu-item.active{
+    color:#fff;
+    background: url(../images/menu_active.png) left center no-repeat;
+    background-color: #1D62AC;
+}
+.first-menu .menu-desc.active{
+     color:#fff;
+     background: url(../images/menu_active2.png) left center no-repeat;
+     background-color: #1D62AC;
+ }
+.ovfHiden{
+    overflow: hidden;height: 100%;
+}
+/*.rotate{*/
+    /*transform: rotate(90deg);*/
+/*}*/
+/*一级导航e*/
+/*二级导航s*/
+.first-menu .first-con .second-menu {
+    display: none;
+    background-color: #2F3640;
+    color: #B1B1B1;
+    font-size: 14px;
+}
+.second-menu  .second-con {
+    position: relative;
+}
+.menu-desc {
+    padding-left: 65px;
+    height: 45px;
+    line-height: 45px;
+    background: #2F3640;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.menu-desc:hover {
+    color: #fff;
+    background: #1F242C;
+}
+/*二级导航e*/
+/*修改密码s*/
+body .reset-password {
+    background: #FAFBFE;
+    height: 100%;
+    padding: 0 20px 40px;
+    overflow: hidden;
+    display: none;
+}
+.reset-password .password-box{
+    padding:20px 0 20px 30%;
+    background:#fff;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+}
+.reset-password .item-position{
+    font-size:14px;
+    color:#2383E2;
+    height:50px;
+    line-height: 50px;
+    border-bottom:1px solid #A0D5FF;
+}
+.reset-password .item-position img{
+    margin-right:5px;
+    vertical-align:middle;
+}
+.password-con-box>div{
+    height:50px;
+    line-height:50px;
+    font-size:14px;
+    color:#1F242C;
+}
+.password-con-box>div>span{
+    width:10%;
+    line-height:30px;
+    height:30px;
+    text-align: right;
+    display: inline-block;
+    margin-right:10px;
+}
+.password-con-box>div>input{
+    padding: 0 10px;
+    border:1px solid #D9D9D9;
+    border-radius:4px;
+    overflow: hidden;
+    height:34px;
+    line-height:34px;
+    width:186px;
+}
+.password-box .reset-password-button{
+    background: #398BF8;
+    border-radius: 4px;
+    width: 100px;
+    height: 30px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 30px;
+    margin: 15px 0 0 15%;
+    text-align: center;
+    cursor: pointer;
+}
+/*修改密码e*/
+/*  错误信息弹框 */
+.error-msg {  display: none;  position: fixed;  top: 35%;  left: 50%;  margin-left: -156px; padding: 6px;  width: 300px;  line-height: 30px;  font-size: 14px;  color: #FFFFFF;  text-align: center;  border-radius: 5px;  background-color: rgba(0, 0, 0, 0.5); z-index: 1010; /*transform: scale(0);*/ /*-webkit-transform: scale(0);*/ /*transform-origin: 50% 80%;*/ /*transition: all .5s;*/  }
+.error-msg.active { display: block; /*transform: scale(1);*/ /*-webkit-transform: scale(1);*/  }
+.ticket-loading{ display: none;}
+
+.mask {
+    background: rgba(0,0,0,0.5);
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+/*loading动画*/
+.loading-img{
+    z-index:1002;width:100%;position:absolute;display: none;
+}
+.loading-img>img{
+    margin: 17% 45%;
+    width: 10%;position: fixed;top: 0;left: 0;
+}
+
+
+
+/**菜单icon*/
+.first-menu i{
+    vertical-align: middle;
+    position: absolute;
+    left: 32px;
+    top: 18px;
+    height: 15px;
+    width: 15px;
+    font-size:30px;
+}
+.second-con i{
+    top: 13px;
+}
+.icon_sign {
+    background: url(../images/sprite.png) -0px -0px no-repeat;
+}
+.icon_credit {
+    background: url(../images/sprite.png) -15px -0px no-repeat;
+}
+.icon_info_manage {
+    background: url(../images/sprite.png) -45px -0px no-repeat;
+}
+.icon_operate {
+    background: url(../images/sprite.png) -60px -0px no-repeat;
+}
+.icon_permission {
+    background: url(../images/sprite.png) -75px -0px no-repeat;
+}
+.icon_permission2 {
+    background: url(../images/sprite.png) -90px -0px no-repeat;
+}
+.icon_reject {
+    background: url(../images/sprite.png) -105px -0px no-repeat;
+}
+.icon_role {
+    background: url(../images/sprite.png) -120px -0px no-repeat;
+}
+.icon_feedback {
+    background: url(../images/sprite.png) -135px -0px no-repeat;
+}
+.icon_system {
+    background: url(../images/sprite.png) -150px -0px no-repeat;
+}
+.icon_system_set {
+    background: url(../images/sprite.png) -165px -0px no-repeat;
+}
+.icon_user {
+    background: url(../images/sprite.png) -180px -0px no-repeat;
+}
+.icon_user_info {
+    background: url(../images/sprite.png) -195px -0px no-repeat;
+}
+.icon_apply_record {
+    background: url(../images/sprite.png) -210px -0px no-repeat;
+}
+.icon_approval {
+    background: url(../images/sprite.png) -225px -0px no-repeat;
+}
+.icon_approval_history {
+    background: url(../images/sprite.png) -240px -0px no-repeat;
+}
+.icon_approval_list {
+    background: url(../images/sprite.png) -255px -0px no-repeat;
+}
+.icon_contract {
+    background: url(../images/sprite.png) -270px -0px no-repeat;
+}
+.icon_contract2 {
+    background: url(../images/sprite.png) -30px -0px no-repeat;
+}
+
+/*修改密码s*/
+body .reset-password {
+    background: #FAFBFE;
+    height: 100%;
+    padding: 0 20px 40px;
+    overflow: hidden;
+    display: none;
+}
+.reset-password .password-box{
+    padding:20px 0 20px 30%;
+    background:#fff;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+}
+.reset-password .item-position{
+    font-size:14px;
+    color:#2383E2;
+    height:50px;
+    line-height: 50px;
+    border-bottom:1px solid #A0D5FF;
+}
+.reset-password .item-position img{
+    margin-right:5px;
+    vertical-align:middle;
+}
+.password-con-box>div{
+    height:50px;
+    line-height:50px;
+    font-size:14px;
+    color:#1F242C;
+}
+.password-con-box>div>span{
+    width:10%;
+    line-height:30px;
+    height:30px;
+    text-align: right;
+    display: inline-block;
+    margin-right:10px;
+}
+.password-con-box>div>input{
+    padding: 0 10px;
+    border:1px solid #D9D9D9;
+    border-radius:4px;
+    overflow: hidden;
+    height:34px;
+    line-height:34px;
+    width:186px;
+}
+.password-box .reset-password-button{
+    background: #398BF8;
+    border-radius: 4px;
+    width: 100px;
+    height: 30px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 30px;
+    margin: 15px 0 0 15%;
+    text-align: center;
+    cursor: pointer;
+}
+/*修改密码e*/

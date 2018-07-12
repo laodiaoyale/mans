@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>互联网信贷业务管理系统</title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <!--page-->
+    <script src="../js/libs/page/kkpager.min.js"></script>
+    <link rel="stylesheet" href="../js/libs/page/kkpager.css" />
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/customerInfo.css">
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box">
+    <h2>系统设置</h2>
+    <div class="search-box">
+        <ul>
+            <li class="search">
+                <span class="s-tit">名称</span>
+                <span class="s-ipt">
+                    <input type="text" class="i-ipt" id="configName">
+                </span>
+            </li>
+
+            <li class="search">
+                <span class="s-tit">code</span>
+                <span class="s-ipt">
+                    <input type="text" class="i-ipt" id="configCode">
+                </span>
+            </li>
+        </ul>
+        <!--<span class="add-item noselect">添加</span>-->
+        <span class="refresh noselect">一键刷新</span>
+        <div class="find noselect" >查询</div>
+        <img src="../images/ic_lantiao.svg">
+    </div>
+    <div class="main-con">
+        <div class="table-con">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>序</th>
+                    <th>名称</th>
+                    <th>code</th>
+                    <th>value</th>
+                    <!--<th>类型</th>-->
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="tableCon"></tbody>
+            </table>
+        </div>
+        <!--页码-->
+        <div class="page-nav-box noselect" id="kkpager">分页</div>
+    </div>
+    <!--修改-->
+    <div class="fix">
+        <div class="fix-head"></div>
+        <div class="fix-con">
+            <span>value</span>
+            <input type="text" class="value-ipt" >
+        </div>
+        <div class="button-box">
+            <button class="sure">确定</button>
+            <button class="cancle">取消</button>
+        </div>
+    </div>
+    <!--添加-->
+    <!--<div class="item-box">-->
+        <!--<div class="item-head">添加项目</div>-->
+        <!--<div class="item-body">-->
+            <!--<div class="item-con">-->
+                <!--<span>名称</span>-->
+                <!--<input type="text" class="value-ipt item-name" >-->
+            <!--</div>-->
+            <!--<div class="item-con">-->
+                <!--<span>code</span>-->
+                <!--<input type="text" class="value-ipt code-size" >-->
+            <!--</div>-->
+            <!--<div class="item-con">-->
+                <!--<span>value</span>-->
+                <!--<input type="text" class="value-ipt value-num" >-->
+            <!--</div>-->
+            <!--<div class="item-con">-->
+                <!--<span>类型</span>-->
+                <!--<select id="item-type" class="value-ipt" >-->
+                    <!--<option value="0">系统级</option>-->
+                    <!--<option value="1">项目级</option>-->
+                <!--</select>-->
+            <!--</div>-->
+            <!--<div class="item-con">-->
+                <!--<span>状态</span>-->
+                <!--<select id="item-state" class="value-ipt" >-->
+                    <!--<option value="0">无效</option>-->
+                    <!--<option value="1">有效</option>-->
+                <!--</select>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="button-box">-->
+            <!--<button class="item-sure">确定</button>-->
+            <!--<button class="item-cancle">取消</button>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+<div class="error-msg"></div>
+<div class="mask"></div>
+<!--修改密码-->
+<div class="reset-password"></div>
+<script src="../js/util.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/menu.js"></script>
+<script src="../js/systemManagement.js"></script>
+</body>
+</html>

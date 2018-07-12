@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.sys.SysRoleUserDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.sys.SysRoleUserDTO" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="target_id" property="targetId" jdbcType="BIGINT" />
+    <result column="app_id" property="appId" jdbcType="BIGINT" />
+    <result column="taget_type" property="tagetType" jdbcType="VARCHAR" />
+    <result column="validate_state" property="validateState" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, role_id, target_id, app_id, taget_type, validate_state, version, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_user
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_role_user
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bns.model.sys.SysRoleUserDTO" >
+    insert into sys_role_user (ID, role_id, target_id, 
+      app_id, taget_type, validate_state, 
+      version, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{targetId,jdbcType=BIGINT}, 
+      #{appId,jdbcType=BIGINT}, #{tagetType,jdbcType=VARCHAR}, #{validateState,jdbcType=VARCHAR}, 
+      #{version,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bns.model.sys.SysRoleUserDTO" useGeneratedKeys="true" keyProperty="id" >
+    insert into sys_role_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="targetId != null" >
+        target_id,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="tagetType != null" >
+        taget_type,
+      </if>
+      <if test="validateState != null" >
+        validate_state,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+        create_time,
+        update_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="targetId != null" >
+        #{targetId,jdbcType=BIGINT},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="tagetType != null" >
+        #{tagetType,jdbcType=VARCHAR},
+      </if>
+      <if test="validateState != null" >
+        #{validateState,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      now(),
+      now(),
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bns.model.sys.SysRoleUserDTO" >
+    update sys_role_user
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="targetId != null" >
+        target_id = #{targetId,jdbcType=BIGINT},
+      </if>
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="tagetType != null" >
+        taget_type = #{tagetType,jdbcType=VARCHAR},
+      </if>
+      <if test="validateState != null" >
+        validate_state = #{validateState,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = now(),
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.sys.SysRoleUserDTO" >
+    update sys_role_user
+    set role_id = #{roleId,jdbcType=BIGINT},
+      target_id = #{targetId,jdbcType=BIGINT},
+      app_id = #{appId,jdbcType=BIGINT},
+      taget_type = #{tagetType,jdbcType=VARCHAR},
+      validate_state = #{validateState,jdbcType=VARCHAR},
+      version = #{version,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <!--修改用户角色-->
+  <update id="updateUserRoleByUserId" parameterType="com.bns.model.sys.SysRoleUserDTO" >
+    update sys_role_user
+    set role_id = #{roleId,jdbcType=BIGINT},
+    update_time = now(),
+    update_user = #{updateUser}
+    where target_id = #{targetId,jdbcType=BIGINT}
+  </update>
+  <!--添加用户角色关系-->
+  <insert id="insertRoleUser" parameterType="com.bns.model.sys.SysRoleUserDTO" >
+    insert into sys_role_user (role_id, target_id,validate_state,
+    create_time, create_user
+    )
+    values (#{roleId,jdbcType=BIGINT}, #{targetId,jdbcType=BIGINT},
+    1,
+    now(), #{createUser,jdbcType=VARCHAR}
+    )
+  </insert>
+</mapper>

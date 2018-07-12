@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>劳务人员管理系统</title>
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <!--page-->
+    <script src="../js/libs/page/kkpager.min.js"></script>
+    <link rel="stylesheet" href="../js/libs/page/kkpager.css" />
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/customerInfo.css">
+    <link rel="stylesheet" href="../css/reject.css">
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box">
+    <h2 class="item-position"><img src="../images/position.png" alt="">系统管理&nbsp;&gt;&nbsp;拒绝代码</h2>
+    <div class="rejectCodeListWrap">
+        <div class="rejectCodeList-box">
+            <span class="CodeAddBtn">代码增加<img src="../images/jjdm_add.png" alt=""></span>
+        </div>
+        <div class="tableConWrap">
+            <div class="table-con">
+                <table class="table table-hover" style="width:100%;">
+                    <thead>
+                    <tr>
+                        <th>序</th>
+                        <th>一级拒绝码</th>
+                        <th>拒绝原因</th>
+                        <th>二级拒绝码</th>
+                        <th>拒绝原因</th>
+                        <th>三级拒绝码</th>
+                        <th>拒绝原因</th>
+                        <th>增加时间</th>
+                        <th>是否生效</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="tableCon rejectListWrap" style="text-align: center"></tbody>
+                </table>
+            </div>
+        </div>
+        <!--页码-->
+        <div class="page-nav-box noselect" id="kkpager">分页</div>
+    </div>
+    <div class="rejectCodeAddWrap">
+        <div class="rejectCodeAddCon">
+            <div class="rejectCodeFirst-box">
+                <span>一级拒绝码</span>
+                <select name="" id="firstRejectCode">
+                    <option value="">请选择</option>
+                </select>
+                <span>拒绝原因</span>
+                <input type="text" class="rejectReasonIpt" id="firstRejectReason">
+            </div>
+            <div class="rejectCodeSecond-box">
+                <div class="rejectCodeFirst-box">
+                    <span>二级拒绝码</span>
+                    <input type="text" class="rejectReasonCodeIpt" id="selectIpt2" maxlength="8">
+                    <select name="" id="select2">
+                        <option value="">请选择</option>
+                    </select>
+                    <span>拒绝原因</span>
+                    <input type="text" class="rejectReasonIpt" id="secondRejectReason" maxlength="20">
+                </div>
+            </div>
+            <div class="rejectCodeThird-box">
+                <div class="rejectCodeFirst-box">
+                    <span>三级拒绝码</span>
+                    <input type="text" class="rejectReasonIpt" id="thirdRejectCode" maxlength="8">
+                    <span>拒绝原因</span>
+                    <input type="text" class="rejectReasonIpt" id="thirdRejectReason" maxlength="20">
+                    <span>再次进件时间</span>
+                    <input type="text" class="rejectReasonIpt" id="reentryTime" style="margin-right:10px;">天
+                </div>
+            </div>
+        </div>
+        <div class="rejectCodeAddButton-box">
+            <div class="submit-button">提交</div>
+        </div>
+    </div>
+</div>
+<div class="error-msg"></div>
+<div class="mask"></div>
+<!--停用二级弹框-->
+<div class="msg-box disableBox">
+    <div class="msg-con">您确认要停用吗</div>
+    <div class="msg-btn">
+        <button class="sure-btn" style="color:#fff;">确定</button>
+        <button class="cancel-btn">取消</button>
+    </div>
+</div>
+<!--修改密码-->
+<div class="reset-password"></div>
+<script src="../js/util.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/menu.js"></script>
+<script src="../js/reject.js"></script>
+</body>
+</html>

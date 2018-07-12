@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.user.ClTProductDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.user.ClTProductDTO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="product_channel" property="productChannel" jdbcType="VARCHAR" />
+    <result column="product_code" property="productCode" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_peroid" property="productPeroid" jdbcType="INTEGER" />
+    <result column="peroid_type" property="peroidType" jdbcType="VARCHAR" />
+    <result column="product_rate" property="productRate" jdbcType="DECIMAL" />
+    <result column="month_rate" property="monthRate" jdbcType="DECIMAL" />
+    <result column="trial_rate" property="trialRate" jdbcType="DECIMAL" />
+    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+    <result column="safe_fee" property="safeFee" jdbcType="INTEGER" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="validate_state" property="validateState" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="year_total_rate" property="yearTotalRate" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, product_channel, product_code, product_name, product_peroid, peroid_type, product_rate, 
+    month_rate, trial_rate, creator_id, safe_fee, remarks, validate_state, create_time, 
+    update_time, year_total_rate
+  </sql>
+
+  <!-- 根据产品费率查询  -->
+  <select id="selectByProductRate" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    t1.id                             ,
+    t1.product_code                   ,
+    t1.product_name                   ,
+    t1.product_peroid                 ,
+    t1.peroid_type                    ,
+    t1.product_rate                   ,
+    t1.month_rate                     ,
+    t1.year_total_rate                ,
+    t1.trial_rate                     ,
+    t1.creator_id                     ,
+    t1.safe_fee                       ,
+    t1.remarks                        ,
+    t1.create_time                    ,
+    t1.update_time
+    from cl_t_product 		t1
+    where t1.product_rate = #{productRate}
+    and t1.validate_state ='1'
+  </select>
+</mapper>

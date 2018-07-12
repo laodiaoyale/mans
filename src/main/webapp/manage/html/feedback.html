@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>劳务人员管理系统</title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="../js/libs/build_standalone.css">
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <!-- page -->
+    <script src="../js/libs/page/kkpager.min.js"></script>
+    <link rel="stylesheet" href="../js/libs/page/kkpager.css" />
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/customerInfo.css">
+    <link rel="stylesheet" href="../js/libs/css/swiper-3.4.2.min.css" />
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box newWrap">
+    <div class="newTitle">
+        <img src="../images/address.png" />
+        <span>信息管理 > 客户反馈</span>
+    </div>
+    <div class="queryWrap">
+        <div class="queryWrapBox">
+            <div class="detailBox bqQuestion">
+                <label>标签问题</label>
+                <div class="optionList ">
+                    <div class="showCon">
+                        <div class="detailCon">全部</div>
+                        <span class="trigonDown"><img src="../images/down_arrow.png" /></span>
+                    </div>
+                    <ul class="optionUl">
+                        <li data-feedbackId=''>全部</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="detailBox condition">
+                <label>状态</label>
+                <div class="optionList">
+                    <div class="showCon">
+                        <div class="detailCon">全部</div>
+                        <span class="trigonDown"><img src="../images/down_arrow.png" /></span>
+                    </div>
+                    <ul class="optionUl">
+                        <li>全部</li>
+                        <li>已处理</li>
+                        <li>未处理</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="detailBox startTime">
+                <label>提交时间</label>
+                <div class="optionList">
+                    <input class="detailCon" id="datetimepicker_str" />
+                </div>
+            </div>
+            <div class="detailBox endTime">
+                <label>至</label>
+                <div class="optionList">
+                    <input class="detailCon" id="datetimepicker_end" />
+                </div>
+            </div>
+        </div>
+        <div class="queryBtn">
+            <div class="searchBtn"><img src="../images/search.png" /><span>查询</span></div>
+            <div id="exportBtn"><img src="../images/export.png" /><span>导出</span></div>
+        </div>
+    </div>
+    <div class="feedbackList">
+        <table class="table ListTable">
+            <thead>
+                <tr style="white-space: nowrap;">
+                    <th>序号</th>
+                    <th>客户账号</th>
+                    <th>客户姓名</th>
+                    <th>手机号码</th>
+                    <th>标签问题</th>
+                    <th>问题描述</th>
+                    <th>提交时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <!--页码-->
+    <div class="page-nav-box noselect" id="kkpager">分页</div>
+</div>
+<div class="mask" style="display: none;"></div>
+<form action="" target='_self' id='exportForm' method='post'></form>
+<div class="troubleshooting bouced" style="display: none;">
+    <div class="detailTitle move_part">
+        <span class="detailTitCon"></span>
+        <span class="audit-close">×</span>
+    </div>
+    <div class="detailBody">
+        <div class="detailBodyList" id="cusAccountWrap"><label>客户账号：</label><span id="cusAccount"></span></div>
+        <div class="detailBodyList"><label>客户姓名：</label><span id="cusName"></span></div>
+        <div class="detailBodyList"><label>手机号：</label><span id="cusIphoneNum"></span></div>
+        <div class="detailBodyList"><label>问题标签：</label><span id="cusTag"></span></div>
+        <div class="detailBodyList"><label>问题描述：</label><span id="cusDepict"></span></div>
+        <div class="detailBodyList"><label>反馈时间：</label><span id="cusTime"></span></div>
+        <div class="detailBodyList">
+            <label>图片展示：</label>
+            <div class="slideshowImg">
+                <div class="showBigImg"><img></div>
+                <div class="swiper-container">
+                    <div class="swiper-wrapper"></div>
+                </div>
+                <!-- 如果需要导航按钮 -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+        <div class="if_manage" style="display: none;">
+            <div class="detailBodyList"><label>处理意见：</label><textarea class="suggestionCon" placeholder="请填写处理意见" maxlength="200" style="resize: none; width: 84%; height: 100px; margin-left: 4px;"></textarea></div>
+            <div class="detailBodyList"><button class="submitBtn">提交</button></div>
+        </div>
+        <div class="if_detail" style="display: none;">
+            <div class="detailBodyList"><label>处理意见：</label><span class="treatment"></span></div>
+            <div class="detailBodyList"><label>处理人员：</label><span class="conductor">展示</span></div>
+            <div class="detailBodyList"><label>处理时间：</label><span class="processing">2018-3-20</span></div>
+        </div>
+    </div>
+</div>
+<div class="error-msg"></div>
+<!--修改密码-->
+<div class="reset-password"></div>
+<script src="../js/libs/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/util.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/menu.js"></script>
+<script src="../js/libs/swiper-3.4.2.jquery.min.js"></script>
+<script src="../js/feedback.js"></script>
+<script src="../js/libs/bootstrap-datetimepicker.min.js"></script>
+<script src="../js/libs/bootstrap-datetimepicker.zh-CN.js"></script>
+<!--轮播图-->
+<script>
+    var mySwiper = new Swiper ('.swiper-container', {
+        slidesPerView: 3,
+        noSwiping : true,
+        noSwipingClass : 'stop-swiping',
+        width:210,
+        // 如果需要前进后退按钮
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev'
+    });
+</script>
+</body>
+</html>

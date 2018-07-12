@@ -1,0 +1,190 @@
+body {
+  padding: 50px 0 0 200px;
+  font-family: PingFangSC-Regular;
+}
+body .inner-page {
+  background: #F3F6F9;
+  height: 100%;
+  width: 100%;
+  padding: 0 20px 40px;
+  overflow: hidden;
+  position: relative;
+}
+body .inner-page > .title {
+  font-size: 24px;
+  color: #398BF8;
+  letter-spacing: -0.58px;
+  line-height: 80px;
+}
+.inner-page .detail-info{
+  width:125px;
+  height : 36px;
+  line-height : 36px;
+  color:#398BF7;
+  font-size:15px;
+  background:#fff;
+  border-radius: 4px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.1),-1px -1px 5px rgba(0,0,0,0.1);
+  text-align: center;
+  position: fixed;
+  top : 82px;
+  right:20px;
+  cursor: pointer;
+  z-index:999;
+}
+.inner-page .match-info{
+  width:100px;
+  height : 36px;
+  line-height : 36px;
+  color:#398BF7;
+  font-size:15px;
+  background:#fff;
+  border-radius: 4px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.1),-1px -1px 5px rgba(0,0,0,0.1);
+  text-align: center;
+  position: fixed;
+  top : 82px;
+  right:160px;
+  cursor: pointer;
+  z-index:999;
+}
+body .inner-page .header-data {
+  display: flex;
+  margin-bottom: 20px;
+}
+body .inner-page .header-data .data-box {
+  flex: 1;
+  background: white;
+  padding-right: 20px;
+  width: 30%;
+  height: 110px;
+  position: relative;
+  padding: 30px 0 30px 50px;
+}
+body .inner-page .header-data .data-box:after {
+  content: "";
+  height: 100%;
+  position: absolute;
+  right: 0;
+  width: 20px;
+  background: #F3F6F9;
+  top: 0;
+}
+body .inner-page .header-data .data-box:last-child:after {
+  display: none;
+}
+body .inner-page .header-data .data-box:before {
+  content: "";
+  height: 30px;
+  width: 0;
+  border-right: 1.5px solid #398BF7;
+  position: absolute;
+  left: 0px;
+  top: 38px;
+}
+body .inner-page .header-data .data-box .icon-box {
+  position: absolute;
+  left: 30px;
+  height: 50px;
+  width: 50px;
+  top: 28px;
+}
+body .inner-page .header-data .data-box .icon-box img {
+  height: 100%;
+  width: 100%;
+}
+body .inner-page .header-data .data-box .info-box {
+  line-height: 24px;
+  padding-left: 45px;
+}
+body .inner-page .header-data .data-box .info-box > .title {
+  font-size: 14px;
+  color: #A3B3BB;
+  letter-spacing: -0.34px;
+  line-height: 16px;
+}
+body .inner-page .header-data .data-box .info-box > .content {
+  font-size: 30px;
+  color: #1F242C;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+body .inner-page .report-box {
+  background: white;
+  margin-bottom: 10px;
+}
+body .inner-page .report-box .title-box {
+  padding: 0 20px;
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+}
+body .inner-page .report-box .title-box:before {
+  content: "";
+  height: 30px;
+  width: 0;
+  border-right: 1.5px solid #398BF7;
+  position: absolute;
+  left: 0px;
+  top: 10px;
+}
+body .inner-page .report-box .title-box > div {
+  border-bottom: 1px solid #EEEFF0;
+}
+body .inner-page .report-box .title-box span.title {
+  color: #1F242C;
+  font-size:16px;
+}
+body .inner-page .report-box .title-box .datepicker {
+  border: 1px solid #D9D9D9;
+  border-radius: 4px;
+  height: 34px;
+  width: 120px;
+  color: #999;
+  text-align: center;
+}
+body .inner-page .report-box .title-box .zhi {
+  color: #1F242C;
+  margin: 0 10px;
+}
+body .inner-page .report-box .title-box .search {
+  width: 110px;
+  height: 34px;
+  border-radius: 4px;
+  background: #1EC0A0;
+  color: white;
+  margin-left: 20px;
+  cursor: pointer;
+}
+body .inner-page .report-box .title-box .fast {
+  float: right;
+  border: 1px solid #A3B3BB;
+  border-radius: 2px;
+  height: 26px;
+  line-height: 24px;
+  margin-top: 12px;
+  font-size: 12px;
+  width: 160px;
+}
+body .inner-page .report-box .title-box .fast span {
+  cursor: pointer;
+  width: 50%;
+  color: #A3B3BB;
+  display: inline-block;
+  float: left;
+  text-align: center;
+}
+body .inner-page .report-box .title-box .fast span.active {
+  background: #A3B3BB;
+  color: white;
+}
+.table-title{
+  height :55px;
+  line-height : 55px;
+  width:100%;
+  font-size:16px;
+  color:#1F242C;
+  margin : 0 50px;
+  border-bottom: 1px solid #EEEFF0;
+}
+

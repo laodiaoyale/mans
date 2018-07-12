@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.sys.SysUserDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.sys.SysUserDTO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_no" property="userNo" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="office_tel" property="officeTel" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="user_image" property="userImage" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="nationality" property="nationality" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="home_address" property="homeAddress" jdbcType="VARCHAR" />
+    <result column="home_zipcode" property="homeZipcode" jdbcType="VARCHAR" />
+    <result column="home_tel" property="homeTel" jdbcType="VARCHAR" />
+    <result column="office_address" property="officeAddress" jdbcType="VARCHAR" />
+    <result column="order_by" property="orderBy" jdbcType="VARCHAR" />
+    <result column="validate_state" property="validateState" jdbcType="VARCHAR" />
+    <result column="is_locked" property="isLocked" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="probation_period" property="probationPeriod" jdbcType="INTEGER" />
+    <result column="entry_date" property="entryDate" jdbcType="TIMESTAMP" />
+    <result column="quit_date" property="quitDate" jdbcType="TIMESTAMP" />
+    <result column="work_date" property="workDate" jdbcType="TIMESTAMP" />
+    <result column="political_status" property="politicalStatus" jdbcType="VARCHAR" />
+    <result column="user_relation" property="userRelation" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+    <result column="annual_leave" property="annualLeave" jdbcType="INTEGER" />
+    <result column="jxzj" property="jxzj" jdbcType="VARCHAR" />
+    <result column="njqsrq" property="njqsrq" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="UserList" type="com.bns.api.sys.bo.LoginRespBo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_no" property="userNo" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="create_time" property="creatTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="User_Column_List" >
+    a.id, a.user_no, a.user_name, b.ID,a.department, a.job, a.mobile, a.create_time
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_no, user_name, sex, password, department, job, mobile, office_tel, email,
+    salt, user_image, birthday, nationality, education, home_address, home_zipcode, home_tel,
+    office_address, order_by, validate_state, is_locked, version, probation_period, entry_date,
+    quit_date, work_date, political_status, user_relation, create_time, update_time,
+    card_no, annual_leave, jxzj, njqsrq,create_user,update_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+
+  <!--更新-->
+  <update id="updateByPrimaryKeySelective" parameterType="com.bns.model.sys.SysUserDTO" >
+    update sys_user
+    <set >
+      <if test="userNo != null" >
+        user_no = #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="officeTel != null" >
+        office_tel = #{officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="userImage != null" >
+        user_image = #{userImage,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null" >
+        nationality = #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null" >
+        home_address = #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homeZipcode != null" >
+        home_zipcode = #{homeZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="homeTel != null" >
+        home_tel = #{homeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="officeAddress != null" >
+        office_address = #{officeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        order_by = #{orderBy,jdbcType=VARCHAR},
+      </if>
+      <if test="validateState != null" >
+        validate_state = #{validateState,jdbcType=VARCHAR},
+      </if>
+      <if test="isLocked != null" >
+        is_locked = #{isLocked,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="probationPeriod != null" >
+        probation_period = #{probationPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="entryDate != null" >
+        entry_date = #{entryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quitDate != null" >
+        quit_date = #{quitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workDate != null" >
+        work_date = #{workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="politicalStatus != null" >
+        political_status = #{politicalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="userRelation != null" >
+        user_relation = #{userRelation,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+        update_time = now(),
+      <if test="cardNo != null" >
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="annualLeave != null" >
+        annual_leave = #{annualLeave,jdbcType=INTEGER},
+      </if>
+      <if test="jxzj != null" >
+        jxzj = #{jxzj,jdbcType=VARCHAR},
+      </if>
+      <if test="njqsrq != null" >
+        njqsrq = #{njqsrq,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.sys.SysUserDTO" >
+    update sys_user
+    set user_no = #{userNo,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      office_tel = #{officeTel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      user_image = #{userImage,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      home_address = #{homeAddress,jdbcType=VARCHAR},
+      home_zipcode = #{homeZipcode,jdbcType=VARCHAR},
+      home_tel = #{homeTel,jdbcType=VARCHAR},
+      office_address = #{officeAddress,jdbcType=VARCHAR},
+      order_by = #{orderBy,jdbcType=VARCHAR},
+      validate_state = #{validateState,jdbcType=VARCHAR},
+      is_locked = #{isLocked,jdbcType=VARCHAR},
+      version = #{version,jdbcType=BIGINT},
+      probation_period = #{probationPeriod,jdbcType=INTEGER},
+      entry_date = #{entryDate,jdbcType=TIMESTAMP},
+      quit_date = #{quitDate,jdbcType=TIMESTAMP},
+      work_date = #{workDate,jdbcType=TIMESTAMP},
+      political_status = #{politicalStatus,jdbcType=VARCHAR},
+      user_relation = #{userRelation,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      annual_leave = #{annualLeave,jdbcType=INTEGER},
+      jxzj = #{jxzj,jdbcType=VARCHAR},
+      njqsrq = #{njqsrq,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="passwordUpdate" parameterType="java.util.Map" >
+   UPDATE  sys_user SET
+   password=#{password,jdbcType=VARCHAR} where user_no = #{userNo,jdbcType=VARCHAR}
+  </update>
+
+  <!--登录-->
+  <select id="sysUserLogin" parameterType="java.util.Map"  resultMap="BaseResultMap" >
+    SELECT *
+            FROM sys_user a
+     where a.USER_NO=#{userNo,jdbcType=VARCHAR}  AND a.PASSWORD=#{password,jdbcType=VARCHAR} and a.validate_state = 1
+ </select>
+  <select id="selectUserByParam" resultMap="BaseResultMap" >
+    select * from sys_user a where 1=1
+    <if test="userNo !=null">
+    AND  a.USER_NO=#{userNo,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+
+
+
+
+  <!--对象查询-->
+  <select id="selectUserParam" parameterType="java.util.Map" resultMap="BaseResultMap" >
+      select * from sys_user a where 1 =1
+      <if test="userNo !=null">
+        AND  a.USER_NO=#{userNo,jdbcType=VARCHAR}
+      </if>
+
+  </select>
+  <!--列表查询-->
+  <select id="selectUserList" resultType="java.util.Map" parameterType="com.bns.api.sys.vo.SysUserVo">
+    SELECT
+    a.id,
+    a.user_no,
+    a.user_name,
+    b.role_name,
+    a.department,
+    a.job,
+    a.mobile,
+    date_format(a.create_time,'%Y-%m-%d') AS create_time
+    FROM
+    sys_user a
+    LEFT JOIN sys_role_user c ON a.id = c.target_id
+    LEFT JOIN sys_role b ON c.role_id = b.ID
+    WHERE a.validate_state =1 and b.ID!='1'
+    <if test="roleId != null">
+      and b.ID=#{roleId,jdbcType=BIGINT}
+    </if>
+    <if test="userName != null and userName !=''">
+      and a.user_name=#{userName}
+    </if>
+  </select>
+  <!--添加-->
+  <insert id="insertSelective" parameterType="com.bns.model.sys.SysUserDTO" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userNo != null" >
+        user_no,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="officeTel != null" >
+        office_tel,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="userImage != null" >
+        user_image,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="nationality != null" >
+        nationality,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="homeAddress != null" >
+        home_address,
+      </if>
+      <if test="homeZipcode != null" >
+        home_zipcode,
+      </if>
+      <if test="homeTel != null" >
+        home_tel,
+      </if>
+      <if test="officeAddress != null" >
+        office_address,
+      </if>
+      <if test="orderBy != null" >
+        order_by,
+      </if>
+      <if test="validateState != null" >
+        validate_state,
+      </if>
+      <if test="isLocked != null" >
+        is_locked,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="probationPeriod != null" >
+        probation_period,
+      </if>
+      <if test="entryDate != null" >
+        entry_date,
+      </if>
+      <if test="quitDate != null" >
+        quit_date,
+      </if>
+      <if test="workDate != null" >
+        work_date,
+      </if>
+      <if test="politicalStatus != null" >
+        political_status,
+      </if>
+      <if test="userRelation != null" >
+        user_relation,
+      </if>
+      create_time,
+
+      update_time,
+      <if test="cardNo != null" >
+        card_no,
+      </if>
+      <if test="annualLeave != null" >
+        annual_leave,
+      </if>
+      <if test="jxzj != null" >
+        jxzj,
+      </if>
+      <if test="njqsrq != null" >
+        njqsrq,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userNo != null" >
+        #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="officeTel != null" >
+        #{officeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="userImage != null" >
+        #{userImage,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null" >
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null" >
+        #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homeZipcode != null" >
+        #{homeZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="homeTel != null" >
+        #{homeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="officeAddress != null" >
+        #{officeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        #{orderBy,jdbcType=VARCHAR},
+      </if>
+      <if test="validateState != null" >
+        #{validateState,jdbcType=VARCHAR},
+      </if>
+      <if test="isLocked != null" >
+        #{isLocked,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="probationPeriod != null" >
+        #{probationPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="entryDate != null" >
+        #{entryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quitDate != null" >
+        #{quitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workDate != null" >
+        #{workDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="politicalStatus != null" >
+        #{politicalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="userRelation != null" >
+        #{userRelation,jdbcType=VARCHAR},
+      </if>
+      now(),
+      now(),
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="annualLeave != null" >
+        #{annualLeave,jdbcType=INTEGER},
+      </if>
+      <if test="jxzj != null" >
+        #{jxzj,jdbcType=VARCHAR},
+      </if>
+      <if test="njqsrq != null" >
+        #{njqsrq,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <!--添加用户-->
+  <insert id="insertUser" parameterType="com.bns.model.sys.SysUserDTO" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_user (user_no, user_name,
+    password, department,
+    job, mobile,create_time,create_user,validate_state)
+    values (#{newUserNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+    #{password,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR},
+    #{job,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},now(),#{createUser,jdbcType=VARCHAR},1)
+  </insert>
+  <!--选择性修改-->
+  <update id="updateByIdSelective" parameterType="com.bns.model.sys.SysUserDTO" >
+    update sys_user
+    <set >
+
+      <if test="userName != null and userName!=''" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null and password !=''" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null and department !=''" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null and job !=''" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null and mobile !=''" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+
+      <if test="validateState != null and validateState !=''" >
+        validate_state = #{validateState,jdbcType=VARCHAR},
+      </if>
+
+      update_time = now(),
+      update_user = #{updateUser ,jdbcType=VARCHAR}
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

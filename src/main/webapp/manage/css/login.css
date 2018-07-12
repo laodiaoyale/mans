@@ -1,0 +1,41 @@
+body {
+    background: #eee;
+}
+
+.login-box .login-con {
+    width: 506px;
+    height: 532px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -266px;
+    margin-left: -253px;
+    background: #fff;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2), -1px -1px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    padding: 30px 63px 0;
+    text-align: center;
+}
+
+.login-con h2 {
+    height: 56px;
+    line-height: 56px;
+    font-size: 30px;
+    color: #398BF7;
+    text-align: center;
+    letter-spacing: 3px;
+    margin-bottom:15px;
+}
+
+.login-msg  span{
+    height :195px;
+    width:195px;
+}
+
+.login-ipt .yzm{
+    width:86px;
+    height : 33px;
+    background:#677383;
+    display: inline-block;
+    margin-top:7px;
+}

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.befloan.ClALoanOrderQueueDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.befloan.ClALoanOrderQueueDTO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="manual_review_queue" property="manualReviewQueue" jdbcType="INTEGER" />
+    <result column="review_status" property="reviewStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="review_user" property="reviewUser" jdbcType="VARCHAR" />
+    <result column="review_time" property="reviewTime" jdbcType="TIMESTAMP" />
+    <result column="review_result_code" property="reviewResultCode" jdbcType="VARCHAR" />
+    <result column="blacklist_type" property="blacklistType" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bns.api.user.vo.IntoUserBaseVo" extends="BaseResultMap" >
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_no, manual_review_queue, review_status, create_time, update_time, review_user, 
+    review_time, review_result_code, blacklist_type
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cl_a_loan_order_queue
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cl_a_loan_order_queue
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bns.model.befloan.ClALoanOrderQueueDTO" >
+    insert into cl_a_loan_order_queue (id, order_no, manual_review_queue,
+    review_status, create_time, update_time,
+    review_user, review_time, review_result_code,
+    blacklist_type, remark)
+    values (#{id,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, #{manualReviewQueue,jdbcType=INTEGER},
+    #{reviewStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+    #{reviewUser,jdbcType=VARCHAR}, #{reviewTime,jdbcType=TIMESTAMP}, #{reviewResultCode,jdbcType=VARCHAR},
+    #{blacklistType,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bns.model.befloan.ClALoanOrderQueueDTO" >
+    insert into cl_a_loan_order_queue
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="manualReviewQueue != null" >
+        manual_review_queue,
+      </if>
+      <if test="reviewStatus != null" >
+        review_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="reviewUser != null" >
+        review_user,
+      </if>
+      <if test="reviewTime != null" >
+        review_time,
+      </if>
+      <if test="reviewResultCode != null" >
+        review_result_code,
+      </if>
+      <if test="blacklistType != null" >
+        blacklist_type,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="manualReviewQueue != null" >
+        #{manualReviewQueue,jdbcType=INTEGER},
+      </if>
+      <if test="reviewStatus != null" >
+        #{reviewStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewUser != null" >
+        #{reviewUser,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewTime != null" >
+        #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewResultCode != null" >
+        #{reviewResultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="blacklistType != null" >
+        #{blacklistType,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bns.model.befloan.ClALoanOrderQueueDTO" >
+    update cl_a_loan_order_queue
+    <set >
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="manualReviewQueue != null" >
+        manual_review_queue = #{manualReviewQueue,jdbcType=INTEGER},
+      </if>
+      <if test="reviewStatus != null" >
+        review_status = #{reviewStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewUser != null" >
+        review_user = #{reviewUser,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewTime != null" >
+        review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewResultCode != null" >
+        review_result_code = #{reviewResultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="blacklistType != null" >
+        blacklist_type = #{blacklistType,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bns.model.befloan.ClALoanOrderQueueDTO" >
+    update cl_a_loan_order_queue
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+    manual_review_queue = #{manualReviewQueue,jdbcType=INTEGER},
+    review_status = #{reviewStatus,jdbcType=INTEGER},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    review_user = #{reviewUser,jdbcType=VARCHAR},
+    review_time = #{reviewTime,jdbcType=TIMESTAMP},
+    review_result_code = #{reviewResultCode,jdbcType=VARCHAR},
+    blacklist_type = #{blacklistType,jdbcType=VARCHAR},
+    remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.befloan.ClALoanOrderQueueDTO" >
+    update cl_a_loan_order_queue
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      manual_review_queue = #{manualReviewQueue,jdbcType=INTEGER},
+      review_status = #{reviewStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      review_user = #{reviewUser,jdbcType=VARCHAR},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP},
+      review_result_code = #{reviewResultCode,jdbcType=VARCHAR},
+      blacklist_type = #{blacklistType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getByOrderId" parameterType="com.bns.api.user.vo.IntoUserBaseVo" resultMap="ResultMapWithBLOBs">
+    select q.*
+    ,s.refuse_code as leve3RefuseCode,
+    s.refuse_des as leve3RefuseDes,
+    r.refuse_code as leve2RefuseCode,
+    r.refuse_des as leve2RefuseDes,
+    e.refuse_code as leve1RefuseCode,
+    e.refuse_des as leve1RefuseDes
+    from cl_a_loan_order_queue q
+    LEFT JOIN sys_refuse s
+    ON
+    q.review_result_code = s.refuse_code
+    LEFT JOIN sys_refuse r
+    on
+    r.id = s.parent_id
+    LEFT JOIN sys_refuse e
+    on
+    e.id = r.parent_id
+    where q.order_no=#{orderNo}
+  </select>
+
+  <update id="updateByOrderNo" parameterType="com.bns.api.user.vo.IntoUserBaseVo">
+    update cl_a_loan_order_queue
+    <set>
+      review_status = #{reviewStatus},
+      <if test="reviewResultCode !=null">
+        review_result_code = #{reviewResultCode},
+      </if>
+      <if test="blacklistType !=null">
+        blacklist_type = #{blacklistType},
+      </if>
+      update_time = now(),
+      review_user = #{reviewUser},
+      review_time = now()
+    </set>
+    where
+        order_no = #{orderNo}
+    <if test="manualReviewQueue !=null">
+      and manual_review_queue=#{manualReviewQueue}
+    </if>
+
+  </update>
+
+  <select id="getOrderQueueStatus" parameterType="com.bns.api.user.vo.IntoUserBaseVo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />,
+    <include refid="Blob_Column_List" />
+    from
+        cl_a_loan_order_queue c
+    where
+        c.order_no = #{orderNo}
+    <![CDATA[and c.manual_review_queue <> #{manualReviewQueue}]]>
+  </select>
+</mapper>

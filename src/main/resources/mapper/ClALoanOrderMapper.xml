@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.user.ClALoanOrderDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.user.ClALoanOrderDTO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="into_code" property="intoCode" jdbcType="VARCHAR" />
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
+    <result column="cust_code" property="custCode" jdbcType="VARCHAR" />
+    <result column="contract_amt" property="contractAmt" jdbcType="INTEGER" />
+    <result column="fund_amt" property="fundAmt" jdbcType="INTEGER" />
+    <result column="loan_periods" property="loanPeriods" jdbcType="INTEGER" />
+    <result column="product_code" property="productCode" jdbcType="VARCHAR" />
+    <result column="loan_purpose" property="loanPurpose" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="dk_into_code" property="dkIntoCode" jdbcType="VARCHAR" />
+    <result column="fund_time" property="fundTime" jdbcType="TIMESTAMP" />
+    <result column="fact_fund_amt" property="factFundAmt" jdbcType="INTEGER" />
+    <result column="fund_status" property="fundStatus" jdbcType="TINYINT" />
+    <result column="lost_reason" property="lostReason" jdbcType="VARCHAR" />
+    <result column="cancel_code" property="cancelCode" jdbcType="INTEGER" />
+    <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR" />
+    <result column="refuse_date" property="refuseDate" jdbcType="TIMESTAMP" />
+    <result column="refuse_days" property="refuseDays" jdbcType="INTEGER" />
+    <result column="approve_req_time" property="approveReqTime" jdbcType="TIMESTAMP" />
+    <result column="approve_ret_time" property="approveRetTime" jdbcType="TIMESTAMP" />
+    <result column="human_review_time" property="humanReviewTime" jdbcType="TIMESTAMP" />
+    <result column="rate" property="rate" jdbcType="DECIMAL" />
+    <result column="sign_time" property="signTime" jdbcType="TIMESTAMP" />
+    <result column="node_record" property="nodeRecord" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bns.model.user.ClALoanOrderDTO" extends="BaseResultMap" >
+    <result column="dk_loan_results" property="dkLoanResults" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_no, into_code, contract_no, cust_code, contract_amt, fund_amt, loan_periods,
+    product_code, loan_purpose, source, status, remark, dk_into_code, fund_time, fact_fund_amt,
+    fund_status, lost_reason, cancel_code, refuse_reason, refuse_date, refuse_days, approve_req_time,
+    approve_ret_time, human_review_time, rate, sign_time, node_record, create_time, update_time
+  </sql>
+  <sql id="BaseCloumn">
+    id, order_no, into_code, dk_into_code,contract_no, cust_code,cancel_code, contract_amt,
+    fund_amt, loan_periods,
+    product_code, loan_purpose, source, status, create_time, update_time, remark,
+    fund_time,fact_fund_amt,fund_status,lost_reason,
+    refuse_reason,refuse_date,refuse_days,approve_ret_time,approve_req_time,human_review_time,dk_loan_results
+    ,rate,sign_time,node_record,email,flag
+  </sql>
+  <sql id="Blob_Column_List" >
+    dk_loan_results
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cl_a_loan_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cl_a_loan_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bns.model.user.ClALoanOrderDTO" >
+    insert into cl_a_loan_order (id, order_no, into_code,
+    contract_no, cust_code, contract_amt,
+    fund_amt, loan_periods, product_code,
+    loan_purpose, source, status,
+    remark, dk_into_code, fund_time,
+    fact_fund_amt, fund_status, lost_reason,
+    cancel_code, refuse_reason, refuse_date,
+    refuse_days, approve_req_time, approve_ret_time,
+    human_review_time, rate, sign_time,
+    node_record, create_time, update_time,
+    dk_loan_results)
+    values (#{id,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, #{intoCode,jdbcType=VARCHAR},
+    #{contractNo,jdbcType=VARCHAR}, #{custCode,jdbcType=VARCHAR}, #{contractAmt,jdbcType=INTEGER},
+    #{fundAmt,jdbcType=INTEGER}, #{loanPeriods,jdbcType=INTEGER}, #{productCode,jdbcType=VARCHAR},
+    #{loanPurpose,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT},
+    #{remark,jdbcType=VARCHAR}, #{dkIntoCode,jdbcType=VARCHAR}, #{fundTime,jdbcType=TIMESTAMP},
+    #{factFundAmt,jdbcType=INTEGER}, #{fundStatus,jdbcType=TINYINT}, #{lostReason,jdbcType=VARCHAR},
+    #{cancelCode,jdbcType=INTEGER}, #{refuseReason,jdbcType=VARCHAR}, #{refuseDate,jdbcType=TIMESTAMP},
+    #{refuseDays,jdbcType=INTEGER}, #{approveReqTime,jdbcType=TIMESTAMP}, #{approveRetTime,jdbcType=TIMESTAMP},
+    #{humanReviewTime,jdbcType=TIMESTAMP}, #{rate,jdbcType=DECIMAL}, #{signTime,jdbcType=TIMESTAMP},
+    #{nodeRecord,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+    #{dkLoanResults,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bns.model.user.ClALoanOrderDTO" >
+    insert into cl_a_loan_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="intoCode != null" >
+        into_code,
+      </if>
+      <if test="contractNo != null" >
+        contract_no,
+      </if>
+      <if test="custCode != null" >
+        cust_code,
+      </if>
+      <if test="contractAmt != null" >
+        contract_amt,
+      </if>
+      <if test="fundAmt != null" >
+        fund_amt,
+      </if>
+      <if test="loanPeriods != null" >
+        loan_periods,
+      </if>
+      <if test="productCode != null" >
+        product_code,
+      </if>
+      <if test="loanPurpose != null" >
+        loan_purpose,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="dkIntoCode != null" >
+        dk_into_code,
+      </if>
+      <if test="fundTime != null" >
+        fund_time,
+      </if>
+      <if test="factFundAmt != null" >
+        fact_fund_amt,
+      </if>
+      <if test="fundStatus != null" >
+        fund_status,
+      </if>
+      <if test="lostReason != null" >
+        lost_reason,
+      </if>
+      <if test="cancelCode != null" >
+        cancel_code,
+      </if>
+      <if test="refuseReason != null" >
+        refuse_reason,
+      </if>
+      <if test="refuseDate != null" >
+        refuse_date,
+      </if>
+      <if test="refuseDays != null" >
+        refuse_days,
+      </if>
+      <if test="approveReqTime != null" >
+        approve_req_time,
+      </if>
+      <if test="approveRetTime != null" >
+        approve_ret_time,
+      </if>
+      <if test="humanReviewTime != null" >
+        human_review_time,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+      <if test="signTime != null" >
+        sign_time,
+      </if>
+      <if test="nodeRecord != null" >
+        node_record,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="dkLoanResults != null" >
+        dk_loan_results,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="intoCode != null" >
+        #{intoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNo != null" >
+        #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="custCode != null" >
+        #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="contractAmt != null" >
+        #{contractAmt,jdbcType=INTEGER},
+      </if>
+      <if test="fundAmt != null" >
+        #{fundAmt,jdbcType=INTEGER},
+      </if>
+      <if test="loanPeriods != null" >
+        #{loanPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="loanPurpose != null" >
+        #{loanPurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dkIntoCode != null" >
+        #{dkIntoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fundTime != null" >
+        #{fundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="factFundAmt != null" >
+        #{factFundAmt,jdbcType=INTEGER},
+      </if>
+      <if test="fundStatus != null" >
+        #{fundStatus,jdbcType=TINYINT},
+      </if>
+      <if test="lostReason != null" >
+        #{lostReason,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelCode != null" >
+        #{cancelCode,jdbcType=INTEGER},
+      </if>
+      <if test="refuseReason != null" >
+        #{refuseReason,jdbcType=VARCHAR},
+      </if>
+      <if test="refuseDate != null" >
+        #{refuseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refuseDays != null" >
+        #{refuseDays,jdbcType=INTEGER},
+      </if>
+      <if test="approveReqTime != null" >
+        #{approveReqTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveRetTime != null" >
+        #{approveRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="humanReviewTime != null" >
+        #{humanReviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="signTime != null" >
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nodeRecord != null" >
+        #{nodeRecord,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dkLoanResults != null" >
+        #{dkLoanResults,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bns.model.user.ClALoanOrderDTO" >
+    update cl_a_loan_order
+    <set >
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="intoCode != null" >
+        into_code = #{intoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNo != null" >
+        contract_no = #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="custCode != null" >
+        cust_code = #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="contractAmt != null" >
+        contract_amt = #{contractAmt,jdbcType=INTEGER},
+      </if>
+      <if test="fundAmt != null" >
+        fund_amt = #{fundAmt,jdbcType=INTEGER},
+      </if>
+      <if test="loanPeriods != null" >
+        loan_periods = #{loanPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        product_code = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="loanPurpose != null" >
+        loan_purpose = #{loanPurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="dkIntoCode != null" >
+        dk_into_code = #{dkIntoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fundTime != null" >
+        fund_time = #{fundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="factFundAmt != null" >
+        fact_fund_amt = #{factFundAmt,jdbcType=INTEGER},
+      </if>
+      <if test="fundStatus != null" >
+        fund_status = #{fundStatus,jdbcType=TINYINT},
+      </if>
+      <if test="lostReason != null" >
+        lost_reason = #{lostReason,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelCode != null" >
+        cancel_code = #{cancelCode,jdbcType=INTEGER},
+      </if>
+      <if test="refuseReason != null" >
+        refuse_reason = #{refuseReason,jdbcType=VARCHAR},
+      </if>
+      <if test="refuseDate != null" >
+        refuse_date = #{refuseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refuseDays != null" >
+        refuse_days = #{refuseDays,jdbcType=INTEGER},
+      </if>
+      <if test="approveReqTime != null" >
+        approve_req_time = #{approveReqTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveRetTime != null" >
+        approve_ret_time = #{approveRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="humanReviewTime != null" >
+        human_review_time = #{humanReviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="signTime != null" >
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nodeRecord != null" >
+        node_record = #{nodeRecord,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dkLoanResults != null" >
+        dk_loan_results = #{dkLoanResults,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="flag != null">
+        flag =#{flag},
+      </if>
+      update_time = now(),
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bns.model.user.ClALoanOrderDTO" >
+    update cl_a_loan_order
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+    into_code = #{intoCode,jdbcType=VARCHAR},
+    contract_no = #{contractNo,jdbcType=VARCHAR},
+    cust_code = #{custCode,jdbcType=VARCHAR},
+    contract_amt = #{contractAmt,jdbcType=INTEGER},
+    fund_amt = #{fundAmt,jdbcType=INTEGER},
+    loan_periods = #{loanPeriods,jdbcType=INTEGER},
+    product_code = #{productCode,jdbcType=VARCHAR},
+    loan_purpose = #{loanPurpose,jdbcType=VARCHAR},
+    source = #{source,jdbcType=VARCHAR},
+    status = #{status,jdbcType=TINYINT},
+    remark = #{remark,jdbcType=VARCHAR},
+    dk_into_code = #{dkIntoCode,jdbcType=VARCHAR},
+    fund_time = #{fundTime,jdbcType=TIMESTAMP},
+    fact_fund_amt = #{factFundAmt,jdbcType=INTEGER},
+    fund_status = #{fundStatus,jdbcType=TINYINT},
+    lost_reason = #{lostReason,jdbcType=VARCHAR},
+    cancel_code = #{cancelCode,jdbcType=INTEGER},
+    refuse_reason = #{refuseReason,jdbcType=VARCHAR},
+    refuse_date = #{refuseDate,jdbcType=TIMESTAMP},
+    refuse_days = #{refuseDays,jdbcType=INTEGER},
+    approve_req_time = #{approveReqTime,jdbcType=TIMESTAMP},
+    approve_ret_time = #{approveRetTime,jdbcType=TIMESTAMP},
+    human_review_time = #{humanReviewTime,jdbcType=TIMESTAMP},
+    rate = #{rate,jdbcType=DECIMAL},
+    sign_time = #{signTime,jdbcType=TIMESTAMP},
+    node_record = #{nodeRecord,jdbcType=INTEGER},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    dk_loan_results = #{dkLoanResults,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.user.ClALoanOrderDTO" >
+    update cl_a_loan_order
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+    into_code = #{intoCode,jdbcType=VARCHAR},
+    contract_no = #{contractNo,jdbcType=VARCHAR},
+    cust_code = #{custCode,jdbcType=VARCHAR},
+    contract_amt = #{contractAmt,jdbcType=INTEGER},
+    fund_amt = #{fundAmt,jdbcType=INTEGER},
+    loan_periods = #{loanPeriods,jdbcType=INTEGER},
+    product_code = #{productCode,jdbcType=VARCHAR},
+    loan_purpose = #{loanPurpose,jdbcType=VARCHAR},
+    source = #{source,jdbcType=VARCHAR},
+    status = #{status,jdbcType=TINYINT},
+    remark = #{remark,jdbcType=VARCHAR},
+    dk_into_code = #{dkIntoCode,jdbcType=VARCHAR},
+    fund_time = #{fundTime,jdbcType=TIMESTAMP},
+    fact_fund_amt = #{factFundAmt,jdbcType=INTEGER},
+    fund_status = #{fundStatus,jdbcType=TINYINT},
+    lost_reason = #{lostReason,jdbcType=VARCHAR},
+    cancel_code = #{cancelCode,jdbcType=INTEGER},
+    refuse_reason = #{refuseReason,jdbcType=VARCHAR},
+    refuse_date = #{refuseDate,jdbcType=TIMESTAMP},
+    refuse_days = #{refuseDays,jdbcType=INTEGER},
+    approve_req_time = #{approveReqTime,jdbcType=TIMESTAMP},
+    approve_ret_time = now(),
+    human_review_time = #{humanReviewTime,jdbcType=TIMESTAMP},
+    rate = #{rate,jdbcType=DECIMAL},
+    sign_time = #{signTime,jdbcType=TIMESTAMP},
+    node_record = #{nodeRecord,jdbcType=INTEGER},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    update_time = now()
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByOrderNo" parameterType="com.bns.model.user.ClALoanOrderDTO">
+    update
+        cl_a_loan_order
+    set
+          status = #{status},
+          approve_ret_time = now(),
+          human_review_time=now(),
+          update_time = now()
+        <if test="refuseDays != null and refuseDays != ''">
+          , refuse_days =#{refuseDays}
+          , refuse_date = sysdate()+ interval <![CDATA[ #{refuseDays}]]> DAY
+        </if>
+        <if test="nodeRecord != null">
+          ,node_record = #{nodeRecord}
+        </if>
+        <if test="flag != null">
+          ,flag = #{flag}
+        </if>
+        <if test="refuseReason != null">
+          ,refuse_reason = #{refuseReason}
+        </if>
+
+    where
+        order_no=#{orderNo}
+  </update>
+
+  <select id="selectByIntoCode" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cl_a_loan_order where into_code = #{intoCode,jdbcType=VARCHAR}
+  </select>
+<!-- 李红阳 " -->
+  <select id="selectByCode" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    dk_into_code
+    from cl_a_loan_order
+    where cust_code= #{custCode,jdbcType=VARCHAR} AND contract_no= #{contractNo,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByCreateTime" resultType="java.lang.Integer">
+    SELECT count(1) from cl_a_loan_order where create_time>date_format(now(),'%y-%m-%d');
+  </select>
+
+  <select id="selectByCreateTimeAndStatus" resultType="java.lang.Integer">
+SELECT count(1) from cl_a_loan_order where create_time>date_format(now(),'%y-%m-%d') AND (status IN (2,4,5,6,7,8,9) OR node_record='302');
+  </select>
+
+  <select id="selectFundAmt" resultType="java.lang.Integer">
+      SELECT SUM(fund_amt) from cl_a_loan_order where approve_ret_time>date_format(now(),'%y-%m-%d') AND status=7;
+  </select>
+  <select id="selectBytime" resultType="java.lang.Integer" parameterType="java.util.Map">
+    SELECT count(1)  from cl_a_loan_order where approve_req_time BETWEEN #{startTime}  AND #{endTime};
+  </select>
+
+  <select id="selectByApproveReqTime" resultType="java.util.Date" parameterType="java.util.Map">
+
+    SELECT approve_req_time from cl_a_loan_order t1 , cl_a_loan_order_send t2 where  t1.into_code=t2.into_code AND  t2.send_state='1' AND  t1.approve_req_time BETWEEN #{start}  AND #{endTime}  AND t1.`status`='1';
+
+  </select>
+
+  <!--通过贷款系统客户编号和合同编号查询订单-->
+  <select id="selectDTOByCode" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="BaseCloumn"/>
+    from cl_a_loan_order
+    where 1=1
+
+    <if test="intoCode != null and intoCode != ''">
+      AND into_code = #{intoCode,jdbcType=VARCHAR}
+    </if>
+
+    <if test="orderNo != null and orderNo != ''">
+      AND order_no = #{orderNo,jdbcType=VARCHAR}
+    </if>
+
+    <if test="contractNo != null and contractNo != ''">
+      AND contract_no = #{contractNo,jdbcType=VARCHAR}
+    </if>
+
+    <if test="custCode != null and custCode != ''">
+      AND cust_code = #{custCode,jdbcType=VARCHAR}
+    </if>
+
+    <if test="dkIntoCode != null and dkIntoCode != ''">
+      AND dk_into_code = #{dkIntoCode,jdbcType=VARCHAR}
+    </if>
+
+
+  </select>
+
+  <!-- 审批结果变更 订单表信息 -->
+  <update id="approveOrderUpdate" parameterType="com.bns.model.user.ClALoanOrderDTO">
+    update cl_a_loan_order
+    set status = #{status},approve_ret_time = now()
+    ,update_time = now()
+    <if test="fundAmt != null and fundAmt != ''">
+      ,fund_amt =#{fundAmt}
+    </if>
+    <if test="loanPeriods != null and loanPeriods != ''">
+      , loan_periods =#{loanPeriods}
+    </if>
+    <if test="refuseReason != null and refuseReason != ''">
+      , refuse_reason =#{refuseReason}
+    </if>
+    <if test="refuseDays != null and refuseDays != ''">
+      , refuse_days =#{refuseDays}
+      , refuse_date = sysdate()+ interval <![CDATA[ #{refuseDays}]]> DAY
+    </if>
+    <if test="approveReqTime != null">
+      , approve_req_time =#{approveReqTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="rate != null and rate != ''">
+      , rate =#{rate}
+    </if>
+    <if test="nodeRecord != null and nodeRecord != ''">
+      , node_record =#{nodeRecord}
+    </if>
+    <if test="flag != null">
+      , flag =#{flag}
+    </if>
+    where order_no =#{orderNo}
+  </update>
+</mapper>

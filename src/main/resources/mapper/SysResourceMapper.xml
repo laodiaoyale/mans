@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.sys.SysResourceDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.sys.SysResourceDTO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
+    <result column="resource_type" property="resourceType" jdbcType="VARCHAR" />
+    <result column="resource_url" property="resourceUrl" jdbcType="VARCHAR" />
+    <result column="permission" property="permission" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="parent_ids" property="parentIds" jdbcType="VARCHAR" />
+    <result column="app_id" property="appId" jdbcType="BIGINT" />
+    <result column="validate_state" property="validateState" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="SysResourceRoleDTO" type="com.bns.model.sys.SysResourceRoleDTO">
+    <result property="roleId" column="role_id" jdbcType="DECIMAL" />
+    <result property="resourceId" column="resource_id" jdbcType="DECIMAL" />
+    <result property="roleCode" column="role_code" jdbcType="VARCHAR" />
+    <result property="resourceUrl" column="resource_url" jdbcType="VARCHAR" />
+    <result property="permission" column="permission" jdbcType="VARCHAR" />
+    <result property="resourceType" column="resource_type" jdbcType="VARCHAR" />
+    <result property="resourceName" column="resource_name" jdbcType="VARCHAR" />
+  </resultMap>
+  <!--资源树返回类型-->
+  <resultMap id="SysResourceTree" type="com.bns.api.sys.bo.ResourceRespBo">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result property="resourceName" column="resource_name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, resource_name, resource_type, resource_url, permission, parent_id, parent_ids,
+    app_id, validate_state, version, create_time, update_time
+  </sql>
+
+  <!--查询菜单-->
+  <select id="getSysResourceRole" parameterType="java.util.Map" resultMap="SysResourceRoleDTO">
+
+    SELECT
+    t4.*
+    FROM
+    (
+    SELECT
+    t1.role_id,
+    t1.resource_id,
+    t2.role_code,
+    t3.resource_url,
+    t3.permission,
+    t3.resource_type,
+    t3.resource_name
+    FROM
+    sys_acl t1
+    LEFT JOIN sys_role t2 ON t1.role_id = t2.id
+    LEFT JOIN sys_resource t3 ON t1.resource_id = t3.id
+    where t2.validate_state = 1
+    ) t4
+    WHERE
+    1=1
+    <if test="resourceType != null and resourceType != ''">
+      and t4.resource_type = #{resourceType}
+    </if>
+    <if test="roleCode != null and roleCode != ''">
+      and t4.role_code = #{roleCode}
+    </if>
+  </select>
+
+  <select id="querySysResource" parameterType="java.util.Map" resultMap="SysResourceTree">
+    select * from sys_resource where validate_state =1
+  </select>
+</mapper>

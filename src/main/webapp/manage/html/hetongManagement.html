@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer" />
+    <title>互联网信贷业务管理系统</title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <!--page-->
+    <script src="../js/libs/page/kkpager.min.js"></script>
+    <link rel="stylesheet" href="../js/libs/page/kkpager.css" />
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/customerInfo.css">
+    <script src="../js/libs/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/hetongManagement.js"></script>
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box">
+    <h2>合同管理</h2>
+    <div class="search-box">
+        <ul>
+            <li class="search">
+                <span class="s-tit">客户姓名</span>
+                <span class="s-ipt"><input type="text" class="i-ipt" id="name"></span>
+            </li>
+            <li class="search">
+                <span class="s-tit">手机号码</span>
+                <span class="s-ipt"><input type="text" class="i-ipt" id="phone" maxlength="11" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();"></span>
+            </li>
+            <li class="search select-box">
+                <span class="s-tit">贷款状态</span>
+                <select class="s-ipt" id="loanStatus">
+                    <option value="0">全部</option>
+                    <option value="1">筹标中</option>
+                    <option value="2">正常</option>
+                    <option value="3">逾期</option>
+                    <option value="4">结清</option>
+                    <option value="5">筹标失败</option>
+                </select>
+            </li>
+        </ul>
+        <div class="find noselect">查询</div>
+        <img src="../images/ic_lantiao.svg">
+    </div>
+    <div class="main-con">
+        <div class="table-con">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>订单编号</th>
+                    <th>客户姓名</th>
+                    <th>手机号码</th>
+                    <th>业务类型</th>
+                    <th>批核金额/元</th>
+                    <th>批核期限/月</th>
+                    <th>月综合费率%</th>
+                    <th>放款状态</th>
+                    <th>放款日期</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="tableCon"></tbody>
+            </table>
+        </div>
+        <div class="page-nav-box noselect" id="kkpager">分页</div>
+    </div>
+</div>
+<div class="error-msg"></div>
+<div class="mask"></div>
+<div class="loading-img" style=""><img src="../images/loading.gif"></div>
+<!--修改密码-->
+<div class="reset-password"></div>
+</body>
+</html>

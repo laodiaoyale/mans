@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bns.dao.sms.ClTSmRecordDao">
+  <resultMap id="BaseResultMap" type="com.bns.model.sms.ClTSmRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="serial_no" jdbcType="VARCHAR" property="serialNo" />
+    <result column="sms_no" jdbcType="INTEGER" property="smsNo" />
+    <result column="template_type" jdbcType="VARCHAR" property="templateType" />
+    <result column="req_code" jdbcType="VARCHAR" property="reqCode" />
+    <result column="req_id" jdbcType="VARCHAR" property="reqId" />
+    <result column="req_time" jdbcType="TIMESTAMP" property="reqTime" />
+    <result column="ret_time" jdbcType="TIMESTAMP" property="retTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="req_body" jdbcType="LONGVARCHAR" property="reqBody" />
+    <result column="ret_body" jdbcType="LONGVARCHAR" property="retBody" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cl_t_sm_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bns.model.sms.ClTSmRecord">
+    insert into cl_t_sm_record (id, mobile, serial_no, sms_no,
+      template_type, req_code, req_id,
+      req_time, ret_time, create_time, 
+      update_time, req_body, ret_body
+      )
+    values (#{id,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, #{serialNo,jdbcType=VARCHAR},
+          #{smsNo,jdbcType=INTEGER},
+      #{templateType,jdbcType=VARCHAR}, #{reqCode,jdbcType=VARCHAR}, #{reqId,jdbcType=VARCHAR}, 
+      #{reqTime,jdbcType=TIMESTAMP}, #{retTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{reqBody,jdbcType=LONGVARCHAR}, #{retBody,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.sms.ClTSmRecord">
+    update cl_t_sm_record
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      template_type = #{templateType,jdbcType=VARCHAR},
+      req_code = #{reqCode,jdbcType=VARCHAR},
+      req_id = #{reqId,jdbcType=VARCHAR},
+      req_time = #{reqTime,jdbcType=TIMESTAMP},
+      ret_time = #{retTime,jdbcType=TIMESTAMP},
+      sms_no = #{smsNo,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      req_body = #{reqBody,jdbcType=LONGVARCHAR},
+      ret_body = #{retBody,jdbcType=LONGVARCHAR}
+    where serial_no = #{serialNo,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, mobile, serial_no, template_type,sms_no, req_code, req_id, req_time, ret_time,
+    create_time, update_time, req_body, ret_body
+    from cl_t_sm_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, mobile, serial_no, template_type, req_code, req_id, req_time, ret_time,sms_no,
+    create_time, update_time, req_body, ret_body
+    from cl_t_sm_record
+  </select>
+</mapper>

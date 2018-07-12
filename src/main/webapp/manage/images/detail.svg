@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>详情</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="管理员-信息管理-客户反馈" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1148.000000, -232.000000)">
+        <g id="Group-2" transform="translate(1148.000000, 232.000000)" fill="#2383E2" fill-rule="nonzero">
+            <g id="问题">
+                <path d="M5.40000964,7.80000322 L6.60000642,7.80000322 L6.60000642,9 L5.40000964,9 L5.40000964,7.80000322 Z M5.40000964,3 L6.60000642,3 L6.60000642,6.60000642 L5.40000964,6.60000642 L5.40000964,3 Z M6,12 C9.30001125,12 12,9.29999519 12,6 C12,2.70000481 9.29999519,0 6,0 C2.70000481,0 0,2.70000481 0,6 C0,9.29999519 2.70000483,12 6,12 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

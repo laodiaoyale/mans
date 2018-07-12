@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 扫描 service,dao -->
+	<context:component-scan base-package="com.bns.*.*,com.bns.*.*.*" />
+	<!-- 引入属性文件，方便配置内容修改 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<!-- 数据库链接 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		  init-method="init" destroy-method="close">
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${mysql.jdbc.url}" />
+		<property name="username" value="${mysql.jdbc.user}" />
+		<property name="password" value="${mysql.jdbc.password}" />
+		<!--<property name="driverClassName" value="${mysql.jdbc.driverClass}"/>-->
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${druid.initialSize}" />
+		<property name="minIdle" value="${druid.minIdle}" />
+		<property name="maxActive" value="${druid.maxActive}" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${druid.maxWait}" />
+
+		<!--用来检测连接是否有效的sql，要求是一个查询语句 如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会其作用。-->
+		<property name="validationQuery" value="SELECT 'x'" />
+		<!--建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。-->
+		<property name="testWhileIdle" value="true" />
+		<!--申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。 -->
+		<property name="testOnBorrow" value="false"/>
+		<!--归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能-->
+		<property name="testOnReturn" value="true"/>
+
+		<!-- 密码加密
+		<property name="filters" value="config" />
+		<property name="connectionProperties" value="config.decrypt=true" /> -->
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 空闲时间大于1分钟进行检测-->
+		<property name="timeBetweenEvictionRunsMillis" value="60000"/>
+
+	</bean>
+
+	<!-- spring整合mybatis -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="typeAliasesPackage" value="com.bns.model"/>
+		<!-- 自动扫描映射文件 -->
+		<property name="mapperLocations">
+			<array>
+				<value>classpath*:mapper/*.xml</value>
+			</array>
+		</property>
+		<property name="configurationProperties">
+			<props>
+				<prop key="dialect">mysql</prop>
+			</props>
+		</property>
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						<value>
+							helperDialect=mysql
+							reasonable=true
+							supportMethodsArguments=true
+							params=count=countSql
+							autoRuntimeDialect=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+	</bean>
+
+	<!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.bns.dao.*" />
+		<property name="annotationClass" value="common.annotation.MyBatisRepository"/>
+	</bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+		<constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean>
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	<aop:config>
+		<aop:pointcut id="appService" expression="execution(* com.bns..*.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="appService"/>
+	</aop:config>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED" rollback-for="Exception,RuntimeException" />
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="Exception,RuntimeException" />
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception,RuntimeException" />
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="Exception,RuntimeException"/>
+			<tx:method name="modify*" propagation="REQUIRED" rollback-for="Exception,RuntimeException" />
+			<tx:method name="do*" propagation="REQUIRED" rollback-for="Exception,RuntimeException" />
+			<tx:method name="select*" propagation="SUPPORTS"/>
+			<tx:method name="find*" propagation="SUPPORTS"/>
+			<tx:method name="search*" propagation="SUPPORTS"/>
+			<tx:method name="get*" propagation="SUPPORTS"/>
+			<tx:method name="*" propagation="SUPPORTS"/>
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 使用annotation 定义 注解事务 优先 使用注解事务 order="0" -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" order="0" />
+
+	<import resource="classpath*:spring-redis.xml"/>
+</beans>

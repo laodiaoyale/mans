@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.user.ClTIntoInfoDao">
+  <resultMap id="BaseResultMap" type="com.bns.model.user.ClTIntoInfoDTO">
+    <id column="id" property="id" jdbcType="BIGINT"/>
+    <result column="into_code" property="intoCode" jdbcType="VARCHAR"/>
+    <result column="cust_code" property="custCode" jdbcType="VARCHAR"/>
+    <result column="product_code" property="productCode" jdbcType="VARCHAR"/>
+    <result column="apply_period" property="applyPeriod" jdbcType="INTEGER"/>
+    <result column="apply_amount" property="applyAmount" jdbcType="INTEGER"/>
+    <result column="credit_amount" property="creditAmount" jdbcType="INTEGER"/>
+    <result column="credit_req_time" property="creditReqTime" jdbcType="TIMESTAMP"/>
+    <result column="credit_ret_time" property="creditRetTime" jdbcType="TIMESTAMP"/>
+    <result column="approve_amount" property="approveAmount" jdbcType="INTEGER"/>
+    <result column="approve_rate" property="approveRate" jdbcType="DOUBLE"/>
+    <result column="purpose_type" property="purposeType" jdbcType="VARCHAR"/>
+    <result column="state" property="state" jdbcType="VARCHAR"/>
+    <result column="calculate_time_len" property="calculateTimeLen" jdbcType="INTEGER"/>
+    <result column="choose_contact_time" property="chooseContactTime" jdbcType="INTEGER"/>
+    <result column="validate_state" property="validateState" jdbcType="VARCHAR"/>
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    <result column="apply_terminal" property="applyTerminal" jdbcType="VARCHAR"/>
+    <result column="apply_product" property="applyProduct" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <resultMap id="BaseResultMapExt" type="com.bns.model.user.ClTInfoInfoDTOExt" extends="BaseResultMap">
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+    <result column="approve_req_time" property="approveReqTime" jdbcType="TIMESTAMP"/>
+    <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+    <result column="status" property="status" jdbcType="TINYINT"/>
+    <result column="manual_review_queue" property="manualReviewQueue" jdbcType="INTEGER"/>
+    <result column="review_time" property="reviewTime" jdbcType="TIMESTAMP"/>
+    <result column="fund_amt" property="fundAmt" jdbcType="INTEGER"/>
+    <result column="approve_ret_time" property="approveRetTime" jdbcType="TIMESTAMP"/>
+    <result column="loan_periods" property="loanPeriods" jdbcType="VARCHAR"/>
+    <result column="promotion_source" property="promotionSource" jdbcType="VARCHAR"/>
+    <result column="human_review_strategy_code" property="reviewStrategyCode" jdbcType="VARCHAR"/>
+    <result column="apply_terminal" property="applyTerminal" jdbcType="VARCHAR"/>
+    <result column="market_channel" property="marketChannel" jdbcType="VARCHAR"/>
+    <result column="cancel_code" property="cancelCode" jdbcType="VARCHAR"/>
+    <result column="apply_channel" property="applyChannel" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, into_code, cust_code, product_code, apply_period, apply_amount, credit_amount,
+    credit_req_time, credit_ret_time, approve_amount, approve_rate, purpose_type, state,
+    calculate_time_len, choose_contact_time, validate_state, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List"/>
+    from cl_t_into_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cl_t_into_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bns.model.user.ClTIntoInfoDTO">
+    insert into cl_t_into_info (id, into_code, cust_code,
+    product_code, apply_period, apply_amount,
+    credit_amount, credit_req_time, credit_ret_time,
+    approve_amount, approve_rate, purpose_type,
+    state, calculate_time_len, choose_contact_time,
+    validate_state, create_time, update_time
+    )
+    values (#{id,jdbcType=BIGINT}, #{intoCode,jdbcType=VARCHAR}, #{custCode,jdbcType=VARCHAR},
+    #{productCode,jdbcType=VARCHAR}, #{applyPeriod,jdbcType=INTEGER}, #{applyAmount,jdbcType=INTEGER},
+    #{creditAmount,jdbcType=INTEGER}, #{creditReqTime,jdbcType=TIMESTAMP}, #{creditRetTime,jdbcType=TIMESTAMP},
+    #{approveAmount,jdbcType=INTEGER}, #{approveRate,jdbcType=DOUBLE}, #{purposeType,jdbcType=VARCHAR},
+    #{state,jdbcType=VARCHAR}, #{calculateTimeLen,jdbcType=INTEGER}, #{chooseContactTime,jdbcType=INTEGER},
+    #{validateState,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bns.model.user.ClTIntoInfoDTO">
+    insert into cl_t_into_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="intoCode != null">
+        into_code,
+      </if>
+      <if test="custCode != null">
+        cust_code,
+      </if>
+      <if test="productCode != null">
+        product_code,
+      </if>
+      <if test="applyPeriod != null">
+        apply_period,
+      </if>
+      <if test="applyAmount != null">
+        apply_amount,
+      </if>
+      <if test="creditAmount != null">
+        credit_amount,
+      </if>
+      <if test="creditReqTime != null">
+        credit_req_time,
+      </if>
+      <if test="creditRetTime != null">
+        credit_ret_time,
+      </if>
+      <if test="approveAmount != null">
+        approve_amount,
+      </if>
+      <if test="approveRate != null">
+        approve_rate,
+      </if>
+      <if test="purposeType != null">
+        purpose_type,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="calculateTimeLen != null">
+        calculate_time_len,
+      </if>
+      <if test="chooseContactTime != null">
+        choose_contact_time,
+      </if>
+      <if test="validateState != null">
+        validate_state,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="intoCode != null">
+        #{intoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="custCode != null">
+        #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null">
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="applyPeriod != null">
+        #{applyPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="applyAmount != null">
+        #{applyAmount,jdbcType=INTEGER},
+      </if>
+      <if test="creditAmount != null">
+        #{creditAmount,jdbcType=INTEGER},
+      </if>
+      <if test="creditReqTime != null">
+        #{creditReqTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditRetTime != null">
+        #{creditRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveAmount != null">
+        #{approveAmount,jdbcType=INTEGER},
+      </if>
+      <if test="approveRate != null">
+        #{approveRate,jdbcType=DOUBLE},
+      </if>
+      <if test="purposeType != null">
+        #{purposeType,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="calculateTimeLen != null">
+        #{calculateTimeLen,jdbcType=INTEGER},
+      </if>
+      <if test="chooseContactTime != null">
+        #{chooseContactTime,jdbcType=INTEGER},
+      </if>
+      <if test="validateState != null">
+        #{validateState,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bns.model.user.ClTIntoInfoDTO">
+    update cl_t_into_info
+    <set>
+      <if test="intoCode != null">
+        into_code = #{intoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="custCode != null">
+        cust_code = #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null">
+        product_code = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="applyPeriod != null">
+        apply_period = #{applyPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="applyAmount != null">
+        apply_amount = #{applyAmount,jdbcType=INTEGER},
+      </if>
+      <if test="creditAmount != null">
+        credit_amount = #{creditAmount,jdbcType=INTEGER},
+      </if>
+      <if test="creditReqTime != null">
+        credit_req_time = #{creditReqTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditRetTime != null">
+        credit_ret_time = #{creditRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approveAmount != null">
+        approve_amount = #{approveAmount,jdbcType=INTEGER},
+      </if>
+      <if test="approveRate != null">
+        approve_rate = #{approveRate,jdbcType=DOUBLE},
+      </if>
+      <if test="purposeType != null">
+        purpose_type = #{purposeType,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="calculateTimeLen != null">
+        calculate_time_len = #{calculateTimeLen,jdbcType=INTEGER},
+      </if>
+      <if test="chooseContactTime != null">
+        choose_contact_time = #{chooseContactTime,jdbcType=INTEGER},
+      </if>
+      <if test="validateState != null">
+        validate_state = #{validateState,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.user.ClTIntoInfoDTO">
+    update cl_t_into_info
+    set into_code = #{intoCode,jdbcType=VARCHAR},
+    cust_code = #{custCode,jdbcType=VARCHAR},
+    product_code = #{productCode,jdbcType=VARCHAR},
+    apply_period = #{applyPeriod,jdbcType=INTEGER},
+    apply_amount = #{applyAmount,jdbcType=INTEGER},
+    credit_amount = #{creditAmount,jdbcType=INTEGER},
+    credit_req_time = #{creditReqTime,jdbcType=TIMESTAMP},
+    credit_ret_time = #{creditRetTime,jdbcType=TIMESTAMP},
+    approve_amount = #{approveAmount,jdbcType=INTEGER},
+    approve_rate = #{approveRate,jdbcType=DOUBLE},
+    purpose_type = #{purposeType,jdbcType=VARCHAR},
+    state = #{state,jdbcType=VARCHAR},
+    calculate_time_len = #{calculateTimeLen,jdbcType=INTEGER},
+    choose_contact_time = #{chooseContactTime,jdbcType=INTEGER},
+    validate_state = #{validateState,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByAsk" parameterType="com.bns.model.user.ClTInfoInfoDTOExt" resultMap="BaseResultMapExt">
+    SELECT
+    ctii.into_code,
+    ctii.apply_terminal,
+    ctii.apply_product,
+    ctu.`name`,
+    ctu.mobile,
+    ctu.promotion_source,
+    ctu.market_channel,
+    calo.approve_req_time,
+    ctii.apply_product AS product_name,
+    ctii.apply_amount/100 apply_amount,
+    ctii.apply_period,
+    ctii.apply_channel,
+    calo.status,
+    aloq.manual_review_queue,
+    aloq.human_review_strategy_code
+    FROM
+    cl_t_into_info ctii
+    LEFT JOIN cl_t_user ctu ON ctii.cust_code = ctu.cust_code
+    LEFT JOIN cl_t_product ctp ON ctii.product_code = ctp.product_code
+    LEFT JOIN cl_a_loan_order calo ON ctii.into_code=calo.into_code
+    LEFT JOIN cl_a_loan_order_queue aloq on calo.order_no = aloq.order_no
+    where
+    calo.status=12
+    and aloq.manual_review_queue = #{type}
+    and aloq.review_status is NULL
+    <if test="name != null">
+      and ctu.`name` LIKE '%${name}%'
+    </if>
+    <if test="mobile != null">
+      and ctu.mobile LIKE '%${mobile}%'
+    </if>
+    ORDER BY calo.approve_req_time desc
+  </select>
+
+  <select id="selectIntoInfoHistoryByBsk" parameterType="com.bns.model.user.ClTInfoInfoDTOExt"
+          resultMap="BaseResultMapExt">
+    SELECT
+    calo.order_no,
+    calo.into_code,
+    ctu.`name`,
+    ctu.promotion_source,
+    ctu.market_channel,
+    ctii.apply_product AS product_name,
+    ctii.apply_amount/100 apply_amount,
+    ctii.apply_period,
+    ctii.apply_terminal,
+    ctii.apply_channel,
+    calo.fund_amt/100 fund_amt,
+    calo.loan_periods,
+    CASE
+    WHEN calo.`status` in(2,4,5,6,7,8,9)
+    THEN 0
+    WHEN calo.`status` in(10,100)
+    THEN 1
+    WHEN calo.`status` in(11)
+    THEN 2
+    WHEN calo.`node_record` in(301)
+    THEN 3
+    WHEN calo.`node_record` in(302)
+    THEN 0
+    end as status,
+    calo.approve_ret_time,
+    calo.cancel_code
+    FROM
+    cl_a_loan_order calo
+    LEFT JOIN cl_t_into_info ctii ON calo.into_code = ctii.into_code
+    LEFT JOIN cl_t_user ctu ON ctii.cust_code = ctu.cust_code
+    WHERE
+    calo.`status` not IN(1,12)
+    <if test="status == 0">
+      and calo.`status` IN (2,3,4,5,6,7,8,9)
+      and (calo.node_record not IN (301) or calo.node_record is null)
+    </if>
+    <if test="status == 1">
+      and calo.`status` IN (10,100)
+    </if>
+    <if test="status == 2">
+      and calo.`status` = 11
+    </if>
+    <if test="status == 3">
+      and calo.`status` = 3
+      and calo.node_record = 301
+    </if>
+    <if test="name != null">
+      and ctu.`name` LIKE '%${name}%'
+    </if>
+    ORDER BY
+    calo.approve_ret_time DESC
+  </select>
+
+  <select id="selectInternalMatch" parameterType="com.bns.model.user.ClTInfoInfoDTOExt"
+          resultMap="BaseResultMapExt">
+    SELECT
+    calo.order_no,
+    calo.into_code,
+    ctu.`name`,
+    ctu.promotion_source,
+    '卡宝' AS product_name,
+    ctii.apply_amount/100 apply_amount,
+    ctii.apply_period,
+    calo.fund_amt/100 fund_amt,
+    calo.loan_periods,
+    CASE
+    WHEN calo.`status` in(2,4,5,6,7,8,9)
+    THEN 0
+    WHEN calo.`status` in(10,100)
+    THEN 1
+    WHEN calo.`status` in(11)
+    THEN 2
+    WHEN calo.`node_record` in(301)
+    THEN 3
+    WHEN calo.`node_record` in(302)
+    THEN 0
+    end as status,
+    calo.approve_ret_time
+    FROM
+    cl_a_loan_order calo
+    LEFT JOIN cl_t_into_info ctii ON calo.into_code = ctii.into_code
+    LEFT JOIN cl_t_user ctu ON ctii.cust_code = ctu.cust_code
+    WHERE
+    calo.`status` not IN(1,12)
+    AND calo.cust_code=#{custCode}
+    ORDER BY
+    calo.approve_ret_time DESC
+  </select>
+  <select id="selectAllOrderCodeByQueue" parameterType="java.lang.Integer" resultType="String">
+    SELECT aloq.order_no
+    FROM cl_t_into_info ctii
+    LEFT JOIN cl_t_user ctu ON ctii.cust_code = ctu.cust_code
+    LEFT JOIN cl_t_product ctp ON ctii.product_code = ctp.product_code
+    LEFT JOIN cl_a_loan_order calo ON ctii.into_code = calo.into_code
+    LEFT JOIN cl_a_loan_order_queue aloq ON calo.order_no = aloq.order_no
+    WHERE calo.status = 12
+    AND aloq.manual_review_queue = #{type,jdbcType=INTEGER}
+    AND aloq.review_status IS NULL
+  </select>
+  
+  <update id="updateValidateStateByCustCode" parameterType="java.util.Map">
+    update cl_t_into_info t1
+    set   t1.validate_state=#{validateState},
+    t1.update_time =now()
+    where t1.cust_code = #{custCode}
+  </update>
+</mapper>

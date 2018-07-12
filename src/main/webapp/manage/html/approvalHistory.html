@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>劳务人员管理系统</title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <!-- page -->
+    <script src="../js/libs/page/kkpager.min.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <link rel="stylesheet" href="../js/libs/page/kkpager.css" />
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/customerInfo.css">
+    <script src="../js/libs/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/approvalHistory.js"></script>
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box">
+    <h2>审批历史</h2>
+    <div class="search-box">
+        <ul>
+            <li class="search">
+                <span class="s-tit">客户姓名</span>
+                <span class="s-ipt"><input type="text" class="i-ipt" id="name"></span>
+            </li>
+            <li class="search select-box">
+                <span class="s-tit">审批状态</span>
+                <select class="s-ipt" id="status">
+                    <option value="-1">全部</option>
+                    <option value="0">通过</option>
+                    <option value="1">拒绝</option>
+                    <option value="2">拒绝并加入黑名单</option>
+                    <option value="3">审批中撤销</option>
+                </select>
+            </li>
+        </ul>
+        <div class="find noselect">查询</div>
+        <img src="../images/ic_lantiao.svg">
+    </div>
+    <div class="main-con">
+        <div class="table-con">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>进件编号</th>
+                    <th>客户姓名</th>
+                    <th>业务类型</th>
+                    <th>申请金额/元</th>
+                    <th>申请期限/月</th>
+                    <th>批核金额/元</th>
+                    <th>批核期限/月</th>
+                    <th>审批状态</th>
+                    <th>审批完成时间</th>
+                    <th>客户来源</th>
+                    <th>终端来源</th>
+                    <th>渠道来源</th>
+                    <th>进件渠道</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="tableCon"></tbody>
+            </table>
+        </div>
+        <!--页码-->
+        <div class="page-nav-box noselect" id="kkpager">分页</div>
+    </div>
+</div>
+<div class="error-msg"></div>
+<!--修改密码-->
+<div class="reset-password"></div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="10px" viewBox="0 0 10 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>编辑</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="管理员-权限管理-角色列表" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1126.000000, -234.000000)">
+        <g id="Group-4" transform="translate(1126.000000, 234.000000)" fill="#2383E2" fill-rule="nonzero">
+            <g id="编辑">
+                <polygon id="Shape" points="1.53070654 9.20062842 0.472634202 8.16326531 0 9.44001991 0 10 7.21088435 10 7.21088435 9.44001991 0.855310837 9.44001991"></polygon>
+                <path d="M8.43202605,8.09465965e-16 L7.64311477,0.0712013792 L1.11110024,6.60321591 L0.816326531,7.61569952 L2.11219163,8.91156463 L3.12467525,8.61679092 L9.65668978,2.08477638 L9.72789116,1.2958651 L8.43202605,0 Z M4.20978427,6.68296146 L3.80678446,6.27996165 L7.30134815,2.78539796 L7.70434796,3.18839776 L4.20978427,6.68296146 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

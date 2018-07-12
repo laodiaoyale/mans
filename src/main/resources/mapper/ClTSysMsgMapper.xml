@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bns.dao.user.ClTSysMsgDao">
+  <resultMap id="BaseResultMap" type="com.bns.model.user.ClTSysMsgDTO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="msg_type" jdbcType="VARCHAR" property="msgType" />
+    <result column="msg_title" jdbcType="VARCHAR" property="msgTitle" />
+    <result column="msg_content" jdbcType="VARCHAR" property="msgContent" />
+    <result column="effective_time" jdbcType="TIMESTAMP" property="effectiveTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="validate_state" jdbcType="VARCHAR" property="validateState" />
+  </resultMap>
+  <resultMap id="BaseResultMapExpand" type="com.bns.api.user.param.InnerMailDTO" extends="BaseResultMap">
+    <result column="message_id" jdbcType="INTEGER" property="messageId" />
+    <result column="is_read" jdbcType="VARCHAR" property="isRead" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cl_t_sys_msg
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bns.model.user.ClTSysMsgDTO">
+    insert into cl_t_sys_msg (id, msg_type, msg_title, 
+      msg_content, effective_time, create_time, 
+      validate_state)
+    values (#{id,jdbcType=INTEGER}, #{msgType,jdbcType=VARCHAR}, #{msgTitle,jdbcType=VARCHAR}, 
+      #{msgContent,jdbcType=VARCHAR}, #{effectiveTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{validateState,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.user.ClTSysMsgDTO">
+    update cl_t_sys_msg
+    set msg_type = #{msgType,jdbcType=VARCHAR},
+      msg_title = #{msgTitle,jdbcType=VARCHAR},
+      msg_content = #{msgContent,jdbcType=VARCHAR},
+      effective_time = #{effectiveTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      validate_state = #{validateState,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, msg_type, msg_title, msg_content, effective_time, create_time, validate_state
+    from cl_t_sys_msg
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, msg_type, msg_title, msg_content, effective_time, create_time, validate_state
+    from cl_t_sys_msg
+  </select>
+
+  <insert id="insertSelective" parameterType="com.bns.model.user.ClTSysMsgDTO" useGeneratedKeys="true" keyProperty="id">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cl_t_sys_msg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+    <if test="id != null" >
+      id,
+    </if>
+    <if test="msgType != null" >
+      msg_type,
+    </if>
+    <if test="msgTitle != null" >
+      msg_title,
+    </if>
+    <if test="msgContent != null" >
+      msg_content,
+    </if>
+    <if test="effectiveTime != null" >
+      effective_time,
+    </if>
+    <if test="createTime != null" >
+      create_time,
+    </if>
+    <if test="validateState != null" >
+      validate_state,
+    </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="msgType != null" >
+        #{msgType,jdbcType=VARCHAR},
+      </if>
+      <if test="msgTitle != null" >
+        #{msgTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="msgContent != null" >
+        #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveTime != null" >
+        #{effectiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validateState != null" >
+        #{validateState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

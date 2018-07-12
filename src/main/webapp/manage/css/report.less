@@ -1,0 +1,147 @@
+body{
+    padding:80px 0 0 200px;
+    font-family: PingFangSC-Regular;
+    .inner-page{
+        background:#F3F6F9;
+        height:100%;
+        width:100%;
+        padding:0px 20px 40px;
+        >.title{
+            font-size: 24px;
+            color: #398BF8;
+            letter-spacing: -0.58px;
+            line-height: 80px;
+        }
+        .header-data{
+            display: flex;
+            margin-bottom:20px;
+            .data-box{
+                flex:1;
+                background:white;
+                padding-right:20px;
+                width:30%;
+                height:110px;
+                position: relative;
+                padding:30px 0 30px 50px;
+                &:after{
+                    content:"";
+                    height:100%;
+                    position: absolute;
+                    right:0;
+                    width:20px;
+                    background:#F3F6F9;
+                    top:0;
+                }
+                &:last-child{
+                    &:after{
+                        display: none;
+                    }
+                }
+                &:before{
+                    content: "";
+                    height:30px;
+                    width:0;
+                    border-right: 1.5px solid #398BF7;
+                    position: absolute;
+                    left:0px;
+                    top:38px;
+                }
+                .icon-box{
+                    position: absolute;
+                    left:30px;
+                    height:30px;
+                    width:30px;
+                    top:38px;
+                    img{
+                        height:100%;
+                        width:100%;
+                    }
+                }
+                .info-box{
+                    line-height: 24px;
+                    padding-left:30px;
+                    >.title{
+                        font-size: 12px;
+                        color: #A3B3BB;
+                        letter-spacing: -0.34px;
+                        line-height: 16px;
+                    }
+                    >.content{
+                        font-size: 24px;
+                        color: #1F242C;
+                        letter-spacing: 0;
+                        line-height: 30px;
+                    }
+                }
+            }
+        }
+        .report-box{
+            background:white;
+            margin-bottom:10px;
+            .title-box{
+                padding:0 20px;
+                height:50px;
+                line-height: 50px;
+                position: relative;
+                &:before{
+                    content: "";
+                    height:30px;
+                    width:0;
+                    border-right: 1.5px solid #398BF7;
+                    position: absolute;
+                    left:0px;
+                    top:10px;
+                }
+                >div{
+                    border-bottom:1px solid #EEEFF0;
+                }
+                span.title{
+                    color: #1F242C;
+                }
+                .datepicker{
+                    border: 1px solid #D9D9D9;
+                    border-radius: 4px;
+                    height:26px;
+                    width:120px;
+                    color:#999;
+                    text-align: center;
+                }
+                .zhi{
+                    color: #1F242C;
+                    margin:0 10px;
+                }
+                .search{
+                    width:80px;
+                    height:25px;
+                    border-radius: 4px;
+                    background:#1EC0A0;
+                    color:white;
+                    margin-left:20px;
+                    cursor:pointer;
+                }
+                .fast{
+                    float: right;
+                    border: 1px solid #A3B3BB;
+                    border-radius: 2px;
+                    height: 26px;
+                    line-height: 24px;
+                    margin-top: 12px;
+                    font-size:12px;
+                    width:160px;
+                    span{
+                        cursor:pointer;
+                        width: 50%;
+                        color: #A3B3BB;
+                        display: inline-block;
+                        float: left;
+                        text-align: center;
+                        &.active{
+                            background:#A3B3BB;
+                            color:white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

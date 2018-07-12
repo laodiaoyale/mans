@@ -1,0 +1,146 @@
+<div class="tbDetailCon-box" id="tbDetailWrap">
+</div>
+<textarea id="addressTemplate" class="template">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>收货地址所在区域</th>
+                        <th>收货地址邮政编码</th>
+                        <th>地址</th>
+                        <th>收货人</th>
+                        <th>电话</th>
+                        <th>真实收货地址对应的最近交易时间</th>
+                        <th>真实收货地址对应的最近交易号</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                     {#foreach $T as row}
+                    <tr>
+                        <td>{$T.row$index+1}</td>
+                        <td>{nullFn($T.row.region)}</td>
+                        <td>{nullFn($T.row.postCode)}</td>
+                        <td class="JustifyLeft">{nullFn($T.row.address)}</td>
+                        <td>{nullFn($T.row.receiveName)}</td>
+                        <td>{nullFn($T.row.telNumber)}</td>
+                        <td>{nullFn($T.row.tradeNo)}</td>
+                        <td class="JustifyLeft">{nullFn($T.row.tradeTime)}</td>
+                    </tr>
+                    {#/for}
+                    </tbody>
+                </table>
+</textarea>
+<textarea id="sellerTemplate" class="template">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>淘宝卖家id</th>
+                        <th>店铺名称</th>
+                        <th>店铺昵称</th>
+                        <th>店铺链接</th>
+                        <th>店铺头像</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {#foreach $T as row}
+                    <tr>
+                        <td>{$T.row$index+1}</td>
+                        <td>{nullFn($T.row.shopId)}</td>
+                        <td>{nullFn($T.row.shopName)}</td>
+                        <td>{nullFn($T.row.nick)}</td>
+                        <td>{nullFn($T.row.url)}</td>
+                        <td>{nullFn($T.row.pic)}</td>
+                    </tr>
+                    {#/for}
+                    </tbody>
+                </table>
+</textarea>
+<textarea id="logisticsTemplate" class="template">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>物流公司编码</th>
+                        <th>物流公司名称</th>
+                        <th>物流号</th>
+                        <th>创建时间</th>
+                        <th>最新物流时间</th>
+                        <th>最新物流信息</th>
+                        <th>派件员</th>
+                        <th>派件员手机号</th>
+                        <th>派件员所在网点</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                     {#foreach $T as row}
+                    <tr>
+                        <td>{$T.row$index+1}</td>
+                        <td>{nullFn($T.row.companyCode)}</td>
+                        <td>{nullFn($T.row.companyName)}</td>
+                        <td>{nullFn($T.row.mailNo)}</td>
+                        <td>{nullFn($T.row.createTime)}</td>
+                        <td>{nullFn($T.row.lastTime)}</td>
+                        <td>{nullFn($T.row.lastMsg)}</td>
+                        <td>{nullFn($T.row.postManName)}</td>
+                        <td>{nullFn($T.row.postManPhone)}</td>
+                        <td>{nullFn($T.row.postManSiteName)}</td>
+                    </tr>
+                    {#/for}
+                    </tbody>
+                </table>
+</textarea>
+<textarea id="subOrdersTemplate" class="template">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>商品名称</th>
+                        <th>商品id</th>
+                        <th>购买数量</th>
+                        <th>原价</th>
+                        <th>实际金额</th>
+                        <th>商品链接</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {#foreach $T as row}
+                    <tr>
+                        <td>{$T.row$index+1}</td>
+                        <td>{nullFn($T.row.itemTitle)}</td>
+                        <td>{nullFn($T.row.itemId)}</td>
+                        <td>{nullFn($T.row.quantity)}</td>
+                        <td>{nullFn($T.row.original)}</td>
+                        <td>{nullFn($T.row.actual)}</td>
+                        <td>{nullFn($T.row.itemUrl)}</td>
+                    </tr>
+                    {#/for}
+                    </tbody>
+                </table>
+</textarea>　
+<textarea id="buyerTemplate" class="template">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>淘宝买家id</th>
+                        <th>淘宝昵称</th>
+                        <th>手机号</th>
+                        <th>城市</th>
+                        <th>姓名</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {#foreach $T as row}
+                    <tr>
+                        <td>{$T.row$index+1}</td>
+                        <td>{nullFn($T.row.buyerId)}</td>
+                        <td>{nullFn($T.row.nick)}</td>
+                        <td>{nullFn($T.row.phoneNum)}</td>
+                        <td>{nullFn($T.row.city)}</td>
+                        <td>{nullFn($T.row.name)}</td>
+                    </tr>
+                    {#/for}
+                    </tbody>
+                </table>
+</textarea>　

@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.befloan.ClTIntoStatusDao">
+<resultMap id="ClTIntoStatusDTO" type="com.bns.model.befloan.ClTIntoStatusDTO">
+	<result property="id" column="id" jdbcType="DECIMAL" />
+	<result property="intoCode" column="into_code" jdbcType="VARCHAR" />
+	<result property="faceCertState" column="face_cert_state" jdbcType="VARCHAR" />
+	<result property="bankCertState" column="bank_cert_state" jdbcType="VARCHAR" />
+	<result property="baseCertState" column="base_cert_state" jdbcType="VARCHAR" />
+	<result property="mobileCertState" column="mobile_cert_state" jdbcType="VARCHAR" />
+	<result property="creditCertState" column="credit_cert_state" jdbcType="VARCHAR" />
+	<result property="crcardCertState" column="crcard_cert_state" jdbcType="VARCHAR" />
+	<result property="faceCertTime" column="face_cert_time" jdbcType="DATE" />
+	<result property="faceCertMsg" column="face_cert_msg" jdbcType="VARCHAR" />
+	<result property="bankCertTime" column="bank_cert_time" jdbcType="DATE" />
+	<result property="bankCertMsg" column="bank_cert_msg" jdbcType="VARCHAR" />
+	<result property="baseCertTime" column="base_cert_time" jdbcType="DATE" />
+	<result property="baseCertMsg" column="base_cert_msg" jdbcType="VARCHAR" />
+	<result property="mobileCertTime" column="mobile_cert_time" jdbcType="DATE" />
+	<result property="mobileCertMsg" column="mobile_cert_msg" jdbcType="VARCHAR" />
+	<result property="creditCertTime" column="credit_cert_time" jdbcType="DATE" />
+	<result property="creditCertMsg" column="credit_cert_msg" jdbcType="VARCHAR" />
+	<result property="crcardCertTime" column="crcard_cert_time" jdbcType="DATE" />
+	<result property="crcardCertMsg" column="crcard_cert_msg" jdbcType="VARCHAR" />
+	<result property="createTime" column="create_time" jdbcType="DATE" />
+	<result property="updateTime" column="update_time" jdbcType="DATE" />
+	<!--<result property="taoBaoCertState" column="taobao_cert_state" jdbcType="VARCHAR" />-->
+	<!--<result property="taoBaoCertTime" column="taobao_cert_time" jdbcType="DATE" />-->
+	<!--<result property="taoBaoCertMsg" column="taobao_cert_msg" jdbcType="VARCHAR" />-->
+</resultMap>
+
+	<!-- 分页查询 cl_t_into_status -->
+	<select id="searchClTIntoStatusByPaging" parameterType="java.util.Map" resultMap="ClTIntoStatusDTO">
+		select
+		t1.id                             ,
+		t1.into_code                      ,
+		t1.face_cert_state                ,
+		t1.bank_cert_state                ,
+		t1.base_cert_state                ,
+		t1.mobile_cert_state              ,
+		t1.credit_cert_state              ,
+		t1.crcard_cert_state              ,
+		t1.face_cert_time                 ,
+		t1.face_cert_msg                  ,
+		t1.bank_cert_time                 ,
+		t1.bank_cert_msg                  ,
+		t1.base_cert_time                 ,
+		t1.base_cert_msg                  ,
+		t1.mobile_cert_time               ,
+		t1.mobile_cert_msg                ,
+		t1.credit_cert_time               ,
+		t1.credit_cert_msg                ,
+		t1.crcard_cert_time               ,
+		t1.crcard_cert_msg                ,
+		t1.create_time                    ,
+		t1.update_time					  ,
+		t1.taobao_cert_state              ,
+		t1.taobao_cert_time               ,
+		t1.taobao_cert_msg
+		from cl_t_into_status 	t1
+		where 1=1
+		<if test="dto.id != null and dto.id != ''">
+			and t1.id =#{dto.id}
+		</if>
+		<if test="dto.intoCode != null and dto.intoCode != ''">
+			and t1.into_code =#{dto.intoCode}
+		</if>
+		<if test="dto.faceCertState != null and dto.faceCertState != ''">
+			and t1.face_cert_state =#{dto.faceCertState}
+		</if>
+		<if test="dto.bankCertState != null and dto.bankCertState != ''">
+			and t1.bank_cert_state =#{dto.bankCertState}
+		</if>
+		<if test="dto.baseCertState != null and dto.baseCertState != ''">
+			and t1.base_cert_state =#{dto.baseCertState}
+		</if>
+		<if test="dto.mobileCertState != null and dto.mobileCertState != ''">
+			and t1.mobile_cert_state =#{dto.mobileCertState}
+		</if>
+		<if test="dto.creditCertState != null and dto.creditCertState != ''">
+			and t1.credit_cert_state =#{dto.creditCertState}
+		</if>
+		<if test="dto.crcardCertState != null and dto.crcardCertState != ''">
+			and t1.crcard_cert_state =#{dto.crcardCertState}
+		</if>
+		<if test="dto.faceCertTime != null and dto.faceCertTime != ''">
+			and t1.face_cert_time =#{dto.faceCertTime}
+		</if>
+		<if test="dto.faceCertMsg != null and dto.faceCertMsg != ''">
+			and t1.face_cert_msg =#{dto.faceCertMsg}
+		</if>
+		<if test="dto.bankCertTime != null and dto.bankCertTime != ''">
+			and t1.bank_cert_time =#{dto.bankCertTime}
+		</if>
+		<if test="dto.bankCertMsg != null and dto.bankCertMsg != ''">
+			and t1.bank_cert_msg =#{dto.bankCertMsg}
+		</if>
+		<if test="dto.baseCertTime != null and dto.baseCertTime != ''">
+			and t1.base_cert_time =#{dto.baseCertTime}
+		</if>
+		<if test="dto.baseCertMsg != null and dto.baseCertMsg != ''">
+			and t1.base_cert_msg =#{dto.baseCertMsg}
+		</if>
+		<if test="dto.mobileCertTime != null and dto.mobileCertTime != ''">
+			and t1.mobile_cert_time =#{dto.mobileCertTime}
+		</if>
+		<if test="dto.mobileCertMsg != null and dto.mobileCertMsg != ''">
+			and t1.mobile_cert_msg =#{dto.mobileCertMsg}
+		</if>
+		<if test="dto.creditCertTime != null and dto.creditCertTime != ''">
+			and t1.credit_cert_time =#{dto.creditCertTime}
+		</if>
+		<if test="dto.creditCertMsg != null and dto.creditCertMsg != ''">
+			and t1.credit_cert_msg =#{dto.creditCertMsg}
+		</if>
+		<if test="dto.crcardCertTime != null and dto.crcardCertTime != ''">
+			and t1.crcard_cert_time =#{dto.crcardCertTime}
+		</if>
+		<if test="dto.crcardCertMsg != null and dto.crcardCertMsg != ''">
+			and t1.crcard_cert_msg =#{dto.crcardCertMsg}
+		</if>
+		<if test="dto.createTime != null and dto.createTime != ''">
+			and t1.create_time =#{dto.createTime}
+		</if>
+		<if test="dto.updateTime != null and dto.updateTime != ''">
+			and t1.update_time =#{dto.updateTime}
+		</if>
+
+		order by t1.id desc
+	</select>
+
+	<!-- 查询列表 cl_t_into_status  -->
+	<select id="searchClTIntoStatus" parameterType="java.util.Map" resultMap="ClTIntoStatusDTO">
+		select
+		t1.id                             ,
+		t1.into_code                      ,
+		t1.face_cert_state                ,
+		t1.bank_cert_state                ,
+		t1.base_cert_state                ,
+		t1.mobile_cert_state              ,
+		t1.credit_cert_state              ,
+		t1.crcard_cert_state              ,
+		t1.face_cert_time                 ,
+		t1.face_cert_msg                  ,
+		t1.bank_cert_time                 ,
+		t1.bank_cert_msg                  ,
+		t1.base_cert_time                 ,
+		t1.base_cert_msg                  ,
+		t1.mobile_cert_time               ,
+		t1.mobile_cert_msg                ,
+		t1.credit_cert_time               ,
+		t1.credit_cert_msg                ,
+		t1.crcard_cert_time               ,
+		t1.crcard_cert_msg                ,
+		t1.create_time                    ,
+		t1.update_time					  ,
+		t1.taobao_cert_state              ,
+		t1.taobao_cert_time               ,
+		t1.taobao_cert_msg
+		from cl_t_into_status 		t1
+		where 1=1
+		<if test="dto.id != null and dto.id != ''">
+			and t1.id = #{dto.id}
+		</if>
+		<if test="dto.intoCode != null and dto.intoCode != ''">
+			and t1.into_code = #{dto.intoCode}
+		</if>
+		<if test="dto.faceCertState != null and dto.faceCertState != ''">
+			and t1.face_cert_state = #{dto.faceCertState}
+		</if>
+		<if test="dto.bankCertState != null and dto.bankCertState != ''">
+			and t1.bank_cert_state = #{dto.bankCertState}
+		</if>
+		<if test="dto.baseCertState != null and dto.baseCertState != ''">
+			and t1.base_cert_state = #{dto.baseCertState}
+		</if>
+		<if test="dto.mobileCertState != null and dto.mobileCertState != ''">
+			and t1.mobile_cert_state = #{dto.mobileCertState}
+		</if>
+		<if test="dto.creditCertState != null and dto.creditCertState != ''">
+			and t1.credit_cert_state = #{dto.creditCertState}
+		</if>
+		<if test="dto.crcardCertState != null and dto.crcardCertState != ''">
+			and t1.crcard_cert_state = #{dto.crcardCertState}
+		</if>
+		<if test="dto.faceCertTime != null and dto.faceCertTime != ''">
+			and t1.face_cert_time = #{dto.faceCertTime}
+		</if>
+		<if test="dto.faceCertMsg != null and dto.faceCertMsg != ''">
+			and t1.face_cert_msg = #{dto.faceCertMsg}
+		</if>
+		<if test="dto.bankCertTime != null and dto.bankCertTime != ''">
+			and t1.bank_cert_time = #{dto.bankCertTime}
+		</if>
+		<if test="dto.bankCertMsg != null and dto.bankCertMsg != ''">
+			and t1.bank_cert_msg = #{dto.bankCertMsg}
+		</if>
+		<if test="dto.baseCertTime != null and dto.baseCertTime != ''">
+			and t1.base_cert_time = #{dto.baseCertTime}
+		</if>
+		<if test="dto.baseCertMsg != null and dto.baseCertMsg != ''">
+			and t1.base_cert_msg = #{dto.baseCertMsg}
+		</if>
+		<if test="dto.mobileCertTime != null and dto.mobileCertTime != ''">
+			and t1.mobile_cert_time = #{dto.mobileCertTime}
+		</if>
+		<if test="dto.mobileCertMsg != null and dto.mobileCertMsg != ''">
+			and t1.mobile_cert_msg = #{dto.mobileCertMsg}
+		</if>
+		<if test="dto.creditCertTime != null and dto.creditCertTime != ''">
+			and t1.credit_cert_time = #{dto.creditCertTime}
+		</if>
+		<if test="dto.creditCertMsg != null and dto.creditCertMsg != ''">
+			and t1.credit_cert_msg = #{dto.creditCertMsg}
+		</if>
+		<if test="dto.crcardCertTime != null and dto.crcardCertTime != ''">
+			and t1.crcard_cert_time = #{dto.crcardCertTime}
+		</if>
+		<if test="dto.crcardCertMsg != null and dto.crcardCertMsg != ''">
+			and t1.crcard_cert_msg = #{dto.crcardCertMsg}
+		</if>
+		<if test="dto.createTime != null and dto.createTime != ''">
+			and t1.create_time = #{dto.createTime}
+		</if>
+		<if test="dto.updateTime != null and dto.updateTime != ''">
+			and t1.update_time = #{dto.updateTime}
+		</if>
+	</select>
+
+	<!-- 主键查询对象  cl_t_into_status -->
+	<select id="findClTIntoStatusByPrimaryKey" parameterType="java.util.Map" resultMap="ClTIntoStatusDTO">
+		select
+		t1.id                             ,
+		t1.into_code                      ,
+		t1.face_cert_state                ,
+		t1.bank_cert_state                ,
+		t1.base_cert_state                ,
+		t1.mobile_cert_state              ,
+		t1.credit_cert_state              ,
+		t1.crcard_cert_state              ,
+		t1.face_cert_time                 ,
+		t1.face_cert_msg                  ,
+		t1.bank_cert_time                 ,
+		t1.bank_cert_msg                  ,
+		t1.base_cert_time                 ,
+		t1.base_cert_msg                  ,
+		t1.mobile_cert_time               ,
+		t1.mobile_cert_msg                ,
+		t1.credit_cert_time               ,
+		t1.credit_cert_msg                ,
+		t1.crcard_cert_time               ,
+		t1.crcard_cert_msg                ,
+		t1.create_time                    ,
+		t1.update_time					  ,
+		t1.taobao_cert_state              ,
+		t1.taobao_cert_time               ,
+		t1.taobao_cert_msg
+		from cl_t_into_status 		t1
+		where
+		t1.id = #{id}
+	</select>
+
+	<!-- 新增对象 cl_t_into_status -->
+	<insert id="insertClTIntoStatus" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="dto.id">
+		insert into cl_t_into_status
+		(
+		id                             ,
+		into_code                      ,
+		face_cert_state                ,
+		bank_cert_state                ,
+		base_cert_state                ,
+		mobile_cert_state              ,
+		credit_cert_state              ,
+		crcard_cert_state              ,
+		face_cert_time                 ,
+		face_cert_msg                  ,
+		bank_cert_time                 ,
+		bank_cert_msg                  ,
+		base_cert_time                 ,
+		base_cert_msg                  ,
+		mobile_cert_time               ,
+		mobile_cert_msg                ,
+		credit_cert_time               ,
+		credit_cert_msg                ,
+		crcard_cert_time               ,
+		crcard_cert_msg                ,
+		create_time                    ,
+		update_time					,
+		taobao_cert_state           ,
+		taobao_cert_time            ,
+		taobao_cert_msg
+		)
+		values(
+		#{dto.id,jdbcType=DECIMAL}
+		,
+		#{dto.intoCode,jdbcType=VARCHAR}
+		,
+		#{dto.faceCertState,jdbcType=VARCHAR}
+		,
+		#{dto.bankCertState,jdbcType=VARCHAR}
+		,
+		#{dto.baseCertState,jdbcType=VARCHAR}
+		,
+		#{dto.mobileCertState,jdbcType=VARCHAR}
+		,
+		#{dto.creditCertState,jdbcType=VARCHAR}
+		,
+		#{dto.crcardCertState,jdbcType=VARCHAR}
+		,
+		#{dto.faceCertTime,jdbcType=DATE}
+		,
+		#{dto.faceCertMsg,jdbcType=VARCHAR}
+		,
+		#{dto.bankCertTime,jdbcType=DATE}
+		,
+		#{dto.bankCertMsg,jdbcType=VARCHAR}
+		,
+		#{dto.baseCertTime,jdbcType=DATE}
+		,
+		#{dto.baseCertMsg,jdbcType=VARCHAR}
+		,
+		#{dto.mobileCertTime,jdbcType=DATE}
+		,
+		#{dto.mobileCertMsg,jdbcType=VARCHAR}
+		,
+		#{dto.creditCertTime,jdbcType=DATE}
+		,
+		#{dto.creditCertMsg,jdbcType=VARCHAR}
+		,
+		#{dto.crcardCertTime,jdbcType=DATE}
+		,
+		#{dto.crcardCertMsg,jdbcType=VARCHAR}
+		,
+		now()
+		,
+		#{dto.updateTime,jdbcType=DATE}
+		,
+		#{dto.taoBaoCertState,jdbcType=VARCHAR}
+		,
+		#{dto.taoBaoCertTime,jdbcType=DATE}
+		,
+		#{dto.taoBaoCertMsg,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<!-- 更新对象 cl_t_into_status -->
+	<update id="updateClTIntoStatus" parameterType="java.util.Map">
+	     update cl_t_into_status t1
+	           set
+			           t1.id                             =#{dto.id,jdbcType=DECIMAL},
+			           t1.into_code                      =#{dto.intoCode,jdbcType=VARCHAR},
+			           t1.face_cert_state                =#{dto.faceCertState,jdbcType=VARCHAR},
+			           t1.bank_cert_state                =#{dto.bankCertState,jdbcType=VARCHAR},
+			           t1.base_cert_state                =#{dto.baseCertState,jdbcType=VARCHAR},
+			           t1.mobile_cert_state              =#{dto.mobileCertState,jdbcType=VARCHAR},
+			           t1.credit_cert_state              =#{dto.creditCertState,jdbcType=VARCHAR},
+			           t1.crcard_cert_state              =#{dto.crcardCertState,jdbcType=VARCHAR},
+			           t1.face_cert_time                 =#{dto.faceCertTime,jdbcType=DATE},
+			           t1.face_cert_msg                  =#{dto.faceCertMsg,jdbcType=VARCHAR},
+			           t1.bank_cert_time                 =#{dto.bankCertTime,jdbcType=DATE},
+			           t1.bank_cert_msg                  =#{dto.bankCertMsg,jdbcType=VARCHAR},
+			           t1.base_cert_time                 =#{dto.baseCertTime,jdbcType=DATE},
+			           t1.base_cert_msg                  =#{dto.baseCertMsg,jdbcType=VARCHAR},
+			           t1.mobile_cert_time               =#{dto.mobileCertTime,jdbcType=DATE},
+			           t1.mobile_cert_msg                =#{dto.mobileCertMsg,jdbcType=VARCHAR},
+			           t1.credit_cert_time               =#{dto.creditCertTime,jdbcType=DATE},
+			           t1.credit_cert_msg                =#{dto.creditCertMsg,jdbcType=VARCHAR},
+			           t1.crcard_cert_time               =#{dto.crcardCertTime,jdbcType=DATE},
+			           t1.crcard_cert_msg                =#{dto.crcardCertMsg,jdbcType=VARCHAR},
+			           t1.create_time                    =#{dto.createTime,jdbcType=DATE},
+			           t1.update_time                    =now(),
+			           t1.taobao_cert_state              =#{dto.taoBaoCertState,jdbcType=VARCHAR},
+					   t1.taobao_cert_time               =#{dto.taoBaoCertTime,jdbcType=DATE},
+		               t1.taobao_cert_msg                =#{dto.taoBaoCertMsg,jdbcType=VARCHAR}
+	     where t1.id = #{dto.id}
+</update>
+
+	<!-- 更新对象 cl_t_into_status -->
+	<update id="updateClTIntoStatusByIntoCode" parameterType="java.util.Map">
+		update cl_t_into_status t1
+		set
+		<if test="dto.id != null and dto.id != ''">
+			 t1.id = #{dto.id},
+		</if>
+		<if test="dto.intoCode != null and dto.intoCode != ''">
+			 t1.into_code = #{dto.intoCode},
+		</if>
+		<if test="dto.faceCertState != null and dto.faceCertState != ''">
+			 t1.face_cert_state = #{dto.faceCertState},
+		</if>
+		<if test="dto.bankCertState != null and dto.bankCertState != ''">
+			 t1.bank_cert_state = #{dto.bankCertState},
+		</if>
+		<if test="dto.baseCertState != null and dto.baseCertState != ''">
+			 t1.base_cert_state = #{dto.baseCertState},
+		</if>
+		<if test="dto.mobileCertState != null and dto.mobileCertState != ''">
+			 t1.mobile_cert_state = #{dto.mobileCertState},
+		</if>
+		<if test="dto.creditCertState != null and dto.creditCertState != ''">
+			 t1.credit_cert_state = #{dto.creditCertState},
+		</if>
+		<if test="dto.crcardCertState != null and dto.crcardCertState != ''">
+			 t1.crcard_cert_state = #{dto.crcardCertState},
+		</if>
+		<if test="dto.faceCertTime != null">
+			 t1.face_cert_time = #{dto.faceCertTime},
+		</if>
+		<if test="dto.faceCertMsg != null and dto.faceCertMsg != ''">
+			 t1.face_cert_msg = #{dto.faceCertMsg},
+		</if>
+		<if test="dto.bankCertTime != null ">
+			 t1.bank_cert_time = #{dto.bankCertTime},
+		</if>
+		<if test="dto.bankCertMsg != null and dto.bankCertMsg != ''">
+			 t1.bank_cert_msg = #{dto.bankCertMsg},
+		</if>
+		<if test="dto.baseCertTime != null ">
+			 t1.base_cert_time = #{dto.baseCertTime},
+		</if>
+		<if test="dto.baseCertMsg != null and dto.baseCertMsg != ''">
+			 t1.base_cert_msg = #{dto.baseCertMsg},
+		</if>
+		<if test="dto.mobileCertTime != null ">
+			 t1.mobile_cert_time = #{dto.mobileCertTime},
+		</if>
+		<if test="dto.mobileCertMsg != null and dto.mobileCertMsg != ''">
+			 t1.mobile_cert_msg = #{dto.mobileCertMsg},
+		</if>
+		<if test="dto.creditCertTime != null ">
+			 t1.credit_cert_time = #{dto.creditCertTime},
+		</if>
+		<if test="dto.creditCertMsg != null and dto.creditCertMsg != ''">
+			 t1.credit_cert_msg = #{dto.creditCertMsg},
+		</if>
+		<if test="dto.crcardCertTime != null ">
+			 t1.crcard_cert_time = #{dto.crcardCertTime},
+		</if>
+		<if test="dto.crcardCertMsg != null ">
+			 t1.crcard_cert_msg = #{dto.crcardCertMsg},
+		</if>
+		<if test="dto.createTime != null ">
+			 t1.create_time = #{dto.createTime},
+		</if>
+		<if test="dto.taoBaoCertState != null and dto.taoBaoCertState != ''">
+			t1.taobao_cert_state = #{dto.taoBaoCertState},
+		</if>
+		<if test="dto.taoBaoCertTime != null ">
+			t1.taobao_cert_time = #{dto.taoBaoCertTime},
+		</if>
+		<if test="dto.taoBaoCertMsg != null and dto.taoBaoCertMsg != ''">
+			t1.taobao_cert_msg = #{dto.taoBaoCertMsg},
+		</if>
+		   t1.update_time = now()
+		where t1.into_code = #{dto.intoCode}
+	</update>
+
+	<!-- 主键删除 cl_t_into_status -->
+	<delete id="deleteClTIntoStatusByID" parameterType="java.util.Map">
+    	delete t1 from cl_t_into_status where id in (${ids} )
+</delete>
+	<!-- 主键假删除 cl_t_into_status -->
+	<update id="deleteClTIntoStatusByPrimaryKey" parameterType="java.util.Map">
+	     update cl_t_into_status t1
+	           set   t1.VALIDATE_STATE='0'	
+	     where t1.id in( ${ids})
+</update>
+<select id="findClTIntoStatusByIntoCode" parameterType="java.util.Map" resultMap="ClTIntoStatusDTO">
+		select
+		t1.id                             ,
+		t1.into_code                      ,
+		t1.face_cert_state                ,
+		t1.bank_cert_state                ,
+		t1.base_cert_state                ,
+		t1.mobile_cert_state              ,
+		t1.credit_cert_state              ,
+		t1.crcard_cert_state              ,
+		t1.face_cert_time                 ,
+		t1.face_cert_msg                  ,
+		t1.bank_cert_time                 ,
+		t1.bank_cert_msg                  ,
+		t1.base_cert_time                 ,
+		t1.base_cert_msg                  ,
+		t1.mobile_cert_time               ,
+		t1.mobile_cert_msg                ,
+		t1.credit_cert_time               ,
+		t1.credit_cert_msg                ,
+		t1.crcard_cert_time               ,
+		t1.crcard_cert_msg                ,
+		t1.create_time                    ,
+		t1.update_time
+		from cl_t_into_status 		t1
+		where
+		t1.into_code = #{intoCode}
+</select>
+</mapper>

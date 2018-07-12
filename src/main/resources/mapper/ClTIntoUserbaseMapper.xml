@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.user.ClTIntoUserbaseDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.user.ClTIntoUserbaseDTO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="cust_code" property="custCode" jdbcType="VARCHAR" />
+    <result column="into_code" property="intoCode" jdbcType="VARCHAR" />
+    <result column="purpose_type" property="purposeType" jdbcType="VARCHAR" />
+    <result column="degree" property="degree" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="VARCHAR" />
+    <result column="live_province_code" property="liveProvinceCode" jdbcType="VARCHAR" />
+    <result column="live_city_code" property="liveCityCode" jdbcType="VARCHAR" />
+    <result column="live__county_code" property="liveCountyCode" jdbcType="VARCHAR" />
+    <result column="live_street" property="liveStreet" jdbcType="VARCHAR" />
+    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="BaseResultMapExt" type="com.bns.model.user.ClTUserDTOExt" extends="BaseResultMap">
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="apply_terminal" property="applyTerminal" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, cust_code, into_code, purpose_type, degree, industry, live_province_code, live_city_code,
+    live__county_code, live_street, remark1, remark2, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cl_t_into_userbase
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cl_t_into_userbase
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bns.model.user.ClTIntoUserbaseDTO" >
+    insert into cl_t_into_userbase (id, cust_code, into_code, 
+      purpose_type, degree, industry, 
+      live_province_code, live_city_code, live__county_code, 
+      live_street, remark1, remark2, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{custCode,jdbcType=VARCHAR}, #{intoCode,jdbcType=VARCHAR}, 
+      #{purposeType,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, 
+      #{liveProvinceCode,jdbcType=VARCHAR}, #{liveCityCode,jdbcType=VARCHAR}, #{liveCountyCode,jdbcType=VARCHAR}, 
+      #{liveStreet,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bns.model.user.ClTIntoUserbaseDTO" >
+    insert into cl_t_into_userbase
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="custCode != null" >
+        cust_code,
+      </if>
+      <if test="intoCode != null" >
+        into_code,
+      </if>
+      <if test="purposeType != null" >
+        purpose_type,
+      </if>
+      <if test="degree != null" >
+        degree,
+      </if>
+      <if test="industry != null" >
+        industry,
+      </if>
+      <if test="liveProvinceCode != null" >
+        live_province_code,
+      </if>
+      <if test="liveCityCode != null" >
+        live_city_code,
+      </if>
+      <if test="liveCountyCode != null" >
+        live__county_code,
+      </if>
+      <if test="liveStreet != null" >
+        live_street,
+      </if>
+      <if test="remark1 != null" >
+        remark1,
+      </if>
+      <if test="remark2 != null" >
+        remark2,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="custCode != null" >
+        #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="intoCode != null" >
+        #{intoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="purposeType != null" >
+        #{purposeType,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="liveProvinceCode != null" >
+        #{liveProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="liveCityCode != null" >
+        #{liveCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="liveCountyCode != null" >
+        #{liveCountyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="liveStreet != null" >
+        #{liveStreet,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bns.model.user.ClTIntoUserbaseDTO" >
+    update cl_t_into_userbase
+    <set >
+      <if test="custCode != null" >
+        cust_code = #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="intoCode != null" >
+        into_code = #{intoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="purposeType != null" >
+        purpose_type = #{purposeType,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="liveProvinceCode != null" >
+        live_province_code = #{liveProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="liveCityCode != null" >
+        live_city_code = #{liveCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="liveCountyCode != null" >
+        live__county_code = #{liveCountyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="liveStreet != null" >
+        live_street = #{liveStreet,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.user.ClTIntoUserbaseDTO" >
+    update cl_t_into_userbase
+    set cust_code = #{custCode,jdbcType=VARCHAR},
+      into_code = #{intoCode,jdbcType=VARCHAR},
+      purpose_type = #{purposeType,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=VARCHAR},
+      live_province_code = #{liveProvinceCode,jdbcType=VARCHAR},
+      live_city_code = #{liveCityCode,jdbcType=VARCHAR},
+      live__county_code = #{liveCountyCode,jdbcType=VARCHAR},
+      live_street = #{liveStreet,jdbcType=VARCHAR},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByIntoCode" parameterType="java.lang.String" resultMap="BaseResultMapExt">
+    SELECT
+        ctiu.into_code,
+        ctiu.industry,
+        ctiu.degree,
+        ctii.create_time,
+        ctu.`name`,
+        ctu.sex,
+        ctu.mobile,
+        ctu.id_card,
+        ctu.address,
+        ctu.birthday,
+        ctiu.cust_code,
+        ctii.apply_terminal
+    FROM
+       cl_t_into_userbase ctiu
+    LEFT JOIN cl_t_user ctu on ctu.cust_code=ctiu.cust_code
+    LEFT JOIN cl_t_into_info ctii on ctii.into_code = ctiu.into_code
+    where ctiu.into_code=#{intoCode}
+  </select>
+
+  <select id="findCurrentAddrByIntoCode" parameterType="java.lang.String" resultType="com.bns.model.contract.CurrentAddrDTO">
+    SELECT
+	sa00.AREA_NAME as liveProvince,sa01.AREA_NAME as liveCity,sa02.AREA_NAME as liveCounty,
+    ctiu.live_street AS liveStreet
+    FROM
+        cl_t_into_userbase ctiu
+    LEFT JOIN sys_area sa00 on ctiu.live_province_code = sa00.AREA_CODE
+    LEFT JOIN sys_area sa01 ON ctiu.live_city_code = sa01.AREA_CODE
+    LEFT JOIN sys_area sa02 on ctiu.live__county_code = sa02.AREA_CODE
+    where  ctiu.into_code=#{intoCode}
+  </select>
+</mapper>

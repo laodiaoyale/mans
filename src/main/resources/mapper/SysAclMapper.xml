@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.sys.SysAclDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.sys.SysAclDTO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="resource_id" property="resourceId" jdbcType="BIGINT" />
+    <result column="accessibility" property="accessibility" jdbcType="INTEGER" />
+    <result column="app_id" property="appId" jdbcType="BIGINT" />
+    <result column="validate_state" property="validateState" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, resource_id, accessibility, app_id, validate_state, version, create_time,
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_acl
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_acl
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.bns.model.sys.SysAclDTO" >
+    insert into sys_acl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="resourceId != null" >
+        resource_id,
+      </if>
+      <if test="accessibility != null" >
+        accessibility,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="validateState != null" >
+        validate_state,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="resourceId != null" >
+        #{resourceId,jdbcType=BIGINT},
+      </if>
+      <if test="accessibility != null" >
+        #{accessibility,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="validateState != null" >
+        #{validateState,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bns.model.sys.SysAclDTO" >
+    update sys_acl
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="resourceId != null" >
+        resource_id = #{resourceId,jdbcType=BIGINT},
+      </if>
+      <if test="accessibility != null" >
+        accessibility = #{accessibility,jdbcType=INTEGER},
+      </if>
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="validateState != null" >
+        validate_state = #{validateState,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.sys.SysAclDTO" >
+    update sys_acl
+    set role_id = #{roleId,jdbcType=BIGINT},
+      resource_id = #{resourceId,jdbcType=BIGINT},
+      accessibility = #{accessibility,jdbcType=INTEGER},
+      app_id = #{appId,jdbcType=BIGINT},
+      validate_state = #{validateState,jdbcType=VARCHAR},
+      version = #{version,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+
+
+
+
+  <!--多条插入-->
+  <insert id="insertMore" parameterType="java.util.Map" >
+    insert into sys_acl (role_id, resource_id,
+    validate_state,create_time,create_user
+    )
+    values
+    <foreach collection="resourceList" item="resourceId" index="index" separator="," >
+      (
+      #{roleId}
+      ,#{resourceId,jdbcType=VARCHAR}
+      ,1
+      ,now()
+      ,#{createUser}
+      )
+    </foreach>
+  </insert>
+
+  <!--删除 角色 资源关系 -->
+  <delete id="deleteByParam" parameterType="java.lang.Long" >
+    delete from sys_acl
+    where role_id = #{roleId}
+  </delete>
+  <update id="updateByRoleId" parameterType="java.lang.Long" >
+    update sys_acl
+    set
+    validate_state = 0
+
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </update>
+</mapper>

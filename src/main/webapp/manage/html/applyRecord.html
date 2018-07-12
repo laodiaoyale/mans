@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>劳务人员管理系统</title>
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <!--page-->
+    <script src="../js/libs/page/kkpager.min.js"></script>
+    <link rel="stylesheet" href="../js/libs/page/kkpager.css" />
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <script src="../js/libs/md5.js"></script>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/customerInfo.css">
+    <script src="../js/util.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/applyRecord.js"></script>
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box">
+    <h2>申请记录</h2>
+    <div class="search-box">
+        <ul>
+            <li class="search">
+                <span class="s-tit">客户姓名</span>
+                <span class="s-ipt">
+                    <input type="text" class="i-ipt" id="name">
+                </span>
+            </li>
+
+            <li class="search">
+                <span class="s-tit">手机号码</span>
+                <span class="s-ipt">
+                    <input type="text" class="i-ipt" id="phone" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" maxlength="11">
+                </span>
+            </li>
+            <li class="search select-box">
+                <span class="s-tit">客户来源</span>
+                <select class="s-ipt" id="source">
+                    <option value="1">全部</option>
+                    <option value="2">AppStore</option>
+                    <option value="3">应用宝</option>
+                    <option value="4">360市场</option>
+                    <option value="5">百度市场</option>
+                    <option value="6">小米市场</option>
+                    <option value="7">华为市场</option>
+                    <option value="8">豌豆荚</option>
+                    <option value="9">安智市场</option>
+                    <option value="11">OPPO市场</option>
+                    <option value="12">VIVO市场</option>
+                    <option value="13">魅族市场</option>
+                    <option value="14">捷越官网</option>
+                    <option value="15">锤子市场</option>
+                    <option value="16">乐视市场</option>
+                    <option value="17">搜狗市场</option>
+                    <option value="18">乐商店</option>
+                    <option value="19">机锋</option>
+                    <option value="20">应用汇</option>
+                    <option value="21">木蚂蚁</option>
+                </select>
+            </li>
+        </ul>
+        <div class="find noselect" >查询</div>
+        <img src="../images/ic_lantiao.svg">
+    </div>
+    <div class="main-con">
+        <div class="table-con">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>序</th>
+                    <th>进件编号</th>
+                    <th>客户姓名</th>
+                    <th>手机号码</th>
+                    <th>业务类型</th>
+                    <th>客户来源</th>
+                    <th>渠道来源</th>
+                    <th>终端来源</th>
+                    <th>进件渠道</th>
+                    <th>申请金额/元</th>
+                    <th>申请期限/月</th>
+                    <th>申请时间</th>
+                    <th>实名认证状态</th>
+                    <th>借记卡绑定状态</th>
+                    <th>信用卡授权状态</th>
+                    <th>运营商授权状态</th>
+                    <th>征信报告授权</th>
+                    <th>提交状态</th>
+                    <th>提交时间</th>
+                </tr>
+                </thead>
+                <tbody class="tableCon"></tbody>
+            </table>
+        </div>
+        <!--页码-->
+        <div class="page-nav-box noselect" id="kkpager">分页</div>
+    </div>
+</div>
+<div class="error-msg"></div>
+<div class="mask"></div>
+<div class="loading-img"><img src="../images/loading.gif"></div>
+<!--修改密码-->
+<div class="reset-password"></div>
+</body>
+</html>

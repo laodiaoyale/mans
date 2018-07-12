@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="51px" viewBox="0 0 50 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_shenpitongguo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1.1-运营面板" transform="translate(-1343.000000, -223.000000)">
+            <g id="申请-copy-2" transform="translate(1343.000000, 223.000000)">
+                <path d="M36.6660963,18.6470588 L12.395743,18.6470588 C11.928291,18.6470588 11.5308055,19.1140988 11.5308055,19.7269152 C11.5308055,20.3398028 11.9048356,20.8068428 12.395743,20.8068428 L36.6660963,20.8068428 C37.1335483,20.8068428 37.5308055,20.3398028 37.5308055,19.7269152 C37.5308055,19.1140988 37.1335483,18.6470588 36.6660963,18.6470588 Z M9.12960813,12.0414529 L39.9640058,12.0414529 C40.5881713,12.0414529 41.0936139,11.5454856 41.0936139,10.9326693 C41.0936139,10.3197817 40.5881713,9.82352941 39.9640058,9.82352941 L9.12960813,9.82352941 C8.5053701,9.82352941 8,10.3197817 8,10.9326693 C8,11.5454856 8.5053701,12.0414529 9.12960813,12.0414529 Z" id="Fill-3" fill="#398BF7"></path>
+                <rect id="Rectangle-9" stroke="#398BF7" stroke-width="2" x="1" y="2" width="48" height="48" rx="4"></rect>
+                <rect id="Rectangle-12" fill="#398BF7" transform="translate(30.091731, 34.144472) rotate(45.000000) translate(-30.091731, -34.144472) " x="29.0917307" y="22.9135993" width="2" height="22.4617465" rx="1"></rect>
+                <rect id="Rectangle-12" fill="#398BF7" transform="translate(18.077238, 37.071440) scale(-1, 1) rotate(45.000000) translate(-18.077238, -37.071440) " x="17.0772376" y="30.2290683" width="2" height="13.6847435" rx="1"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

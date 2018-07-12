@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.user.ClTManagerInfoDao">
+	<resultMap id="ClTManagerInfoDTO" type="com.bns.model.user.ClTManagerInfoDTO">
+		<result property="id" column="id" jdbcType="DECIMAL" />
+		<result property="oneDepartment" column="one_department" jdbcType="VARCHAR" />
+		<result property="twoDepartment" column="two_department " jdbcType="VARCHAR" />
+		<result property="threeDepartment" column="three_department" jdbcType="VARCHAR" />
+		<result property="fourDepartment" column="four_department" jdbcType="VARCHAR" />
+		<result property="fiveDepartment" column="five_department" jdbcType="VARCHAR" />
+		<result property="storeLevel" column="store_level" jdbcType="VARCHAR" />
+		<result property="oaWorkNumber" column="oa_work_number" jdbcType="VARCHAR" />
+		<result property="name" column="name" jdbcType="VARCHAR" />
+		<result property="sex" column="sex" jdbcType="VARCHAR" />
+		<result property="mobile" column="mobile" jdbcType="VARCHAR" />
+		<result property="idCardNum" column="id_card_num" jdbcType="VARCHAR" />
+		<result property="post" column="post" jdbcType="VARCHAR" />
+		<result property="superior" column="superior" jdbcType="VARCHAR" />
+		<result property="email" column="email" jdbcType="VARCHAR" />
+		<result property="staffStatus" column="staff_status" jdbcType="INTEGER" />
+		<result property="dateOfEntry" column="date_of_entry" jdbcType="VARCHAR" />
+		<result property="leaveDate" column="leave_date" jdbcType="DATE" />
+		<result property="importTime" column="import_time" jdbcType="DATE" />
+		<result property="orCode" column="or_code" jdbcType="VARCHAR" />
+		<result property="expiredTime" column="expired_time" jdbcType="DATE" />
+	</resultMap>
+	<insert id="insert" parameterType="com.bns.dao.user.ClTManagerInfoDao">
+		insert into cl_t_manager_info (id, one_department, two_department,
+		three_department, four_department, five_department,
+		store_level, oa_work_number, name,
+		sex, mobile,id_card_num,post,superior,email,staff_status,date_of_entry,leave_date,import_time,or_code,expired_time)
+		values (#{id,jdbcType=INTEGER}, #{oneDepartment,jdbcType=INTEGER}, #{twoDepartment,jdbcType=VARCHAR},
+		#{threeDepartment,jdbcType=VARCHAR}, #{fourDepartment,jdbcType=VARCHAR}, #{fiveDepartment,jdbcType=VARCHAR},
+		#{storeLevel,jdbcType=VARCHAR}, #{oaWorkNumber,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR},
+		#{sex,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},#{idCardNum,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR},
+		#{superior,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},#{staffStatus,jdbcType=VARCHAR}, #{dateOfEntry,jdbcType=VARCHAR}
+		, #{leaveDate,jdbcType=DATE},now(), #{orCode,jdbcType=VARCHAR}, #{expiredTime,jdbcType=VARCHAR})
+	</insert>
+
+</mapper>

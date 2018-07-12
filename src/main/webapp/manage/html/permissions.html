@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理系统</title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="../js/libs/build_standalone.css">
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <!-- page -->
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/customerInfo.css">
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box newWrap">
+    <div class="newTitle">
+        <img src="../images/address.png" />
+        <span>权限管理 > 权限列表</span>
+    </div>
+    <div class="queryWrap limitsWrap">
+       <p class="add_user_tit">增加人员<img class="add_user_btn" src="../images/add.png" /></p>
+        <div class="searchBox">
+            <div class="searchList">
+                <div class="roleBox">
+                    <label>角色</label>
+                    <div class="inpBox permission_role userRoleCla">
+                        <div class="cludeBox"></div>
+                        <input class="selectRole" id="selectRole" type="text" value="全部" readonly />
+                        <img src="../images/down_arrow.png" id="downArrowPic" />
+                        <ul class="roleSelect search" style="height: 180px;overflow-y: auto;">
+                            <li>全部</li>
+                            <li>运营</li>
+                            <li>信审</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="nameBox">
+                    <label>姓名</label>
+                    <input id="inpName" type="text" />
+                </div>
+            </div>
+            <button class="searchBtn" id="searchBtn"><img src="../images/search.png" /><span>搜索</span></button>
+        </div>
+    </div>
+    <div class="feedbackList limitsTable">
+        <table class="table ListTable" id="permissionsTable">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>账号</th>
+                <th>姓名</th>
+                <th>角色</th>
+                <th>部门</th>
+                <th>岗位</th>
+                <th>手机号</th>
+                <th>注册时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--<tr class="table_null"><td style="padding-left: 15px; text-align: left;" colspan='9'>暂无数据</td></tr>-->
+
+            </tbody>
+        </table>
+    </div>
+    <!--页码-->
+    <div class="page-nav-box noselect" id="kkpager">分页</div>
+</div>
+<div class="mask" style="display: none;"></div>
+<div class="sureDel" style="display: none;">
+    <div class="sureDelREC">
+        <p>确认删除吗？</p>
+        <div>
+            <button class="del_sure">确定</button>
+            <button class="del_cancel">取消</button>
+        </div>
+    </div>
+    <div class="sureDelSicircle"></div>
+    <img src="../images/del.png">
+</div>
+<div class="error-msg"></div>
+<!--修改密码-->
+<div class="reset-password"></div>
+<script src="../js/libs/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/util.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/menu.js"></script>
+<script src="../js/libs/page/kkpager.min.js"></script>
+<link rel="stylesheet" href="../js/libs/page/kkpager.css" />
+<script src="../js/permissions.js"></script>
+<script>
+    //点击其他地方收起下拉框
+    $("body").on("click",function(event){
+        if( event.target.className != "cludeBox" ){
+            $(".roleSelect").hide();
+            $('body').removeClass('ovfHiden');//使网页可滚动
+        }else {
+            $('body').addClass('ovfHiden');//使网页不可滚动
+        }
+    })
+</script>
+</body>
+</html>

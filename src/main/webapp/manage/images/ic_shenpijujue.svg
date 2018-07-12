@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_shenpijujue</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1.1-运营面板" transform="translate(-860.000000, -224.000000)">
+            <g id="申请-copy" transform="translate(860.000000, 224.000000)">
+                <path d="M36.6660963,17 L12.395743,17 C11.928291,17 11.5308055,17.4763808 11.5308055,18.1014535 C11.5308055,18.7265988 11.9048356,19.2029797 12.395743,19.2029797 L36.6660963,19.2029797 C37.1335483,19.2029797 37.5308055,18.7265988 37.5308055,18.1014535 C37.5308055,17.4763808 37.1335483,17 36.6660963,17 Z M9.12960813,10.262282 L39.9640058,10.262282 C40.5881713,10.262282 41.0936139,9.75639535 41.0936139,9.13132267 C41.0936139,8.50617733 40.5881713,8 39.9640058,8 L9.12960813,8 C8.5053701,8 8,8.50617733 8,9.13132267 C8,9.75639535 8.5053701,10.262282 9.12960813,10.262282 Z" id="Fill-3" fill="#398BF7"></path>
+                <rect id="Rectangle-9" stroke="#398BF7" stroke-width="2" x="1" y="1" width="48" height="48" rx="4"></rect>
+                <rect id="Rectangle-12" fill="#398BF7" transform="translate(25.485281, 32.485281) rotate(45.000000) translate(-25.485281, -32.485281) " x="24.4852814" y="21.4852814" width="2" height="22" rx="1"></rect>
+                <rect id="Rectangle-12" fill="#398BF7" transform="translate(25.485281, 32.485281) scale(-1, 1) rotate(45.000000) translate(-25.485281, -32.485281) " x="24.4852814" y="21.4852814" width="2" height="22" rx="1"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

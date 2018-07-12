@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <script src="../js/login.js"></script>
+    <style>
+        body{width:100%;height:100%;position:absolute;}
+        .login-box{width: 100%;height:100%;background:url("../images/login_bg.jpg") no-repeat;justify-content: center;align-items: center;display: -webkit-flex;background-size:cover;}
+        .login-con-box{width:360px;height:370px;margin:auto;background:#fff;border-radius: 4px;overflow: hidden;padding : 25px;}
+        .login-con-box .login-header{text-align: center;margin-bottom:45px;}
+        .login-con-box .login-username,.login-con-box .login-userpassword{width:100%;height:40px;margin-bottom: 20px;}
+        .login-con-box .login-username input,.login-con-box .login-userpassword input{padding:0 15px;border:1px solid #C7C7C7; width:100%;height:100%;}
+        .login-con-box .login-username input:focus,.login-con-box .login-userpassword input:focus{border:1px solid #8ED0FF;}
+        .login-remember-box{margin-bottom:25px;}
+        .login-remember-box span{position: relative;}
+        .login-remember-box span label{position:absolute;left:2px;top:7px;}
+        .login-remember-box .input_check {width: 20px;height: 20px;visibility: hidden;}
+        .login-remember-box .input_check+label {display: inline-block;width: 12px;height: 12px;background: url('../images/unchecked.png') no-repeat;cursor: pointer;}
+        .login-remember-box .input_check:checked+label {background:url("../images/checked.png") no-repeat;}
+        .login-remember-box i{font-size:12px;color:#7E7E7E; font-style: normal; }
+        .login-button-box{width:100%;height:40px;color:#fff;border-radius:4px;overflow: hidden;text-align: center;background:#4487E3;line-height: 40px;font-size:14px;cursor: pointer;}
+    </style>
+</head>
+<body onkeydown="enterLogin(event)">
+    <div class="login-box">
+        <div class="login-con-box">
+            <div class="login-header"><img src="../images/" alt=""></div>
+            <div class="login-username">
+                <input type="text" placeholder="用户名" id="login-username">
+            </div>
+            <div class="login-userpassword">
+                <input type="password" placeholder="密码：6-8个字母+数字" maxlength="10" minlength="8" id="login-passwod">
+            </div>
+            <div class="login-remember-box">
+                <span><input type="checkbox"class="input_check" id="check1"><label for="check1"></label></span>
+                <i class="noselect">记住账号</i>
+            </div>
+            <div class="login-button-box noselect" id="login-button">登&nbsp;&nbsp;录</div>
+        </div>
+    </div>
+    <div class="error-msg"></div>
+</body>
+</html>

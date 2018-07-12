@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+    <diskStore path="java.io.tmpdir"/>
+    <defaultCache eternal="false"
+                  maxElementsInMemory="1000"
+                  overflowToDisk="false"
+                  diskPersistent="false"
+                  timeToIdleSeconds="0"
+                  timeToLiveSeconds="3660"
+                  memoryStoreEvictionPolicy="LFU">
+    </defaultCache>
+    <!--核心贷款系统配置文件-->
+    <cache name="interface_url.properties"
+           eternal="false"
+           maxElementsInMemory="500"
+           overflowToDisk="false"
+           diskPersistent="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="3600"
+           memoryStoreEvictionPolicy="LFU">
+    </cache>
+    <!--System配置文件-->
+    <cache name="system.properties"
+           eternal="false"
+           maxElementsInMemory="500"
+           overflowToDisk="false"
+           diskPersistent="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="3600"
+           memoryStoreEvictionPolicy="LFU">
+    </cache>
+
+</ehcache>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.sys.SysRoleDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.sys.SysRoleDTO" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="role_code" property="roleCode" jdbcType="VARCHAR" />
+    <result column="role_type" property="roleType" jdbcType="VARCHAR" />
+    <result column="app_id" property="appId" jdbcType="BIGINT" />
+    <result column="validate_state" property="validateState" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, role_name, role_code, role_type, app_id, validate_state, version, create_time, 
+    update_time,create_user,update_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_role
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bns.model.sys.SysRoleDTO" >
+    insert into sys_role (ID, role_name, role_code, 
+      role_type, app_id, validate_state, 
+      version, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}, 
+      #{roleType,jdbcType=VARCHAR}, #{appId,jdbcType=BIGINT}, #{validateState,jdbcType=VARCHAR}, 
+      #{version,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.bns.model.sys.SysRoleDTO" >
+    update sys_role
+    <set >
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null" >
+        role_code = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null" >
+        role_type = #{roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=BIGINT},
+      </if>
+      <if test="validateState != null" >
+        validate_state = #{validateState,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.sys.SysRoleDTO" >
+    update sys_role
+    set
+    <if test="roleName != null and roleName !=''" >
+      role_name = #{roleName,jdbcType=VARCHAR},
+    </if>
+    <if test="validateState != null" >
+      validate_state = #{validateState,jdbcType=VARCHAR},
+    </if>
+      update_time = now(),
+      update_user = #{updateUser}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--查询role-->
+  <select id="selectRoleByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
+
+    select
+    t1.id                             ,
+    t1.role_name                      ,
+    t1.role_code                      ,
+    t1.role_type                      ,
+    t1.app_id                         ,
+    t1.validate_state                 ,
+    t1.version
+    from sys_role 		t1, sys_role_user t2,sys_user t3
+    where t1.id = t2.role_id
+    and  t1.validate_state='1'
+    and t2.target_id = t3.id and t3.user_no = #{userNo,jdbcType=VARCHAR}
+  </select>
+  <!--角色查詢-->
+  <select id="selectRole" resultType="java.util.Map" >
+     select id,role_name,role_code from sys_role where validate_state = 1 and role_code !='admin'
+  </select>
+
+  <select id="queryRoleList" resultMap="BaseResultMap">
+     select
+      id,
+      role_name,
+      role_code,
+      role_type,
+      app_id,
+      validate_state,
+      version,
+      DATE_FORMAT(create_time,'%Y-%m-%d')as create_time,
+      DATE_FORMAT(update_time,'%Y-%m-%d')as update_time,
+      create_user,
+      update_user
+      from sys_role
+      where validate_state = 1 and role_code !='admin';
+  </select>
+
+
+
+  <!--角色对象查询-->
+  <select id="queryRoleDTOByParam" parameterType="java.util.Map" resultMap="BaseResultMap" >
+    select
+    id,
+    role_name,
+    role_code,
+    role_type,
+    app_id,
+    validate_state,
+    version,
+    DATE_FORMAT(create_time,'%y-%m-%d')as create_time,
+    DATE_FORMAT(update_time,'%y-%m-%d')as update_time,
+    create_user,
+    update_user
+    from sys_role
+    where validate_state = 1
+    <if test = "roleCode !=null and roleCode !='' ">
+      and role_code = #{roleCode}
+    </if>
+    <if test = "id !=null and id !='' ">
+      and id = #{id}
+    </if>
+  </select>
+  <!--插入-->
+  <insert id="insertSelective" parameterType="com.bns.model.sys.SysRoleDTO" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="roleCode != null" >
+        role_code,
+      </if>
+      <if test="roleType != null" >
+        role_type,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      validate_state,
+      <if test="version != null" >
+        version,
+      </if>
+
+      create_time,
+
+      create_user
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null" >
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null" >
+        #{roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=BIGINT},
+      </if>
+      1,
+      <if test="version != null" >
+        #{version,jdbcType=BIGINT},
+      </if>
+      now(),
+      #{createUser}
+    </trim>
+  </insert>
+  <select id="selectUserByRole" parameterType="com.bns.model.sys.SysRoleDTO" resultType="java.util.Map">
+    select
+    u.user_no,
+    u.user_name,
+    r.id,
+    r.role_name
+    from sys_role_user ru
+    LEFT JOIN sys_user u
+    ON ru.target_id = u.id
+    LEFT JOIN sys_role r
+    on r.ID =ru.role_id where r.ID=#{id,jdbcType=BIGINT} and u.validate_state=1
+  </select>
+</mapper>

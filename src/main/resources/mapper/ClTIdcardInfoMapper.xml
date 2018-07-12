@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.user.ClTIdcardInfoDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.user.ClTIdcardInfoDTO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="cust_code" property="custCode" jdbcType="VARCHAR" />
+    <result column="front_url" property="frontUrl" jdbcType="VARCHAR" />
+    <result column="back_url" property="backUrl" jdbcType="VARCHAR" />
+    <result column="validate_state" property="validateState" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cust_code, front_url, back_url, validate_state, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cl_t_idcard_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cl_t_idcard_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bns.model.user.ClTIdcardInfoDTO" >
+    insert into cl_t_idcard_info (id, cust_code, front_url, 
+      back_url, validate_state, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{custCode,jdbcType=VARCHAR}, #{frontUrl,jdbcType=VARCHAR}, 
+      #{backUrl,jdbcType=VARCHAR}, #{validateState,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bns.model.user.ClTIdcardInfoDTO" >
+    insert into cl_t_idcard_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="custCode != null" >
+        cust_code,
+      </if>
+      <if test="frontUrl != null" >
+        front_url,
+      </if>
+      <if test="backUrl != null" >
+        back_url,
+      </if>
+      <if test="validateState != null" >
+        validate_state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="custCode != null" >
+        #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="frontUrl != null" >
+        #{frontUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="backUrl != null" >
+        #{backUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="validateState != null" >
+        #{validateState,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bns.model.user.ClTIdcardInfoDTO" >
+    update cl_t_idcard_info
+    <set >
+      <if test="custCode != null" >
+        cust_code = #{custCode,jdbcType=VARCHAR},
+      </if>
+      <if test="frontUrl != null" >
+        front_url = #{frontUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="backUrl != null" >
+        back_url = #{backUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="validateState != null" >
+        validate_state = #{validateState,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.user.ClTIdcardInfoDTO" >
+    update cl_t_idcard_info
+    set cust_code = #{custCode,jdbcType=VARCHAR},
+      front_url = #{frontUrl,jdbcType=VARCHAR},
+      back_url = #{backUrl,jdbcType=VARCHAR},
+      validate_state = #{validateState,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByCustCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+     id, cust_code, front_url, back_url, validate_state
+    from cl_t_idcard_info
+    where cust_code = #{custCode,jdbcType=VARCHAR}
+    and validate_state = 1
+    ORDER BY create_time desc
+  </select>
+</mapper>

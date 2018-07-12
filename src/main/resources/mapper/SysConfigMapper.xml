@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.sys.SysConfigDao" >
+    <resultMap id="SysConfigDTO" type="com.bns.model.sys.SysConfigDTO">
+        <result property="id" column="id" jdbcType="DECIMAL" />
+        <result property="configName" column="config_name" jdbcType="VARCHAR" />
+        <result property="configCode" column="config_code" jdbcType="VARCHAR" />
+        <result property="configValue" column="config_value" jdbcType="VARCHAR" />
+        <result property="configType" column="config_type" jdbcType="VARCHAR" />
+        <result property="validateState" column="validate_state" jdbcType="VARCHAR" />
+        <result property="version" column="version" jdbcType="DECIMAL" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, config_name, config_code, config_value, config_type, validate_state, version
+    </sql>
+
+    <insert id="insertSelective" parameterType="com.bns.api.sys.vo.SysConfigVo">
+        insert into sys_config
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="configName != null" >
+                config_name,
+            </if>
+            <if test="configCode != null" >
+                config_code,
+            </if>
+            <if test="configValue != null" >
+                config_value,
+            </if>
+            <if test="configType != null" >
+                config_type,
+            </if>
+            <if test="validateState != null" >
+                validate_state,
+            </if>
+            <if test="version != null" >
+                version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="configName != null" >
+                #{configName,jdbcType=VARCHAR},
+            </if>
+            <if test="configCode != null" >
+                #{configCode,jdbcType=VARCHAR},
+            </if>
+            <if test="configValue != null" >
+                #{configValue,jdbcType=VARCHAR},
+            </if>
+            <if test="configType != null" >
+                #{configType,jdbcType=VARCHAR},
+            </if>
+            <if test="validateState != null" >
+                #{validateState,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectAll" resultMap="SysConfigDTO" parameterType="com.bns.api.sys.vo.SysConfigVo">
+        select  <include refid="Base_Column_List" /> from sys_config
+        where
+            1=1
+          <if test="configName != null">
+              and config_name LIKE '%${configName}%'
+          </if>
+          <if test="configCode != null">
+              and config_code LIKE '%${configCode}%'
+          </if>
+          <if test="configType != null">
+            and config_type =#{configType}
+          </if>
+    </select>
+
+    <update id="updateById" parameterType="com.bns.api.sys.vo.SysConfigVo" >
+        update
+          sys_config sc
+        SET
+          sc.config_value = #{configValue}
+        where
+          sc.id=#{id}
+    </update>
+
+    <select id="selectByCode" parameterType="java.lang.String" resultType="java.lang.String">
+        select config_value from sys_config where config_code = #{configCode}
+    </select>
+    <select id="selectByConfigCode" parameterType="java.lang.String" resultType="java.util.HashMap">
+        select config_code, config_value from sys_config where config_type = #{configType}
+    </select>
+</mapper>

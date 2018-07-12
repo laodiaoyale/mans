@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.user.ClTUserDao">
+<resultMap id="ClTUserDTO" type="com.bns.model.user.CITUserVoDTO">
+	<result property="custCode" column="cust_code" jdbcType="VARCHAR" />
+	<result property="mobile" column="mobile" jdbcType="VARCHAR" />
+	<result property="name" column="name" jdbcType="VARCHAR" />
+	<result property="idCard" column="id_card" jdbcType="VARCHAR" />
+	<result property="sex" column="sex" jdbcType="VARCHAR" />
+	<result property="marketChannel" column="market_channel" jdbcType="VARCHAR" />
+	<result property="createTime" column="create_time" jdbcType="DATE" />
+	<result property="loginTime" column="login_time" jdbcType="DATE" />
+	<result property="validateState" column="validate_state" jdbcType="VARCHAR" />
+	<result property="promotionSource" column="promotion_source" jdbcType="VARCHAR" />
+	<result property="terminalType" column="terminal_type" jdbcType="VARCHAR" />
+</resultMap>
+
+	<resultMap id="UserPromotionSource" type="com.bns.model.user.UserPromotionSourceDTO">
+		<result property="custCode" column="cust_code" jdbcType="VARCHAR" />
+		<result property="intoCode" column="into_code" jdbcType="VARCHAR" />
+		<result property="promotionSource" column="promotion_source" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="ClTUserDTODTO" type="com.bns.model.user.ClTUserDTO">
+		<result property="id" column="id" jdbcType="DECIMAL" />
+		<result property="dkCustCode" column="dk_cust_code" jdbcType="VARCHAR" />
+		<result property="custCode" column="cust_code" jdbcType="VARCHAR" />
+		<result property="mobile" column="mobile" jdbcType="VARCHAR" />
+		<result property="password" column="password" jdbcType="VARCHAR" />
+		<result property="name" column="name" jdbcType="VARCHAR" />
+		<result property="idCard" column="id_card" jdbcType="VARCHAR" />
+		<result property="sex" column="sex" jdbcType="VARCHAR" />
+		<result property="nation" column="nation" jdbcType="VARCHAR" />
+		<result property="birthday" column="birthday" jdbcType="VARCHAR" />
+		<result property="address" column="address" jdbcType="VARCHAR" />
+		<result property="cardStartTime" column="card_start_time" jdbcType="VARCHAR" />
+		<result property="cardEndTime" column="card_end_time" jdbcType="VARCHAR" />
+		<result property="signDept" column="sign_dept" jdbcType="VARCHAR" /> <!-- 签发机关 add by weili.chen 2017-12-27 -->
+		<result property="authState" column="auth_state" jdbcType="VARCHAR" />
+		<result property="accountPwd" column="account_pwd" jdbcType="VARCHAR" />
+		<result property="validateState" column="validate_state" jdbcType="VARCHAR" />
+		<result property="marketChannel" column="market_channel" jdbcType="VARCHAR" />
+		<result property="terminalType" column="terminal_type" jdbcType="VARCHAR" />
+		<result property="promotionSource" column="promotion_source" jdbcType="VARCHAR" />
+		<result property="createTime" column="create_time" jdbcType="DATE" />
+		<result property="updateTime" column="update_time" jdbcType="DATE" />
+		<result property="authTime" column="auth_time" jdbcType="DATE" />
+		<result property="terminalType" column="terminal_type" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="queryUserPromotionSource" parameterType="java.lang.String" resultMap="UserPromotionSource">
+		SELECT
+		t1.cust_code,
+		t2.into_code,
+		t1.promotion_source
+		FROM
+		cl_t_user AS t1
+		LEFT JOIN cl_t_into_info AS t2 ON t1.cust_code= t2.cust_code
+		WHERE t2.into_code=#{intoCode}
+	</select>
+	<!-- 查询列表 cl_t_user  -->
+	<select id="findPaging" parameterType="com.bns.model.user.ClTUserDTO" resultMap="ClTUserDTO">
+		SELECT
+		t1.cust_code,
+		t1.mobile,
+		t1.name,
+		t1.id_card,
+		t1.sex,
+		t1.market_channel,
+		t1.create_time,
+		t1.validate_state ,
+		t1.terminal_type,
+		t1.promotion_source
+		FROM
+		cl_t_user t1
+		where 1=1
+		<if test="name != null and name != ''">
+			and t1.name like '%${name}%'
+		</if>
+		<if test="mobile != null and mobile != ''">
+			and t1.mobile like '%${mobile}%'
+		</if>
+		<if test="idCard != null and idCard != ''">
+			and t1.id_card = #{idCard}
+		</if>
+		ORDER BY t1.create_time DESC
+</select>
+
+
+	<update id="updateClTUserByCustCode" parameterType="java.util.Map">
+		update cl_t_user t1
+		set
+		<if test="dto.custCode != null and dto.custCode != ''">
+			t1.cust_code = #{dto.custCode},
+		</if>
+		<if test="dto.dkCustCode != null and dto.dkCustCode != ''">
+			t1.dk_cust_code = #{dto.dkCustCode},
+		</if>
+		<if test="dto.mobile != null and dto.mobile != ''">
+			t1.mobile = #{dto.mobile},
+		</if>
+		<if test="dto.password != null and dto.password != ''">
+			t1.password = #{dto.password},
+		</if>
+		<if test="dto.name != null and dto.name != ''">
+			t1.name = #{dto.name},
+		</if>
+		<if test="dto.idCard != null and dto.idCard != ''">
+			t1.id_card = #{dto.idCard},
+		</if>
+		<if test="dto.sex != null and dto.sex != ''">
+			t1.sex = #{dto.sex},
+		</if>
+		<if test="dto.nation != null and dto.nation != ''">
+			t1.nation = #{dto.nation},
+		</if>
+		<if test="dto.birthday != null and dto.birthday != ''">
+			t1.birthday = #{dto.birthday},
+		</if>
+		<if test="dto.address != null and dto.address != ''">
+			t1.address = #{dto.address},
+		</if>
+		<if test="dto.cardStartTime != null and dto.cardStartTime != ''">
+			t1.card_start_time = #{dto.cardStartTime},
+		</if>
+		<if test="dto.cardEndTime != null and dto.cardEndTime != ''">
+			t1.card_end_time = #{dto.cardEndTime},
+		</if>
+		<if test="dto.authState != null and dto.authState != ''">
+			t1.auth_state = #{dto.authState},
+		</if>
+		<if test="dto.accountPwd != null and dto.accountPwd != ''">
+			t1.account_pwd =#{dto.accountPwd,jdbcType=VARCHAR},
+		</if>
+		<if test="dto.validateState != null and dto.validateState != ''">
+			t1.validate_state = #{dto.validateState},
+		</if>
+		<if test="dto.marketChannel != null and dto.marketChannel != ''">
+			t1.market_channel  =#{dto.marketChannel,jdbcType=VARCHAR},
+		</if>
+		<if test="dto.terminalType != null and dto.terminalType != ''">
+			t1.terminal_type  =#{dto.terminalType,jdbcType=VARCHAR},
+		</if>
+		<if test="dto.promotionSource != null and dto.promotionSource != ''">
+			t1.promotion_source =#{dto.promotionSource,jdbcType=VARCHAR},
+		</if>
+		<if test="dto.createTime != null and dto.createTime != ''">
+			t1.create_time = #{dto.createTime},
+		</if>
+		t1.update_time = now()
+		where t1.cust_code = #{dto.custCode}
+	</update>
+
+	<select id="queryUserByParam" parameterType="java.util.Map" resultMap="ClTUserDTODTO">
+		SELECT
+		*
+		FROM
+		cl_t_user t1
+		WHERE  1=1
+		<if test="username != null and username != ''">
+			and `name` like '%${username}%'
+		</if>
+		<if test="customerSource != null and customerSource != ''">
+			and market_channel =#{customerSource}
+		</if>
+		<if test="mobile != null and mobile != ''">
+			and mobile like '%${mobile}%'
+		</if>
+	</select>
+	<select id="findClTUserByOrderNo" parameterType="String" resultMap="ClTUserDTO">
+		select u.* from cl_t_user u ,cl_a_loan_order o where u.cust_code = o.cust_code and o.order_no=#{orderNo}
+	</select>
+</mapper>

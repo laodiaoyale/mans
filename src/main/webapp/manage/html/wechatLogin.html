@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+<div class="login-box">
+    <div class="login-con">
+        <h2>劳务人员管理系统</h2>
+        <div class="login-msg">
+            <span id="login_container"></span>
+        </div>
+    </div>
+</div>
+<script src="../js/util.js"></script>
+<script src="../js/libs/AES.js"></script>
+<script src="../js/libs/jquery-1.11.1.min.js"></script>
+<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+
+<script>
+    $(function () {
+        var obj = new WxLogin({
+            id: "login_container",
+            appid: "wx0bf4d92f98272636",
+            scope: "snsapi_login",
+            redirect_uri: encodeURIComponent("http://obs.iqianjindai.com/wechat/doVerifyLogin"),
+            state: Math.ceil(Math.random() * 1000),
+            style: "black",
+            href: ""
+        });
+    })
+
+    // aes解密
+    function decrypt(word) {
+        var key = CryptoJS.enc.Utf8.parse("TESH5@!#2017caln"); //秘钥  UATDF@!#2017caln  TESH5@!#2017caln
+        var iv = CryptoJS.enc.Utf8.parse("2015030120123456");
+        var decrypt = CryptoJS.AES.decrypt(word, key, {
+            iv: iv,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        });
+        var decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
+        return JSON.parse(decryptedStr.toString());//将字符串转为json
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.user.ClTBackCommentsReplyDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.user.ClTBackCommentsReplyDTO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="comments_id" property="commentsId" jdbcType="INTEGER" />
+    <result column="context" property="context" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="validate_state" property="validateState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, comments_id, context, create_time, create_user, validate_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cl_t_back_comments_reply
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cl_t_back_comments_reply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.bns.model.user.ClTBackCommentsDTO" >
+    insert into cl_t_back_comments_reply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="commentsId != null" >
+        comments_id,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="validateState != null" >
+        validate_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="commentsId != null" >
+        #{commentsId,jdbcType=INTEGER},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="validateState != null" >
+        #{validateState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bns.model.user.ClTBackCommentsDTO" >
+    update cl_t_back_comments_reply
+    <set >
+      <if test="commentsId != null" >
+        comments_id = #{commentsId,jdbcType=INTEGER},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="validateState != null" >
+        validate_state = #{validateState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.user.ClTBackCommentsDTO" >
+    update cl_t_back_comments_reply
+    set comments_id = #{commentsId,jdbcType=INTEGER},
+      context = #{context,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      validate_state = #{validateState,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <!--意见反馈 处理意见 添加-->
+  <insert id="insert" parameterType="com.bns.model.user.ClTBackCommentsDTO" >
+    insert into cl_t_back_comments_reply (comments_id, context,
+    create_time, create_user, validate_state
+    )
+    values (#{commentsId,jdbcType=INTEGER}, #{context,jdbcType=VARCHAR},
+    now(), #{createUser,jdbcType=VARCHAR}, 1
+    )
+  </insert>
+  <select id="selectByCommentId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT
+    r.*, (
+    SELECT
+    user_name
+    FROM
+    sys_user
+    WHERE
+    user_no = r.create_user
+    ) AS create_user_name
+    FROM
+    cl_t_back_comments_reply r
+    where r.comments_id = #{commentId,jdbcType=INTEGER}
+  </select>
+
+  <!-- 反馈处理之后的状态修改-->
+  <update id="updateStatusByCommentId" parameterType="com.bns.model.user.ClTBackCommentsReplyDTO">
+    UPDATE cl_t_back_comments
+    SET status = 1
+    WHERE id= #{commentsId,jdbcType=INTEGER}
+  </update>
+</mapper>

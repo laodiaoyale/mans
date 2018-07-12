@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bns.dao.user.ClTBackCommentsDao">
+  <resultMap id="BaseResultMap" type="com.bns.model.user.ClTBackCommentsDTO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cust_code" jdbcType="VARCHAR" property="custCode" />
+    <result column="server_type" jdbcType="VARCHAR" property="serverType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="back_comments" jdbcType="LONGVARCHAR" property="backComments" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <resultMap id="ExcelResultMap" type="com.bns.api.user.bo.BackCommentsRespBO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cust_code" jdbcType="VARCHAR" property="custCode" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="server_type" jdbcType="VARCHAR" property="serverType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="back_comments" jdbcType="LONGVARCHAR" property="backComments" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cl_t_back_comments
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bns.model.user.ClTBackCommentsDTO">
+    insert into cl_t_back_comments (id, cust_code, create_time, back_comments,server_type,status
+      )
+    values (#{id,jdbcType=BIGINT}, #{custCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{backComments,jdbcType=LONGVARCHAR}, #{serverType,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.user.ClTBackCommentsDTO">
+    update cl_t_back_comments
+    set cust_code = #{custCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      back_comments = #{backComments,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, cust_code,  create_time, back_comments
+    from cl_t_back_comments
+  </select>
+
+  <select id="selectBackComments" parameterType="java.util.Map" resultMap="BaseResultMap">
+   select t1.id,t1.cust_code,t1.create_time,t1.back_comments,t1.server_type
+   from cl_t_back_comments t1
+   where t1.cust_code = #{custCode} AND t1.server_type =#{serverType} AND t1.back_comments = #{backComments}
+   order by t1.create_time desc
+  </select>
+
+  <!--excel 语句-->
+  <select id="queryListExcel" parameterType="java.util.Map" resultMap="ExcelResultMap">
+    SELECT
+        t1.cust_code,
+        t2.`name` AS user_name,
+        t2.mobile,
+        DATE_FORMAT(t1.create_time,'%Y-%m-%d %T') as create_time,
+        t1.back_comments,
+        t1.server_type,
+        case t1.`status` when 0 then '未处理' when 1 then '已处理' end as status
+    FROM
+        cl_t_back_comments t1
+    LEFT JOIN cl_t_user t2 ON t2.cust_code = t1.cust_code
+    where 1=1
+    <if test = "type !=null and type !=''">
+      and t1.server_type  like concat(concat('%',#{type}),'%')
+    </if>
+    <if test = "startDate !=null and startDate !=''" >
+      and DATE(t1.create_time) <![CDATA[ > ]]> #{startDate}
+    </if>
+    <if test = "endDate !=null and  endDate !=''">
+      and DATE(t1.create_time) <![CDATA[ < ]]> #{endDate}
+    </if>
+    <if test = "status !=null ">
+      and t1.status =  #{status}
+    </if>
+  </select>
+
+  <!--分页查询-->
+  <select id="queryListByPage" parameterType="java.util.Map" resultMap="ExcelResultMap">
+    SELECT
+    t1.id,
+    t1.cust_code,
+    t2.`name` AS user_name,
+    t2.mobile,
+    t1.create_time,
+    t1.back_comments,
+    t1.server_type,
+    t1.`status`
+    FROM
+    cl_t_back_comments t1
+    LEFT JOIN cl_t_user t2 ON t2.cust_code = t1.cust_code
+    where 1=1
+    <if test = "type !=null and type !=''">
+      and t1.server_type  like concat(concat('%',#{type}),'%')
+    </if>
+    <if test = "startDate !=null and startDate !=''" >
+      and DATE(t1.create_time) <![CDATA[ >= ]]> #{startDate}
+    </if>
+    <if test = "endDate !=null and  endDate !=''">
+      and DATE(t1.create_time) <![CDATA[ <= ]]> #{endDate}
+    </if>
+    <if test = "status !=null ">
+      and t1.status =  #{status}
+    </if>
+  </select>
+  <!--根据id 查询-->
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ExcelResultMap">
+    SELECT
+    t1.id,
+    t1.cust_code,
+    t2.`name` AS user_name,
+    t2.mobile,
+    t1.create_time,
+    t1.back_comments,
+    t1.server_type,
+    t1.`status`
+    FROM
+    cl_t_back_comments t1
+    LEFT JOIN cl_t_user t2 ON t2.cust_code = t1.cust_code
+    where t1.id = #{id,jdbcType=BIGINT}
+  </select>
+</mapper>

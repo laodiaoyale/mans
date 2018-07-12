@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bns.dao.user.ClTBackCommentsUrlDao">
+  <resultMap id="BaseResultMap" type="com.bns.model.user.ClTBackCommentsUrlDTO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="back_comments_id" jdbcType="VARCHAR" property="backCommentsId" />
+    <result column="picture_url" jdbcType="VARCHAR" property="pictureUrl" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <insert id="insert" parameterType="com.bns.model.user.ClTBackCommentsUrlDTO">
+    insert into cl_t_back_comments_url (id, back_comments_id, picture_url, create_time,update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{backCommentsId,jdbcType=VARCHAR}, #{pictureUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <select id="selectImageByCommentId" parameterType="java.lang.String" resultType="java.util.Map">
+    SELECT
+    picture_url
+    FROM
+    cl_t_back_comments_url
+
+    where back_comments_id = #{commentId,jdbcType=BIGINT}
+  </select>
+</mapper>
