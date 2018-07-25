@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>互联网信贷业务管理系统</title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="../js/libs/build_standalone.css">
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <!-- page -->
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/customerInfo.css">
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box newWrap">
+    <div class="newTitle">
+        <img src="../images/address.png" />
+        <span>人员管理 > <a href="user.html">人员列表</a><label id="path"> > 增加人员</label></span>
+    </div>
+    <div class="queryWrap addUserHtml">
+        <div class="listOfOptions">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6"><label class="com-lab">账号</label><input class="com-span"  id="newUserNo" /><span class="reminder">员工编号，8位数字</span></div>
+                <div class="col-lg-6 col-md-6 col-sm-6"><label class="com-lab">姓名</label><input class="com-span"  id="userName" /><span class="reminder">权限人员真实姓名</span></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6" id="passwordItem"><label class="com-lab">密码</label><input class="com-span"  id="password" /><span class="reminder">8-10个字母+数字</span></div>
+                <div class="col-lg-6 col-md-6 col-sm-6"><label class="com-lab">手机号</label><input class="com-span" maxlength="11"  id="mobile" /><span class="reminder">11个数字</span></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 flexBox">
+                    <label class="com-lab">角色</label>
+                    <div class="inpBox com-span userRoleCla">
+                        <div class="cludeBox"></div>
+                        <input id="add_user_role" type="text"  readonly />
+                        <img src="../images/down_arrow.png" />
+                        <ul class="roleSelect">
+                            <li>运营</li>
+                            <li>信审</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6"><label class="com-lab">部门</label><input class="com-span"  id="department"/></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6"><label class="com-lab">岗位</label><input class="com-span"  id="job"/></div>
+            </div>
+        </div>
+        <div class="submitBox">
+            <button id="submitBtn_addUser">提交</button>
+        </div>
+    </div>
+</div>
+<div class="mask" style="display: none;"></div>
+
+<div class="error-msg"></div>
+<!--修改密码-->
+<div class="reset-password"></div>
+<script src="../js/libs/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/util.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/menu.js"></script>
+<script src="../js/user.js"></script>
+<script>
+     $("body").on("click",function(event){
+         if(event.target.className != "cludeBox"){
+             $(".roleSelect").hide()
+         }
+     })
+</script>
+</body>
+</html>

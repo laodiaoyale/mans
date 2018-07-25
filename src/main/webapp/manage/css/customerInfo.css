@@ -798,6 +798,11 @@ border-bottom:1px solid #EEEFF0;
     border: 1px solid #D9D9D9;
     background: #FFFFFF;
 }
+
+.limitsWrap .searchList #idCard{
+    border: 1px solid #D9D9D9;
+    background: #FFFFFF;
+}
 .limitsWrap .searchList ul,
 .listOfOptions ul{
     cursor: pointer;
@@ -830,7 +835,10 @@ border-bottom:1px solid #EEEFF0;
     cursor: pointer;
     position: relative;
 }
-.limitsWrap .nameBox{
+.limitsWrap .roleBox {
+    margin-left: 1.9vw;
+}
+.limitsWrap .idCardBox{
     margin-left: 1.9vw;
 }
 .limitsWrap .searchBtn{
