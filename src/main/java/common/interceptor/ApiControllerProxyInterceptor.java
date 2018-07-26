@@ -63,7 +63,7 @@ public class ApiControllerProxyInterceptor extends HandlerInterceptorAdapter {
                 }else if(clazz.isAssignableFrom(String.class)  || clazz.isAssignableFrom(int.class)  || clazz.isAssignableFrom(Integer.class)){
                     methodParameter.initParameterNameDiscovery(new DefaultParameterNameDiscoverer());
                     if(clazz==int.class|| clazz == Integer.class){
-                        params[i] = ((Double)reqMap.get(methodParameter.getParameterName())).intValue();
+                        params[i] = ((Integer)reqMap.get(methodParameter.getParameterName())).intValue();
                     }else {
                         params[i] = reqMap.get(methodParameter.getParameterName());
                     }

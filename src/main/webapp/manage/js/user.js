@@ -289,7 +289,7 @@ function queryUserList(roleId,userName,page){
         },
         type: "POST",
         contentType: "text/html; charset=UTF-8",
-        url: "/api/manage/user/list",//获取角色下拉框
+        url: "/api/user/list",//获取角色下拉框
         dataType: 'json',
         data: _obj,
         success: function (data) {
@@ -303,21 +303,27 @@ function queryUserList(roleId,userName,page){
                 if(list.length>0) {
                     $.each(list, function (i) {
                         var _tr = $("<tr>");
-                        var str =  '          <td>' + parseInt((page - 1) * 10 +i+1) + '</td>' +
-                            '                <td>' + this.user_no + '</td>' +
-                            '                <td>' + this.user_name + '</td>' +
-                            '                <td>' + this.role_name + '</td>' +
-                            '                <td>' + this.department + '</td>' +
-                            '                <td>' + this.job + '</td>' +
+                        var str =  '         <td>' + parseInt((page - 1) * 10 +i+1) + '</td>' +
+                            '                <td>' + this.name + '</td>' +
+                            '                <td>' + this.sex + '</td>' +
+                            '                <td>' + this.idCard + '</td>' +
                             '                <td>' + this.mobile + '</td>' +
-                            '                <td>' + (this.create_time?this.create_time:"") + '</td>' +
-                            '                <td id="' + this.user_no
+                            '                <td>' + this.wechatCode + '</td>' +
+                            '                <td>' + this.qqCode + '</td>' +
+                            '                <td>' + this.address + '</td>' +
+                            '                <td>' + this.age + '</td>' +
+                            '                <td>' + this.education + '</td>' +
+                            '                <td>' + this.source + '</td>' +
+                            '                <td>' + this.skill + '</td>' +
+                            '                <td>' + this.history + '</td>' +
+                            '                <td>' + this.job + '</td>' +
+                            '                <td id="' + this.id
                         +'"><span class="redactTlt"><a href="javascript:void(0);"><img src="../images/compile.svg" />编辑</a></span><span class="delTit"><img src="../images/delete.svg" />删除</span></td>' ;
                         _tr.html(str).data(list[i]);
                         $("#permissionsTable tbody").append(_tr);
                     });
                 }else{
-                    $("#permissionsTable tbody").append('<tr class="table_null"><td style="padding-left: 15px; text-align: left;" colspan=\'9\'>暂无数据</td></tr>');
+                    $("#permissionsTable tbody").append('<tr class="table_null"><td style="padding-left: 15px; text-align: left;" colspan=\'15\'>暂无数据</td></tr>');
                 }
 
             } else if (data.rspCode === '-999999') {
@@ -337,8 +343,7 @@ function queryUserList(roleId,userName,page){
 }
 function deleteUser(id) {
     var _obj = JSON.stringify({
-        newUserNo:id,
-        updateUser:localStorage.getItem('userNo')
+        id:id
     }, 'utf-8');
     $.ajax({
         headers: {
@@ -346,7 +351,7 @@ function deleteUser(id) {
         },
         type: "POST",
         contentType: "text/html; charset=UTF-8",
-        url: "/api/sysUser/sysUserDel/v1",//员工删除
+        url: "/api/user/del",//员工删除
         dataType: 'json',
         data: _obj,
         success: function (data) {

@@ -84,6 +84,11 @@ public class BnsUser{
      */
     private String job;
 
+    /**
+     * 状态1正常，0删除
+     */
+    private Byte status;
+
     public Integer getId() {
         return id;
     }
@@ -210,5 +215,13 @@ public class BnsUser{
 
     public void setJob(String job) {
         this.job = job == null ? null : job.trim();
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 }

@@ -1,15 +1,21 @@
 package com.bns.api.user.service;
 
+import com.bns.api.sys.vo.SysUserRegisterVO;
 import com.bns.api.user.param.UserReqParam;
 import com.bns.dao.user.BnsUserDao;
 import com.bns.model.user.BnsUser;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import common.exception.BaseException;
 import common.message.BaseController;
+import common.message.JsonResult;
+import common.message.RespCodeCostant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhaolei
@@ -36,5 +42,20 @@ public class UserService extends BaseController{
         List<BnsUser> pageList = userDao.findPaging(user);
         return  new PageInfo(pageList);
     }
-
+    /**
+     * @param id
+     * @return
+     * 删除
+     */
+    public void delete(Integer id)throws BaseException {
+        BnsUser user = userDao.selectByPrimaryKey(id);//查询员工
+        if(user ==null){
+            throw new BaseException("员工不存在");
+        }
+        user.setStatus((byte) 0);
+        int num = userDao.updateByPrimaryKey(user);
+        if(num==0){
+            throw new BaseException("信息删除失败");
+        }
+    }
 }

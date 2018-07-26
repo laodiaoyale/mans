@@ -1,8 +1,10 @@
 package com.bns.api.user.controller;
 
-import com.github.pagehelper.PageInfo;
+import com.bns.api.sys.vo.SysUserRegisterVO;
 import com.bns.api.user.param.UserReqParam;
 import com.bns.api.user.service.UserService;
+import com.github.pagehelper.PageInfo;
+import common.exception.BaseException;
 import common.message.BaseController;
 import common.message.JsonResult;
 import common.message.RespCodeCostant;
@@ -20,7 +22,7 @@ import java.util.HashMap;
  * 用户相关
  */
 @Controller
-@RequestMapping(value = "api/manage/user",method = RequestMethod.POST)
+@RequestMapping(value = "api/user",method = RequestMethod.POST)
 public class UserController extends BaseController{
 
     @Autowired
@@ -35,14 +37,27 @@ public class UserController extends BaseController{
     public JsonResult list(UserReqParam userReqParam){
         JsonResult json = initJsonResult();
         PageInfo pageInfo=userService.pageLite(userReqParam);
-        if(pageInfo.getList().size()==0){
-            //若用户列表为0则查找不到该用户
-            json.setError(RespCodeCostant.ACCOUNTMANAGEMENT);
-            json.setBody(new HashMap<>());
-            return json;
-        }
+//        if(pageInfo.getList().size()==0){
+//            //若用户列表为0则查找不到该用户
+//            json.setError(RespCodeCostant.ACCOUNTMANAGEMENT);
+//            json.setBody(new HashMap<>());
+//            return json;
+//        }
         json.setBody(pageInfo);
         return json;
+    }
+
+    /**
+     * OK
+     * @param id
+     * @return
+     * 删除
+     */
+    @RequestMapping(value="/del")
+    public JsonResult delete(String id) throws BaseException {
+        Integer i = Integer.valueOf(id);
+        userService.delete(i);
+        return initJsonResult();
     }
 
 }
