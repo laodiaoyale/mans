@@ -65,7 +65,7 @@ function loginFn(){
                     localStorage.setItem('LoginId', login_id);
                     //记住账号
                     SaveAccount();
-                    window.location.href = 'customerInfo.html';
+                    window.location.href = 'user.html';
                 }else if(data.rspCode==='-999999'){
                     localStorage.removeItem("LoginName");
                     localStorage.removeItem("LoginToken");
