@@ -339,26 +339,26 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <distributionManagement>
+    <!--<distributionManagement>-->
+        <!--&lt;!&ndash;<repository>&ndash;&gt;-->
+        <!--&lt;!&ndash;<id>Snapshots</id>&ndash;&gt;-->
+        <!--&lt;!&ndash;<name>snapshots</name>&ndash;&gt;-->
+        <!--&lt;!&ndash;<url>http://101.200.52.224:8081/nexus/content/repositories/snapshots</url>&ndash;&gt;-->
+        <!--&lt;!&ndash;</repository>&ndash;&gt;-->
         <!--<repository>-->
-        <!--<id>Snapshots</id>-->
-        <!--<name>snapshots</name>-->
-        <!--<url>http://101.200.52.224:8081/nexus/content/repositories/snapshots</url>-->
+            <!--<id>snapshots</id>-->
+            <!--<name>snapshots</name>-->
+            <!--<url>http://172.18.100.230:8080/nexus-2.5.1/content/repositories/snapshots</url>-->
         <!--</repository>-->
-        <repository>
-            <id>snapshots</id>
-            <name>snapshots</name>
-            <url>http://172.18.100.230:8080/nexus-2.5.1/content/repositories/snapshots</url>
-        </repository>
-    </distributionManagement>
-    <repositories>
-        <repository>
-            <id>releases</id>
-            <name>releases</name>
-            <url>http://172.18.100.230:8080/nexus-2.5.1/content/groups/public</url>
-        </repository>
+    <!--</distributionManagement>-->
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>releases</id>-->
+            <!--<name>releases</name>-->
+            <!--<url>http://172.18.100.230:8080/nexus-2.5.1/content/groups/public</url>-->
+        <!--</repository>-->
 
-    </repositories>
+    <!--</repositories>-->
     <build>
         <finalName>user-manage</finalName>
         <resources>
