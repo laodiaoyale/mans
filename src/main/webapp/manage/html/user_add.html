@@ -26,30 +26,103 @@
     <div class="queryWrap addUserHtml">
         <div class="listOfOptions">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6"><label class="com-lab">账号</label><input class="com-span"  id="newUserNo" /><span class="reminder">员工编号，8位数字</span></div>
-                <div class="col-lg-6 col-md-6 col-sm-6"><label class="com-lab">姓名</label><input class="com-span"  id="userName" /><span class="reminder">权限人员真实姓名</span></div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6" id="passwordItem"><label class="com-lab">密码</label><input class="com-span"  id="password" /><span class="reminder">8-10个字母+数字</span></div>
-                <div class="col-lg-6 col-md-6 col-sm-6"><label class="com-lab">手机号</label><input class="com-span" maxlength="11"  id="mobile" /><span class="reminder">11个数字</span></div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 flexBox">
-                    <label class="com-lab">角色</label>
-                    <div class="inpBox com-span userRoleCla">
-                        <div class="cludeBox"></div>
-                        <input id="add_user_role" type="text"  readonly />
-                        <img src="../images/down_arrow.png" />
-                        <ul class="roleSelect">
-                            <li>运营</li>
-                            <li>信审</li>
-                        </ul>
-                    </div>
+                <div class="col-lg-4 col-md-4 col-sm-4"><label class="com-lab">姓名</label><input class="com-span"  id="name" /></div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                        <label class="com-lab" for="sex"> 性别</label>
+                        <select class="form-control" style="width: 100px" id="sex">
+                            <option value="0">男</option>
+                            <option value="1">女</option>
+                        </select>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6"><label class="com-lab">部门</label><input class="com-span"  id="department"/></div>
+                <div class="col-lg-4 col-md-4 col-sm-4"><label class="com-lab">身份号</label><input class="com-span"  id="userName" /></div>
             </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6"><label class="com-lab">岗位</label><input class="com-span"  id="job"/></div>
+                <div class="col-lg-4 col-md-4 col-sm-4"><label class="com-lab">手机号</label><input class="com-span" id="mobile" maxlength="11"  /></div>
+                <div class="col-lg-4 col-md-4 col-sm-4"><label class="com-lab">微信号</label><input class="com-span"  id="wechatCode" /></div>
+                <div class="col-lg-4 col-md-4 col-sm-4"><label class="com-lab">QQ号</label><input class="com-span"id="qqCode" /></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4"><label class="com-lab">住址</label><input class="com-span"  id="address"/></div>
+                <div class="col-lg-4 col-md-4 col-sm-4 flexBox">
+                    <label class="com-lab" style="width: 70px">年龄</label>
+                    <select class="form-control" style="width: 100px" id="age">
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                        <option>20</option>
+                        <option>21</option>
+                        <option>22</option>
+                        <option>23</option>
+                        <option>24</option>
+                        <option>25</option>
+                        <option>26</option>
+                        <option>27</option>
+                        <option>28</option>
+                        <option>29</option>
+                        <option>30</option>
+                        <option>31</option>
+                        <option>32</option>
+                        <option>33</option>
+                        <option>34</option>
+                        <option>35</option>
+                        <option>36</option>
+                        <option>37</option>
+                        <option>38</option>
+                        <option>39</option>
+                        <option>40</option>
+                        <option>41</option>
+                        <option>42</option>
+                        <option>43</option>
+                        <option>44</option>
+                        <option>45</option>
+                        <option>46</option>
+                        <option>47</option>
+                        <option>48</option>
+                        <option>49</option>
+                        <option>50</option>
+                        <option>51</option>
+                        <option>52</option>
+                        <option>53</option>
+                        <option>54</option>
+                        <option>55</option>
+                        <option>56</option>
+                        <option>57</option>
+                        <option>58</option>
+                        <option>59</option>
+                        <option>60</option>
+                        <option>61</option>
+                        <option>62</option>
+                        <option>63</option>
+                        <option>64</option>
+                        <option>65</option>
+                        <option>66</option>
+                        <option>67</option>
+                        <option>68</option>
+                        <option>69</option>
+                        <option>70</option>
+                    </select>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab" style="width: 70px">学历</label>
+                    <select class="form-control" id="education">
+                        <option>高中以下</option>
+                        <option>高中</option>
+                        <option>专科</option>
+                        <option>本科</option>
+                        <option>研究生</option>
+                        <option>研究生以上</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4"><label class="com-lab">来源渠道</label><input class="com-span"  id="source"/></div>
+                <div class="col-lg-4 col-md-4 col-sm-4"><label class="com-lab">岗位</label><input class="com-span"  id="job"/></div>
+                <div class="col-lg-4 col-md-4 col-sm-4"><label class="com-lab">专业技能</label><input class="com-span"  id="skill"/></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4"><label class="com-lab">在职状态</label><input class="com-span"  id="status"/></div>
+                <div class="col-lg-6 col-md-6 col-sm-6"><label class="com-lab">曾入职企业</label><input class="com-span"  id="history"/></div>
             </div>
         </div>
         <div class="submitBox">

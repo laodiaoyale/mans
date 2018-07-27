@@ -841,7 +841,7 @@ border-bottom:1px solid #EEEFF0;
 .limitsWrap .idCardBox{
     margin-left: 1.9vw;
 }
-.limitsWrap .searchBtn{
+.searchBtn{
     background: #16C0D4;
     border-radius: 4px;
     height: 30px;
@@ -853,7 +853,7 @@ border-bottom:1px solid #EEEFF0;
     padding-left: 20px;
     position: relative;
 }
-.limitsWrap .searchBtn img{
+.searchBtn img{
     float: left;
     position: absolute;
     top: 3px;
@@ -895,8 +895,8 @@ border-bottom:1px solid #EEEFF0;
     /*border-right: 1px dashed #D9D9D9;*/
 }
 .listOfOptions .row .com-lab{
-    width: 65px;
-    margin-right: 7px;
+    /*width: 65px;*/
+    margin-right: 3px;
     font-size: 14px;
     color: #8B94A0;
     letter-spacing: -0.34px;
@@ -909,7 +909,7 @@ border-bottom:1px solid #EEEFF0;
     letter-spacing: -0.29px;
 }
 .listOfOptions .row .com-span{
-    width: 200px;
+    width: 150px;
     height: 30px;
     background: #fff;
     border: 1px solid #D9D9D9;
