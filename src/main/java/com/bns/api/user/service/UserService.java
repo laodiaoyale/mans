@@ -58,4 +58,16 @@ public class UserService extends BaseController{
             throw new BaseException("信息删除失败");
         }
     }
+
+    /**
+     * 新增或修改用户信息
+     * @param bnsUser
+     */
+    public void addOrUpdate(BnsUser bnsUser) {
+        if(bnsUser.getId()==0){
+            userDao.insert(bnsUser);
+        }else{
+            userDao.updateByPrimaryKey(bnsUser);
+        }
+    }
 }

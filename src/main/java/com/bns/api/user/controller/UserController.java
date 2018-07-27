@@ -2,6 +2,7 @@ package com.bns.api.user.controller;
 
 import com.bns.api.user.param.UserReqParam;
 import com.bns.api.user.service.UserService;
+import com.bns.model.user.BnsUser;
 import com.github.pagehelper.PageInfo;
 import common.exception.BaseException;
 import common.message.BaseController;
@@ -42,6 +43,21 @@ public class UserController extends BaseController{
         json.setBody(pageInfo);
         return json;
     }
+
+
+    /**
+     * OK
+     * @param bnsUser
+     * @return
+     * 删除
+     */
+    @RequestMapping(value="/addOrUpdate")
+    public JsonResult addOrUpdate(BnsUser bnsUser) throws BaseException {
+        userService.addOrUpdate(bnsUser);
+        return initJsonResult();
+    }
+
+
 
     /**
      * OK
