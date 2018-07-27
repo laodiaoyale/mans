@@ -72,6 +72,8 @@ $(function () {
     $("#searchBtn").click(function () {
         var roleId = $("#selectRole").attr("roleId") ;
         var userName = $.trim($("#inpName").val());
+        var sex = $.trim($("#sex").val());
+        console.log(sex)
         queryUserList(roleId,userName,1);
     });
 });
