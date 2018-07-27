@@ -1,20 +1,16 @@
 package com.bns.api.user.controller;
 
-import com.bns.api.sys.vo.SysUserRegisterVO;
 import com.bns.api.user.param.UserReqParam;
 import com.bns.api.user.service.UserService;
 import com.github.pagehelper.PageInfo;
 import common.exception.BaseException;
 import common.message.BaseController;
 import common.message.JsonResult;
-import common.message.RespCodeCostant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.HashMap;
 
 /**
  * @author zhaolei
