@@ -52,7 +52,12 @@ public class UserReqParam {
     /**
      * 年龄
      */
-    private Byte age;
+    private Byte minAge;
+
+    /**
+     * 年龄
+     */
+    private Byte maxAge;
 
     /**
      * 学历
@@ -171,12 +176,20 @@ public class UserReqParam {
         this.qqCode = qqCode;
     }
 
-    public Byte getAge() {
-        return age;
+    public Byte getMinAge() {
+        return minAge;
     }
 
-    public void setAge(Byte age) {
-        this.age = age;
+    public void setMinAge(Byte minAge) {
+        this.minAge = minAge;
+    }
+
+    public Byte getMaxAge() {
+        return maxAge;
+    }
+
+    public void setMaxAge(Byte maxAge) {
+        this.maxAge = maxAge;
     }
 
     public Byte getEducation() {
