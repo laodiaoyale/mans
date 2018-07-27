@@ -25,54 +25,67 @@
     </div>
     <div class="queryWrap limitsWrap">
        <p class="add_user_tit">增加人员<img class="add_user_btn" src="../images/add.png" /></p>
-        <div class="searchBox">
-            <div class="searchList">
-                <div class="nameBox">
-                    <label>姓名</label>
-                    <input id="inpName" type="text" style="width: 75px" />
-                </div>
-                <!--<div class="roleBox">-->
-                    <!--<label>角色</label>-->
-                    <!--<div class="inpBox permission_role userRoleCla">-->
-                        <!--<div class="cludeBox"></div>-->
-                        <!--<input class="selectRole" id="selectRole" type="text" value="全部" readonly />-->
-                        <!--<img src="../images/down_arrow.png" id="downArrowPic" />-->
-                        <!--<ul class="roleSelect search" style="height: 180px;overflow-y: auto;">-->
-                            <!--<li>全部</li>-->
-                            <!--<li>运营</li>-->
-                            <!--<li>信审</li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-
-                <!--</div>-->
-                <!--<div class="sexBox">-->
-                    <!--<label>性别</label>-->
-                    <!--<input id="sex" type="text" />-->
-                <!--</div>-->
-
-                <div class="idCardBox">
-                    <label>身份证号</label>
-                    <input id="idCard" type="text" style="width: 175px" />
-                </div>
-
-                <div class="addressBox">
-                    <label>住址</label>
-                    <input id="address" type="text"/>
-                </div>
-                <div class="ageBox">
-                    <label>年龄</label>
-                    <input id="age" type="text"/>
-                </div>
-                <div class="educationBox">
-                    <label>学历</label>
-                    <input id="education"/>
-                </div>
-                <div class="sourceBox">
-                    <label>渠道</label>
-                    <input id="source"/>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="control-label" for="inpName"> 姓名</label>
+                    <input type="text" class="form-control" id="inpName" >
                 </div>
             </div>
-            <button class="searchBtn" id="searchBtn"><img src="../images/search.png" /><span>搜索</span></button>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label" for="idCard"> 身份证号</label>
+                    <input type="text" class="form-control" id="idCard" >
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label" for="idCard"> 住址</label>
+                    <input type="text" class="form-control" id="address" >
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label" for="idCard"> 渠道</label>
+                    <input type="text" class="form-control" id="source" >
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label class="control-label" for="idCard"> 性别</label>
+                    <select class="form-control" id="sex">
+                        <option  value="2">男</option>
+                        <option value="3">女</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="control-label" for="inpName"> 学历</label>
+                    <select class="form-control" id="education">
+                        <option>研究生</option>
+                        <option>本科</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label" for="idCard"> 年龄</label>
+                    <select class="form-control" id="age">
+                        <option>30</option>
+                        <option>29</option>
+                        <option>28</option>
+                        <option>27</option>
+                        <option>26</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button class="searchBtn mt23" id="searchBtn"><img src="../images/search.png" /><span>搜索</span></button>
+            </div>
         </div>
     </div>
     <div class="feedbackList limitsTable">
