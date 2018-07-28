@@ -3,6 +3,21 @@ $(function () {
     if(window.location.href.indexOf("user.html")>-1){
         queryUserList("","",1);
     }
+    if(window.location.href.indexOf("user_info.html")>-1){
+        $("#path").html(" > 人员信息");
+        $('#name').attr({'display' : 'disabled'});
+        $('#sex').attr({'disabled' : 'disabled'});
+        $('#job').attr({'disabled' : 'disabled'});
+        $('#mobile').css({'color' : '#999'});
+        $('#idCard').css({'color' : '#999'});
+        initUser();
+        //点击其他地方收起下拉框
+        $("body").on("click",function(event){
+            if(event.target.className != "cludeBox"){
+                $(".roleSelect").hide()
+            }
+        })
+    }
     if(window.location.href.indexOf("user_add.html?type=edit")>-1){
         $("#path").html(" > 人员修改");
         $('#passwordItem').css({'display' : 'none'});
@@ -37,6 +52,14 @@ $(function () {
     $('#addUserBtn').click(function () {
         window.location.href = 'user_add.html';
     });
+    // 点击编辑跳转到编辑页面
+    $('#submitBtn_infoUser').click(function () {
+        window.location.href = 'user.html';
+    });
+    // 点击编辑跳转到编辑页面
+    $('#submitBtn_cancel').click(function () {
+        window.location.href = 'user.html';
+    });
     var DelId = "";
     // 点击删除弹出二级确认页
     $("#userTable").on('click','.delTit',function () {
@@ -44,7 +67,12 @@ $(function () {
         $('.mask').show();
         $('.sureDel').show();
     });
-    $("#userTable").on('click','a',function () {
+    $("#userTable").on('click','.infoTlt',function () {
+        var user =  JSON.stringify($(this).parents("tr").data());
+        sessionStorage.setItem("user",user);
+        window.location.href = "user_info.html";
+    });
+    $("#userTable").on('click','.redactTlt',function () {
         var user =  JSON.stringify($(this).parents("tr").data());
         sessionStorage.setItem("user",user);
         window.location.href = "user_add.html?type=edit";
@@ -314,11 +342,11 @@ function queryUserList(roleId,userName,page){
                             // '                <td>' + this.qqCode + '</td>' +
                             // '                <td>' + this.address + '</td>' +
                             '                <td>' + educationAction(this.education) + '</td>' +
-                            '                <td>' + this.job + '</td>' +
-                            '                <td>' + this.source + '</td>' +
+                            '                <td>' + this.skill + '</td>' +
+                            '                <td>' + this.address + '</td>' +
                             '                <td>' + statusAction(this.status) + '</td>' +
                             '                <td id="' + this.id +'">' +
-                            '<span class="redactTlt"><a href="javascript:void(0);">详情</a></span>' +
+                            '<span class="infoTlt"><a href="javascript:void(0);">详情</a></span>' +
                             '<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
                             '<span class="delTit">删除</span></td>' ;
                         _tr.html(str).data(list[i]);
