@@ -1,8 +1,8 @@
 $(function () {
-    getRole();
     if(window.location.href.indexOf("user.html")>-1){
         queryUserList("","",1);
     }
+    getRole();
     if(window.location.href.indexOf("user_info.html")>-1){
         $("#path").html(" > 人员信息");
         $('#name').attr({'display' : 'disabled'});
@@ -260,32 +260,26 @@ function editUser(){
     }
 }
 function getRole(){
-    var _obj = JSON.stringify({}, 'utf-8');
+    var obj = {
+        "userNo":localStorage.getItem('userNo')
+    };
+    var _obj = JSON.stringify(obj, 'utf-8');
     $.ajax({
         headers: {
             token: localStorage.getItem('LoginToken')
         },
         type: "POST",
         contentType: "text/html; charset=UTF-8",
-        url: "/api/sysUserRole/selectRoleAll/v1",//获取角色下拉框
+        url: "/api/sysUserRole/queryRoleByUserId/v1",//获取角色下拉框
         dataType: 'json',
         data: _obj,
         aysnc:false,
         success: function (data) {
             if (data.rspCode === '000000') {
                 var items = data.body;
-                $(".roleSelect").html("");
-                $.each(items,function () {
-                    var _li = '<li roleId="'+this.id+'">'+this.role_name+'</li>';
-                    $(".roleSelect").append(_li);
-                });
-                if($(".roleSelect").hasClass("search")){
-                    $(".roleSelect").prepend('<li roleId="">全部</li>');
-                }else{
-                    if(window.location.href.indexOf("permissions_user.html?type=edit")==-1) {
-                        var _defaultLi = $(".roleSelect li:first-child");
-                        $("#add_user_role").val(_defaultLi.html()).attr("roleId", _defaultLi.attr("roleId"));
-                    }
+                localStorage.setItem("roleCode",items.roleCode);
+                if(items.roleCode!="admin"){
+                    $("#addUserBtn").attr("style","display:none");
                 }
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
@@ -346,9 +340,12 @@ function queryUserList(roleId,userName,page){
                             '                <td>' + this.address + '</td>' +
                             '                <td>' + statusAction(this.status) + '</td>' +
                             '                <td id="' + this.id +'">' +
-                            '<span class="infoTlt"><a href="javascript:void(0);">详情</a></span>' +
-                            '<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
-                            '<span class="delTit">删除</span></td>' ;
+                            '<span class="infoTlt"><a href="javascript:void(0);">详情</a></span>';
+                            if(localStorage.getItem("roleCode")=="admin"){
+                                str =str+'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
+                                    '<span class="delTit">删除</span>' ;
+                            }
+                            str =str+'</td>';
                         _tr.html(str).data(list[i]);
                         $("#userTable tbody").append(_tr);
                     });

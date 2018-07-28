@@ -22,6 +22,19 @@ public class SysRoleContrller extends BaseController {
 
     @Autowired
     private SysRoleService sysRoleService;
+
+    /**
+     * OK
+     * 查询角色下拉框
+     * @param
+     * @return
+     */
+    @RequestMapping("/queryRoleByUserId/v1")
+    public JsonResult queryRoleByUserId(String userNo) throws BaseException{
+        JsonResult json = initJsonResult();
+        json.setBody(sysRoleService.queryRoleByUserId(userNo));
+        return json;
+    }
     /**
      * OK
      * 查询角色下拉框
@@ -29,7 +42,7 @@ public class SysRoleContrller extends BaseController {
      * @return
      */
     @RequestMapping("/selectRoleAll/v1")
-    public JsonResult selectRoleAll(){
+    public JsonResult selectRoleAll(String userNo){
         JsonResult json = initJsonResult();
         return sysRoleService.selectRole();
     }
