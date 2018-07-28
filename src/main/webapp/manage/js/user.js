@@ -313,7 +313,7 @@ function queryUserList(roleId,userName,page){
                             '                <td>' + this.qqCode + '</td>' +
                             '                <td>' + this.address + '</td>' +
                             '                <td>' + this.age + '</td>' +
-                            '                <td>' + this.education + '</td>' +
+                            '                <td>' + (this.education==0?'--':this.education) + '</td>' +
                             '                <td>' + this.source + '</td>' +
                             '                <td>' + this.skill + '</td>' +
                             '                <td>' + this.history + '</td>' +

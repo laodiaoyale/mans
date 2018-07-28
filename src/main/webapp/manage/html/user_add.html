@@ -20,7 +20,7 @@
 <div class="menu-box" id="menu"></div>
 <div class="customer-box newWrap">
     <div class="newTitle">
-        <img src="../images/address.png" />
+        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
         <span>人员管理 > <a href="user.html">人员列表</a><label id="path"> > 增加人员</label></span>
     </div>
     <div class="queryWrap addUserHtml">
@@ -31,9 +31,9 @@
                     <label class="com-lab">姓名</label>
                     <input class="com-span"  id="name" />
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 ">
                         <label class="com-lab" for="sex"> 性别</label>
-                        <select class="form-control" style="width: 100px" id="sex">
+                        <select class="form-control" id="sex">
                             <option value="0">男</option>
                             <option value="1">女</option>
                         </select>
@@ -62,9 +62,10 @@
                     <label class="com-lab">住址</label>
                     <input class="com-span"  id="address"/>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 flexBox">
-                    <label class="com-lab" style="width: 70px">年龄</label>
-                    <select class="form-control" style="width: 100px" id="age">
+                <div class="col-lg-4 col-md-4 col-sm-4 ">
+                    <label class="com-lab">年龄</label>
+                    <!--<select class="form-control " id="age"  onmousedown="if(this.options.length>6){this.size=7}" onblur="this.size=0" onchange="this.size=0">-->
+                    <select class="form-control " id="age" >
                         <option>16</option>
                         <option>17</option>
                         <option>18</option>
@@ -123,8 +124,8 @@
                     </select>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                    <label class="com-lab" style="width: 70px">学历</label>
-                    <select class="com-span" id="education">
+                    <label class="com-lab" >学历</label>
+                    <select class="form-control" id="education">
                         <option value="0">全部</option>
                         <option value="1">高中以下</option>
                         <option value="2">高中</option>
