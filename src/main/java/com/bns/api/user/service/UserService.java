@@ -64,7 +64,7 @@ public class UserService extends BaseController{
      * @param bnsUser
      */
     public void addOrUpdate(BnsUser bnsUser) {
-        if(bnsUser.getId()==0){
+        if(bnsUser.getId()==null||bnsUser.getId()==0){
             userDao.insert(bnsUser);
         }else{
             userDao.updateByPrimaryKey(bnsUser);

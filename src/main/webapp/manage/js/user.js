@@ -4,7 +4,7 @@ $(function () {
         queryUserList("","",1);
     }
     if(window.location.href.indexOf("user_add.html?type=edit")>-1){
-        $("#path").html(" > 权限人员修改");
+        $("#path").html(" > 人员修改");
         $('#passwordItem').css({'display' : 'none'});
         $('#newUserNo').attr({'disabled' : 'disabled'});
         $('#userName').attr({'disabled' : 'disabled'});
@@ -39,14 +39,14 @@ $(function () {
     });
     var DelId = "";
     // 点击删除弹出二级确认页
-    $("#permissionsTable").on('click','.delTit',function () {
+    $("#userTable").on('click','.delTit',function () {
         DelId = $(this).parents("td").attr("id");
         $('.mask').show();
         $('.sureDel').show();
     });
-    $("#permissionsTable").on('click','a',function () {
-        var permissionsInfo =  JSON.stringify($(this).parents("tr").data());
-        sessionStorage.setItem("permissionsInfo",permissionsInfo);
+    $("#userTable").on('click','a',function () {
+        var user =  JSON.stringify($(this).parents("tr").data());
+        sessionStorage.setItem("user",user);
         window.location.href = "user_add.html?type=edit";
     });
 
@@ -86,50 +86,48 @@ function focusOrBlur(obj,ele,val1,val2) { //对象，元素，属性值1，属�
     });
 }
 function addUser(){
-        var newUserNo = $.trim($("#newUserNo").val());
-        var userName = $.trim($("#userName").val());
-        var password = $.trim($("#password").val());
+        var name = $.trim($("#name").val());
+        var sex = $.trim($("#sex").val());
+        var idCard = $.trim($("#idCard").val());
         var mobile = $.trim($("#mobile").val());
-        var roleId = $.trim($("#add_user_role").attr("roleId"));
+        var wechatCode = $.trim($("#wechatCode").val());
+        var qqCode = $.trim($("#qqCode").val());
+        var address = $.trim($("#address").val());
+        var age = $.trim($("#age").val());
+        var education = $.trim($("#education").val());
+        var source = $.trim($("#source").val());
         var job = $.trim($("#job").val());
-        var department = $.trim($("#department").val());
-        if(newUserNo==""){
-            showMsg('.error-msg', "请输入账号");
-            return false;
-        }else if(newUserNo.length !== 8 ){
-            showMsg('.error-msg', "请输入正确账号");
-            return false;
-        }else if(userName==""){
+        var skill = $.trim($("#skill").val());
+        var status = $.trim($("#status").val());
+        var history = $.trim($("#history").val());
+        if(name==""){
             showMsg('.error-msg', "请输入姓名");
             return false;
-        }else if(password==""){
-            showMsg('.error-msg', "请输入密码");
-            return false;
-        }else if(mobile==""){
-            showMsg('.error-msg', "请输入手机号");
-            return false;
-        }else if(department==""){
-            showMsg('.error-msg', "请输入部门");
-            return false;
-        }else if(job==""){
-            showMsg('.error-msg', "请输入岗位");
-            return false;
-        }else if(!isValNum(newUserNo)){
-            showMsg('.error-msg', "请输入正确的账号");
-        }else if(!isNumAndStr(password)){
-            showMsg('.error-msg', "请输入正确格式的密码");
-        }else if(!isPhoneNum(mobile) || mobile.length != 11){
-            showMsg('.error-msg', "请输入正确格式的手机号");
-        }else{
+        }
+        // else if(!isValNum(newUserNo)){
+        //     showMsg('.error-msg', "请输入正确的账号");
+        // }else if(!isNumAndStr(password)){
+        //     showMsg('.error-msg', "请输入正确格式的密码");
+        // }else if(!isPhoneNum(mobile) || mobile.length != 11){
+        //     showMsg('.error-msg', "请输入正确格式的手机号");
+        // }
+        else{
             var obj = {
-                "userNo":localStorage.getItem('userNo'),
-                "userName":userName,
-                "newUserNo":newUserNo,
-                "password":md5(password),//(md5加密)
-                "roleId":roleId,
+                "id":localStorage.getItem('id'),
+                "name":name,
+                "sex":sex,
+                "idCard":idCard,
+                "mobile":mobile,
+                "wechatCode":wechatCode,
+                "qqCode":qqCode,
+                "address":address,
+                "age":age,
+                "education":education,
+                "source":source,
                 "job":job,
-                "department":department,
-                "mobile":mobile
+                "skill":skill,
+                "status":status,
+                "history":history
             };
             var _obj = JSON.stringify(obj, 'utf-8');
             $.ajax({
@@ -138,14 +136,14 @@ function addUser(){
                 },
                 type: "POST",
                 contentType: "text/html; charset=UTF-8",
-                url: "/api/sysUser/sysUserRegister/v1",//员工增加
+                url: "/api/user/addOrUpdate",//员工增加
                 data: _obj,
                 dataType: 'json',
                 success: function (data) {
                     if (data.rspCode === '000000') {
                         showMsg($('.error-msg'), '提交成功');
                         setTimeout(function () {
-                            window.location.href = 'permissions.html' ;
+                            window.location.href = 'user.html' ;
                         });
                     } else if (data.rspCode === '-999999') {
                         localStorage.removeItem("LoginName");
@@ -165,41 +163,42 @@ function addUser(){
 
 }
 function editUser(){
-    var newUserNo = $("#newUserNo").val();
-    var userName = $("#userName").val();
-    var mobile = $("#mobile").val();
-    var roleId = $("#add_user_role").attr("roleId");
-    var job = $("#job").val();
-    var department = $("#department").val();
-    if(newUserNo==""){
-        showMsg('.error-msg', "请输入账号");
-        return false;
-    }else if(userName==""){
+    var id = $.trim($("#id").val());
+    var name = $.trim($("#name").val());
+    var sex = $.trim($("#sex").val());
+    var idCard = $.trim($("#idCard").val());
+    var mobile = $.trim($("#mobile").val());
+    var wechatCode = $.trim($("#wechatCode").val());
+    var qqCode = $.trim($("#qqCode").val());
+    var address = $.trim($("#address").val());
+    var age = $.trim($("#age").val());
+    var education = $.trim($("#education").val());
+    var source = $.trim($("#source").val());
+    var job = $.trim($("#job").val());
+    var skill = $.trim($("#skill").val());
+    var status = $.trim($("#status").val());
+    var history = $.trim($("#history").val());
+    if(name==""){
         showMsg('.error-msg', "请输入姓名");
         return false;
-    }else if(mobile==""){
-        showMsg('.error-msg', "请输入手机号");
-        return false;
-    }else if(department==""){
-        showMsg('.error-msg', "请输入部门");
-        return false;
-    }else if(job==""){
-        showMsg('.error-msg', "请输入岗位");
-        return false;
-    }else if(!isPhoneNum(mobile) || mobile.length != 11){
-        showMsg('.error-msg', "请输入正确的手机号");
     }else {
         var obj = {
-            "userNo":localStorage.getItem('userNo'),
-            "userName":userName,
-            "newUserNo":newUserNo,
+            "id":id,
+            "name":name,
+            "sex":sex,
+            "idCard":idCard,
+            "mobile":mobile,
+            "wechatCode":wechatCode,
+            "qqCode":qqCode,
+            "address":address,
+            "age":age,
+            "education":education,
+            "source":source,
             "job":job,
-            "department":department,
-            "mobile":mobile
+            "skill":skill,
+            "status":status,
+            "history":history
         };
-        if(roleId!=undefined&&roleId!=""){
-            obj.roleId = roleId;
-        }
         var _obj = JSON.stringify(obj, 'utf-8');
         $.ajax({
             headers: {
@@ -207,7 +206,7 @@ function editUser(){
             },
             type: "POST",
             contentType: "text/html; charset=UTF-8",
-            url: "/api/sysUser/updateUser/v1",//员工修改
+            url: "/api/user/addOrUpdate",//员工修改
             data: _obj,
             dataType: 'json',
             success: function (data) {
@@ -301,7 +300,7 @@ function queryUserList(roleId,userName,page){
                 definedPaginator(page, totalPage, "kkpager", function (n) {
                     queryUserList(roleId,userName,n);
                 });
-                $("#permissionsTable tbody").html("");
+                $("#userTable tbody").html("");
                 if(list.length>0) {
                     $.each(list, function (i) {
                         var _tr = $("<tr>");
@@ -319,13 +318,12 @@ function queryUserList(roleId,userName,page){
                             '                <td>' + this.skill + '</td>' +
                             '                <td>' + this.history + '</td>' +
                             '                <td>' + this.job + '</td>' +
-                            '                <td id="' + this.id
-                        +'"><span class="redactTlt"><a href="javascript:void(0);"><img src="../images/compile.svg" />编辑</a></span><span class="delTit"><img src="../images/delete.svg" />删除</span></td>' ;
+                            '                <td id="' + this.id +'"><span class="redactTlt"><a href="javascript:void(0);"><img src="../images/compile.svg" />编辑</a></span><span class="delTit"><img src="../images/delete.svg" />删除</span></td>' ;
                         _tr.html(str).data(list[i]);
-                        $("#permissionsTable tbody").append(_tr);
+                        $("#userTable tbody").append(_tr);
                     });
                 }else{
-                    $("#permissionsTable tbody").append('<tr class="table_null"><td style="padding-left: 15px; text-align: left;" colspan=\'15\'>暂无数据</td></tr>');
+                    $("#userTable tbody").append('<tr class="table_null"><td style="padding-left: 15px; text-align: left;" colspan=\'15\'>暂无数据</td></tr>');
                 }
 
             } else if (data.rspCode === '-999999') {
@@ -378,12 +376,20 @@ function deleteUser(id) {
     });
 }
 function initUser(){
-    var permissionsInfo = JSON.parse(sessionStorage.getItem("permissionsInfo"));
-    $("#newUserNo").val(permissionsInfo.user_no);
-    $("#userName").val(permissionsInfo.user_name);
-    $("#password").val("******").attr("readonly",true);
-    $("#mobile").val(permissionsInfo.mobile);
-    $('#add_user_role').val(permissionsInfo.role_name);
-    $("#department").val(permissionsInfo.department);
-    $("#job").val(permissionsInfo.job);
+    var user = JSON.parse(sessionStorage.getItem("user"));
+    $("#id").val(user.id);
+    $("#name").val(user.name);
+    $("#mobile").val(user.mobile);
+    $('#sex').val(user.sex);
+    $("#idCard").val(user.idCard);
+    $("#job").val(user.job);
+    $("#wechatCode").val(user.wechatCode);
+    $("#qqCode").val(user.qqCode);
+    $('#address').val(user.address);
+    $("#age").val(user.age);
+    $("#education").val(user.education);
+    $("#source").val(user.source);
+    $('#skill').val(user.skill);
+    $("#status").val(user.status);
+    $("#history").val(user.history);
 }
