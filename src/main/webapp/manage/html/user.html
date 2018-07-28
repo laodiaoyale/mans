@@ -23,70 +23,72 @@
         <img src="../images/address.png" />
         <span>人员管理 > 人员列表</span>
     </div>
-    <div class="queryWrap limitsWrap">
-       <p class="add_user_tit">增加人员<img class="add_user_btn" src="../images/add.png" /></p>
+    <div class="listOfOptions">
         <div class="row">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label class="control-label" for="inpName"> 姓名</label>
-                    <input type="text" class="form-control" id="inpName" >
-                </div>
+            <div class="col-md-3">
+                <label class="com-lab" for="inpName"> 姓名</label>
+                <input class="com-span" id="inpName" type="text">
             </div>
             <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label" for="idCard"> 身份证号</label>
-                    <input type="text" class="form-control" id="idCard" >
-                </div>
+                <label class="com-lab" for="idCard"> 身份证号</label>
+                <input class="com-span" id="idCard" type="text">
             </div>
             <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label" for="idCard"> 住址</label>
-                    <input type="text" class="form-control" id="address" >
-                </div>
+                <label class="com-lab" for="address"> 住址</label>
+                <input class="com-span" id="address" type="text">
             </div>
             <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label" for="idCard"> 渠道</label>
-                    <input type="text" class="form-control" id="source" >
-                </div>
+                <label class="com-lab" for="source"> 渠道</label>
+                <input class="com-span" id="source" type="text">
             </div>
-            <div class="col-md-1">
-                <div class="form-group">
-                    <label class="control-label" for="idCard"> 性别</label>
-                    <select class="form-control" id="sex">
-                        <option  value="2">男</option>
-                        <option value="3">女</option>
-                    </select>
-                </div>
-            </div>
+
         </div>
 
         <div class="row">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label class="control-label" for="inpName"> 学历</label>
-                    <select class="form-control" id="education">
-                        <option>研究生</option>
-                        <option>本科</option>
-                    </select>
-                </div>
+            <div class="col-md-3">
+                <label class="com-lab" for="sex"> 性别</label>
+                <select class="com-span" id="sex">
+                    <option value="0">全部</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
             </div>
             <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label" for="idCard"> 年龄</label>
-                    <select class="form-control" id="age">
-                        <option>30</option>
-                        <option>29</option>
-                        <option>28</option>
-                        <option>27</option>
-                        <option>26</option>
-                    </select>
-                </div>
+                <label class="com-lab" for="inpName"> 学历</label>
+                <select class="com-span" id="education">
+                    <option value="0">全部</option>
+                    <option value="1">高中以下</option>
+                    <option value="2">高中</option>
+                    <option value="3">专科</option>
+                    <option value="4">本科</option>
+                    <option value="5">研究生</option>
+                    <option value="6">研究生以上</option>
+                </select>
             </div>
             <div class="col-md-3">
-                <button class="searchBtn mt23" id="searchBtn"><img src="../images/search.png" /><span>搜索</span></button>
+                <label class="com-lab" for="idCard"> 年龄</label>
+                <input class="com-span" style="width: 50px" id="minAge" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                -
+                <input class="com-span" style="width: 50px" id="maxAge" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                <span class="reminder">岁</span>
+            </div>
+            <div class="col-md-3">
+                <label class="com-lab" for="inpName">状态</label>
+                <select class="com-span" id="status">
+                    <option value="0">全部</option>
+                    <option value="1">在职</option>
+                    <option value="2">离职</option>
+                </select>
             </div>
         </div>
+    </div>
+    <div>
+        <button class="searchBtn mt23" id="searchBtn">
+            <img src="../images/search.png" /><span >搜索</span>
+        </button>
+        <button class="searchBtn mt23" id="addUserBtn">
+            <img src="../images/add.png" /><span >增加</span>
+        </button>
     </div>
     <div class="feedbackList limitsTable">
         <table class="table ListTable" id="permissionsTable">
