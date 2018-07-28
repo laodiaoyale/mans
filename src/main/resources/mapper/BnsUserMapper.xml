@@ -75,7 +75,7 @@
     select id, name, mobile, id_card, sex, nation, address, create_time, wechat_code,
     qq_code, age, education, source, skill, history, job
     from bns_user t1
-    where 1=1 and status = 1
+    where 1=1
     <if test="name != null and name != ''">
       and t1.name like '%${name}%'
     </if>
