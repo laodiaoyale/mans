@@ -34,7 +34,7 @@ $(function () {
 
 
     // 点击编辑跳转到编辑页面
-    $('.add_user_tit').click(function () {
+    $('#addUserBtn').click(function () {
         window.location.href = 'user_add.html';
     });
     var DelId = "";
