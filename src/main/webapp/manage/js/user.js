@@ -306,14 +306,14 @@ function queryUserList(roleId,userName,page){
                         var _tr = $("<tr>");
                         var str =  '         <td>' + parseInt((page - 1) * 10 +i+1) + '</td>' +
                             '                <td>' + this.name + '</td>' +
-                            '                <td>' + this.sex + '</td>' +
+                            '                <td>' + sexAction(this.sex) + '</td>' +
                             '                <td>' + this.idCard + '</td>' +
                             '                <td>' + this.mobile + '</td>' +
                             '                <td>' + this.wechatCode + '</td>' +
                             '                <td>' + this.qqCode + '</td>' +
                             '                <td>' + this.address + '</td>' +
                             '                <td>' + this.age + '</td>' +
-                            '                <td>' + (this.education==0?'--':this.education) + '</td>' +
+                            '                <td>' + educationAction(this.education) + '</td>' +
                             '                <td>' + this.source + '</td>' +
                             '                <td>' + this.skill + '</td>' +
                             '                <td>' + this.history + '</td>' +
@@ -340,6 +340,48 @@ function queryUserList(roleId,userName,page){
             }
         }
     });
+}
+function sexAction(sex){
+    var res='';
+    switch (sex) {
+        case 0:
+            res='--'
+            break;
+        case 1:
+            res='男'
+            break;
+        case 2:
+            res='女'
+            break;
+    }
+    return res
+}
+function educationAction(education){
+    var res='';
+    switch (education) {
+        case 0:
+            res='--'
+            break;
+        case 1:
+            res='高中以下'
+            break;
+        case 2:
+            res='高中'
+            break;
+        case 3:
+            res='专科'
+            break;
+        case 4:
+            res='本科'
+            break;
+        case 5:
+            res='研究生'
+            break;
+        case 6:
+            res='研究生以上'
+            break;
+    }
+    return res
 }
 function deleteUser(id) {
     var _obj = JSON.stringify({
