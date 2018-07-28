@@ -368,6 +368,7 @@ border-bottom:1px solid #EEEFF0;
     font-size: 14px;
     letter-spacing: -0.33px;
     position: relative;
+    border-bottom: 1px #0DAFFF solid;
 }
 .customer-box .newTitle span{
     padding-left: 4px;
@@ -850,7 +851,6 @@ border-bottom:1px solid #EEEFF0;
     color: #FFFFFF;
     letter-spacing: 1.37px;
     box-sizing: border-box;
-    padding-left: 20px;
     position: relative;
 }
 .searchBtn img{
@@ -886,21 +886,21 @@ border-bottom:1px solid #EEEFF0;
     font-family: MicrosoftYaHei;
 }
 .listOfOptions .row>div{
-    padding-bottom: 30px;
+    padding-bottom: 15px;
 }
 .listOfOptions .row:first-child div{
-    padding-top: 30px;
+    padding-top: 15px;
 }
 .listOfOptions .row>div:first-child{
     /*border-right: 1px dashed #D9D9D9;*/
 }
 .listOfOptions .row .com-lab{
-    /*width: 65px;*/
+    width: 70px;
     margin-right: 3px;
     font-size: 14px;
     color: #8B94A0;
     letter-spacing: -0.34px;
-    text-align: right;
+    text-align: left;
 }
 .listOfOptions .row .com-span,
 .listOfOptions .row .reminder{
@@ -919,7 +919,8 @@ border-bottom:1px solid #EEEFF0;
     padding-left: 10px;
 }
 .listOfOptions .row select{
-    margin-left: -5px;
+    width: 150px;
+    display: inline-block;
 }
 .listOfOptions .row .reminder{
     padding-left: 9px;
