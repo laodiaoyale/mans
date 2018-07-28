@@ -1,5 +1,5 @@
 <html>
+<meta http-equiv="refresh" content="0; url=/manage/html/login.html">
 <body>
-<h2>Have to connect to the server!</h2>
 </body>
 </html>
