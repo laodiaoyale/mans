@@ -73,7 +73,7 @@
   <!-- 查询列表 cl_t_user  -->
   <select id="findPaging" parameterType="com.bns.model.user.BnsUser" resultMap="BaseResultMap">
     select id, name, mobile, id_card, sex, nation, address, create_time, wechat_code,
-    qq_code, age, education, source, skill, history, job
+    qq_code, age, education, source, skill, history, job,status
     from bns_user t1
     where 1=1
     <if test="name != null and name != ''">

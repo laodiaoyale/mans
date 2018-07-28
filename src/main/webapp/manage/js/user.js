@@ -307,18 +307,20 @@ function queryUserList(roleId,userName,page){
                         var str =  '         <td>' + parseInt((page - 1) * 10 +i+1) + '</td>' +
                             '                <td>' + this.name + '</td>' +
                             '                <td>' + sexAction(this.sex) + '</td>' +
+                            '                <td>' + this.age + '</td>' +
                             '                <td>' + this.idCard + '</td>' +
                             '                <td>' + this.mobile + '</td>' +
-                            '                <td>' + this.wechatCode + '</td>' +
-                            '                <td>' + this.qqCode + '</td>' +
-                            '                <td>' + this.address + '</td>' +
-                            '                <td>' + this.age + '</td>' +
+                            // '                <td>' + this.wechatCode + '</td>' +
+                            // '                <td>' + this.qqCode + '</td>' +
+                            // '                <td>' + this.address + '</td>' +
                             '                <td>' + educationAction(this.education) + '</td>' +
-                            '                <td>' + this.source + '</td>' +
-                            '                <td>' + this.skill + '</td>' +
-                            '                <td>' + this.history + '</td>' +
                             '                <td>' + this.job + '</td>' +
-                            '                <td id="' + this.id +'"><span class="redactTlt"><a href="javascript:void(0);"><img src="../images/compile.svg" />编辑</a></span><span class="delTit"><img src="../images/delete.svg" />删除</span></td>' ;
+                            '                <td>' + this.source + '</td>' +
+                            '                <td>' + statusAction(this.status) + '</td>' +
+                            '                <td id="' + this.id +'">' +
+                            '<span class="redactTlt"><a href="javascript:void(0);">详情</a></span>' +
+                            '<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
+                            '<span class="delTit">删除</span></td>' ;
                         _tr.html(str).data(list[i]);
                         $("#userTable tbody").append(_tr);
                     });
@@ -352,6 +354,21 @@ function sexAction(sex){
             break;
         case 2:
             res='女'
+            break;
+    }
+    return res
+}
+function statusAction(status){
+    var res='';
+    switch (status) {
+        case 0:
+            res='--'
+            break;
+        case 1:
+            res='在职'
+            break;
+        case 2:
+            res='离职'
             break;
     }
     return res
