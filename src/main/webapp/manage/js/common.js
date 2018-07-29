@@ -520,7 +520,7 @@ $(function () {
                 showMsg('.error-msg','请输入正确的密码格式');
             }else if(CheckChinese(_newPassword) || CheckChinese(_confirmPassword)){//是否包含汉字
                 showMsg('.error-msg','请输入正确的密码格式');
-            }else if(_newPassword.length<8||_newPassword.length>10||_confirmPassword.length<8||_confirmPassword.length>10){
+            }else if(_newPassword.length<6||_newPassword.length>8||_confirmPassword.length<6||_confirmPassword.length>8){
                 showMsg('.error-msg','请输入正确的密码长度');
             }else if(!isNumAndStr(_newPassword) || !isNumAndStr(_confirmPassword)){
                 showMsg('.error-msg','请输入正确的密码格式');
@@ -543,7 +543,7 @@ $(function () {
                     success : function(data){
                         if(data.rspCode === '000000'){
                             showMsg($('.error-msg'), '密码修改成功');
-                            window.location.href = 'index.html';
+                            window.location.href = 'user.html';
                         }else if(data.rspCode === '-999999'){
                             localStorage.removeItem("LoginName");
                             localStorage.removeItem("LoginToken");
