@@ -1,5 +1,6 @@
 package com.bns.dao.user;
 
+import com.bns.api.user.param.UserReqParam;
 import com.bns.model.user.BnsUser;
 import common.annotation.MyBatisRepository;
 
@@ -17,5 +18,5 @@ public interface BnsUserDao {
 
     int updateByPrimaryKey(BnsUser record);
 
-    List<BnsUser> findPaging(BnsUser bnsUser);
+    List<BnsUser> findPaging(UserReqParam userReqParam);
 }

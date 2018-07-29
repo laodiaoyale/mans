@@ -298,13 +298,20 @@ function getRole(){
 }
 
 function queryUserList(roleId,userName,page){
-    roleId = $("#selectRole").attr("roleId") ;
     userName = $.trim($("#inpName").val());
+    sex = $.trim($("#sex").val());
     var _obj = JSON.stringify({
         "pageNum":page,
         "pageSize":10,
-        "roleId":roleId,
-        "name":userName
+        "name":userName,
+        "sex":sex,
+        "minAge":$.trim($("#minAge").val()),
+        "maxAge":$.trim($("#maxAge").val()),
+        "status":$.trim($("#status").val()),
+        "idCard":$.trim($("#idCard").val()),
+        "education":$.trim($("#education").val()),
+        "address":$.trim($("#address").val()),
+        "source":$.trim($("#source").val())
         }, 'utf-8');
     $.ajax({
         headers: {
@@ -334,10 +341,10 @@ function queryUserList(roleId,userName,page){
                             '                <td>' + this.mobile + '</td>' +
                             // '                <td>' + this.wechatCode + '</td>' +
                             // '                <td>' + this.qqCode + '</td>' +
-                            // '                <td>' + this.address + '</td>' +
                             '                <td>' + educationAction(this.education) + '</td>' +
                             '                <td>' + this.skill + '</td>' +
                             '                <td>' + this.address + '</td>' +
+                            '                <td>' + this.source + '</td>' +
                             '                <td>' + statusAction(this.status) + '</td>' +
                             '                <td id="' + this.id +'">' +
                             '<span class="infoTlt"><a href="javascript:void(0);">详情</a></span>';

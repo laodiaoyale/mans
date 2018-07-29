@@ -85,9 +85,13 @@ public class BnsUser{
     private String job;
 
     /**
-     * 状态1正常，0删除
+     * 状态1在职，2离职
      */
     private Byte status;
+    /**
+     * 状态1正常，0删除
+     */
+    private Byte delFlag;
 
     public Integer getId() {
         return id;
@@ -223,5 +227,13 @@ public class BnsUser{
 
     public void setStatus(Byte status) {
         this.status = status;
+    }
+
+    public Byte getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Byte delFlag) {
+        this.delFlag = delFlag;
     }
 }

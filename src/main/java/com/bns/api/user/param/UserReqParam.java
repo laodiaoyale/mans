@@ -84,6 +84,9 @@ public class UserReqParam {
      */
     private String job;
 
+
+    private Byte status;
+
     private int pageNum = 1;
 
     private int pageSize = 10;
@@ -230,5 +233,13 @@ public class UserReqParam {
 
     public void setJob(String job) {
         this.job = job;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 }
