@@ -56,7 +56,18 @@ public class UserController extends BaseController{
         userService.addOrUpdate(bnsUser);
         return initJsonResult();
     }
-
+    /**
+     * OK
+     * @param bnsUser
+     * @return
+     * 删除
+     */
+    @RequestMapping(value="/getCity")
+    public JsonResult getCity(BnsUser bnsUser) throws BaseException {
+        JsonResult json = initJsonResult();
+        json.setBody(userService.getCity());
+        return json;
+    }
 
 
     /**

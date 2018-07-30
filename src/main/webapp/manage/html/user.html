@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>管理系统</title>
+    <title>贝诺胜企业管理系统</title>
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
@@ -21,7 +21,7 @@
 <div class="customer-box newWrap">
     <div class="newTitle">
         <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-        人员管理 > 人员列表
+        员工管理 > 员工列表
 
     </div>
     <div class="listOfOptions">
@@ -73,8 +73,17 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <label class="com-lab" for="address"> 城市</label>
-                <input class="com-span" id="address" type="text">
+                <label class="com-lab" for="city"> 城市</label>
+                <!--<input class="com-span" id="city" type="text" value="全部" >-->
+                <select  class="com-span"  id="city">
+                    <!--<option>全部</option>-->
+                    <!--<option >北京市</option>-->
+                </select>
+                <ul class="roleSelect search" style="height: 180px;overflow-y: auto;">
+                    <li>全部</li>
+                    <li>运营</li>
+                    <li>信审</li>
+                </ul>
             </div>
             <div class="col-md-3">
                 <label class="com-lab" for="source"> 渠道</label>

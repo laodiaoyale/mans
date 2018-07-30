@@ -32,7 +32,7 @@ public class UserReqParam {
     /**
      *
      */
-    private String address;
+    private String city;
 
     /**
      *
@@ -147,12 +147,12 @@ public class UserReqParam {
         this.nation = nation;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Date getCreateTime() {

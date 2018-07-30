@@ -20,6 +20,8 @@
     <result column="job" jdbcType="VARCHAR" property="job" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
+    <result column="enterprise" jdbcType="VARCHAR" property="enterprise" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from bns_user
@@ -31,13 +33,13 @@
       address, create_time, wechat_code, 
       qq_code, age, education, 
       source, skill, history, 
-      job)
+      job,city,enterprise,remark)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{idCard,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{nation,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{wechatCode,jdbcType=VARCHAR}, 
       #{qqCode,jdbcType=VARCHAR}, #{age,jdbcType=TINYINT}, #{education,jdbcType=TINYINT}, 
       #{source,jdbcType=VARCHAR}, #{skill,jdbcType=VARCHAR}, #{history,jdbcType=VARCHAR}, 
-      #{job,jdbcType=VARCHAR})
+      #{job,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{enterprise,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.bns.model.user.BnsUser">
     update bns_user
@@ -46,6 +48,7 @@
       id_card = #{idCard,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=TINYINT},
       nation = #{nation,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       wechat_code = #{wechatCode,jdbcType=VARCHAR},
@@ -57,11 +60,13 @@
       history = #{history,jdbcType=VARCHAR},
       job = #{job,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
-      del_flag = #{delFlag,jdbcType=TINYINT}
+      del_flag = #{delFlag,jdbcType=TINYINT},
+      enterprise = #{enterprise,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, name, mobile, id_card, sex, nation, address, create_time, wechat_code, 
+    select id, name, mobile, id_card, sex, nation,city, address, create_time, wechat_code,
     qq_code, age, education, source, skill, history, job
     from bns_user
     where id = #{id,jdbcType=INTEGER}
@@ -72,10 +77,13 @@
     from bns_user
   </select>
 
+  <select id="getCity" resultType="java.lang.String">
+     select DISTINCT city from bns_user where city is not null
+  </select>
   <!-- 查询列表 cl_t_user  -->
   <select id="findPaging" parameterType="com.bns.api.user.param.UserReqParam" resultMap="BaseResultMap">
-    select id, name, mobile, id_card, sex, nation, address, create_time, wechat_code,
-    qq_code, age, education, source, skill, history, job,status
+    select id, name, mobile, id_card, sex, nation, city, address, create_time, wechat_code,
+    qq_code, age, education, source, skill, history, job,status,remark,enterprise
     from bns_user t1
     where 1=1 and del_flag = 1
     <if test="name != null and name != ''">
@@ -102,8 +110,8 @@
     <if test="maxAge != null and maxAge != 0">
       <![CDATA[and t1.age <= #{maxAge} ]]>
     </if>
-    <if test="address != null and address != ''">
-      and t1.address like '%${address}%'
+    <if test="city != null and city != ''">
+      and t1.city like '%${city}%'
     </if>
     <if test="source != null and source != ''">
       and t1.source like '%${source}%'

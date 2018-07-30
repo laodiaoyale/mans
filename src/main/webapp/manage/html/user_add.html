@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>互联网信贷业务管理系统</title>
+    <title>贝诺胜企业管理系统</title>
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
@@ -21,7 +21,7 @@
 <div class="customer-box newWrap">
     <div class="newTitle">
         <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-        <span>人员管理 > <a href="user.html">人员列表</a><label id="path"> > 增加人员</label></span>
+        <span>员工管理 > <a href="user.html">员工列表</a><label id="path"> > 增加人员</label></span>
     </div>
     <div class="queryWrap addUserHtml">
         <input type="hidden" id="id" />
@@ -32,21 +32,50 @@
                     <input class="com-span"  id="name" />
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
-                        <label class="com-lab" for="sex"> 性别</label>
-                        <select class="com-span" id="sex">
-                            <option value="0">男</option>
-                            <option value="1">女</option>
-                        </select>
+                    <label class="com-lab" for="sex"> 性别</label>
+                    <select class="com-span" id="sex">
+                        <option value="0">男</option>
+                        <option value="1">女</option>
+                    </select>
                 </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 ">
+                    <label class="com-lab">年龄</label>
+                    <input class="com-span"  id="age"/>
+                    <!--<select class="form-control " id="age"  onmousedown="if(this.options.length>6){this.size=7}" onblur="this.size=0" onchange="this.size=0"/>-->
+                </div>
+            </div>
+            <div class="row">
+
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">身份号</label>
                     <input class="com-span"  id="idCard" />
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">手机号</label>
                     <input class="com-span" id="mobile" maxlength="11"  onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab" >学历</label>
+                    <select class="com-span" id="education">
+                        <option value="0">无</option>
+                        <option value="1">小学</option>
+                        <option value="2">初中</option>
+                        <option value="3">高中</option>
+                        <option value="4">专科</option>
+                        <option value="5">本科</option>
+                        <option value="6">研究生</option>
+                        <option value="7">研究生以上</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">在职状态</label>
+                    <select class="com-span" id="status">
+                        <option value="0">--</option>
+                        <option value="1">在职</option>
+                        <option value="2">离职</option>
+                    </select>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">微信号</label>
@@ -55,29 +84,6 @@
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">QQ号</label>
                     <input class="com-span"id="qqCode" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <label class="com-lab">住址</label>
-                    <input class="com-span"  id="address"/>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 ">
-                    <label class="com-lab">年龄</label>
-                    <input class="com-span"  id="age"/>
-                    <!--<select class="form-control " id="age"  onmousedown="if(this.options.length>6){this.size=7}" onblur="this.size=0" onchange="this.size=0"/>-->
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <label class="com-lab" >学历</label>
-                    <select class="com-span" id="education">
-                        <option value="0">全部</option>
-                        <option value="1">高中以下</option>
-                        <option value="2">高中</option>
-                        <option value="3">专科</option>
-                        <option value="4">本科</option>
-                        <option value="5">研究生</option>
-                        <option value="6">研究生以上</option>
-                    </select>
                 </div>
             </div>
             <div class="row">
@@ -96,16 +102,26 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                    <label class="com-lab">在职状态</label>
-                    <select class="com-span" id="status">
-                        <option value="0">--</option>
-                        <option value="1">在职</option>
-                        <option value="2">离职</option>
-                    </select>
+                    <label class="com-lab">所属企业</label>
+                    <input class="com-span"  id="enterprise"/>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">曾入职企业</label>
                     <input class="com-span"  id="history"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">备注</label>
+                    <input class="com-span"  id="remark"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">城市</label>
+                    <input class="com-span"  id="city"/>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="com-lab">住址</label>
+                    <input class="com-span-6"  id="address"/>
                 </div>
             </div>
         </div>

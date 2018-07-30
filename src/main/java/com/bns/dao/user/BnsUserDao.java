@@ -19,4 +19,6 @@ public interface BnsUserDao {
     int updateByPrimaryKey(BnsUser record);
 
     List<BnsUser> findPaging(UserReqParam userReqParam);
+
+    List<String> getCity();
 }

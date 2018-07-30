@@ -62,7 +62,13 @@ public class UserService extends BaseController{
         if(bnsUser.getId()==null||bnsUser.getId()==0){
             userDao.insert(bnsUser);
         }else{
+            bnsUser.setDelFlag((byte)1);
             userDao.updateByPrimaryKey(bnsUser);
         }
+    }
+
+    public List<String> getCity() {
+        List<String> list = userDao.getCity();
+        return list;
     }
 }
