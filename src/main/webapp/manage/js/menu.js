@@ -85,7 +85,7 @@ function getMenu(){
                         window.location.href = 'login.html';
                     }
                 }
-            } else if (data.rspCode === '-999999') {
+            } else if (data.rspCode === '-999999'||data.rspCode === '999999') {
                 localStorage.removeItem("LoginName");
                 localStorage.removeItem("LoginToken");
                 localStorage.removeItem("userNo");

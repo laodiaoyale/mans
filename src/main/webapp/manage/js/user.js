@@ -1,7 +1,22 @@
 $(function () {
-    getRole();
     if(window.location.href.indexOf("user.html")>-1){
         queryUserList("","",1);
+    }
+    getRole();
+    if(window.location.href.indexOf("user_info.html")>-1){
+        $("#path").html(" > 人员信息");
+        $('#name').attr({'display' : 'disabled'});
+        $('#sex').attr({'disabled' : 'disabled'});
+        $('#job').attr({'disabled' : 'disabled'});
+        $('#mobile').css({'color' : '#999'});
+        $('#idCard').css({'color' : '#999'});
+        initUser();
+        //点击其他地方收起下拉框
+        $("body").on("click",function(event){
+            if(event.target.className != "cludeBox"){
+                $(".roleSelect").hide()
+            }
+        })
     }
     if(window.location.href.indexOf("user_add.html?type=edit")>-1){
         $("#path").html(" > 人员修改");
@@ -37,6 +52,14 @@ $(function () {
     $('#addUserBtn').click(function () {
         window.location.href = 'user_add.html';
     });
+    // 点击编辑跳转到编辑页面
+    $('#submitBtn_infoUser').click(function () {
+        window.location.href = 'user.html';
+    });
+    // 点击编辑跳转到编辑页面
+    $('#submitBtn_cancel').click(function () {
+        window.location.href = 'user.html';
+    });
     var DelId = "";
     // 点击删除弹出二级确认页
     $("#userTable").on('click','.delTit',function () {
@@ -44,7 +67,12 @@ $(function () {
         $('.mask').show();
         $('.sureDel').show();
     });
-    $("#userTable").on('click','a',function () {
+    $("#userTable").on('click','.infoTlt',function () {
+        var user =  JSON.stringify($(this).parents("tr").data());
+        sessionStorage.setItem("user",user);
+        window.location.href = "user_info.html";
+    });
+    $("#userTable").on('click','.redactTlt',function () {
         var user =  JSON.stringify($(this).parents("tr").data());
         sessionStorage.setItem("user",user);
         window.location.href = "user_add.html?type=edit";
@@ -232,32 +260,26 @@ function editUser(){
     }
 }
 function getRole(){
-    var _obj = JSON.stringify({}, 'utf-8');
+    var obj = {
+        "userNo":localStorage.getItem('userNo')
+    };
+    var _obj = JSON.stringify(obj, 'utf-8');
     $.ajax({
         headers: {
             token: localStorage.getItem('LoginToken')
         },
         type: "POST",
         contentType: "text/html; charset=UTF-8",
-        url: "/api/sysUserRole/selectRoleAll/v1",//获取角色下拉框
+        url: "/api/sysUserRole/queryRoleByUserId/v1",//获取角色下拉框
         dataType: 'json',
         data: _obj,
         aysnc:false,
         success: function (data) {
             if (data.rspCode === '000000') {
                 var items = data.body;
-                $(".roleSelect").html("");
-                $.each(items,function () {
-                    var _li = '<li roleId="'+this.id+'">'+this.role_name+'</li>';
-                    $(".roleSelect").append(_li);
-                });
-                if($(".roleSelect").hasClass("search")){
-                    $(".roleSelect").prepend('<li roleId="">全部</li>');
-                }else{
-                    if(window.location.href.indexOf("permissions_user.html?type=edit")==-1) {
-                        var _defaultLi = $(".roleSelect li:first-child");
-                        $("#add_user_role").val(_defaultLi.html()).attr("roleId", _defaultLi.attr("roleId"));
-                    }
+                localStorage.setItem("roleCode",items.roleCode);
+                if(items.roleCode!="admin"){
+                    $("#addUserBtn").attr("style","display:none");
                 }
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
@@ -276,13 +298,20 @@ function getRole(){
 }
 
 function queryUserList(roleId,userName,page){
-    roleId = $("#selectRole").attr("roleId") ;
     userName = $.trim($("#inpName").val());
+    sex = $.trim($("#sex").val());
     var _obj = JSON.stringify({
         "pageNum":page,
         "pageSize":10,
-        "roleId":roleId,
-        "name":userName
+        "name":userName,
+        "sex":sex,
+        "minAge":$.trim($("#minAge").val()),
+        "maxAge":$.trim($("#maxAge").val()),
+        "status":$.trim($("#status").val()),
+        "idCard":$.trim($("#idCard").val()),
+        "education":$.trim($("#education").val()),
+        "address":$.trim($("#address").val()),
+        "source":$.trim($("#source").val())
         }, 'utf-8');
     $.ajax({
         headers: {
@@ -307,18 +336,23 @@ function queryUserList(roleId,userName,page){
                         var str =  '         <td>' + parseInt((page - 1) * 10 +i+1) + '</td>' +
                             '                <td>' + this.name + '</td>' +
                             '                <td>' + sexAction(this.sex) + '</td>' +
+                            '                <td>' + this.age + '</td>' +
                             '                <td>' + this.idCard + '</td>' +
                             '                <td>' + this.mobile + '</td>' +
-                            '                <td>' + this.wechatCode + '</td>' +
-                            '                <td>' + this.qqCode + '</td>' +
-                            '                <td>' + this.address + '</td>' +
-                            '                <td>' + this.age + '</td>' +
+                            // '                <td>' + this.wechatCode + '</td>' +
+                            // '                <td>' + this.qqCode + '</td>' +
                             '                <td>' + educationAction(this.education) + '</td>' +
-                            '                <td>' + this.source + '</td>' +
                             '                <td>' + this.skill + '</td>' +
-                            '                <td>' + this.history + '</td>' +
-                            '                <td>' + this.job + '</td>' +
-                            '                <td id="' + this.id +'"><span class="redactTlt"><a href="javascript:void(0);"><img src="../images/compile.svg" />编辑</a></span><span class="delTit"><img src="../images/delete.svg" />删除</span></td>' ;
+                            '                <td>' + this.address + '</td>' +
+                            '                <td>' + this.source + '</td>' +
+                            '                <td>' + statusAction(this.status) + '</td>' +
+                            '                <td id="' + this.id +'">' +
+                            '<span class="infoTlt"><a href="javascript:void(0);">详情</a></span>';
+                            if(localStorage.getItem("roleCode")=="admin"){
+                                str =str+'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
+                                    '<span class="delTit">删除</span>' ;
+                            }
+                            str =str+'</td>';
                         _tr.html(str).data(list[i]);
                         $("#userTable tbody").append(_tr);
                     });
@@ -352,6 +386,21 @@ function sexAction(sex){
             break;
         case 2:
             res='女'
+            break;
+    }
+    return res
+}
+function statusAction(status){
+    var res='';
+    switch (status) {
+        case 0:
+            res='--'
+            break;
+        case 1:
+            res='在职'
+            break;
+        case 2:
+            res='离职'
             break;
     }
     return res

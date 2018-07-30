@@ -863,7 +863,10 @@ border-bottom:1px solid #EEEFF0;
     padding-right: 6px;
 }
 .limitsTable .redactTlt{
-    margin-right: 20px;
+    margin-right: 10px;
+}
+.limitsTable .infoTlt{
+    margin-right: 10px;
 }
 .limitsTable .ListTable .limitsShow{
     text-align: left;
@@ -933,7 +936,9 @@ border-bottom:1px solid #EEEFF0;
     display: flex;
     justify-content: center;
 }
+#submitBtn_infoUser,
 #submitBtn_addUser,
+#submitBtn_cancel,
 #submitBtn_addRole,
 #submitBtn_editRole{
     background: #398BF8;

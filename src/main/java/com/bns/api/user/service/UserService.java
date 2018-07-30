@@ -34,12 +34,7 @@ public class UserService extends BaseController{
      */
     public PageInfo pageLite(UserReqParam userReqParam){
         PageHelper.startPage(userReqParam.getPageNum(), userReqParam.getPageSize());
-        BnsUser user = new BnsUser();
-        user.setName(userReqParam.getName());
-        user.setMobile(userReqParam.getMobile());
-        user.setIdCard(userReqParam.getIdCard());
-        //可以增加其他参数。。。
-        List<BnsUser> pageList = userDao.findPaging(user);
+        List<BnsUser> pageList = userDao.findPaging(userReqParam);
         return  new PageInfo(pageList);
     }
     /**
@@ -52,7 +47,7 @@ public class UserService extends BaseController{
         if(user ==null){
             throw new BaseException("员工不存在");
         }
-        user.setStatus((byte) 0);
+        user.setDelFlag((byte) 0);
         int num = userDao.updateByPrimaryKey(user);
         if(num==0){
             throw new BaseException("信息删除失败");
