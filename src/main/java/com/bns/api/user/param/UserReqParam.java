@@ -84,6 +84,7 @@ public class UserReqParam {
      */
     private String job;
 
+    private String department;
 
     private Byte status;
 
@@ -241,5 +242,13 @@ public class UserReqParam {
 
     public void setStatus(Byte status) {
         this.status = status;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

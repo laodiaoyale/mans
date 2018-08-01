@@ -1,9 +1,9 @@
 $(function () {
+    getRole();
     if(window.location.href.indexOf("user.html")>-1){
+        getCity();
         queryUserList("","",1);
     }
-    getRole();
-    getCity();
     if(window.location.href.indexOf("user_info.html")>-1){
         $("#path").html(" > 人员信息");
         $('#name').attr({'display' : 'disabled'});
@@ -330,6 +330,7 @@ function getRole(){
             if (data.rspCode === '000000') {
                 var items = data.body;
                 localStorage.setItem("roleCode",items.roleCode);
+                localStorage.setItem("department",items.department);
                 if(items.roleCode=="user"){
                     $("#addUserBtn").attr("style","display:none");
                 }
@@ -351,6 +352,8 @@ function getRole(){
 
 function queryUserList(roleId,userName,page){
     userName = $.trim($("#inpName").val());
+    department = localStorage.getItem("LoginDepartment");
+    // if(department=="")
     sex = $.trim($("#sex").val());
     var _obj = JSON.stringify({
         "pageNum":page,
@@ -363,7 +366,8 @@ function queryUserList(roleId,userName,page){
         "idCard":$.trim($("#idCard").val()),
         "education":$.trim($("#education").val()),
         "city":$.trim($("#city").val()),
-        "source":$.trim($("#source").val())
+        "source":$.trim($("#source").val()),
+        "department":department
         }, 'utf-8');
     $.ajax({
         headers: {

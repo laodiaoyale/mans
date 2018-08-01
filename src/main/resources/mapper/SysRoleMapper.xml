@@ -13,6 +13,7 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="create_user" property="createUser" jdbcType="VARCHAR" />
     <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, role_name, role_code, role_type, app_id, validate_state, version, create_time, 
@@ -95,7 +96,8 @@
     t1.role_type                      ,
     t1.app_id                         ,
     t1.validate_state                 ,
-    t1.version
+    t1.version                        ,
+    t3.department
     from sys_role 		t1, sys_role_user t2,sys_user t3
     where t1.id = t2.role_id
     and  t1.validate_state='1'

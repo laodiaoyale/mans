@@ -116,6 +116,9 @@
     <if test="source != null and source != ''">
       and t1.source like '%${source}%'
     </if>
+    <if test="department != null and department != ''">
+      and t1.enterprise = #{department}
+    </if>
     ORDER BY t1.create_time DESC
   </select>
 </mapper>
