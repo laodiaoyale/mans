@@ -330,7 +330,7 @@ function getRole(){
             if (data.rspCode === '000000') {
                 var items = data.body;
                 localStorage.setItem("roleCode",items.roleCode);
-                if(items.roleCode!="admin"){
+                if(items.roleCode=="user"){
                     $("#addUserBtn").attr("style","display:none");
                 }
             } else if (data.rspCode === '-999999') {
@@ -403,6 +403,8 @@ function queryUserList(roleId,userName,page){
                             if(localStorage.getItem("roleCode")=="admin"){
                                 str =str+'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
                                     '<span class="delTit">删除</span>' ;
+                            }else if(localStorage.getItem("roleCode")=="root"){
+                                str =str+'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>';
                             }
                             str =str+'</td>';
                         _tr.html(str).data(list[i]);
