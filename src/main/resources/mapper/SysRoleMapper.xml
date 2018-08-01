@@ -103,7 +103,7 @@
   </select>
   <!--角色查詢-->
   <select id="selectRole" resultType="java.util.Map" >
-     select id,role_name,role_code from sys_role where validate_state = 1 and role_code !='admin'
+     select id,role_name,role_code from sys_role where validate_state = 1
   </select>
 
   <select id="queryRoleList" resultMap="BaseResultMap">
@@ -120,7 +120,7 @@
       create_user,
       update_user
       from sys_role
-      where validate_state = 1 and role_code !='admin';
+      where validate_state = 1
   </select>
 
 

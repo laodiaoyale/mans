@@ -266,7 +266,7 @@
     sys_user a
     LEFT JOIN sys_role_user c ON a.id = c.target_id
     LEFT JOIN sys_role b ON c.role_id = b.ID
-    WHERE a.validate_state =1 and b.ID!='1'
+    WHERE a.validate_state =1 and c.id !=1
     <if test="roleId != null">
       and b.ID=#{roleId,jdbcType=BIGINT}
     </if>
