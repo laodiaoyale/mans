@@ -308,7 +308,7 @@ function queryUserList(roleId,userName,page){
                             '                <td>' + this.user_name + '</td>' +
                             '                <td>' + this.role_name + '</td>' +
                             '                <td>' + this.department + '</td>' +
-                            '                <td>' + this.job + '</td>' +
+                            // '                <td>' + this.job + '</td>' +
                             '                <td>' + this.mobile + '</td>' +
                             '                <td>' + (this.create_time?this.create_time:"") + '</td>' +
                             '                <td id="' + this.user_no
