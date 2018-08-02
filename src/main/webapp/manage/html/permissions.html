@@ -23,12 +23,15 @@
         <img src="../images/address.png" />
         <span>权限管理 > 权限列表</span>
     </div>
+
+
     <div class="queryWrap limitsWrap">
-       <p class="add_user_tit">增加人员<img class="add_user_btn" src="../images/add.png" /></p>
-        <div class="searchBox">
-            <div class="searchList">
-                <div class="roleBox">
-                    <div class="inpBox permission_role userRoleCla">
+       <p class="add_user_tit"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> 增加人员</p>
+
+        <div class="searchBox ">
+            <div class="listOfOptions" style="width: 100%">
+                <div class="row ">
+                    <div class="col-md-3" style="height: 30px;">
                         <label class="com-lab" for="role"> 角色</label>
                         <!--<input class="com-span" id="city" type="text" value="全部" >-->
                         <select  class="com-span"  id="role">
@@ -36,14 +39,16 @@
                             <!--<option >北京市</option>-->
                         </select>
                     </div>
-
+                    <div class="col-md-3">
+                        <label class="com-lab" >姓名</label>
+                        <input class="com-span" id="inpName" type="text">
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3 text-right"> <button class="searchBtn" id="searchBtn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜索</button></div>
                 </div>
-                <div class="nameBox">
-                    <label>姓名</label>
-                    <input id="inpName" type="text" />
                 </div>
             </div>
-            <button class="searchBtn" id="searchBtn"><img src="../images/search.png" /><span>搜索</span></button>
+
         </div>
     </div>
     <div class="feedbackList limitsTable">
