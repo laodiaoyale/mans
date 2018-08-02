@@ -14,7 +14,18 @@
         body{width:100%;height:100%;position:absolute;}
         .login-box{width: 100%;height:100%;background:url("../images/login_bg.jpg") no-repeat;justify-content: center;align-items: center;display: -webkit-flex;background-size:cover;}
         .login-con-box{width:360px;height:370px;margin:auto;background:#fff;border-radius: 4px;overflow: hidden;padding : 25px;}
-        .login-con-box .login-header{text-align: center;margin-bottom:45px;}
+        .login-con-box .login-header{text-align: center;margin-bottom:45px; height: 30px;line-height: 30px;position: relative}
+        .login-header :after{
+            content:'';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 35px;
+            background: url("../images/logo.png") no-repeat;
+            background-size:30px ;
+            width: 30px;
+            height: 30px;
+        }
         .login-con-box .login-username,.login-con-box .login-userpassword{width:100%;height:40px;margin-bottom: 20px;}
         .login-con-box .login-username input,.login-con-box .login-userpassword input{padding:0 15px;border:1px solid #C7C7C7; width:100%;height:100%;}
         .login-con-box .login-username input:focus,.login-con-box .login-userpassword input:focus{border:1px solid #8ED0FF;}
@@ -32,7 +43,7 @@
     <div class="login-box">
         <div class="login-con-box">
             <div class="login-header">
-                <!--<img src="../images/logo.png" alt="">-->
+                <img src="" alt="">
                 <span style="font-size: 20px">贝诺胜企业管理系统</span>
             </div>
             <div class="login-username">
