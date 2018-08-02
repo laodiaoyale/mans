@@ -29,6 +29,8 @@ public class BnsUser{
      */
     private Byte sex;
 
+    private String city;
+
     /**
      * 
      */
@@ -92,6 +94,10 @@ public class BnsUser{
      * 状态1正常，0删除
      */
     private Byte delFlag;
+
+    private String remark;
+
+    private String enterprise;
 
     public Integer getId() {
         return id;
@@ -235,5 +241,29 @@ public class BnsUser{
 
     public void setDelFlag(Byte delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(String enterprise) {
+        this.enterprise = enterprise;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

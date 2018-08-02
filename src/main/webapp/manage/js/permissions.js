@@ -245,11 +245,11 @@ function getRole(){
         success: function (data) {
             if (data.rspCode === '000000') {
                 var items = data.body;
-                $(".roleSelect").html("");
-                $.each(items,function () {
-                    var _li = '<li roleId="'+this.id+'">'+this.role_name+'</li>';
-                    $(".roleSelect").append(_li);
-                });
+
+                $("#role").html(""); //绑定模号下拉菜单
+                for (var i = 0; i < items.length; i++) {
+                    $("#role").append($("<option value=\"" + items[i].id + "\">" + items[i].role_name + "</option>"));
+                }
                 if($(".roleSelect").hasClass("search")){
                     $(".roleSelect").prepend('<li roleId="">全部</li>');
                 }else{
@@ -308,7 +308,7 @@ function queryUserList(roleId,userName,page){
                             '                <td>' + this.user_name + '</td>' +
                             '                <td>' + this.role_name + '</td>' +
                             '                <td>' + this.department + '</td>' +
-                            '                <td>' + this.job + '</td>' +
+                            // '                <td>' + this.job + '</td>' +
                             '                <td>' + this.mobile + '</td>' +
                             '                <td>' + (this.create_time?this.create_time:"") + '</td>' +
                             '                <td id="' + this.user_no

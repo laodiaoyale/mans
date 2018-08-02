@@ -32,7 +32,7 @@ public class UserReqParam {
     /**
      *
      */
-    private String address;
+    private String city;
 
     /**
      *
@@ -84,6 +84,7 @@ public class UserReqParam {
      */
     private String job;
 
+    private String department;
 
     private Byte status;
 
@@ -147,12 +148,12 @@ public class UserReqParam {
         this.nation = nation;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Date getCreateTime() {
@@ -241,5 +242,13 @@ public class UserReqParam {
 
     public void setStatus(Byte status) {
         this.status = status;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

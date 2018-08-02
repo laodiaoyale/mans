@@ -1,8 +1,9 @@
 $(function () {
+    getRole();
     if(window.location.href.indexOf("user.html")>-1){
+        getCity();
         queryUserList("","",1);
     }
-    getRole();
     if(window.location.href.indexOf("user_info.html")>-1){
         $("#path").html(" > 人员信息");
         $('#name').attr({'display' : 'disabled'});
@@ -120,6 +121,7 @@ function addUser(){
         var mobile = $.trim($("#mobile").val());
         var wechatCode = $.trim($("#wechatCode").val());
         var qqCode = $.trim($("#qqCode").val());
+        var city = $.trim($("#city").val());
         var address = $.trim($("#address").val());
         var age = $.trim($("#age").val());
         var education = $.trim($("#education").val());
@@ -128,6 +130,8 @@ function addUser(){
         var skill = $.trim($("#skill").val());
         var status = $.trim($("#status").val());
         var history = $.trim($("#history").val());
+        var enterprise = $.trim($("#enterprise").val());
+        var remark = $.trim($("#remark").val());
         if(name==""){
             showMsg('.error-msg', "请输入姓名");
             return false;
@@ -146,6 +150,7 @@ function addUser(){
                 "sex":sex,
                 "idCard":idCard,
                 "mobile":mobile,
+                "city":city,
                 "wechatCode":wechatCode,
                 "qqCode":qqCode,
                 "address":address,
@@ -155,7 +160,9 @@ function addUser(){
                 "job":job,
                 "skill":skill,
                 "status":status,
-                "history":history
+                "history":history,
+                "enterprise":enterprise,
+                "remark":remark
             };
             var _obj = JSON.stringify(obj, 'utf-8');
             $.ajax({
@@ -198,6 +205,7 @@ function editUser(){
     var mobile = $.trim($("#mobile").val());
     var wechatCode = $.trim($("#wechatCode").val());
     var qqCode = $.trim($("#qqCode").val());
+    var city = $.trim($("#city").val());
     var address = $.trim($("#address").val());
     var age = $.trim($("#age").val());
     var education = $.trim($("#education").val());
@@ -206,6 +214,8 @@ function editUser(){
     var skill = $.trim($("#skill").val());
     var status = $.trim($("#status").val());
     var history = $.trim($("#history").val());
+    var enterprise = $.trim($("#enterprise").val());
+    var remark = $.trim($("#remark").val());
     if(name==""){
         showMsg('.error-msg', "请输入姓名");
         return false;
@@ -218,6 +228,7 @@ function editUser(){
             "mobile":mobile,
             "wechatCode":wechatCode,
             "qqCode":qqCode,
+            "city":city,
             "address":address,
             "age":age,
             "education":education,
@@ -225,7 +236,9 @@ function editUser(){
             "job":job,
             "skill":skill,
             "status":status,
-            "history":history
+            "history":history,
+            "enterprise":enterprise,
+            "remark":remark
         };
         var _obj = JSON.stringify(obj, 'utf-8');
         $.ajax({
@@ -259,6 +272,45 @@ function editUser(){
         });
     }
 }
+
+function getCity(){
+    var obj = {
+        "userNo":localStorage.getItem('userNo')
+    };
+    var _obj = JSON.stringify(obj, 'utf-8');
+    $.ajax({
+        headers: {
+            token: localStorage.getItem('LoginToken')
+        },
+        type: "POST",
+        contentType: "text/html; charset=UTF-8",
+        url: "/api/user/getCity",//获取城市下拉列表
+        dataType: 'json',
+        data: _obj,
+        aysnc:false,
+        success: function (data) {
+            if (data.rspCode === '000000') {
+                var items = data.body;
+                $("#city").html(""); //绑定模号下拉菜单
+                $("#city").append($("<option value=\"\">全部</option>"));
+                for (var i = 0; i < items.length; i++) {
+                    $("#city").append($("<option value=\"" + items[i] + "\">" + items[i] + "</option>"));
+                }
+            } else if (data.rspCode === '-999999') {
+                localStorage.removeItem("LoginName");
+                localStorage.removeItem("LoginToken");
+                localStorage.removeItem("userNo");
+                localStorage.removeItem("LoginJob");
+                localStorage.removeItem("LoginDepartment");
+                localStorage.removeItem("LoginRoleName");
+                showMsg($('.error-msg'), data.rspMsg);
+                window.location.href = 'wechatLogin.html';
+            } else {
+                showMsg('.error-msg', data.rspMsg);
+            }
+        }
+    });
+}
 function getRole(){
     var obj = {
         "userNo":localStorage.getItem('userNo')
@@ -278,7 +330,8 @@ function getRole(){
             if (data.rspCode === '000000') {
                 var items = data.body;
                 localStorage.setItem("roleCode",items.roleCode);
-                if(items.roleCode!="admin"){
+                localStorage.setItem("department",items.department);
+                if(items.roleCode=="user"){
                     $("#addUserBtn").attr("style","display:none");
                 }
             } else if (data.rspCode === '-999999') {
@@ -299,6 +352,8 @@ function getRole(){
 
 function queryUserList(roleId,userName,page){
     userName = $.trim($("#inpName").val());
+    department = localStorage.getItem("LoginDepartment");
+    // if(department=="")
     sex = $.trim($("#sex").val());
     var _obj = JSON.stringify({
         "pageNum":page,
@@ -310,8 +365,9 @@ function queryUserList(roleId,userName,page){
         "status":$.trim($("#status").val()),
         "idCard":$.trim($("#idCard").val()),
         "education":$.trim($("#education").val()),
-        "address":$.trim($("#address").val()),
-        "source":$.trim($("#source").val())
+        "city":$.trim($("#city").val()),
+        "source":$.trim($("#source").val()),
+        "department":department
         }, 'utf-8');
     $.ajax({
         headers: {
@@ -343,7 +399,7 @@ function queryUserList(roleId,userName,page){
                             // '                <td>' + this.qqCode + '</td>' +
                             '                <td>' + educationAction(this.education) + '</td>' +
                             '                <td>' + this.skill + '</td>' +
-                            '                <td>' + this.address + '</td>' +
+                            '                <td>' + this.city + '</td>' +
                             '                <td>' + this.source + '</td>' +
                             '                <td>' + statusAction(this.status) + '</td>' +
                             '                <td id="' + this.id +'">' +
@@ -351,6 +407,8 @@ function queryUserList(roleId,userName,page){
                             if(localStorage.getItem("roleCode")=="admin"){
                                 str =str+'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
                                     '<span class="delTit">删除</span>' ;
+                            }else if(localStorage.getItem("roleCode")=="root"){
+                                str =str+'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>';
                             }
                             str =str+'</td>';
                         _tr.html(str).data(list[i]);
@@ -483,4 +541,6 @@ function initUser(){
     $('#skill').val(user.skill);
     $("#status").val(user.status);
     $("#history").val(user.history);
+    $("#enterprise").val(user.enterprise);
+    $("#remark").val(user.remark);
 }
