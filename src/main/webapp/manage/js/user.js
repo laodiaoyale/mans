@@ -19,6 +19,22 @@ $(function () {
             }
         })
     }
+    if(window.location.href.indexOf("user_add.html")>-1){
+        if(localStorage.getItem('LoginDepartment')!="admin"){
+            $('#enterprise').attr({'disabled' : 'disabled'});
+            $("#enterprise").val(localStorage.getItem('LoginDepartment'));
+        }
+        $('#userName').attr({'disabled' : 'disabled'});
+        $('#newUserNo').css({'color' : '#999'});
+        $('#userName').css({'color' : '#999'});
+        // initUser();
+        //点击其他地方收起下拉框
+        $("body").on("click",function(event){
+            if(event.target.className != "cludeBox"){
+                $(".roleSelect").hide()
+            }
+        })
+    }
     if(window.location.href.indexOf("user_add.html?type=edit")>-1){
         $("#path").html(" > 人员修改");
         $('#passwordItem').css({'display' : 'none'});
@@ -353,7 +369,10 @@ function getRole(){
 function queryUserList(roleId,userName,page){
     userName = $.trim($("#inpName").val());
     department = localStorage.getItem("LoginDepartment");
-    // if(department=="")
+    roleCode = localStorage.getItem("LoginRoleCode");
+    if(department=="admin"||roleCode=="user"){
+        department='';
+    }
     sex = $.trim($("#sex").val());
     var _obj = JSON.stringify({
         "pageNum":page,
@@ -541,6 +560,6 @@ function initUser(){
     $('#skill').val(user.skill);
     $("#status").val(user.status);
     $("#history").val(user.history);
-    $("#enterprise").val(user.enterprise);
     $("#remark").val(user.remark);
+    $("#enterprise").val(user.enterprise);
 }

@@ -88,14 +88,11 @@ function addUser(){
         var userName = $.trim($("#userName").val());
         var password = $.trim($("#password").val());
         var mobile = $.trim($("#mobile").val());
-        var roleId = $.trim($("#add_user_role").attr("roleId"));
+        var roleId = $("#roleId").val();
         var job = $.trim($("#job").val());
         var department = $.trim($("#department").val());
         if(newUserNo==""){
             showMsg('.error-msg', "请输入账号");
-            return false;
-        }else if(newUserNo.length !== 8 ){
-            showMsg('.error-msg', "请输入正确账号");
             return false;
         }else if(userName==""){
             showMsg('.error-msg', "请输入姓名");
@@ -109,11 +106,6 @@ function addUser(){
         }else if(department==""){
             showMsg('.error-msg', "请输入部门");
             return false;
-        }else if(job==""){
-            showMsg('.error-msg', "请输入岗位");
-            return false;
-        }else if(!isValNum(newUserNo)){
-            showMsg('.error-msg', "请输入正确的账号");
         }else if(!isNumAndStr(password)){
             showMsg('.error-msg', "请输入正确格式的密码");
         }else if(!isPhoneNum(mobile) || mobile.length != 11){
@@ -166,7 +158,7 @@ function editUser(){
     var newUserNo = $("#newUserNo").val();
     var userName = $("#userName").val();
     var mobile = $("#mobile").val();
-    var roleId = $("#add_user_role").attr("roleId");
+    var roleId = $("#roleId").val();
     var job = $("#job").val();
     var department = $("#department").val();
     if(newUserNo==""){
@@ -246,9 +238,10 @@ function getRole(){
             if (data.rspCode === '000000') {
                 var items = data.body;
 
-                $("#role").html(""); //绑定模号下拉菜单
+                $("#roleId").html(""); //绑定模号下拉菜单
+                $("#roleId").append($("<option value=\"\">全部</option>"));
                 for (var i = 0; i < items.length; i++) {
-                    $("#role").append($("<option value=\"" + items[i].id + "\">" + items[i].role_name + "</option>"));
+                    $("#roleId").append($("<option value=\"" + items[i].id + "\">" + items[i].role_name + "</option>"));
                 }
                 if($(".roleSelect").hasClass("search")){
                     $(".roleSelect").prepend('<li roleId="">全部</li>');
@@ -275,7 +268,7 @@ function getRole(){
 }
 
 function queryUserList(roleId,userName,page){
-    roleId = $("#selectRole").attr("roleId") ;
+    roleId = $("#roleId").val() ;
     userName = $.trim($("#inpName").val());
     var _obj = JSON.stringify({
         "pageNum":page,

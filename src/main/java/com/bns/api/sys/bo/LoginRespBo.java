@@ -27,6 +27,8 @@ public class LoginRespBo {
 
     private String mobile;
 
+    private String roleCode;
+
     public String getToken() {
         return token;
     }
@@ -91,7 +93,13 @@ public class LoginRespBo {
         this.job = job;
     }
 
+    public String getRoleCode() {
+        return roleCode;
+    }
 
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
 
     public String getRoleName() {
         return roleName;
