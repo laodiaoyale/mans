@@ -121,6 +121,18 @@ $(function () {
         console.log(sex)
         queryUserList(roleId,userName,1);
     });
+
+    $("#resetBtn").click(function () {
+        $("#inpName").val("");
+        $("#sex").prop('selectedIndex', 0);
+        $('#minAge').val("");
+        $('#maxAge').val("");
+        $("#idCard").val("");
+        $("#education").prop('selectedIndex', 0);
+        $('#status').prop('selectedIndex', 0);
+        $('#city').val("");
+        $("#source").val("");
+    });
 });
 // input框获取/失去焦点时属性变化
 function focusOrBlur(obj,ele,val1,val2) { //对象，元素，属性值1，属性值2

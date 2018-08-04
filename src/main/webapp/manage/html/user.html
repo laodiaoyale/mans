@@ -30,40 +30,39 @@
                 <label class="com-lab" for="inpName"> 姓名</label>
                 <input class="com-span" id="inpName" type="text">
             </div>
-            <div class="col-md-3 ">
+            <div class="col-md-2 ">
                 <label class="com-lab " for="sex"> 性别</label>
-                <select class="com-span" id="sex">
+                <select class="com-span-2" id="sex">
                     <option value="0">全部</option>
                     <option value="1">男</option>
                     <option value="2">女</option>
                 </select>
             </div>
             <div class="col-md-3">
-                <label class="com-lab" for="idCard"> 年龄</label>
+                <label class="com-lab" > 年龄</label>
                 <input class="com-span" style="width: 50px" id="minAge" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'')"/>
                 -
                 <input class="com-span" style="width: 50px" id="maxAge" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'')"/>
                 <span class="reminder">岁</span>
             </div>
             <div class="col-md-3">
-                <label class="com-lab" for="inpName">在职状态</label>
-                <select class="com-span" id="status">
-                    <option value="0">全部</option>
-                    <option value="1">在职</option>
-                    <option value="2">离职</option>
-                </select>
+                <label class="com-lab" for="idCard"> 身份证号</label>
+                <input class="com-span" id="idCard" type="text">
             </div>
+            <div class="col-md-1">
+                <button class="searchBtn" id="searchBtn"  aria-label="Left Align">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    搜索
+                </button>
+            </div>
+
         </div>
 
         <div class="row">
             <div class="col-md-3">
-                <label class="com-lab" for="idCard"> 身份证号</label>
-                <input class="com-span" id="idCard" type="text">
-            </div>
-            <div class="col-md-3">
-                <label class="com-lab" for="inpName"> 学历</label>
-                <select class="com-span  " id="education">
-                    <option value="0">无</option>
+                <label class="com-lab" for="education"> 学历</label>
+                <select class="com-span" id="education">
+                    <option value="0">全部</option>
                     <option value="1">小学</option>
                     <option value="2">初中</option>
                     <option value="3">高中</option>
@@ -73,6 +72,14 @@
                     <option value="7">研究生以上</option>
                 </select>
             </div>
+            <div class="col-md-2">
+                <label class="com-lab" for="status">在职状态</label>
+                <select class="com-span-2" id="status">
+                    <option value="0">全部</option>
+                    <option value="1">在职</option>
+                    <option value="2">离职</option>
+                </select>
+            </div>
             <div class="col-md-3">
                 <label class="com-lab" for="city"> 城市</label>
                 <!--<input class="com-span" id="city" type="text" value="全部" >-->
@@ -80,23 +87,20 @@
                     <!--<option>全部</option>-->
                     <!--<option >北京市</option>-->
                 </select>
-                <ul class="roleSelect search" style="height: 180px;overflow-y: auto;">
-                    <li>全部</li>
-                    <li>运营</li>
-                    <li>信审</li>
-                </ul>
             </div>
             <div class="col-md-3">
                 <label class="com-lab" for="source"> 渠道</label>
                 <input class="com-span" id="source" type="text">
             </div>
+            <div class="col-md-1">
+                <button class="searchBtn" id="resetBtn"  aria-label="Left Align">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                    重置
+                </button>
+            </div>
         </div>
     </div>
     <div class=" mb20">
-        <button class="searchBtn" id="searchBtn"  aria-label="Left Align">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-            搜索
-        </button>
         <button class="searchBtn" id="addUserBtn" aria-label="Left Align">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             增加
