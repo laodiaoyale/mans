@@ -151,14 +151,9 @@ function addUser(){
         if(name==""){
             showMsg('.error-msg', "请输入姓名");
             return false;
+        }else if(idCard==""){
+            showMsg('.error-msg', "请输入身份证号");
         }
-        // else if(!isValNum(newUserNo)){
-        //     showMsg('.error-msg', "请输入正确的账号");
-        // }else if(!isNumAndStr(password)){
-        //     showMsg('.error-msg', "请输入正确格式的密码");
-        // }else if(!isPhoneNum(mobile) || mobile.length != 11){
-        //     showMsg('.error-msg', "请输入正确格式的手机号");
-        // }
         else{
             var obj = {
                 "id":localStorage.getItem('id'),
@@ -235,6 +230,8 @@ function editUser(){
     if(name==""){
         showMsg('.error-msg', "请输入姓名");
         return false;
+    }else if(idCard==""){
+        showMsg('.error-msg', "请输入身份证号");
     }else {
         var obj = {
             "id":id,

@@ -58,8 +58,15 @@ public class UserService extends BaseController{
      * 新增或修改用户信息
      * @param bnsUser
      */
-    public void addOrUpdate(BnsUser bnsUser) {
+    public void addOrUpdate(BnsUser bnsUser) throws BaseException{
         if(bnsUser.getId()==null||bnsUser.getId()==0){
+            //估计身份证号查询是否有录入
+            UserReqParam userReqParam = new UserReqParam();
+            userReqParam.setIdCard(bnsUser.getIdCard());
+            List<BnsUser> bnsUsers = userDao.findPaging(userReqParam);
+            if(bnsUsers!=null&&bnsUsers.size()>0){
+                throw  new BaseException("该身份证号已存在");
+            }
             userDao.insert(bnsUser);
         }else{
             bnsUser.setDelFlag((byte)1);
