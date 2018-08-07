@@ -44,6 +44,14 @@ $(function () {
         $('.mask').show();
         $('.sureDel').show();
     });
+
+    // 点击删除弹出二级确认页
+    $("#permissionsTable").on('click','.resetTit',function () {
+        DelId = $(this).parents("td").attr("id");
+        $('.mask').show();
+        $('.restPassword').show();
+    });
+
     $("#permissionsTable").on('click','a',function () {
         var permissionsInfo =  JSON.stringify($(this).parents("tr").data());
         sessionStorage.setItem("permissionsInfo",permissionsInfo);
@@ -54,11 +62,23 @@ $(function () {
     $('.del_cancel').click(function () {
         $('.mask').hide();
         $('.sureDel').hide();
+        $('.restPassword').hide();
     });
     $(".del_sure").click(function(){
         $('.mask').hide();
         $('.sureDel').hide();
         deleteUser(DelId);
+    });
+
+    // 点击二级确认页上取消按钮，关闭二级确认页
+    $('.reset_cancel').click(function () {
+        $('.mask').hide();
+        $('.restPassword').hide();
+    });
+    $(".reset_sure").click(function(){
+        $('.mask').hide();
+        $('.restPassword').hide();
+        resetPassword(DelId);
     });
     focusOrBlur($('#inpName'),'border-color','#398BF8','#D9D9D9');
     focusOrBlur($('.listOfOptions .com-span'),'border-color','#398BF8','#D9D9D9');
@@ -311,8 +331,13 @@ function queryUserList(roleId,userName,page){
                             // '                <td>' + this.job + '</td>' +
                             '                <td>' + this.mobile + '</td>' +
                             '                <td>' + (this.create_time?this.create_time:"") + '</td>' +
-                            '                <td id="' + this.user_no
-                        +'"><span class="redactTlt"><a href="javascript:void(0);"><img src="../images/compile.svg" />编辑</a></span><span class="delTit"><img src="../images/delete.svg" />删除</span></td>' ;
+                            '                <td id="' + this.user_no+'">';
+                        if(this.role_code!="admin"){
+                            str = str +'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
+                                '<span class="resetTit">重置密码</span>' +
+                                '<span class="delTit">删除</span>' ;
+                        }
+                        str = str+'</td>';
                         _tr.html(str).data(list[i]);
                         $("#permissionsTable tbody").append(_tr);
                     });
@@ -370,11 +395,48 @@ function deleteUser(id) {
         }
     });
 }
+
+function resetPassword(id) {
+    var _obj = JSON.stringify({
+        newUserNo:id,
+        updateUser:localStorage.getItem('userNo'),
+        password:md5("aaa111")
+    }, 'utf-8');
+    $.ajax({
+        headers: {
+            token: localStorage.getItem('LoginToken')
+        },
+        type: "POST",
+        contentType: "text/html; charset=UTF-8",
+        url: "/api/sysUser/updateUser/v1",//员工删除
+        dataType: 'json',
+        data: _obj,
+        success: function (data) {
+            if (data.rspCode === '000000') {
+                showMsg($('.error-msg'), '重置成功');
+                setTimeout(function () {
+                    queryUserList("","",1);
+                });
+            } else if (data.rspCode === '-999999') {
+                localStorage.removeItem("LoginName");
+                localStorage.removeItem("LoginToken");
+                localStorage.removeItem("userNo");
+                localStorage.removeItem("LoginJob");
+                localStorage.removeItem("LoginDepartment");
+                localStorage.removeItem("LoginRoleName");
+                showMsg($('.error-msg'), data.rspMsg);
+                window.location.href = 'wechatLogin.html';
+            } else {
+                showMsg('.error-msg', data.rspMsg);
+            }
+        }
+    });
+}
 function initUser(){
     var permissionsInfo = JSON.parse(sessionStorage.getItem("permissionsInfo"));
     $("#newUserNo").val(permissionsInfo.user_no);
     $("#userName").val(permissionsInfo.user_name);
-    // $("#password").val("******").attr("readonly",false);
+    $("#password").val("******").attr("readonly",true);
     $("#mobile").val(permissionsInfo.mobile);
     $('#add_user_role').val(permissionsInfo.role_name);
     $("#department").val(permissionsInfo.department);
