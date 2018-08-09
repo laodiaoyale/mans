@@ -181,12 +181,8 @@ function editUser(){
     var roleId = $("#roleId").val();
     var job = $("#job").val();
     var department = $("#department").val();
-    var password = $.trim($("#password").val());
     if(newUserNo==""){
         showMsg('.error-msg', "请输入账号");
-        return false;
-    }else if(password==""){
-        showMsg('.error-msg', "请输入密码");
         return false;
     }else if(userName==""){
         showMsg('.error-msg', "请输入姓名");
@@ -200,8 +196,6 @@ function editUser(){
     }else if(job==""){
         showMsg('.error-msg', "请输入岗位");
         return false;
-    }else if(!isNumAndStr(password)){
-        showMsg('.error-msg', "请输入正确格式的密码");
     }else if(!isPhoneNum(mobile) || mobile.length != 11){
         showMsg('.error-msg', "请输入正确的手机号");
     }else {
@@ -209,7 +203,6 @@ function editUser(){
             "userNo":localStorage.getItem('userNo'),
             "userName":userName,
             "newUserNo":newUserNo,
-            "password":md5(password),//(md5加密)
             "job":job,
             "department":department,
             "mobile":mobile
