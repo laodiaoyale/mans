@@ -64,7 +64,6 @@ $(function () {
         });
     });
 
-
     // 点击编辑跳转到编辑页面
     $('#addUserBtn').click(function () {
         window.location.href = 'user_add.html';
@@ -149,6 +148,7 @@ function addUser(){
         var mobile = $.trim($("#mobile").val());
         var wechatCode = $.trim($("#wechatCode").val());
         var qqCode = $.trim($("#qqCode").val());
+        var entryDate = $.trim($("#entryDate").val());
         var city = $.trim($("#city").val());
         var address = $.trim($("#address").val());
         var age = $.trim($("#age").val());
@@ -176,6 +176,7 @@ function addUser(){
                 "city":city,
                 "wechatCode":wechatCode,
                 "qqCode":qqCode,
+                "entryDate":entryDate,
                 "address":address,
                 "age":age,
                 "education":education,
@@ -228,6 +229,7 @@ function editUser(){
     var mobile = $.trim($("#mobile").val());
     var wechatCode = $.trim($("#wechatCode").val());
     var qqCode = $.trim($("#qqCode").val());
+    var entryDate = $.trim($("#entryDate").val());
     var city = $.trim($("#city").val());
     var address = $.trim($("#address").val());
     var age = $.trim($("#age").val());
@@ -253,6 +255,7 @@ function editUser(){
             "mobile":mobile,
             "wechatCode":wechatCode,
             "qqCode":qqCode,
+            "entryDate":entryDate,
             "city":city,
             "address":address,
             "age":age,
@@ -571,4 +574,10 @@ function initUser(){
     $("#history").val(user.history);
     $("#remark").val(user.remark);
     $("#enterprise").val(user.enterprise);
+
+    alert(user.leaveDate);
+    $("#entryDate").val(user.entryDate);
+    $("#leaveDate").val(user.leaveDate);
+    $("#bankCard").val(user.bankCard);
+    $("#bankName").val(user.bankName);
 }

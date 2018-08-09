@@ -22,6 +22,11 @@
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
     <result column="enterprise" jdbcType="VARCHAR" property="enterprise" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
+
+    <result column="entryDate" jdbcType="VARCHAR" property="entry_date" />
+    <result column="leaveDate" jdbcType="VARCHAR" property="leave_date" />
+    <result column="bankCard" jdbcType="VARCHAR" property="bank_card" />
+    <result column="bankName" jdbcType="VARCHAR" property="bank_name" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from bns_user
@@ -82,8 +87,7 @@
   </select>
   <!-- 查询列表 cl_t_user  -->
   <select id="findPaging" parameterType="com.bns.api.user.param.UserReqParam" resultMap="BaseResultMap">
-    select id, name, mobile, id_card, sex, nation, city, address, create_time, wechat_code,
-    qq_code, age, education, source, skill, history, job,status,remark,enterprise
+    select *
     from bns_user t1
     where 1=1 and del_flag = 1
     <if test="name != null and name != ''">

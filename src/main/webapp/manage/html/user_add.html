@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="../js/libs/build_standalone.css">
     <script src="../js/libs/jquery-1.11.1.min.js"></script>
     <script src="../js/libs/md5.js"></script>
+    <script src="../js/libs/page/kkpager.min.js"></script>
     <!-- page -->
     <link rel="stylesheet" href="../iconfont/iconfont.css">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/customerInfo.css">
+    <link rel="stylesheet" href="../js/libs/css/swiper-3.4.2.min.css" />
 </head>
 <body>
 <div class="loan-header" id="header"></div>
@@ -124,6 +126,24 @@
                     <input class="com-span-6"  id="address"/>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="detailBox startTime">
+                        <label class="com-lab">入职时间</label>
+                        <div class="optionList">
+                            <input class="detailCon" id="entryDate" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="detailBox endTime">
+                        <label class="com-lab">离职时间</label>
+                        <div class="optionList">
+                            <input class="detailCon" id="leaveDate" />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="submitBox">
             <button id="submitBtn_addUser">提交</button>
@@ -141,6 +161,12 @@
 <script src="../js/common.js"></script>
 <script src="../js/menu.js"></script>
 <script src="../js/user.js"></script>
+<script src="../js/userAdd.js"></script>
+<script src="../js/libs/swiper-3.4.2.jquery.min.js"></script>
+<!--<script src="../js/feedback.js"></script>-->
+<script src="../js/libs/bootstrap-datetimepicker.min.js"></script>
+<script src="../js/libs/bootstrap-datetimepicker.zh-CN.js"></script>
+
 <script>
      $("body").on("click",function(event){
          if(event.target.className != "cludeBox"){
