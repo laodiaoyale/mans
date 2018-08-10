@@ -160,6 +160,10 @@ function addUser(){
         var history = $.trim($("#history").val());
         var enterprise = $.trim($("#enterprise").val());
         var remark = $.trim($("#remark").val());
+        var entryDate = $.trim($("#entryDate").val());
+        var leaveDate = $.trim($("#leaveDate").val());
+        var bankCard = $.trim($("#bankCard").val());
+        var bankName = $.trim($("#bankName").val());
         if(name==""){
             showMsg('.error-msg', "请输入姓名");
             return false;
@@ -186,7 +190,11 @@ function addUser(){
                 "status":status,
                 "history":history,
                 "enterprise":enterprise,
-                "remark":remark
+                "remark":remark,
+                "entryDate":entryDate,
+                "leaveDate":leaveDate,
+                "bankCard":bankCard,
+                "bankName":bankName
             };
             var _obj = JSON.stringify(obj, 'utf-8');
             $.ajax({
@@ -241,6 +249,11 @@ function editUser(){
     var history = $.trim($("#history").val());
     var enterprise = $.trim($("#enterprise").val());
     var remark = $.trim($("#remark").val());
+
+    var entryDate = $.trim($("#entryDate").val());
+    var leaveDate = $.trim($("#leaveDate").val());
+    var bankCard = $.trim($("#bankCard").val());
+    var bankName = $.trim($("#bankName").val());
     if(name==""){
         showMsg('.error-msg', "请输入姓名");
         return false;
@@ -266,7 +279,11 @@ function editUser(){
             "status":status,
             "history":history,
             "enterprise":enterprise,
-            "remark":remark
+            "remark":remark,
+            "entryDate":entryDate,
+            "leaveDate":leaveDate,
+            "bankCard":bankCard,
+            "bankName":bankName
         };
         var _obj = JSON.stringify(obj, 'utf-8');
         $.ajax({
@@ -574,10 +591,12 @@ function initUser(){
     $("#history").val(user.history);
     $("#remark").val(user.remark);
     $("#enterprise").val(user.enterprise);
-
-    alert(user.leaveDate);
-    $("#entryDate").val(user.entryDate);
-    $("#leaveDate").val(user.leaveDate);
+    $("#entryDate").val(setDate(user.entryDate));
+    $("#leaveDate").val(setDate(user.leaveDate));
     $("#bankCard").val(user.bankCard);
     $("#bankName").val(user.bankName);
+}
+
+function setDate(date){
+    return /\d{4}-\d{1,2}-\d{1,2}/g.exec(date);
 }
