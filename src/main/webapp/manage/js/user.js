@@ -2,6 +2,7 @@ $(function () {
     getRole();
     if(window.location.href.indexOf("user.html")>-1){
         getCity();
+        getEnterprise();
         queryUserList("","",1);
     }
     if(window.location.href.indexOf("user_info.html")>-1){
@@ -356,6 +357,45 @@ function getCity(){
         }
     });
 }
+
+function getEnterprise(){
+    var obj = {
+        "userNo":localStorage.getItem('userNo')
+    };
+    var _obj = JSON.stringify(obj, 'utf-8');
+    $.ajax({
+        headers: {
+            token: localStorage.getItem('LoginToken')
+        },
+        type: "POST",
+        contentType: "text/html; charset=UTF-8",
+        url: "/api/sysUser/getEnterprise",//获取城市下拉列表
+        dataType: 'json',
+        data: _obj,
+        aysnc:false,
+        success: function (data) {
+            if (data.rspCode === '000000') {
+                var items = data.body;
+                $("#enterprise").html(""); //绑定模号下拉菜单
+                $("#enterprise").append($("<option value=\"\">全部</option>"));
+                for (var i = 0; i < items.length; i++) {
+                    $("#enterprise").append($("<option value=\"" + items[i] + "\">" + items[i] + "</option>"));
+                }
+            } else if (data.rspCode === '-999999') {
+                localStorage.removeItem("LoginName");
+                localStorage.removeItem("LoginToken");
+                localStorage.removeItem("userNo");
+                localStorage.removeItem("LoginJob");
+                localStorage.removeItem("LoginDepartment");
+                localStorage.removeItem("LoginRoleName");
+                showMsg($('.error-msg'), data.rspMsg);
+                window.location.href = 'wechatLogin.html';
+            } else {
+                showMsg('.error-msg', data.rspMsg);
+            }
+        }
+    });
+}
 function getRole(){
     var obj = {
         "userNo":localStorage.getItem('userNo')
@@ -375,6 +415,7 @@ function getRole(){
             if (data.rspCode === '000000') {
                 var items = data.body;
                 localStorage.setItem("roleCode",items.roleCode);
+                localStorage.setItem("roleName",items.roleName);
                 localStorage.setItem("department",items.department);
                 if(items.roleCode=="user"){
                     $("#addUserBtn").attr("style","display:none");
@@ -399,7 +440,8 @@ function queryUserList(roleId,userName,page){
     userName = $.trim($("#inpName").val());
     department = localStorage.getItem("LoginDepartment");
     roleCode = localStorage.getItem("LoginRoleCode");
-    if(department=="admin"||roleCode=="user"){
+    roleName = localStorage.getItem("LoginRoleName");
+    if(roleName=="管理员"||roleCode=="user"){
         department='';
     }
     sex = $.trim($("#sex").val());

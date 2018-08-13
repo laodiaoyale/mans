@@ -23,10 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service
@@ -148,6 +145,9 @@ public class SysUserService {
         }
         user = new SysUserDTO();
         BeanUtils.copyProperties(registerVO,user);
+        if(user.getDepartment()!=null){
+            user.getDepartment().replaceAll("，",",");
+        }
         int num=sysUserDao.insertUser(user);
         if(num==0){
             throw new BaseException("信息添加失败");
@@ -179,6 +179,9 @@ public class SysUserService {
         SysUserDTO userNew = new SysUserDTO();
         BeanUtils.copyProperties(vo,userNew);
         userNew.setId(user.getId());
+        if(userNew.getDepartment()!=null){
+            userNew.getDepartment().replaceAll("，",",");
+        }
         int num=sysUserDao.updateByIdSelective(userNew);
         if(num==0){
             throw new BaseException("信息修改失败");
@@ -235,5 +238,25 @@ public class SysUserService {
 //        JYJedisCache.del(userNo);
         jsonResult.setError(RespCodeCostant.OK);
         return jsonResult;
+    }
+
+
+    public List<String> getEnterprise(SysUserDTO sysUserDTO) {
+        sysUserDTO  = sysUserDao.selectUserByParam(sysUserDTO);
+        if(!"管理员".equals(sysUserDTO.getJob())){
+            return Arrays.asList(sysUserDTO.getDepartment().split(","));
+        }else {
+            List<String> strs = sysUserDao.selectUserDepartment();
+            List<String> newList = new ArrayList();
+            for(String str:strs){
+                String[] ss = str.split(",");
+                for(int i=0;i<ss.length;i++){
+                    if("admin".equals(ss[i]))
+                        continue;
+                    newList.add(ss[i]);
+                }
+            }
+            return  newList;
+        }
     }
 }

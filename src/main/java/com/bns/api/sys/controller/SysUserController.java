@@ -1,5 +1,6 @@
 package com.bns.api.sys.controller;
 
+import com.bns.model.sys.SysUserDTO;
 import com.github.pagehelper.PageInfo;
 import com.bns.api.sys.service.SysUserService;
 import com.bns.api.sys.vo.LoginUserVO;
@@ -113,5 +114,17 @@ public class SysUserController extends BaseController {
         return sysUserService.logout(userNo, reqHeader.getToken());
     }
 
+    /**
+     * OK
+     * @param sysUserDTO
+     * @return
+     * 删除
+     */
+    @RequestMapping(value="/getEnterprise")
+    public JsonResult getEnterprise(SysUserDTO sysUserDTO) throws BaseException {
+        JsonResult json = initJsonResult();
+        json.setBody(sysUserService.getEnterprise(sysUserDTO));
+        return json;
+    }
 
 }

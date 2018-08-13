@@ -123,8 +123,11 @@ function addUser(){
         }else if(mobile==""){
             showMsg('.error-msg', "请输入手机号");
             return false;
+        }else if(roleId==""){
+            showMsg('.error-msg', "请输入角色");
+            return false;
         }else if(department==""){
-            showMsg('.error-msg', "请输入部门");
+            showMsg('.error-msg', "请输入所属企业");
             return false;
         }else if(!isNumAndStr(password)){
             showMsg('.error-msg', "请输入正确格式的密码");
@@ -191,7 +194,10 @@ function editUser(){
         showMsg('.error-msg', "请输入手机号");
         return false;
     }else if(department==""){
-        showMsg('.error-msg', "请输入部门");
+        showMsg('.error-msg', "请输入所属企业");
+        return false;
+    }else if(roleId==""){
+        showMsg('.error-msg', "请输入角色");
         return false;
     }else if(job==""){
         showMsg('.error-msg', "请输入岗位");
@@ -259,7 +265,7 @@ function getRole(){
                 var items = data.body;
 
                 $("#roleId").html(""); //绑定模号下拉菜单
-                $("#roleId").append($("<option value=\"\">全部</option>"));
+                $("#roleId").append($("<option value=\"\">-请选择-</option>"));
                 for (var i = 0; i < items.length; i++) {
                     $("#roleId").append($("<option value=\"" + items[i].id + "\">" + items[i].role_name + "</option>"));
                 }
@@ -325,7 +331,11 @@ function queryUserList(roleId,userName,page){
                             '                <td>' + this.mobile + '</td>' +
                             '                <td>' + (this.create_time?this.create_time:"") + '</td>' +
                             '                <td id="' + this.user_no+'">';
-                        if(this.role_code!="admin"){
+                        if(localStorage.getItem("userNo")=="admin"){
+                            str = str +'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
+                                '<span class="resetTit">重置密码</span>' +
+                                '<span class="delTit">删除</span>' ;
+                        }else if(this.role_code!="admin"){
                             str = str +'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
                                 '<span class="resetTit">重置密码</span>' +
                                 '<span class="delTit">删除</span>' ;
