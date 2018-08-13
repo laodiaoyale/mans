@@ -78,4 +78,9 @@ public class UserService extends BaseController{
         List<String> list = userDao.getCity();
         return list;
     }
+
+    public List<String> getEnterprise(String userNo) {
+        List<String> list = userDao.getCity();
+        return list;
+    }
 }

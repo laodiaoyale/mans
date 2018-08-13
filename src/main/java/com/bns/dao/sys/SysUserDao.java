@@ -61,4 +61,6 @@ public interface SysUserDao {
      * @param newUser
      */
     int updateByIdSelective(SysUserDTO newUser);
+
+    List<String> selectUserDepartment();
 }
