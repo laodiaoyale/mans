@@ -399,8 +399,8 @@ border-bottom:1px solid #EEEFF0;
 }
 .customer-box .queryWrapBox,
 .customer-box .detailBox{
-    display: flex;
-    justify-content: space-between;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
 }
 .customer-box .detailBox label,
 .searchBox .searchList label{

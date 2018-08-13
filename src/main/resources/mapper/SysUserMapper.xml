@@ -240,7 +240,10 @@
   </select>
 
 
-
+  <!--对象查询-->
+  <select id="selectUserDepartment" parameterType="java.util.Map" resultType="java.lang.String" >
+    select department from sys_user
+  </select>
 
 
   <!--对象查询-->

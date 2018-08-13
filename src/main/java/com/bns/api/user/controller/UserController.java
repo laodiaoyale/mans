@@ -69,6 +69,18 @@ public class UserController extends BaseController{
         return json;
     }
 
+    /**
+     * OK
+     * @param userNo
+     * @return
+     * 删除
+     */
+    @RequestMapping(value="/getEnterprise")
+    public JsonResult getEnterprise(String userNo) throws BaseException {
+        JsonResult json = initJsonResult();
+        json.setBody(userService.getEnterprise(userNo));
+        return json;
+    }
 
     /**
      * OK
