@@ -119,8 +119,8 @@ $(function () {
         var userName = $.trim($("#inpName").val());
         var sex = $.trim($("#sex").val());
         console.log(sex)
-        var selAll= $('.selectpicker').selectpicker('val');
-        console.log(selAll)
+        var enterprise= $('#enterprise').selectpicker('val');
+        console.log(enterprise)
         queryUserList(roleId,userName,1);
     });
 
@@ -383,6 +383,7 @@ function getEnterprise(){
                 for (var i = 0; i < items.length; i++) {
                     $("#enterprise").append($("<option value=\"" + items[i] + "\">" + items[i] + "</option>"));
                 }
+                $("#enterprise").selectpicker('val', '全部');
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
                 localStorage.removeItem("LoginToken");
