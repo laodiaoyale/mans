@@ -118,6 +118,8 @@ $(function () {
         var userName = $.trim($("#inpName").val());
         var sex = $.trim($("#sex").val());
         console.log(sex)
+        var selAll= $('.selectpicker').selectpicker('val');
+        console.log(selAll)
         queryUserList(roleId,userName,1);
     });
 
