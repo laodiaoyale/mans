@@ -61,6 +61,7 @@ function loginFn(){
                     localStorage.setItem('LoginToken', login_token);
                     localStorage.setItem('LoginJob', login_jobs);
                     localStorage.setItem('LoginDepartment', login_department);
+                    localStorage.setItem('LoginRoleCode', _data.roleCode);
                     localStorage.setItem('LoginRoleName', login_roleName);
                     localStorage.setItem('LoginId', login_id);
                     //记住账号

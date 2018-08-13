@@ -19,6 +19,22 @@ $(function () {
             }
         })
     }
+    if(window.location.href.indexOf("user_add.html")>-1){
+        if(localStorage.getItem('LoginDepartment')!="admin"){
+            $('#enterprise').attr({'disabled' : 'disabled'});
+            $("#enterprise").val(localStorage.getItem('LoginDepartment'));
+        }
+        $('#userName').attr({'disabled' : 'disabled'});
+        $('#newUserNo').css({'color' : '#999'});
+        $('#userName').css({'color' : '#999'});
+        // initUser();
+        //点击其他地方收起下拉框
+        $("body").on("click",function(event){
+            if(event.target.className != "cludeBox"){
+                $(".roleSelect").hide()
+            }
+        })
+    }
     if(window.location.href.indexOf("user_add.html?type=edit")>-1){
         $("#path").html(" > 人员修改");
         $('#passwordItem').css({'display' : 'none'});
@@ -47,7 +63,6 @@ $(function () {
             _ul.hide();
         });
     });
-
 
     // 点击编辑跳转到编辑页面
     $('#addUserBtn').click(function () {
@@ -105,6 +120,18 @@ $(function () {
         console.log(sex)
         queryUserList(roleId,userName,1);
     });
+
+    $("#resetBtn").click(function () {
+        $("#inpName").val("");
+        $("#sex").prop('selectedIndex', 0);
+        $('#minAge').val("");
+        $('#maxAge').val("");
+        $("#idCard").val("");
+        $("#education").prop('selectedIndex', 0);
+        $('#status').prop('selectedIndex', 0);
+        $('#city').val("");
+        $("#source").val("");
+    });
 });
 // input框获取/失去焦点时属性变化
 function focusOrBlur(obj,ele,val1,val2) { //对象，元素，属性值1，属性值2
@@ -121,6 +148,7 @@ function addUser(){
         var mobile = $.trim($("#mobile").val());
         var wechatCode = $.trim($("#wechatCode").val());
         var qqCode = $.trim($("#qqCode").val());
+        var entryDate = $.trim($("#entryDate").val());
         var city = $.trim($("#city").val());
         var address = $.trim($("#address").val());
         var age = $.trim($("#age").val());
@@ -132,17 +160,16 @@ function addUser(){
         var history = $.trim($("#history").val());
         var enterprise = $.trim($("#enterprise").val());
         var remark = $.trim($("#remark").val());
+        var entryDate = $.trim($("#entryDate").val());
+        var leaveDate = $.trim($("#leaveDate").val());
+        var bankCard = $.trim($("#bankCard").val());
+        var bankName = $.trim($("#bankName").val());
         if(name==""){
             showMsg('.error-msg', "请输入姓名");
             return false;
+        }else if(idCard==""){
+            showMsg('.error-msg', "请输入身份证号");
         }
-        // else if(!isValNum(newUserNo)){
-        //     showMsg('.error-msg', "请输入正确的账号");
-        // }else if(!isNumAndStr(password)){
-        //     showMsg('.error-msg', "请输入正确格式的密码");
-        // }else if(!isPhoneNum(mobile) || mobile.length != 11){
-        //     showMsg('.error-msg', "请输入正确格式的手机号");
-        // }
         else{
             var obj = {
                 "id":localStorage.getItem('id'),
@@ -153,6 +180,7 @@ function addUser(){
                 "city":city,
                 "wechatCode":wechatCode,
                 "qqCode":qqCode,
+                "entryDate":entryDate,
                 "address":address,
                 "age":age,
                 "education":education,
@@ -162,7 +190,11 @@ function addUser(){
                 "status":status,
                 "history":history,
                 "enterprise":enterprise,
-                "remark":remark
+                "remark":remark,
+                "entryDate":entryDate,
+                "leaveDate":leaveDate,
+                "bankCard":bankCard,
+                "bankName":bankName
             };
             var _obj = JSON.stringify(obj, 'utf-8');
             $.ajax({
@@ -205,6 +237,7 @@ function editUser(){
     var mobile = $.trim($("#mobile").val());
     var wechatCode = $.trim($("#wechatCode").val());
     var qqCode = $.trim($("#qqCode").val());
+    var entryDate = $.trim($("#entryDate").val());
     var city = $.trim($("#city").val());
     var address = $.trim($("#address").val());
     var age = $.trim($("#age").val());
@@ -216,9 +249,16 @@ function editUser(){
     var history = $.trim($("#history").val());
     var enterprise = $.trim($("#enterprise").val());
     var remark = $.trim($("#remark").val());
+
+    var entryDate = $.trim($("#entryDate").val());
+    var leaveDate = $.trim($("#leaveDate").val());
+    var bankCard = $.trim($("#bankCard").val());
+    var bankName = $.trim($("#bankName").val());
     if(name==""){
         showMsg('.error-msg', "请输入姓名");
         return false;
+    }else if(idCard==""){
+        showMsg('.error-msg', "请输入身份证号");
     }else {
         var obj = {
             "id":id,
@@ -228,6 +268,7 @@ function editUser(){
             "mobile":mobile,
             "wechatCode":wechatCode,
             "qqCode":qqCode,
+            "entryDate":entryDate,
             "city":city,
             "address":address,
             "age":age,
@@ -238,7 +279,11 @@ function editUser(){
             "status":status,
             "history":history,
             "enterprise":enterprise,
-            "remark":remark
+            "remark":remark,
+            "entryDate":entryDate,
+            "leaveDate":leaveDate,
+            "bankCard":bankCard,
+            "bankName":bankName
         };
         var _obj = JSON.stringify(obj, 'utf-8');
         $.ajax({
@@ -353,7 +398,10 @@ function getRole(){
 function queryUserList(roleId,userName,page){
     userName = $.trim($("#inpName").val());
     department = localStorage.getItem("LoginDepartment");
-    // if(department=="")
+    roleCode = localStorage.getItem("LoginRoleCode");
+    if(department=="admin"||roleCode=="user"){
+        department='';
+    }
     sex = $.trim($("#sex").val());
     var _obj = JSON.stringify({
         "pageNum":page,
@@ -541,6 +589,14 @@ function initUser(){
     $('#skill').val(user.skill);
     $("#status").val(user.status);
     $("#history").val(user.history);
-    $("#enterprise").val(user.enterprise);
     $("#remark").val(user.remark);
+    $("#enterprise").val(user.enterprise);
+    $("#entryDate").val(setDate(user.entryDate));
+    $("#leaveDate").val(setDate(user.leaveDate));
+    $("#bankCard").val(user.bankCard);
+    $("#bankName").val(user.bankName);
+}
+
+function setDate(date){
+    return /\d{4}-\d{1,2}-\d{1,2}/g.exec(date);
 }

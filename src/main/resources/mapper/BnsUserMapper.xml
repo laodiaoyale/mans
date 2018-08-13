@@ -22,6 +22,11 @@
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
     <result column="enterprise" jdbcType="VARCHAR" property="enterprise" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
+
+    <result column="entry_date" jdbcType="VARCHAR" property="entryDate" />
+    <result column="leave_date" jdbcType="VARCHAR" property="leaveDate" />
+    <result column="bank_card" jdbcType="VARCHAR" property="bankCard" />
+    <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from bns_user
@@ -33,13 +38,17 @@
       address, create_time, wechat_code, 
       qq_code, age, education, 
       source, skill, history, 
-      job,city,enterprise,remark)
+      job,city,enterprise,remark,
+      entry_date,leave_date,bank_card,bank_name
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{idCard,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{nation,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{wechatCode,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, now(), #{wechatCode,jdbcType=VARCHAR},
       #{qqCode,jdbcType=VARCHAR}, #{age,jdbcType=TINYINT}, #{education,jdbcType=TINYINT}, 
       #{source,jdbcType=VARCHAR}, #{skill,jdbcType=VARCHAR}, #{history,jdbcType=VARCHAR}, 
-      #{job,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{enterprise,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
+      #{job,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{enterprise,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},
+      #{entryDate,jdbcType=TIMESTAMP},#{leaveDate,jdbcType=TIMESTAMP},#{bankCard,jdbcType=VARCHAR},#{bankName,jdbcType=VARCHAR}
+      )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.bns.model.user.BnsUser">
     update bns_user
@@ -50,7 +59,6 @@
       nation = #{nation,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
       wechat_code = #{wechatCode,jdbcType=VARCHAR},
       qq_code = #{qqCode,jdbcType=VARCHAR},
       age = #{age,jdbcType=TINYINT},
@@ -62,7 +70,11 @@
       status = #{status,jdbcType=TINYINT},
       del_flag = #{delFlag,jdbcType=TINYINT},
       enterprise = #{enterprise,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR}
+      remark = #{remark,jdbcType=VARCHAR},
+      entry_date = #{entryDate,jdbcType=TIMESTAMP},
+      leave_date = #{leaveDate,jdbcType=TIMESTAMP},
+      bank_card = #{bankCard,jdbcType=VARCHAR},
+      bank_name =  #{bankName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -82,8 +94,7 @@
   </select>
   <!-- 查询列表 cl_t_user  -->
   <select id="findPaging" parameterType="com.bns.api.user.param.UserReqParam" resultMap="BaseResultMap">
-    select id, name, mobile, id_card, sex, nation, city, address, create_time, wechat_code,
-    qq_code, age, education, source, skill, history, job,status,remark,enterprise
+    select *
     from bns_user t1
     where 1=1 and del_flag = 1
     <if test="name != null and name != ''">

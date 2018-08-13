@@ -71,6 +71,7 @@ public class SysUserService {
         BeanUtils.copyProperties(user,loginRespBo);
         loginRespBo.setToken(uuid);
         loginRespBo.setRoleId(role.getId());
+        loginRespBo.setRoleCode(role.getRoleCode());
         loginRespBo.setRoleName(role.getRoleName());
         loginRespBo.setPassword(loginUserVO.getPassword());
 

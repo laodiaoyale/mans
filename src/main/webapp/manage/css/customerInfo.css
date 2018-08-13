@@ -865,6 +865,10 @@ border-bottom:1px solid #EEEFF0;
 .limitsTable .redactTlt{
     margin-right: 10px;
 }
+
+.limitsTable .resetTit{
+    margin-right: 10px;
+}
 .limitsTable .infoTlt{
     margin-right: 10px;
 }
@@ -918,6 +922,26 @@ border-bottom:1px solid #EEEFF0;
     border: 1px solid #D9D9D9;
     border-radius: 4px;
 
+    box-sizing: border-box;
+    padding-left: 10px;
+}
+.listOfOptions .row .com-span-3{
+    width: 120px;
+    height: 30px;
+    background: #fff;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    font-size: 12px;
+    box-sizing: border-box;
+    padding-left: 10px;
+}
+.listOfOptions .row .com-span-2{
+    width: 70px;
+    height: 30px;
+    background: #fff;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    font-size: 12px;
     box-sizing: border-box;
     padding-left: 10px;
 }
@@ -1117,6 +1141,78 @@ border-bottom:1px solid #EEEFF0;
     top: -7px;
 }
 .sureDel img{
+    position: absolute;
+    left: 145px;
+    top: 15px;
+}
+
+
+
+.restPassword{
+    width: 350px;
+    height: 192px;
+    z-index: 1002;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: 20% 0 0 40%;
+    border-radius: 4px;
+}
+.restPassword .sureDelREC{
+    background: #fff;
+    border-top: 1px solid #DFDFDF;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px 0 rgba(100,100,100,0.50);
+    position: absolute;
+    left: 0px;
+    top: 42px;
+    width: 350px;
+    height: 150px;
+}
+.restPassword .sureDelREC p{
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #1F242C;
+    letter-spacing: 0;
+    padding: 40px 0 0 130px;
+}
+.restPassword .sureDelREC div{
+    padding: 22px 0 0 80px;
+}
+.restPassword .sureDelREC div button{
+    width: 80px;
+    height: 30px;
+    border-radius: 4px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+
+    letter-spacing: 0;
+    line-height: 16px;
+}
+.restPassword .sureDelREC div .del_sure{
+    background: #2592F2;
+    color: #FFFFFF;
+    margin-right: 19px;
+}
+.restPassword .sureDelREC div .del_cancel{
+    background: #E9EDF2;
+    border: 1px solid #DADADA;
+    color: #7F8A97;
+}
+.restPassword .sureDelSicircle{
+    width: 100px;
+    height: 50px;
+    border: 1px solid #DFDFDF;
+    border-radius: 50px 50px 0 0;
+    border-bottom: none;
+    background: #fff;
+    position: absolute;
+    left: 125px;
+    top: -7px;
+}
+.restPassword img{
     position: absolute;
     left: 145px;
     top: 15px;

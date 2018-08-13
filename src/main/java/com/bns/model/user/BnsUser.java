@@ -99,6 +99,46 @@ public class BnsUser{
 
     private String enterprise;
 
+    private Date entryDate;
+
+    private Date leaveDate;
+
+    private String bankCard;
+
+    private String bankName;
+
+    public Date getEntryDate() {
+        return entryDate;
+    }
+
+    public void setEntryDate(Date entryDate) {
+        this.entryDate = entryDate;
+    }
+
+    public Date getLeaveDate() {
+        return leaveDate;
+    }
+
+    public void setLeaveDate(Date leaveDate) {
+        this.leaveDate = leaveDate;
+    }
+
+    public String getBankCard() {
+        return bankCard;
+    }
+
+    public void setBankCard(String bankCard) {
+        this.bankCard = bankCard;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -266,4 +306,5 @@ public class BnsUser{
     public void setCity(String city) {
         this.city = city;
     }
+
 }

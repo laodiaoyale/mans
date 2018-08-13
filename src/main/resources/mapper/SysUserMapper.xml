@@ -258,6 +258,7 @@
     a.user_no,
     a.user_name,
     b.role_name,
+    b.role_code,
     a.department,
     a.job,
     a.mobile,
