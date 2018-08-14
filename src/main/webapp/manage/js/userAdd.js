@@ -15,6 +15,37 @@ $(function(){
         endDate: getNowFormatDate(),
         autoclose: true
     });
+    // 点击显示日历
+    $('#startEntryDate').datetimepicker({
+        format: 'yyyy-mm-dd',
+        minView: 2,
+        language: 'zh-CN',
+        endDate: getNowFormatDate(),
+        autoclose: true
+    });
+    $('#endEntryDate').datetimepicker({
+        format: 'yyyy-mm-dd',
+        minView: 2,
+        language: 'zh-CN',
+        endDate: getNowFormatDate(),
+        autoclose: true
+    });
+
+    // 点击显示日历
+    $('#startLeaveDate').datetimepicker({
+        format: 'yyyy-mm-dd',
+        minView: 2,
+        language: 'zh-CN',
+        endDate: getNowFormatDate(),
+        autoclose: true
+    });
+    $('#endLeaveDate').datetimepicker({
+        format: 'yyyy-mm-dd',
+        minView: 2,
+        language: 'zh-CN',
+        endDate: getNowFormatDate(),
+        autoclose: true
+    });
 });
 
 // 显示日历函数

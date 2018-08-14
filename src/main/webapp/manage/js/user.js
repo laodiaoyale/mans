@@ -134,6 +134,13 @@ $(function () {
         $('#status').prop('selectedIndex', 0);
         $('#city').val("");
         $("#source").val("");
+
+        $('#enterprise').val("");
+        $("#insurance").prop('selectedIndex', 0);
+        $('#startEntryDate').val("");
+        $("#endEntryDate").val("");
+        $('#startLeaveDate').val("");
+        $("#endLeaveDate").val("");
     });
 });
 // input框获取/失去焦点时属性变化
@@ -383,7 +390,7 @@ function getEnterprise(){
                 for (var i = 0; i < items.length; i++) {
                     $("#enterprise").append($("<option value=\"" + items[i] + "\">" + items[i] + "</option>"));
                 }
-                $("#enterprise").selectpicker('val', '全部');
+                $('#enterprise').selectpicker('refresh');
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
                 localStorage.removeItem("LoginToken");

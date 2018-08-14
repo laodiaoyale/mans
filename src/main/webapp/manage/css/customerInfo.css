@@ -487,10 +487,10 @@ border-bottom:1px solid #EEEFF0;
     padding-left: 1.9vw;
 }
 .startTime{
-    padding-left: 1.1vw;
+    /*padding-left: 1.1vw;*/
 }
 .endTime{
-    padding-left: 0.6vw;
+    /*padding-left: 0.6vw;*/
 }
 /*表格*/
 .feedbackList{

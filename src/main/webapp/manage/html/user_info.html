@@ -142,6 +142,27 @@
                         <input class="com-span" id="leaveDate" />
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">紧急联系人</label>
+                    <input class="com-span"  id="contacts"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">关系</label>
+                    <input class="com-span"  id="relation"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">联系电话</label>
+                    <input class="com-span" id="contact_number" maxlength="11"  onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab" for="insurance"> 商业保险</label>
+                    <input class="com-span"  id="insurance"/>
+                </div>
+            </div>
         </div>
         <div class="submitBox">
             <button id="submitBtn_infoUser">返回</button>
