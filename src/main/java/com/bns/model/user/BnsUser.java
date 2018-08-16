@@ -107,6 +107,46 @@ public class BnsUser{
 
     private String bankName;
 
+    private String contacts;
+
+    private Byte relation;
+
+    private String contactNumber;
+
+    private String insurance;
+
+    public String getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts;
+    }
+
+    public Byte getRelation() {
+        return relation;
+    }
+
+    public void setRelation(Byte relation) {
+        this.relation = relation;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(String insurance) {
+        this.insurance = insurance;
+    }
+
     public Date getEntryDate() {
         return entryDate;
     }

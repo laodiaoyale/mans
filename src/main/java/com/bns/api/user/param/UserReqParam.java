@@ -92,6 +92,46 @@ public class UserReqParam {
 
     private int pageSize = 10;
 
+    private String startEntryDate;
+
+    private String endEntryDate;
+
+    private String startLeaveDate;
+
+    private String endLeaveDate;
+
+    public String getStartEntryDate() {
+        return startEntryDate;
+    }
+
+    public void setStartEntryDate(String startEntryDate) {
+        this.startEntryDate = startEntryDate;
+    }
+
+    public String getEndEntryDate() {
+        return endEntryDate;
+    }
+
+    public void setEndEntryDate(String endEntryDate) {
+        this.endEntryDate = endEntryDate;
+    }
+
+    public String getStartLeaveDate() {
+        return startLeaveDate;
+    }
+
+    public void setStartLeaveDate(String startLeaveDate) {
+        this.startLeaveDate = startLeaveDate;
+    }
+
+    public String getEndLeaveDate() {
+        return endLeaveDate;
+    }
+
+    public void setEndLeaveDate(String endLeaveDate) {
+        this.endLeaveDate = endLeaveDate;
+    }
+
     public String getName() {
         return name;
     }

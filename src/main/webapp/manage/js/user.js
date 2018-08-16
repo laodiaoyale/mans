@@ -467,8 +467,12 @@ function queryUserList(roleId,userName,page){
         "education":$.trim($("#education").val()),
         "city":$.trim($("#city").val()),
         "source":$.trim($("#source").val()),
-        "department":department
-        }, 'utf-8');
+        "department":department,
+        "startEntryDate":$.trim($("#startEntryDate").val()),
+        "endEntryDate":$.trim($("#endEntryDate").val()),
+        "startLeaveDate":$.trim($("#startLeaveDate").val()),
+        "endLeaveDate":$.trim($("#endLeaveDate").val())
+    }, 'utf-8');
     $.ajax({
         headers: {
             token: localStorage.getItem('LoginToken')
