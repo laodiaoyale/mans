@@ -5,6 +5,8 @@
     <title>互联网信贷业务管理系统</title>
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
     <link rel="stylesheet" href="../js/libs/build_standalone.css">
     <script src="../js/libs/jquery-1.11.1.min.js"></script>
@@ -66,22 +68,17 @@
                         <!--<option >北京市</option>-->
                     </select>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <label class="com-lab">所属企业</label>
-                    <input class="com-span"  id="department"/>
-                    <span class="reminder">多个企业用逗号隔开</span>
-                </div>
+                <!--<div class="col-lg-4 col-md-4 col-sm-4">-->
+                    <!--<label class="com-lab">所属企业</label>-->
+                    <!--<input class="com-span"  id="department"/>-->
+                    <!--<span class="reminder">多个企业用逗号隔开</span>-->
+                <!--</div>-->
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                    <label class="com-lab">所属企业</label>
-                    <!--<input class="com-span"  id="department"/>-->
-                    <input type="checkbox" name="allSel" ><span>全选</span></div>
-                <!--<input type="checkbox" name="select" value="1"/>1-->
-                <!--<input type="checkbox" name="select" value="2"/>2-->
-                <!--<input type="checkbox" name="select" value="3"/>3-->
-                <!--<input type="checkbox" name="select" value="4"/>4-->
-                <!--<input type="checkbox" name="select" value="5"/>5-->
+                    <label class="com-lab" for="enterprise"> 所属企业</label>
+                    <select class="selectpicker" data-none-selected-text="请选择" multiple id="enterprise">
+                    </select>
                 </div>
             </div>
         </div>
@@ -95,11 +92,12 @@
 <div class="error-msg"></div>
 <!--修改密码-->
 <div class="reset-password"></div>
-<script src="../js/libs/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="../js/util.js"></script>
 <script src="../js/common.js"></script>
 <script src="../js/menu.js"></script>
 <script src="../js/permissions.js"></script>
+<script src="../js/libs/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/libs/vendor/bootstrap/js/bootstrap-select.min.js"></script>
 <script>
      $("body").on("click",function(event){
          if(event.target.className != "cludeBox"){

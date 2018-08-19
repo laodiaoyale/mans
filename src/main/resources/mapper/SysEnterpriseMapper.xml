@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bns.dao.sys.SysEnterpriseDao" >
+  <resultMap id="BaseResultMap" type="com.bns.model.sys.SysEnterpriseDTO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="en_code" property="enCode" jdbcType="VARCHAR" />
+    <result column="enterprise" property="enterprise" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result property="remark" column="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select *
+    from sys_enterprise
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_enterprise
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.bns.model.sys.SysEnterpriseDTO" >
+    insert into sys_enterprise (en_code, enterprise,
+    create_date, remark)
+    values (#{enCode,jdbcType=VARCHAR}, #{enterprise,jdbcType=VARCHAR},
+    now(),#{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.bns.model.sys.SysEnterpriseDTO" >
+    update sys_enterprise
+    set en_code = #{enCode,jdbcType=VARCHAR},
+      enterprise = #{enterprise,jdbcType=VARCHAR},
+      updateDate = now(),
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="queryEnterprise" resultMap="BaseResultMap">
+      select * from sys_enterprise
+  </select>
+
+
+</mapper>
