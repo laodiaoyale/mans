@@ -451,6 +451,20 @@ function queryUserList(roleId,userName,page){
     department = localStorage.getItem("LoginDepartment");
     roleCode = localStorage.getItem("LoginRoleCode");
     roleName = localStorage.getItem("LoginRoleName");
+
+    var startEntryDate = $('#startEntryDate').val();
+    var endEntryDate = $("#endEntryDate").val();
+    var startLeaveDate = $('#startLeaveDate').val();
+    var endLeaveDate = $("#endLeaveDate").val();
+    if(startEntryDate!=null&&endEntryDate!=null&&endEntryDate<startEntryDate){
+        showMsg($('.error-msg'), "开始时间必须小于结束时间");
+        return;
+    }
+    if(startLeaveDate!=null&&endLeaveDate!=null&&endLeaveDate<startLeaveDate){
+        showMsg($('.error-msg'), "开始时间必须小于结束时间");
+        return;
+    }
+
     if(roleName=="管理员"||roleCode=="user"){
         department='';
     }

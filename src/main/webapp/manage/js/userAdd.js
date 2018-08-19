@@ -48,6 +48,19 @@ $(function(){
     });
 });
 
+function changeValue(){
+    var startEntryDate = $('#startEntryDate').val();
+    var endEntryDate = $("#endEntryDate").val();
+    var startLeaveDate = $('#startLeaveDate').val();
+    var endLeaveDate = $("#endLeaveDate").val();
+    if(startEntryDate!=''&&endEntryDate!=''&&endEntryDate<startEntryDate){
+        showMsg($('.error-msg'), "开始时间必须小于结束时间");
+    }
+    if(startLeaveDate!=''&&endLeaveDate!=''&&endLeaveDate<startLeaveDate){
+        showMsg($('.error-msg'), "开始时间必须小于结束时间");
+    }
+}
+
 // 显示日历函数
 function getNowFormatDate() {
     var date = new Date();
