@@ -499,13 +499,12 @@ function queryUserList(roleId,userName,page){
                             '                <td>' + this.age + '</td>' +
                             '                <td>' + this.idCard + '</td>' +
                             '                <td>' + this.mobile + '</td>' +
-                            // '                <td>' + this.wechatCode + '</td>' +
-                            // '                <td>' + this.qqCode + '</td>' +
-                            '                <td>' + educationAction(this.education) + '</td>' +
-                            '                <td>' + this.skill + '</td>' +
-                            '                <td>' + this.city + '</td>' +
+                            '                <td>' + this.enterprise + '</td>' +
                             '                <td>' + this.source + '</td>' +
                             '                <td>' + statusAction(this.status) + '</td>' +
+                            '                <td>' + setDate(this.entryDate) + '</td>' +
+                            '                <td>' + setDate(this.leaveDate) + '</td>' +
+                            '                <td>' + this.insurance + '</td>' +
                             '                <td id="' + this.id +'">' +
                             '<span class="infoTlt"><a href="javascript:void(0);">详情</a></span>';
                             if(localStorage.getItem("roleCode")=="admin"){
@@ -654,5 +653,7 @@ function initUser(){
 }
 
 function setDate(date){
+    if(date==null)
+        return"";
     return /\d{4}-\d{1,2}-\d{1,2}/g.exec(date);
 }

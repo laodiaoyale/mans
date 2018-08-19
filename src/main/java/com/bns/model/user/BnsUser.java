@@ -97,10 +97,18 @@ public class BnsUser{
 
     private String remark;
 
+    /**
+     * 所属企业
+     */
     private String enterprise;
-
+    /**
+     * 入职时间
+     */
     private Date entryDate;
 
+    /**
+     * 离职时间
+     */
     private Date leaveDate;
 
     private String bankCard;
