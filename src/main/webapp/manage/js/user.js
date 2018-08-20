@@ -611,6 +611,7 @@ function deleteUser(id) {
     var _obj = JSON.stringify({
         id:id
     }, 'utf-8');
+    alert(_obj);
     $.ajax({
         headers: {
             token: localStorage.getItem('LoginToken')

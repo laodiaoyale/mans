@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class SysEnterpriseDTO {
-    private Long id;
+    private Integer id;
 
     private String enCode;
 
@@ -16,11 +16,25 @@ public class SysEnterpriseDTO {
 
     private String remark;
 
-    public Long getId() {
+    public Byte getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Byte delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    /**
+
+     * 状态1正常，0删除
+     */
+    private Byte delFlag;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,6 +1,9 @@
 package com.bns.api.sys.controller;
 
 import com.bns.api.sys.service.SysEnterpriseService;
+import com.bns.api.sys.vo.SysRoleVo;
+import com.bns.model.sys.SysEnterpriseDTO;
+import common.exception.BaseException;
 import common.message.BaseController;
 import common.message.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +31,29 @@ public class SysEnterpriseController extends BaseController {
         return json;
     }
 
+
+    /**
+     * OK
+     * 新增角色
+     * @param
+     * @return
+     */
+    @RequestMapping("/addOrUpdate")
+    public JsonResult addOrUpdate(SysEnterpriseDTO sysEnterpriseDTO) throws BaseException {
+        JsonResult json = initJsonResult();
+        return sysEnterpriseService.addOrUpdate(sysEnterpriseDTO);
+    }
+    /***
+     * OK
+     * 角色删除
+     * @return
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value="/del")
+    public JsonResult delEnterprise(String id) throws Exception {
+        Integer i = Integer.valueOf(id);
+        sysEnterpriseService.delEnterprise(i);
+        return initJsonResult();
+    }
 }

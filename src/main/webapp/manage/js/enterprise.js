@@ -122,25 +122,18 @@ function getBasicPermissions(callbak){
 }
 //角色新增
 function roleAddFn(){
-    var allVal = $("input:checkbox:checked").map(function(index,elem) {
-        return $(elem).val();
-    }).get().join(',');
-    var _createUser = $('.mine-info-account').html(),
-        _roleName = $('.role-name').val(),
-        _roleCode = $('.role-encode').val(),
-        _resourceIds = allVal;
-    if(_roleName.length > 8){
-        showMsg($('.error-msg'), '角色名称最多8个字符');
-    }else if(isIncludeSpecalStr(_roleName)){ //是否包含特殊字符
-        showMsg($('.error-msg'), '角色名称不可包含特殊字符');
-    }else if (isValContent(_roleName) ||isValContent(_roleCode) || _resourceIds.length <= 0){ // 是否为空
-        showMsg($('.error-msg'), '您的输入有误');
+    var enCode = $('#enCode').val(),
+        enterprise = $('#enterprise').val(),
+        remark = $('#remark').val()
+    if(enCode==''){
+        showMsg($('.error-msg'), '公司简称不能为空');
+    }if(enterprise==''){
+        showMsg($('.error-msg'), '公司名称不能为空');
     }else {
         var obj = {
-            'createUser':_createUser,
-            'roleName':_roleName,
-            'roleCode':_roleCode,
-            'resourceIds':_resourceIds
+            'enCode':enCode,
+            'enterprise':enterprise,
+            'remark':remark
         };
         var _obj = JSON.stringify(obj,'utf-8');
         $.ajax({
@@ -149,14 +142,14 @@ function roleAddFn(){
             },
             type: "POST",
             contentType: "text/html; charset=UTF-8",
-            url: "/api/sysUserRole/addRole/v1",//角色新增接口
+            url: "/api/sysEnterprise/addOrUpdate",//角色新增接口
             data: _obj,
             dataType: 'json',
             success : function(data){
                 if(data.rspCode==='000000'){
                     showMsg($('.error-msg'), '角色新增成功');
                     setTimeout(function(){
-                        window.location.href = 'role.html';
+                        window.location.href = 'enterprise.html';
                     },1000)
                     // getBasicPermissions();
                     // $('.role-name,.role-encode').val('');
@@ -178,20 +171,17 @@ function roleAddFn(){
 }
 //角色删除
 function roleDelteFn(){
-    var _updateUser = $('.mine-info-account').html(),
-        _id = $('.sureDel').data('id');
-    var obj = {
-        'updateUser':_updateUser,
-        'id':_id
-    };
-    var _obj = JSON.stringify(obj,'utf-8');
+    var id = $('.sureDel').data('id');
+    var _obj = JSON.stringify({
+        id:String(id)
+    }, 'utf-8');
     $.ajax({
         headers: {
             token:localStorage.getItem('LoginToken')
         },
         type: "POST",
         contentType: "text/html; charset=UTF-8",
-        url: "/api/sysUserRole/delRole/v1",//角色删除接口
+        url: "/api/sysEnterprise/del",//角色删除接口
         data: _obj,
         dataType: 'json',
         success : function(data){
