@@ -3,6 +3,9 @@ $(function () {
     if(window.location.href.indexOf("permissions.html")>-1){
         queryUserList("","",1);
     }
+    if(window.location.href.indexOf("permissions_user.html")>-1){
+        getEnterprise();
+    }
     if(window.location.href.indexOf("permissions_user.html?type=edit")>-1){
         getEnterprise();
         $("#path").html(" > 权限人员修改");
@@ -268,15 +271,11 @@ function getRole(){
                 $("#roleId").html(""); //绑定模号下拉菜单
                 $("#roleId").append($("<option value=\"\">-请选择-</option>"));
                 for (var i = 0; i < items.length; i++) {
-                    $("#roleId").append($("<option value=\"" + items[i].id + "\">" + items[i].role_name + "</option>"));
+                    $("#roleId").append($("<option value=\"" + items[i].role_code + "\">" + items[i].role_name + "</option>"));
                 }
-                if($(".roleSelect").hasClass("search")){
-                    $(".roleSelect").prepend('<li roleId="">全部</li>');
-                }else{
-                    if(window.location.href.indexOf("permissions_user.html?type=edit")==-1) {
-                        var _defaultLi = $(".roleSelect li:first-child");
-                        $("#add_user_role").val(_defaultLi.html()).attr("roleId", _defaultLi.attr("roleId"));
-                    }
+                if(window.location.href.indexOf("permissions_user.html?type=edit")>-1) {
+                    var permissionsInfo = JSON.parse(sessionStorage.getItem("permissionsInfo"));
+                    $("#roleId").val(permissionsInfo.role_code);
                 }
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
@@ -442,7 +441,7 @@ function initUser(){
     $("#userName").val(permissionsInfo.user_name);
     $("#password").val("******").attr("readonly",true);
     $("#mobile").val(permissionsInfo.mobile);
-    $("#roleId").prop('selectedIndex', permissionsInfo.role_code);
+    // $("#roleId").prop('selectedIndex', permissionsInfo.role_code);
     $("#department").val(permissionsInfo.department);
     $("#job").val(permissionsInfo.job);
 }
