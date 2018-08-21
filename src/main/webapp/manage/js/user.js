@@ -378,7 +378,7 @@ function getEnterprise(){
         },
         type: "POST",
         contentType: "text/html; charset=UTF-8",
-        url: "/api/sysUser/getEnterprise",//获取城市下拉列表
+        url: "/api/sysEnterprise/getEnterprise",//获取城市下拉列表
         dataType: 'json',
         data: _obj,
         aysnc:false,
@@ -386,9 +386,8 @@ function getEnterprise(){
             if (data.rspCode === '000000') {
                 var items = data.body;
                 $("#enterprise").html(""); //绑定模号下拉菜单
-                $("#enterprise").append($("<option value=\"\">全部</option>"));
                 for (var i = 0; i < items.length; i++) {
-                    $("#enterprise").append($("<option value=\"" + items[i] + "\">" + items[i] + "</option>"));
+                    $("#enterprise").append($("<option value=\"" + items[i].id + "\">" + items[i].enCode + "</option>"));
                 }
                 $('#enterprise').selectpicker('refresh');
             } else if (data.rspCode === '-999999') {
@@ -611,7 +610,6 @@ function deleteUser(id) {
     var _obj = JSON.stringify({
         id:id
     }, 'utf-8');
-    alert(_obj);
     $.ajax({
         headers: {
             token: localStorage.getItem('LoginToken')

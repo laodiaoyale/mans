@@ -40,5 +40,16 @@
       select * from sys_enterprise where del_flag = 1
   </select>
 
+  <resultMap id="EnterpriseVoList" type="com.bns.api.sys.vo.SysEnterpriseVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="en_code" property="enCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="queryEnterpriseByUserNo" resultMap="EnterpriseVoList" parameterType="java.lang.String" >
+      SELECT en_no as id,en_code from sys_user_enterprise
+      where user_no =#{userNo,jdbcType=VARCHAR}
+  </select>
 
+  <select id="queryAllEnterprise" resultMap="EnterpriseVoList" parameterType="java.lang.String" >
+    select id,en_code from sys_enterprise where del_flag = 1
+  </select>
 </mapper>

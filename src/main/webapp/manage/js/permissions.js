@@ -4,6 +4,7 @@ $(function () {
         queryUserList("","",1);
     }
     if(window.location.href.indexOf("permissions_user.html?type=edit")>-1){
+        getEnterprise();
         $("#path").html(" > 权限人员修改");
         // $('#passwordItem').css({'display' : 'none'});
         // $('#newUserNo').attr({'disabled' : 'disabled'});
@@ -441,7 +442,46 @@ function initUser(){
     $("#userName").val(permissionsInfo.user_name);
     $("#password").val("******").attr("readonly",true);
     $("#mobile").val(permissionsInfo.mobile);
-    $('#add_user_role').val(permissionsInfo.role_name);
+    $("#roleId").prop('selectedIndex', permissionsInfo.role_code);
     $("#department").val(permissionsInfo.department);
     $("#job").val(permissionsInfo.job);
+}
+
+function getEnterprise(){
+    var obj = {
+        "userNo":localStorage.getItem('userNo')
+    };
+    var _obj = JSON.stringify(obj, 'utf-8');
+    $.ajax({
+        headers: {
+            token: localStorage.getItem('LoginToken')
+        },
+        type: "POST",
+        contentType: "text/html; charset=UTF-8",
+        url: "/api/sysEnterprise/getEnterprise",//获取城市下拉列表
+        dataType: 'json',
+        data: _obj,
+        aysnc:false,
+        success: function (data) {
+            if (data.rspCode === '000000') {
+                var items = data.body;
+                $("#enterprise").html(""); //绑定模号下拉菜单
+                for (var i = 0; i < items.length; i++) {
+                    $("#enterprise").append($("<option value=\"" + items[i].id + "\">" + items[i].enCode + "</option>"));
+                }
+                $('#enterprise').selectpicker('refresh');
+            } else if (data.rspCode === '-999999') {
+                localStorage.removeItem("LoginName");
+                localStorage.removeItem("LoginToken");
+                localStorage.removeItem("userNo");
+                localStorage.removeItem("LoginJob");
+                localStorage.removeItem("LoginDepartment");
+                localStorage.removeItem("LoginRoleName");
+                showMsg($('.error-msg'), data.rspMsg);
+                window.location.href = 'wechatLogin.html';
+            } else {
+                showMsg('.error-msg', data.rspMsg);
+            }
+        }
+    });
 }

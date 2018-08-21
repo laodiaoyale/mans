@@ -100,13 +100,8 @@
 
         <div class="row">
             <div class="col-md-3">
-                <label class="com-lab" for="enterprise"> 所属企业</label>
-                <select class="selectpicker" data-none-selected-text="全部" multiple id="enterprise">
-                </select>
-            </div>
-            <div class="col-md-2">
                 <label class="com-lab" for="insurance"> 商业保险</label>
-                <select class="com-span-3" id="insurance">
+                <select class="com-span" id="insurance">
                     <option value="0">-请选择-</option>
                     <option value="1">已购买保险</option>
                     <option value="2">离职已替换</option>
@@ -114,18 +109,25 @@
                     <option value="4">待购买保险</option>
                 </select>
             </div>
-            <div class="col-md-3 detailBox startTime">
+            <div class="col-md-4 detailBox startTime">
                 <label class="com-lab">入职时间</label>
                 <input class="com-span-3 optionList" id="startEntryDate" onchange="changeValue()"/>
                 -
                 <input class="com-span-3 optionList" id="endEntryDate" onchange="changeValue()"/>
             </div>
-            <div class="col-md-3 detailBox endTime">
+            <div class="col-md-4 detailBox endTime">
                 <label class="com-lab">离职时间</label>
                 <input class="com-span-3 optionList" id="startLeaveDate" onchange="changeValue()"/>
                 -
                 <input class="com-span-3 optionList" id="endLeaveDate" onchange="changeValue()"/>
 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label class="com-lab" for="enterprise"> 所属企业</label>
+                <select class="selectpicker" data-none-selected-text="全部" multiple id="enterprise">
+                </select>
             </div>
         </div>
     </div>

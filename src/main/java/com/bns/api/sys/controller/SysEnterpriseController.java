@@ -3,6 +3,7 @@ package com.bns.api.sys.controller;
 import com.bns.api.sys.service.SysEnterpriseService;
 import com.bns.api.sys.vo.SysRoleVo;
 import com.bns.model.sys.SysEnterpriseDTO;
+import com.bns.model.sys.SysUserDTO;
 import common.exception.BaseException;
 import common.message.BaseController;
 import common.message.JsonResult;
@@ -56,4 +57,18 @@ public class SysEnterpriseController extends BaseController {
         sysEnterpriseService.delEnterprise(i);
         return initJsonResult();
     }
+
+    /**
+     * OK
+     * @param sysUserDTO
+     * @return
+     * 删除
+     */
+    @RequestMapping(value="/getEnterprise")
+    public JsonResult getEnterprise(SysUserDTO sysUserDTO) throws BaseException {
+        JsonResult json = initJsonResult();
+        json.setBody(sysEnterpriseService.getEnterprise(sysUserDTO));
+        return json;
+    }
+
 }

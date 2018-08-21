@@ -147,7 +147,7 @@ function roleAddFn(){
             dataType: 'json',
             success : function(data){
                 if(data.rspCode==='000000'){
-                    showMsg($('.error-msg'), '角色新增成功');
+                    showMsg($('.error-msg'), '企业新增成功');
                     setTimeout(function(){
                         window.location.href = 'enterprise.html';
                     },1000)
@@ -187,7 +187,7 @@ function roleDelteFn(){
         success : function(data){
             if(data.rspCode==='000000'){
                 $('.mask,.sureDel').hide();
-                showMsg($('.error-msg'), '角色删除成功');
+                showMsg($('.error-msg'), '企业删除成功');
                 getRoleListFn();
             }else if(data.rspCode==='-999999'){
                 localStorage.removeItem("LoginName");

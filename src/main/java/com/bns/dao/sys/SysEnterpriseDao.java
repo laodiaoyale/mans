@@ -1,5 +1,6 @@
 package com.bns.dao.sys;
 
+import com.bns.api.sys.vo.SysEnterpriseVo;
 import com.bns.model.sys.SysEnterpriseDTO;
 import common.annotation.MyBatisRepository;
 
@@ -17,4 +18,6 @@ public interface SysEnterpriseDao {
     SysEnterpriseDTO selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKey(SysEnterpriseDTO record);
+
+    List<SysEnterpriseVo> queryAllEnterprise();
 }

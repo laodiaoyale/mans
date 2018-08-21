@@ -1,6 +1,7 @@
 package com.bns.api.sys.service;
 
 import com.bns.api.sys.bo.MenuRespBo;
+import com.bns.api.sys.vo.SysEnterpriseVo;
 import com.bns.api.sys.vo.SysRoleVo;
 import com.bns.dao.sys.SysEnterpriseDao;
 import com.bns.dao.sys.SysMenuDao;
@@ -8,6 +9,7 @@ import com.bns.dao.sys.SysUserDao;
 import com.bns.model.sys.SysEnterpriseDTO;
 import com.bns.model.sys.SysResourceRoleDTO;
 import com.bns.model.sys.SysRoleDTO;
+import com.bns.model.sys.SysUserDTO;
 import com.bns.model.user.BnsUser;
 import common.exception.BaseException;
 import common.message.JsonResult;
@@ -59,5 +61,10 @@ public class SysEnterpriseService {
         if(num==0){
             throw new BaseException("企业删除失败");
         }
+    }
+
+    public List<SysEnterpriseVo> getEnterprise(SysUserDTO sysUserDTO) {
+        List<SysEnterpriseVo> list= sysEnterpriseDao.queryAllEnterprise();
+        return list;
     }
 }
