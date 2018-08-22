@@ -33,6 +33,16 @@ public class UserService extends BaseController{
      * @return
      */
     public PageInfo pageLite(UserReqParam userReqParam){
+        String[] ens = userReqParam.getEnNos();
+        if(ens!=null&&ens.length>0){
+            //删除之前的记录
+            StringBuffer buf = new StringBuffer();
+            for(String s :ens){
+                buf.append(s);
+                buf.append(",");
+            }
+            userReqParam.setEnNo(buf.substring(0,buf.length()-1));
+        }
         PageHelper.startPage(userReqParam.getPageNum(), userReqParam.getPageSize());
         List<BnsUser> pageList = userDao.findPaging(userReqParam);
         return  new PageInfo(pageList);

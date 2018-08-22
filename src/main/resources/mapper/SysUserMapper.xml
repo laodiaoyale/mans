@@ -278,6 +278,7 @@
     <if test="userName != null and userName !=''">
       and a.user_name=#{userName}
     </if>
+    order by a.id
   </select>
   <!--添加-->
   <insert id="insertSelective" parameterType="com.bns.model.sys.SysUserDTO" useGeneratedKeys="true" keyProperty="id">

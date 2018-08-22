@@ -102,6 +102,28 @@ public class UserReqParam {
 
     private Byte insurance;
 
+    private String[] enNos;
+
+    private String enNo;
+
+    public String getEnNo() {
+        return enNo;
+    }
+
+    public void setEnNo(String enNo) {
+        this.enNo = enNo;
+    }
+
+    private String enterprise;
+
+    public String getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(String enterprise) {
+        this.enterprise = enterprise;
+    }
+
     public Byte getInsurance() {
         return insurance;
     }
@@ -300,5 +322,13 @@ public class UserReqParam {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public String[] getEnNos() {
+        return enNos;
+    }
+
+    public void setEnNos(String[] enNos) {
+        this.enNos = enNos;
     }
 }

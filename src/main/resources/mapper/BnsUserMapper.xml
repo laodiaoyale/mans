@@ -155,6 +155,9 @@
     <if test="insurance != null and insurance != 0">
       and t1.insurance = #{insurance}
     </if>
+    <if test="enNo != null and enNo != ''">
+      and t1.en_no in (${enNo} )
+    </if>
     ORDER BY t1.create_time DESC
   </select>
 </mapper>

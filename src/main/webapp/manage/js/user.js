@@ -472,6 +472,7 @@ function queryUserList(roleId,userName,page){
     var endEntryDate = $("#endEntryDate").val();
     var startLeaveDate = $('#startLeaveDate').val();
     var endLeaveDate = $("#endLeaveDate").val();
+    var enNos= $('#enterprise').selectpicker('val');
     if(startEntryDate!=null&&endEntryDate!=null&&endEntryDate<startEntryDate){
         showMsg($('.error-msg'), "开始时间必须小于结束时间");
         return;
@@ -502,7 +503,8 @@ function queryUserList(roleId,userName,page){
         "startEntryDate":$.trim($("#startEntryDate").val()),
         "endEntryDate":$.trim($("#endEntryDate").val()),
         "startLeaveDate":$.trim($("#startLeaveDate").val()),
-        "endLeaveDate":$.trim($("#endLeaveDate").val())
+        "endLeaveDate":$.trim($("#endLeaveDate").val()),
+        "enNos":enNos
     }, 'utf-8');
     $.ajax({
         headers: {
