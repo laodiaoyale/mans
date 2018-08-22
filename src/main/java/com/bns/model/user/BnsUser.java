@@ -121,7 +121,7 @@ public class BnsUser{
 
     private String contactNumber;
 
-    private String insurance;
+    private Byte insurance;
 
     public String getContacts() {
         return contacts;
@@ -147,11 +147,11 @@ public class BnsUser{
         this.contactNumber = contactNumber;
     }
 
-    public String getInsurance() {
+    public Byte getInsurance() {
         return insurance;
     }
 
-    public void setInsurance(String insurance) {
+    public void setInsurance(Byte insurance) {
         this.insurance = insurance;
     }
 

@@ -25,6 +25,8 @@ public class SysUserRegisterVO {
 
     private String updateUser;
 
+    private String[] enNos;
+
     public String getNewUserNo() { return newUserNo; }
 
     public void setNewUserNo(String newUserNo) { this.newUserNo = newUserNo; }
@@ -95,5 +97,13 @@ public class SysUserRegisterVO {
 
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
+    }
+
+    public String[] getEnNos() {
+        return enNos;
+    }
+
+    public void setEnNos(String[] enNos) {
+        this.enNos = enNos;
     }
 }

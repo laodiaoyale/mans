@@ -2,6 +2,7 @@ package com.bns.dao.sys;
 
 import com.bns.api.sys.vo.SysEnterpriseVo;
 import com.bns.model.sys.SysEnterpriseDTO;
+import com.bns.model.sys.SysUserEnterpriseDTO;
 import common.annotation.MyBatisRepository;
 
 import java.util.List;
@@ -20,4 +21,10 @@ public interface SysEnterpriseDao {
     int updateByPrimaryKey(SysEnterpriseDTO record);
 
     List<SysEnterpriseVo> queryAllEnterprise();
+
+    void batchInsert(List<SysUserEnterpriseDTO> sysUserEnterpriseDTOS);
+
+    void deleteByUserNo(String userNo);
+
+    String getEnterPrise(String userNo);
 }

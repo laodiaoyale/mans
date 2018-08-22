@@ -7,8 +7,16 @@ public class SysUserVo extends SysPageVo{
 
 
     private String userName;
+    private String roleCode;
     private Long roleId;
 
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
 
     public String getUserName() {
         return userName;

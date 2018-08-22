@@ -78,6 +78,7 @@
                         <option value="0">--</option>
                         <option value="1">在职</option>
                         <option value="2">离职</option>
+                        <option value="3">已请假</option>
                     </select>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
@@ -164,14 +165,14 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">联系电话</label>
-                    <input class="com-span" id="contact_number" maxlength="11"  onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                    <input class="com-span" id="contactNumber" maxlength="11"  onkeyup="value=value.replace(/[^\d]/g,'')"/>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab" for="insurance"> 商业保险</label>
                     <select class="com-span" id="insurance">
-                        <!--<option value="0">-未知-</option>-->
+                        <option value="0">-请选择-</option>
                         <option value="1">已购买保险</option>
                         <option value="2">离职已替换</option>
                         <option value="3">离职未替换</option>

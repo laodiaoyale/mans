@@ -52,4 +52,25 @@
   <select id="queryAllEnterprise" resultMap="EnterpriseVoList" parameterType="java.lang.String" >
     select id,en_code from sys_enterprise where del_flag = 1
   </select>
+
+  <insert id="batchInsert" parameterType="java.util.List"
+          useGeneratedKeys="true">
+    insert into sys_user_enterprise (user_no, user_name,en_no,en_code,create_date)
+    values
+    <foreach collection="list" item="dto" index="index" separator=",">
+      (
+      #{dto.userNo},#{dto.userName},#{dto.enNo},#{dto.enCode},now()
+      )
+    </foreach>
+  </insert>
+
+  <delete id="deleteByUserNo" parameterType="java.lang.String" >
+    delete from sys_user_enterprise where user_no = #{userNo,jdbcType=VARCHAR}
+  </delete>
+
+
+  <select id="getEnterPrise" resultType="java.lang.String" parameterType="java.lang.String" >
+      SELECT GROUP_CONCAT(a.en_code SEPARATOR '、') as en_code
+      FROM sys_user_enterprise a  where a.user_no = #{userNo}
+  </select>
 </mapper>

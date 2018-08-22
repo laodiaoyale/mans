@@ -260,6 +260,7 @@
     a.id,
     a.user_no,
     a.user_name,
+    b.id as role_id,
     b.role_name,
     b.role_code,
     a.department,

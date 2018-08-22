@@ -1,5 +1,7 @@
 package com.bns.api.sys.service;
 
+import com.bns.dao.sys.SysEnterpriseDao;
+import com.bns.model.sys.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.bns.api.sys.bo.LoginRespBo;
@@ -9,9 +11,6 @@ import com.bns.api.sys.vo.SysUserVo;
 import com.bns.dao.sys.SysRoleDao;
 import com.bns.dao.sys.SysRoleUserDao;
 import com.bns.dao.sys.SysUserDao;
-import com.bns.model.sys.SysRoleDTO;
-import com.bns.model.sys.SysRoleUserDTO;
-import com.bns.model.sys.SysUserDTO;
 import common.exception.BaseException;
 import common.message.JsonResult;
 import common.message.RespCodeCostant;
@@ -38,7 +37,7 @@ public class SysUserService {
     @Autowired
     private SysRoleUserDao sysRoleUserDao;
     @Autowired
-    private SysRoleDao sysRoleDao;
+    private SysEnterpriseDao sysEnterpriseDao;
 
 
     /***
@@ -124,6 +123,13 @@ public class SysUserService {
     public PageInfo selectUserList(SysUserVo sysUserVo){
         PageHelper.startPage(sysUserVo.getPageNum(), sysUserVo.getPageSize());
         List sysUserList = sysUserDao.selectUserList(sysUserVo);
+        if(sysUserList!=null&&sysUserList.size()>0){
+            for(Object obj :sysUserList){
+                Map<String,String > map =(Map) obj;
+                String userNo = map.get("user_no");
+                map.put("department",sysEnterpriseDao.getEnterPrise(userNo));
+            }
+        }
         return new PageInfo(sysUserList);
     }
 
@@ -179,9 +185,6 @@ public class SysUserService {
         SysUserDTO userNew = new SysUserDTO();
         BeanUtils.copyProperties(vo,userNew);
         userNew.setId(user.getId());
-        if(userNew.getDepartment()!=null){
-            userNew.getDepartment().replaceAll("，",",");
-        }
         int num=sysUserDao.updateByIdSelective(userNew);
         if(num==0){
             throw new BaseException("信息修改失败");
@@ -192,6 +195,22 @@ public class SysUserService {
             sysRoleUser.setTargetId(userNew.getId());
             sysRoleUser.setUpdateUser(vo.getUpdateUser());
             sysRoleUserDao.updateUserRoleByUserId(sysRoleUser);
+        }
+        String[] ens = vo.getEnNos();
+        if(ens!=null&&ens.length>0){
+            //删除之前的记录
+            sysEnterpriseDao.deleteByUserNo(user.getUserNo());
+            List<SysUserEnterpriseDTO> sysUserEnterpriseDTOS = new ArrayList<>();
+            for(String s :ens){
+                SysUserEnterpriseDTO dto = new SysUserEnterpriseDTO();
+                dto.setUserNo(user.getUserNo());
+                dto.setUserName(user.getUserName());
+                dto.setEnNo(s);
+                SysEnterpriseDTO sysEnterpriseDTO = sysEnterpriseDao.selectByPrimaryKey(Integer.valueOf(s));
+                dto.setEnCode(sysEnterpriseDTO.getEnCode());
+                sysUserEnterpriseDTOS.add(dto);
+            }
+            sysEnterpriseDao.batchInsert(sysUserEnterpriseDTOS);
         }
         jsonResult.setError(RespCodeCostant.OK);
         jsonResult.setBody(new HashMap<>());

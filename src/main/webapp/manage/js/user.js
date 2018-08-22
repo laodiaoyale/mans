@@ -174,6 +174,10 @@ function addUser(){
         var leaveDate = $.trim($("#leaveDate").val());
         var bankCard = $.trim($("#bankCard").val());
         var bankName = $.trim($("#bankName").val());
+        var insurance =  $.trim($("#insurance").val());
+        var contacts =  $.trim($("#contacts").val());
+        var relation =  $.trim($("#relation").val());
+        var contactNumber =  $.trim($("#contactNumber").val());
         if(name==""){
             showMsg('.error-msg', "请输入姓名");
             return false;
@@ -204,7 +208,11 @@ function addUser(){
                 "entryDate":entryDate,
                 "leaveDate":leaveDate,
                 "bankCard":bankCard,
-                "bankName":bankName
+                "bankName":bankName,
+                "insurance":insurance,
+                "contacts":contacts,
+                "relation":relation,
+                "contactNumber":contactNumber
             };
             var _obj = JSON.stringify(obj, 'utf-8');
             $.ajax({
@@ -264,6 +272,11 @@ function editUser(){
     var leaveDate = $.trim($("#leaveDate").val());
     var bankCard = $.trim($("#bankCard").val());
     var bankName = $.trim($("#bankName").val());
+    var insurance =  $.trim($("#insurance").val());
+    var contacts =  $.trim($("#contacts").val());
+    var relation =  $.trim($("#relation").val());
+    var contactNumber =  $.trim($("#contactNumber").val());
+
     if(name==""){
         showMsg('.error-msg', "请输入姓名");
         return false;
@@ -293,7 +306,11 @@ function editUser(){
             "entryDate":entryDate,
             "leaveDate":leaveDate,
             "bankCard":bankCard,
-            "bankName":bankName
+            "bankName":bankName,
+            "insurance":insurance,
+            "contacts":contacts,
+            "relation":relation,
+            "contactNumber":contactNumber
         };
         var _obj = JSON.stringify(obj, 'utf-8');
         $.ajax({
@@ -467,7 +484,8 @@ function queryUserList(roleId,userName,page){
     if(roleName=="管理员"||roleCode=="user"){
         department='';
     }
-    sex = $.trim($("#sex").val());
+    var sex = $.trim($("#sex").val());
+    var insurance = $.trim($("#insurance").val());
     var _obj = JSON.stringify({
         "pageNum":page,
         "pageSize":10,
@@ -517,7 +535,7 @@ function queryUserList(roleId,userName,page){
                             '                <td>' + statusAction(this.status) + '</td>' +
                             '                <td>' + setDate(this.entryDate) + '</td>' +
                             '                <td>' + setDate(this.leaveDate) + '</td>' +
-                            '                <td>' + this.insurance + '</td>' +
+                            '                <td>' + insuranceAction(this.insurance) + '</td>' +
                             '                <td id="' + this.id +'">' +
                             '<span class="infoTlt"><a href="javascript:void(0);">详情</a></span>';
                             if(localStorage.getItem("roleCode")=="admin"){
@@ -553,7 +571,7 @@ function sexAction(sex){
     var res='';
     switch (sex) {
         case 0:
-            res='--'
+            res=''
             break;
         case 1:
             res='男'
@@ -568,7 +586,7 @@ function statusAction(status){
     var res='';
     switch (status) {
         case 0:
-            res='--'
+            res=''
             break;
         case 1:
             res='在职'
@@ -579,11 +597,33 @@ function statusAction(status){
     }
     return res
 }
+function insuranceAction(insurance){
+    var res='';
+    switch (insurance) {
+        case 0:
+            res=''
+            break;
+        case 1:
+            res='已购买保险'
+            break;
+        case 2:
+            res='离职已替换'
+            break;
+        case 3:
+            res='离职未替换'
+            break;
+        case 4:
+            res='待购买保险'
+            break;
+    }
+    return res
+}
+
 function educationAction(education){
     var res='';
     switch (education) {
         case 0:
-            res='--'
+            res=''
             break;
         case 1:
             res='高中以下'
@@ -663,6 +703,10 @@ function initUser(){
     $("#leaveDate").val(setDate(user.leaveDate));
     $("#bankCard").val(user.bankCard);
     $("#bankName").val(user.bankName);
+    $("#insurance").val(user.insurance);
+    $("#contacts").val(user.contacts);
+    $("#relation").val(user.relation);
+    $("#contactNumber").val(user.contactNumber);
 }
 
 function setDate(date){

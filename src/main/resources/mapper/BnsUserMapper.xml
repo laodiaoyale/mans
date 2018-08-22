@@ -152,6 +152,9 @@
     <if test="endLeaveDate != null and endLeaveDate != ''">
       <![CDATA[and t1.leave_date <= #{endLeaveDate} ]]>
     </if>
+    <if test="insurance != null and insurance != 0">
+      and t1.insurance = #{insurance}
+    </if>
     ORDER BY t1.create_time DESC
   </select>
 </mapper>

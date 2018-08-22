@@ -1,7 +1,7 @@
 $(function () {
     getRole();
     if(window.location.href.indexOf("permissions.html")>-1){
-        queryUserList("","",1);
+        queryUserList(1);
     }
     if(window.location.href.indexOf("permissions_user.html")>-1){
         getEnterprise();
@@ -94,9 +94,7 @@ $(function () {
         }
     });
     $("#searchBtn").click(function () {
-        var roleId = $("#selectRole").attr("roleId") ;
-        var userName = $.trim($("#inpName").val());
-        queryUserList(roleId,userName,1);
+        queryUserList(1);
     });
 });
 // input框获取/失去焦点时属性变化
@@ -188,6 +186,7 @@ function editUser(){
     var roleId = $("#roleId").val();
     var job = $("#job").val();
     var department = $("#department").val();
+    var enNos= $('#enterprise').selectpicker('val');
     if(newUserNo==""){
         showMsg('.error-msg', "请输入账号");
         return false;
@@ -215,7 +214,8 @@ function editUser(){
             "newUserNo":newUserNo,
             "job":job,
             "department":department,
-            "mobile":mobile
+            "mobile":mobile,
+            "enNos":enNos
         };
         if(roleId!=undefined&&roleId!=""){
             obj.roleId = roleId;
@@ -271,12 +271,17 @@ function getRole(){
                 $("#roleId").html(""); //绑定模号下拉菜单
                 $("#roleId").append($("<option value=\"\">-请选择-</option>"));
                 for (var i = 0; i < items.length; i++) {
-                    $("#roleId").append($("<option value=\"" + items[i].role_code + "\">" + items[i].role_name + "</option>"));
+                    $("#roleId").append($("<option value=\"" + items[i].id + "\">" + items[i].role_name + "</option>"));
                 }
-                if(window.location.href.indexOf("permissions_user.html?type=edit")>-1) {
-                    var permissionsInfo = JSON.parse(sessionStorage.getItem("permissionsInfo"));
-                    $("#roleId").val(permissionsInfo.role_code);
+                if($(".roleSelect").hasClass("search")){
+                    $(".roleSelect").prepend('<li roleId="">全部</li>');
+                }else{
+                    if(window.location.href.indexOf("permissions_user.html?type=edit")>-1) {
+                        var permissionsInfo = JSON.parse(sessionStorage.getItem("permissionsInfo"));
+                        $("#roleId").val(permissionsInfo.role_id);
+                    }
                 }
+
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
                 localStorage.removeItem("LoginToken");
@@ -293,7 +298,7 @@ function getRole(){
     });
 }
 
-function queryUserList(roleId,userName,page){
+function queryUserList(page){
     roleId = $("#roleId").val() ;
     userName = $.trim($("#inpName").val());
     var _obj = JSON.stringify({
@@ -316,7 +321,7 @@ function queryUserList(roleId,userName,page){
                 var list = data.body.list;
                 totalPage =data.body.lastPage;
                 definedPaginator(page, totalPage, "kkpager", function (n) {
-                    queryUserList(roleId,userName,n);
+                    queryUserList(n);
                 });
                 $("#permissionsTable tbody").html("");
                 if(list.length>0) {
@@ -381,7 +386,7 @@ function deleteUser(id) {
             if (data.rspCode === '000000') {
                 showMsg($('.error-msg'), '删除成功');
                 setTimeout(function () {
-                    queryUserList("","",1);
+                    queryUserList(1);
                 });
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
@@ -418,7 +423,7 @@ function resetPassword(id) {
             if (data.rspCode === '000000') {
                 showMsg($('.error-msg'), '重置成功');
                 setTimeout(function () {
-                    queryUserList("","",1);
+                    queryUserList(1);
                 });
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");

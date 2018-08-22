@@ -100,6 +100,16 @@ public class UserReqParam {
 
     private String endLeaveDate;
 
+    private Byte insurance;
+
+    public Byte getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(Byte insurance) {
+        this.insurance = insurance;
+    }
+
     public String getStartEntryDate() {
         return startEntryDate;
     }
