@@ -20,6 +20,7 @@
     <result column="job" jdbcType="VARCHAR" property="job" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
+    <result column="en_no" jdbcType="INTEGER" property="enNo" />
     <result column="enterprise" jdbcType="VARCHAR" property="enterprise" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="entry_date" jdbcType="VARCHAR" property="entryDate" />
@@ -41,7 +42,7 @@
       address, create_time, wechat_code, 
       qq_code, age, education, 
       source, skill, history, 
-      job,city,enterprise,remark,
+      job,city,en_no,enterprise,remark,
       entry_date,leave_date,bank_card,bank_name,
       contacts,relation,contact_number,insurance
       )
@@ -50,7 +51,7 @@
       #{address,jdbcType=VARCHAR}, now(), #{wechatCode,jdbcType=VARCHAR},
       #{qqCode,jdbcType=VARCHAR}, #{age,jdbcType=TINYINT}, #{education,jdbcType=TINYINT}, 
       #{source,jdbcType=VARCHAR}, #{skill,jdbcType=VARCHAR}, #{history,jdbcType=VARCHAR}, 
-      #{job,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{enterprise,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},
+      #{job,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{enNo,jdbcType=INTEGER},#{enterprise,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},
       #{entryDate,jdbcType=TIMESTAMP},#{leaveDate,jdbcType=TIMESTAMP},#{bankCard,jdbcType=VARCHAR},#{bankName,jdbcType=VARCHAR},
       #{contacts,jdbcType=VARCHAR},#{relation,jdbcType=TINYINT},#{contactNumber,jdbcType=VARCHAR},#{insurance,jdbcType=TINYINT}
       )
@@ -74,6 +75,7 @@
       job = #{job,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
       del_flag = #{delFlag,jdbcType=TINYINT},
+      en_no = #{enNo,jdbcType=INTEGER},
       enterprise = #{enterprise,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       entry_date = #{entryDate,jdbcType=TIMESTAMP},

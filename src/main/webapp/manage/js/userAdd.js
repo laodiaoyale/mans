@@ -1,5 +1,6 @@
 $(function(){
     getEnterprises();
+    // initUser();
 // 点击显示日历
     $('#entryDate').datetimepicker({
         format: 'yyyy-mm-dd',
@@ -83,7 +84,8 @@ function getNowFormatDate() {
 
 function getEnterprises(){
     var obj = {
-        "userNo":localStorage.getItem('userNo')
+        "userNo":localStorage.getItem('userNo'),
+        "roleCode":localStorage.getItem('LoginRoleCode')
     };
     var _obj = JSON.stringify(obj, 'utf-8');
     $.ajax({
@@ -100,9 +102,13 @@ function getEnterprises(){
             if (data.rspCode === '000000') {
                 var items = data.body;
                 $("#enterpriseAdd").html(""); //绑定模号下拉菜单
+                $("#enterpriseAdd").append($("<option value=\"\">请选择</option>"));
                 for (var i = 0; i < items.length; i++) {
                     $("#enterpriseAdd").append($("<option value=\"" + items[i].id + "\">" + items[i].enCode + "</option>"));
                 }
+
+                var user = JSON.parse(sessionStorage.getItem("user"));
+                $("#enterpriseAdd").val(user.enNo);
                 // $('#enterprise').selectpicker('refresh');
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
@@ -118,4 +124,31 @@ function getEnterprises(){
             }
         }
     });
+}
+function initUser(){
+    var user = JSON.parse(sessionStorage.getItem("user"));
+    $("#id").val(user.id);
+    $("#name").val(user.name);
+    $("#mobile").val(user.mobile);
+    $('#sex').val(user.sex);
+    $("#idCard").val(user.idCard);
+    $("#job").val(user.job);
+    $("#wechatCode").val(user.wechatCode);
+    $("#qqCode").val(user.qqCode);
+    $('#address').val(user.address);
+    $("#age").val(user.age);
+    $("#education").val(user.education);
+    $("#source").val(user.source);
+    $('#skill').val(user.skill);
+    $("#status").val(user.status);
+    $("#history").val(user.history);
+    $("#remark").val(user.remark);
+    $("#entryDate").val(setDate(user.entryDate));
+    $("#leaveDate").val(setDate(user.leaveDate));
+    $("#bankCard").val(user.bankCard);
+    $("#bankName").val(user.bankName);
+    $("#insurance").val(user.insurance);
+    $("#contacts").val(user.contacts);
+    $("#relation").val(user.relation);
+    $("#contactNumber").val(user.contactNumber);
 }

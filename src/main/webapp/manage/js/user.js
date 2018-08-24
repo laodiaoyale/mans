@@ -134,8 +134,8 @@ $(function () {
         $('#status').prop('selectedIndex', 0);
         $('#city').val("");
         $("#source").val("");
-
-        $('#enterprise').val("");
+        // $('#enterprise').selectpicker('refresh');
+        getEnterprise();
         $("#insurance").prop('selectedIndex', 0);
         $('#startEntryDate').val("");
         $("#endEntryDate").val("");
@@ -168,7 +168,8 @@ function addUser(){
         var skill = $.trim($("#skill").val());
         var status = $.trim($("#status").val());
         var history = $.trim($("#history").val());
-        var enterprise = $.trim($("#enterprise").val());
+        var enterprise = $.trim($("#enterpriseAdd").find("option:selected").text());
+        var enNo = $.trim($("#enterpriseAdd").val());
         var remark = $.trim($("#remark").val());
         var entryDate = $.trim($("#entryDate").val());
         var leaveDate = $.trim($("#leaveDate").val());
@@ -183,6 +184,10 @@ function addUser(){
             return false;
         }else if(idCard==""){
             showMsg('.error-msg', "请输入身份证号");
+            return false;
+        }else if(enNo==""){
+            showMsg('.error-msg', "请输入企业");
+            return false;
         }
         else{
             var obj = {
@@ -204,6 +209,7 @@ function addUser(){
                 "status":status,
                 "history":history,
                 "enterprise":enterprise,
+                "enNo":enNo,
                 "remark":remark,
                 "entryDate":entryDate,
                 "leaveDate":leaveDate,
@@ -265,7 +271,8 @@ function editUser(){
     var skill = $.trim($("#skill").val());
     var status = $.trim($("#status").val());
     var history = $.trim($("#history").val());
-    var enterprise = $.trim($("#enterprise").val());
+    var enterprise = $.trim($("#enterpriseAdd").find("option:selected").text());
+    var enNo = $.trim($("#enterpriseAdd").val());
     var remark = $.trim($("#remark").val());
 
     var entryDate = $.trim($("#entryDate").val());
@@ -302,6 +309,7 @@ function editUser(){
             "status":status,
             "history":history,
             "enterprise":enterprise,
+            "enNo":enNo,
             "remark":remark,
             "entryDate":entryDate,
             "leaveDate":leaveDate,

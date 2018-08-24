@@ -23,6 +23,29 @@ $(function () {
     $(document).on('click','.del_sure',function(){
         roleDelteFn();
     })
+
+    $("#enterpriseTable").on('click','.redactTlt',function () {
+        alert(0);
+        var user =  JSON.stringify($(this).parents("tr").data());
+        sessionStorage.setItem("user",user);
+        window.location.href = "enterprise_add.html?type=edit";
+    });
+    if(window.location.href.indexOf("enterprise_add.html?type=edit")>-1){
+        $("#path").html(" > 人员修改");
+        $('#passwordItem').css({'display' : 'none'});
+        $('#newUserNo').attr({'disabled' : 'disabled'});
+        $('#userName').attr({'disabled' : 'disabled'});
+        $('#newUserNo').css({'color' : '#999'});
+        $('#userName').css({'color' : '#999'});
+        initUser();
+        //点击其他地方收起下拉框
+        $("body").on("click",function(event){
+            if(event.target.className != "cludeBox"){
+                $(".roleSelect").hide()
+            }
+        })
+    }
+
 });
 // input框获取/失去焦点时属性变化
 function focusOrBlur(obj,ele,val1,val2) { //对象，元素，属性值1，属性值2
@@ -51,7 +74,9 @@ function getRoleListFn(){
                 var roleListData = data.body;
                 if(roleListData){
                     var roleList = $.map(roleListData,function(o,i){
-                        var str ='<td><span class="redactTlt noselect"><a href="role_edit.html?resourceIds='+ o.resourceIds +'&roleName='+o.roleName+'&roleCode='+o.roleCode+'&id='+ o.id +'"><img src="../images/compile.svg" />编辑</a></span><span class="delTit noselect" data-id = "'+o.id +'"><img src="../images/delete.svg" />删除</span></td>' ;
+                        var str ='<td>' +
+                            //'<span class="redactTlt"><a href="javascript:void(0);"><img src="../images/compile.svg" />编辑</a></span>' +
+                            '<span class="delTit noselect" data-id = "'+o.id +'"><img src="../images/delete.svg" />删除</span></td>' ;
                         return '<tr>' +
                             '                <td>'+(i+1)+'</td>' +
                             '                <td>'+ o.enCode +'</td>' +
@@ -79,6 +104,8 @@ function getRoleListFn(){
         }
     })
 }
+
+
 function getBasicPermissions(callbak){
     var obj = new Object();
     var _obj = JSON.stringify(obj,'utf-8');
@@ -203,4 +230,14 @@ function roleDelteFn(){
             }
         }
     })
+}
+
+
+function initUser(){
+    var user = JSON.parse(sessionStorage.getItem("enterprise"));
+    $("#id").val(enterprise.id);
+    $("#name").val(user.name);
+    $("#mobile").val(user.mobile);
+    $('#sex').val(user.sex);
+    $("#idCard").val(user.idCard);
 }

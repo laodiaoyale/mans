@@ -97,6 +97,15 @@ public class BnsUser{
 
     private String remark;
 
+    public Integer getEnNo() {
+        return enNo;
+    }
+
+    public void setEnNo(Integer enNo) {
+        this.enNo = enNo;
+    }
+
+    private Integer enNo;
     /**
      * 所属企业
      */

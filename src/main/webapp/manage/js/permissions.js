@@ -112,7 +112,7 @@ function addUser(){
         var mobile = $.trim($("#mobile").val());
         var roleId = $("#roleId").val();
         var job = $.trim($("#job").val());
-        var department = $.trim($("#department").val());
+        var enNos= $('#enterprise').selectpicker('val');
         if(newUserNo==""){
             showMsg('.error-msg', "请输入账号");
             return false;
@@ -125,16 +125,18 @@ function addUser(){
         }else if(mobile==""){
             showMsg('.error-msg', "请输入手机号");
             return false;
+        }else if(enNos==""||enNos==null){
+            showMsg('.error-msg', "请选择所属企业");
+            return false;
         }else if(roleId==""){
             showMsg('.error-msg', "请输入角色");
             return false;
-        }else if(department==""){
-            showMsg('.error-msg', "请输入所属企业");
-            return false;
         }else if(!isNumAndStr(password)){
             showMsg('.error-msg', "请输入正确格式的密码");
+            return false;
         }else if(!isPhoneNum(mobile) || mobile.length != 11){
             showMsg('.error-msg', "请输入正确格式的手机号");
+            return false;
         }else{
             var obj = {
                 "userNo":localStorage.getItem('userNo'),
@@ -143,8 +145,8 @@ function addUser(){
                 "password":md5(password),//(md5加密)
                 "roleId":roleId,
                 "job":job,
-                "department":department,
-                "mobile":mobile
+                "mobile":mobile,
+                "enNos":enNos
             };
             var _obj = JSON.stringify(obj, 'utf-8');
             $.ajax({
@@ -196,8 +198,8 @@ function editUser(){
     }else if(mobile==""){
         showMsg('.error-msg', "请输入手机号");
         return false;
-    }else if(department==""){
-        showMsg('.error-msg', "请输入所属企业");
+    }else if(enNos==""||enNos==null){
+        showMsg('.error-msg', "请选择所属企业");
         return false;
     }else if(roleId==""){
         showMsg('.error-msg', "请输入角色");
@@ -213,7 +215,6 @@ function editUser(){
             "userName":userName,
             "newUserNo":newUserNo,
             "job":job,
-            "department":department,
             "mobile":mobile,
             "enNos":enNos
         };
