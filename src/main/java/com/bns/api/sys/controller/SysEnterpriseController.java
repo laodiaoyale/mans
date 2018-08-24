@@ -60,14 +60,14 @@ public class SysEnterpriseController extends BaseController {
 
     /**
      * OK
-     * @param sysUserDTO
+     * @param roleCode
      * @return
      * 删除
      */
     @RequestMapping(value="/getEnterprise")
-    public JsonResult getEnterprise(SysUserDTO sysUserDTO) throws BaseException {
+    public JsonResult getEnterprise(String roleCode,String userNo) throws BaseException {
         JsonResult json = initJsonResult();
-        json.setBody(sysEnterpriseService.getEnterprise(sysUserDTO));
+        json.setBody(sysEnterpriseService.getEnterprise(roleCode,userNo));
         return json;
     }
 

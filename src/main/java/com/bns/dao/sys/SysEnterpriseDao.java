@@ -27,4 +27,6 @@ public interface SysEnterpriseDao {
     void deleteByUserNo(String userNo);
 
     String getEnterPrise(String userNo);
+
+    List<SysEnterpriseVo> queryEnterpriseByUserNo(String userNo);
 }

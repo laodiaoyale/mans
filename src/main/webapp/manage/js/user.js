@@ -386,8 +386,10 @@ function getCity(){
 
 function getEnterprise(){
     var obj = {
-        "userNo":localStorage.getItem('userNo')
-    };
+        "userNo":localStorage.getItem('userNo'),
+        "roleCode":localStorage.getItem('LoginRoleCode')
+
+};
     var _obj = JSON.stringify(obj, 'utf-8');
     $.ajax({
         headers: {
@@ -505,7 +507,10 @@ function queryUserList(roleId,userName,page){
         "startLeaveDate":$.trim($("#startLeaveDate").val()),
         "endLeaveDate":$.trim($("#endLeaveDate").val()),
         "insurance":insurance,
-        "enNos":enNos
+        "enNos":enNos,
+        "userNo":localStorage.getItem('userNo'),
+        "roleCode":localStorage.getItem('LoginRoleCode')
+
     }, 'utf-8');
     $.ajax({
         headers: {

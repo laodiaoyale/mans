@@ -1,7 +1,9 @@
 package com.bns.api.user.service;
 
+import com.bns.api.sys.vo.SysEnterpriseVo;
 import com.bns.api.sys.vo.SysUserRegisterVO;
 import com.bns.api.user.param.UserReqParam;
+import com.bns.dao.sys.SysEnterpriseDao;
 import com.bns.dao.user.BnsUserDao;
 import com.bns.model.user.BnsUser;
 import com.github.pagehelper.PageHelper;
@@ -10,6 +12,7 @@ import common.exception.BaseException;
 import common.message.BaseController;
 import common.message.JsonResult;
 import common.message.RespCodeCostant;
+import common.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,8 @@ public class UserService extends BaseController{
 
     @Autowired
     private BnsUserDao userDao ;
+    @Autowired
+    private SysEnterpriseDao sysEnterpriseDao;
 
     /**
      * 客户信息展示
@@ -43,6 +48,19 @@ public class UserService extends BaseController{
             }
             userReqParam.setEnNo(buf.substring(0,buf.length()-1));
         }
+        if(!"admin".equals(userReqParam.getRoleCode())&& StringUtil.isBlank( userReqParam.getEnNo())){
+            List<SysEnterpriseVo> list =  sysEnterpriseDao.queryEnterpriseByUserNo(userReqParam.getUserNo());
+            if(list!=null&&list.size()>0){
+                //删除之前的记录
+                StringBuffer buf = new StringBuffer();
+                for(SysEnterpriseVo s :list){
+                    buf.append(s.getId());
+                    buf.append(",");
+                }
+                userReqParam.setEnNo(buf.substring(0,buf.length()-1));
+            }
+        }
+
         PageHelper.startPage(userReqParam.getPageNum(), userReqParam.getPageSize());
         List<BnsUser> pageList = userDao.findPaging(userReqParam);
         return  new PageInfo(pageList);

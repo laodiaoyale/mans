@@ -4,6 +4,26 @@ import java.util.Date;
 
 public class UserReqParam {
 
+    private String userNo;
+
+    private String roleCode;
+
+    public String getUserNo() {
+        return userNo;
+    }
+
+    public void setUserNo(String userNo) {
+        this.userNo = userNo;
+    }
+
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
+
     /**
      * 姓名
      */

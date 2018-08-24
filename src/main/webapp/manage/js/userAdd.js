@@ -1,5 +1,5 @@
 $(function(){
-    // getEnterprises();
+    getEnterprises();
 // 点击显示日历
     $('#entryDate').datetimepicker({
         format: 'yyyy-mm-dd',
@@ -99,9 +99,9 @@ function getEnterprises(){
         success: function (data) {
             if (data.rspCode === '000000') {
                 var items = data.body;
-                $("#enterprise").html(""); //绑定模号下拉菜单
+                $("#enterpriseAdd").html(""); //绑定模号下拉菜单
                 for (var i = 0; i < items.length; i++) {
-                    $("#enterprise").append($("<option value=\"" + items[i].id + "\">" + items[i].enCode + "</option>"));
+                    $("#enterpriseAdd").append($("<option value=\"" + items[i].id + "\">" + items[i].enCode + "</option>"));
                 }
                 // $('#enterprise').selectpicker('refresh');
             } else if (data.rspCode === '-999999') {

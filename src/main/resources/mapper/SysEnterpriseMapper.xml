@@ -52,7 +52,6 @@
   <select id="queryAllEnterprise" resultMap="EnterpriseVoList" parameterType="java.lang.String" >
     select id,en_code from sys_enterprise where del_flag = 1
   </select>
-
   <insert id="batchInsert" parameterType="java.util.List"
           useGeneratedKeys="true">
     insert into sys_user_enterprise (user_no, user_name,en_no,en_code,create_date)

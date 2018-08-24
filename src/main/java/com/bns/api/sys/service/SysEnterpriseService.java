@@ -63,8 +63,10 @@ public class SysEnterpriseService {
         }
     }
 
-    public List<SysEnterpriseVo> getEnterprise(SysUserDTO sysUserDTO) {
-        List<SysEnterpriseVo> list= sysEnterpriseDao.queryAllEnterprise();
-        return list;
+    public List<SysEnterpriseVo> getEnterprise(String roleCode,String userNo) {
+        if("admin".equals(roleCode)){
+            return sysEnterpriseDao.queryAllEnterprise();
+        }
+        return sysEnterpriseDao.queryEnterpriseByUserNo(userNo);
     }
 }

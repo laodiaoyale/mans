@@ -453,7 +453,9 @@ function initUser(){
 
 function getEnterprise(){
     var obj = {
-        "userNo":localStorage.getItem('userNo')
+        "userNo":localStorage.getItem('userNo'),
+        "roleCode":localStorage.getItem('LoginRoleCode')
+
     };
     var _obj = JSON.stringify(obj, 'utf-8');
     $.ajax({
