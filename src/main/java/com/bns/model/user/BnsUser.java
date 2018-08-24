@@ -132,6 +132,26 @@ public class BnsUser{
 
     private Byte insurance;
 
+    private String realName;
+
+    private String realCard;
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getRealCard() {
+        return realCard;
+    }
+
+    public void setRealCard(String realCard) {
+        this.realCard = realCard;
+    }
+
     public String getContacts() {
         return contacts;
     }

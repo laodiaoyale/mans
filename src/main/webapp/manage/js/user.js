@@ -218,7 +218,9 @@ function addUser(){
                 "insurance":insurance,
                 "contacts":contacts,
                 "relation":relation,
-                "contactNumber":contactNumber
+                "contactNumber":contactNumber,
+                "realName":  $.trim($("#realName").val()),
+                "realCard" : $.trim($("#realCard").val())
             };
             var _obj = JSON.stringify(obj, 'utf-8');
             $.ajax({
@@ -318,7 +320,9 @@ function editUser(){
             "insurance":insurance,
             "contacts":contacts,
             "relation":relation,
-            "contactNumber":contactNumber
+            "contactNumber":contactNumber,
+            "realName":  $.trim($("#realName").val()),
+            "realCard" : $.trim($("#realCard").val())
         };
         var _obj = JSON.stringify(obj, 'utf-8');
         $.ajax({
@@ -723,6 +727,8 @@ function initUser(){
     $("#contacts").val(user.contacts);
     $("#relation").val(user.relation);
     $("#contactNumber").val(user.contactNumber);
+    $("#realName").val(user.realName);
+    $("#realCard").val(user.realCard);
 }
 
 function setDate(date){

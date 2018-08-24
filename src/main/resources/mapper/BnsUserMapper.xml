@@ -31,6 +31,8 @@
     <result column="relation" jdbcType="TINYINT" property="relation" />
     <result column="contact_number" jdbcType="VARCHAR" property="contactNumber" />
     <result column="insurance" jdbcType="TINYINT" property="insurance" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="real_card" jdbcType="VARCHAR" property="realCard" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from bns_user
@@ -44,7 +46,8 @@
       source, skill, history, 
       job,city,en_no,enterprise,remark,
       entry_date,leave_date,bank_card,bank_name,
-      contacts,relation,contact_number,insurance
+      contacts,relation,contact_number,insurance,
+      real_name,real_card
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{idCard,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{nation,jdbcType=VARCHAR}, 
@@ -53,7 +56,8 @@
       #{source,jdbcType=VARCHAR}, #{skill,jdbcType=VARCHAR}, #{history,jdbcType=VARCHAR}, 
       #{job,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{enNo,jdbcType=INTEGER},#{enterprise,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},
       #{entryDate,jdbcType=TIMESTAMP},#{leaveDate,jdbcType=TIMESTAMP},#{bankCard,jdbcType=VARCHAR},#{bankName,jdbcType=VARCHAR},
-      #{contacts,jdbcType=VARCHAR},#{relation,jdbcType=TINYINT},#{contactNumber,jdbcType=VARCHAR},#{insurance,jdbcType=TINYINT}
+      #{contacts,jdbcType=VARCHAR},#{relation,jdbcType=TINYINT},#{contactNumber,jdbcType=VARCHAR},#{insurance,jdbcType=TINYINT},
+      #{realName,jdbcType=VARCHAR}, #{realCard,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.bns.model.user.BnsUser">
@@ -85,7 +89,9 @@
       contacts =  #{contacts,jdbcType=VARCHAR},
       relation = #{relation,jdbcType=TINYINT},
       contact_number = #{contactNumber,jdbcType=VARCHAR},
-      insurance = #{insurance,jdbcType=TINYINT}
+      insurance = #{insurance,jdbcType=TINYINT},
+      real_name = #{realName,jdbcType=VARCHAR},
+      real_card = #{realCard,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

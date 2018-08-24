@@ -106,9 +106,11 @@ function getEnterprises(){
                 for (var i = 0; i < items.length; i++) {
                     $("#enterpriseAdd").append($("<option value=\"" + items[i].id + "\">" + items[i].enCode + "</option>"));
                 }
+                if(window.location.href.indexOf("user_add.html?type=edit")>-1){
+                    var user = JSON.parse(sessionStorage.getItem("user"));
+                    $("#enterpriseAdd").val(user.enNo);
+                }
 
-                var user = JSON.parse(sessionStorage.getItem("user"));
-                $("#enterpriseAdd").val(user.enNo);
                 // $('#enterprise').selectpicker('refresh');
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
@@ -151,4 +153,6 @@ function initUser(){
     $("#contacts").val(user.contacts);
     $("#relation").val(user.relation);
     $("#contactNumber").val(user.contactNumber);
+    $("#realName").val(user.realName);
+    $("#realCard").val(user.realCard);
 }

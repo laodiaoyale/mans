@@ -73,7 +73,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">在职状态</label>
                     <select class="com-span" id="status">
-                        <option value="0">--</option>
+                        <option value="0"></option>
                         <option value="1">在职</option>
                         <option value="2">离职</option>
                         <option value="3">已请假</option>
@@ -123,7 +123,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">住址</label>
-                    <input class="com-span-6"  id="address"/>
+                    <input class="com-span-5"  id="address"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">入职时间</label>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">开卡行</label>
-                    <input class="com-span-6"  id="bankName"/>
+                    <input class="com-span-5"  id="bankName"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                         <label class="com-lab">离职时间</label>
@@ -152,7 +152,15 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">关系</label>
-                    <input class="com-span"  id="relation"/>
+                    <select class="com-span" id="relation">
+                        <option value="0"></option>
+                        <option value="1">父亲</option>
+                        <option value="2">母亲</option>
+                        <option value="3">子女</option>
+                        <option value="4">其他亲属</option>
+                        <option value="5">朋友</option>
+                        <option value="6">其他</option>
+                    </select>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">联系电话</label>
@@ -162,7 +170,22 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab" for="insurance"> 商业保险</label>
-                    <input class="com-span"  id="insurance"/>
+                    <select class="com-span" id="insurance">
+                        <option value="0"></option>
+                        <option value="1">已购买保险</option>
+                        <option value="2">离职已替换</option>
+                        <option value="3">离职未替换</option>
+                        <option value="4">待购买保险</option>
+                    </select>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab" for="realName"> 真实姓名</label>
+                    <input class="com-span"  id="realName"/>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab" for="realCard"> 真实身份证</label>
+                    <input class="com-span"  id="realCard"/>
                 </div>
             </div>
         </div>
