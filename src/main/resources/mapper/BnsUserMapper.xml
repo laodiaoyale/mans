@@ -136,10 +136,6 @@
     <if test="source != null and source != ''">
       and t1.source like '%${source}%'
     </if>
-    <if test="department != null and department != ''">
-      and t1.enterprise = #{department}
-    </if>
-
     <if test="startEntryDate != null and startEntryDate != ''">
       and t1.entry_date >= #{startEntryDate}
     </if>

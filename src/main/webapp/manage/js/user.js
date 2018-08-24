@@ -504,6 +504,7 @@ function queryUserList(roleId,userName,page){
         "endEntryDate":$.trim($("#endEntryDate").val()),
         "startLeaveDate":$.trim($("#startLeaveDate").val()),
         "endLeaveDate":$.trim($("#endLeaveDate").val()),
+        "insurance":insurance,
         "enNos":enNos
     }, 'utf-8');
     $.ajax({
