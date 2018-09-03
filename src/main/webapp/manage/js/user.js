@@ -614,6 +614,9 @@ function statusAction(status){
         case 2:
             res='离职'
             break;
+        case 3:
+            res='已请假'
+            break;
     }
     return res
 }
