@@ -134,13 +134,13 @@
         </div>
     </div>
     <div class=" row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <button class="searchBtn" id="addUserBtn" aria-label="Left Align">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 增加
             </button>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-5">
             <form method="POST"  enctype="multipart/form-data" id="form1" style="left: auto" >
                 <input id="upfile" type="file" name="upfile"  class="form-control" style="width: 300px; display: inline;">
                 <button class="searchBtn" id="importExcel" style="width: 60px;height: 35px;" value="上传" >
@@ -149,14 +149,14 @@
                 </button>
             </form>
         </div>
-        <!--<div class="col-md-1">-->
-            <!--<form method="POST"  enctype="multipart/form-data" id="form2" style="left: auto" >-->
-                <!--<button class="searchBtn" id="exportExcel" style="width: 60px;height: 35px;" value="上传" >-->
-                    <!--<span class="glyphicon glyphicon-save" aria-hidden="true"></span>-->
-                    <!--导出-->
-                <!--</button>-->
-            <!--</form>-->
-        <!--</div>-->
+        <div class="col-md-1">
+            <form method="POST"  enctype="multipart/form-data" id="form2" style="left: auto" >
+                <button class="searchBtn" id="exportExcel" style="width: 60px;height: 35px;" value="上传" >
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                    导出
+                </button>
+            </form>
+        </div>
     </div>
     <div class="feedbackList limitsTable">
         <table class="table table-hover" id="userTable">

@@ -1,9 +1,11 @@
 package com.bns.api.user.service;
 
+import com.bns.api.sys.service.SysEnterpriseService;
 import com.bns.api.sys.vo.SysEnterpriseVo;
 import com.bns.api.user.param.UserReqParam;
 import com.bns.dao.sys.SysEnterpriseDao;
 import com.bns.dao.user.BnsUserDao;
+import com.bns.model.sys.SysEnterpriseDTO;
 import com.bns.model.user.BnsUser;
 import com.bns.model.user.BnsUserVo;
 import com.github.pagehelper.PageHelper;
@@ -123,7 +125,18 @@ public class UserService extends BaseController{
         for(BnsUserVo info:list){
             //验证是否存在
 //            int count = userDao.selectCountByIdCard(info.getIdCard());
+            //通过企业名称找到企业编号
+            if(StringUtil.isBlank(info.getEnterprise())){
+                j++;
+                continue;
+            }
+            SysEnterpriseDTO enterpriseDTO =sysEnterpriseDao.getEnterpriseByName(info.getEnterprise());
+            if(enterpriseDTO==null){
+                j++;
+                continue;
+            }
             try {
+                info.setEnNo(String.valueOf(enterpriseDTO.getId()));
                 userDao.insertVo(info);
                 i++;
                 continue;

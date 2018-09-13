@@ -29,4 +29,6 @@ public interface SysEnterpriseDao {
     String getEnterPrise(String userNo);
 
     List<SysEnterpriseVo> queryEnterpriseByUserNo(String userNo);
+
+    SysEnterpriseDTO getEnterpriseByName(String enterprise);
 }

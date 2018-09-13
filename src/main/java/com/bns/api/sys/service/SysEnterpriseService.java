@@ -69,4 +69,8 @@ public class SysEnterpriseService {
         }
         return sysEnterpriseDao.queryEnterpriseByUserNo(userNo);
     }
+
+    public  SysEnterpriseDTO getEnterpriseByName(String enterprise){
+        return sysEnterpriseDao.getEnterpriseByName(enterprise);
+    }
 }

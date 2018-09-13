@@ -72,4 +72,10 @@
       SELECT GROUP_CONCAT(a.en_code SEPARATOR '、') as en_code
       FROM sys_user_enterprise a  where a.user_no = #{userNo}
   </select>
+
+  <select id="getEnterpriseByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from sys_enterprise
+    where en_code =  #{enCode,jdbcType=VARCHAR}
+  </select>
 </mapper>
