@@ -1,18 +1,19 @@
 package common;
 
-import java.io.*;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
-
-import com.bns.model.user.ClTManagerInfoDTO;
-import common.util.StringUtil;
+import com.bns.model.user.BnsUserVo;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.*;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 public class ReadExcel {
 
@@ -20,59 +21,53 @@ public class ReadExcel {
         Workbook wb =null;
         Sheet sheet = null;
         Row row = null;
-        List<ClTManagerInfoDTO> list = null;
+        List<BnsUserVo> list = null;
         String cellData = null;
-        String filePath = "D:\\韦星喜_O2O名单变更【20180709】(修改后)v1.0.xlsx";
-        String columns[] = {"name","age","score"};
+        String filePath = "D:\\导入模板.xlsx";
         wb = readExcel(filePath);
-
         //设置背景色
         CellStyle cellStyle = wb.createCellStyle();
         cellStyle.setFillForegroundColor(IndexedColors.RED.getIndex());
         cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
         if(wb != null){
             //用来存放表中数据
-            list = new ArrayList<ClTManagerInfoDTO>();
+            list = new ArrayList<BnsUserVo>();
             //获取第一个sheet
             sheet = wb.getSheetAt(0);
             //获取最大行数
             int rownum = sheet.getPhysicalNumberOfRows();
             for (int i = 1; i<rownum; i++) {
-                ClTManagerInfoDTO info = new ClTManagerInfoDTO();
+                BnsUserVo info = new BnsUserVo();
                 row = sheet.getRow(i);
                 if(row !=null){
-                    info.setOneDepartment((String) getCellFormatValue(row.getCell(0)));
-                    info.setTwoDepartment((String) getCellFormatValue(row.getCell(1)));
-                    info.setThreeDepartment((String) getCellFormatValue(row.getCell(2)));
-                    info.setFourDepartment((String) getCellFormatValue(row.getCell(3)));
-                    info.setFiveDepartment((String) getCellFormatValue(row.getCell(4)));
-                    info.setStoreLevel((String) getCellFormatValue(row.getCell(5)));
-                    String oaNumber = (String) getCellFormatValue(row.getCell(6));
-                    if(StringUtil.isBlank(oaNumber)||oaNumber.length()!=8) {
-                        row.getCell(6).setCellStyle(cellStyle);
-                    }
-                    info.setOaWorkNumber(oaNumber);
-                    info.setSuperior((String) getCellFormatValue(row.getCell(7)));
-                    info.setName((String) getCellFormatValue(row.getCell(8)));
-                    info.setSex((String) getCellFormatValue(row.getCell(9)));
-                    String idCard = (String) getCellFormatValue(row.getCell(10));
-                    if(StringUtil.isBlank(idCard)||idCard.length()!=18) {
-                        row.getCell(10).setCellStyle(cellStyle);
-                    }
-                    info.setIdCardNum(idCard);
-                    info.setEmail((String) getCellFormatValue(row.getCell(11)));
-                    String mobile = (String) getCellFormatValue(row.getCell(12));
-                    if(StringUtil.isBlank(mobile)||!isChinaPhoneLegal(mobile)) {
-                        row.getCell(12).setCellStyle(cellStyle);
-                    }
-                    info.setMobile(mobile);
-                    info.setStaffStatus((String) getCellFormatValue(row.getCell(13)));
-                    info.setDateOfEntry((String) getCellFormatValue(row.getCell(14)));
-                    info.setLeaveDate((String) getCellFormatValue(row.getCell(15)));
-                    info.setImportTime((String) getCellFormatValue(row.getCell(16)));
-                    info.setPost((String) getCellFormatValue(row.getCell(17)));
-                    info.setOrCode((String) getCellFormatValue(row.getCell(18)));
-                    info.setExpiredTime((String) getCellFormatValue(row.getCell(19)));
+                    info.setName((String) getCellFormatValue(row.getCell(0)));
+                    info.setIdCard((String) getCellFormatValue(row.getCell(1)));
+                    info.setMobile((String) getCellFormatValue(row.getCell(2)));
+                    info.setRealName((String) getCellFormatValue(row.getCell(3)));
+                    info.setRealCard((String) getCellFormatValue(row.getCell(4)));
+                    info.setSex(sexFn((String) getCellFormatValue(row.getCell(5))));
+                    info.setAge((String)getCellFormatValue(row.getCell(6)));
+                    info.setCity((String) getCellFormatValue(row.getCell(7)));
+                    info.setAddress((String) getCellFormatValue(row.getCell(8)));
+                    info.setWechatCode((String) getCellFormatValue(row.getCell(9)));
+                    info.setQqCode((String) getCellFormatValue(row.getCell(10)));
+                    info.setEducation(educationFn((String) getCellFormatValue(row.getCell(11))));
+                    info.setSource((String) getCellFormatValue(row.getCell(12)));
+                    info.setSkill((String) getCellFormatValue(row.getCell(13)));
+                    info.setHistory((String) getCellFormatValue(row.getCell(14)));
+                    info.setJob((String) getCellFormatValue(row.getCell(15)));
+                    info.setStatus(statusFn((String) getCellFormatValue(row.getCell(16))));
+                    info.setEnterprise((String) getCellFormatValue(row.getCell(17)));
+                    //通过企业找到Code码
+                    info.setEntryDate((String) getCellFormatValue(row.getCell(18)));
+                    info.setLeaveDate((String) getCellFormatValue(row.getCell(19)));
+                    info.setBankCard((String) getCellFormatValue(row.getCell(20)));
+                    info.setBankName((String) getCellFormatValue(row.getCell(21)));
+                    info.setContacts((String) getCellFormatValue(row.getCell(22)));
+                    info.setRelation(relationFn((String) getCellFormatValue(row.getCell(23))));
+                    info.setContactNumber((String) getCellFormatValue(row.getCell(24)));
+                    info.setInsurance(insuranceFn((String) getCellFormatValue(row.getCell(25))));
+                    info.setRemark((String) getCellFormatValue(row.getCell(26)));
                     list.add(info);
                 }else{
                     break;
@@ -90,11 +85,81 @@ public class ReadExcel {
         }
 
         //遍历解析出来的list
-        for (ClTManagerInfoDTO info : list) {
+        for (BnsUserVo info : list) {
                 System.out.println(""+info.toString());
         }
         System.out.println("一共"+list.size()+"行。");
     }
+    public static String insuranceFn(String insurance){
+        switch (insurance){
+            case "已购买保险":
+                return "1";
+            case "离职已替换":
+                return "2";
+            case "离职未替换":
+                return "3";
+            case "待购买保险":
+                return "4";
+        }
+        return "0";
+    }
+    public static String relationFn(String relation){
+        switch (relation){
+            case "父亲":
+                return "1";
+            case "母亲":
+                return "2";
+            case "子女":
+                return "3";
+            case "其他亲属":
+                return "4";
+            case "朋友":
+                return "5";
+            case "其他":
+                return "6";
+        }
+        return "";
+    }
+    public static String sexFn(String sex){
+        switch (sex){
+            case "男":
+                return "0";
+            case "女":
+                return "1";
+        }
+        return "";
+    }
+    public static String educationFn(String education){
+        switch (education){
+            case "小学":
+                return "1";
+            case "初中":
+                return "2";
+            case "高中":
+                return "3";
+            case "专科":
+                return "4";
+            case "本科":
+                return "5";
+            case "研究生":
+                return "6";
+            case "研究生以上":
+                return "7";
+        }
+        return "";
+    }
+    public static String statusFn(String status){
+        switch (status){
+            case "在职":
+                return "1";
+            case "离职":
+                return "2";
+            case "已请假":
+                return "3";
+        }
+        return "";
+    }
+
     /**
      * 大陆手机号码11位数，匹配格式：前三位固定格式+后8位任意数
      * 此方法中前三位格式有：

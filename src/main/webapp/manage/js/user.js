@@ -142,7 +142,85 @@ $(function () {
         $('#startLeaveDate').val("");
         $("#endLeaveDate").val("");
     });
+
+    //导入excel文件
+    $("#saveZipButton").on('click', function(){
+        var filepath = encodeURI(encodeURI($("#articleImageFile").val()));
+        var extname = filepath.substring(filepath.lastIndexOf(".")+1,filepath.length);//文件后缀
+        extname = extname.toLowerCase();//处理了大小写
+        if(extname!= "xls" && extname!= "xlsm" && extname!= "xlsx"){
+            alert("导入文件格式不对,请按模版导入！");
+            return;
+        }
+        var obj = {
+            "id":localStorage.getItem('id'),
+            "path":extname,
+        };
+        var _obj = JSON.stringify(obj, 'utf-8');
+        alert(name);
+        $.ajax({
+            headers: {
+                token: localStorage.getItem('LoginToken')
+            },
+            type: "POST",
+            contentType: "text/html; charset=UTF-8",
+            url: "/api/user/importData",//员工增加
+            data: _obj,
+            dataType: 'json',
+            // 告诉jQuery不要去处理发送的数据
+            processData : false,
+            // 告诉jQuery不要去设置Content-Type请求头
+            contentType : false,
+            beforeSend:function(){
+                console.log("正在进行，请稍候");
+            },
+            success : function(responseStr) {
+                if(responseStr=="01"){
+                    alert("导入成功");
+                }else{
+                    alert("导入失败");
+                }
+            }
+        });
+    });
+
+    $(document).ready(function(){
+        $("#importExcel").click(function(){ if(checkData()){
+            $('#form1').ajaxSubmit({
+                url:'/api/user/importData',
+                dataType: 'text',
+                async: false,
+                success: resutlMsg,
+                error: errorMsg
+            });
+            function resutlMsg(msg){
+                alert(msg);
+                $("#upfile").val("");
+            }
+            function errorMsg(){
+                alert("导入excel出错！");
+            }
+        }
+        });
+    });
+
 });
+//JS校验form表单信息
+function checkData(){
+    var fileDir = $("#upfile").val();
+    var suffix = fileDir.substr(fileDir.lastIndexOf("."));
+    if("" == fileDir){
+        alert("选择需要导入的Excel文件！");
+        return false;
+    }
+    if(".xls" != suffix && ".xlsx" != suffix ){
+        alert("选择Excel格式的文件导入！");
+        return false;
+    }
+    return true;
+}
+
+
 // input框获取/失去焦点时属性变化
 function focusOrBlur(obj,ele,val1,val2) { //对象，元素，属性值1，属性值2
     obj.focus(function () {

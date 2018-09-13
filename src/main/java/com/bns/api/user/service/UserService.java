@@ -1,24 +1,24 @@
 package com.bns.api.user.service;
 
 import com.bns.api.sys.vo.SysEnterpriseVo;
-import com.bns.api.sys.vo.SysUserRegisterVO;
 import com.bns.api.user.param.UserReqParam;
 import com.bns.dao.sys.SysEnterpriseDao;
 import com.bns.dao.user.BnsUserDao;
 import com.bns.model.user.BnsUser;
+import com.bns.model.user.BnsUserVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import common.ReadExcel;
 import common.exception.BaseException;
 import common.message.BaseController;
-import common.message.JsonResult;
-import common.message.RespCodeCostant;
 import common.util.StringUtil;
+import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author zhaolei
@@ -111,4 +111,156 @@ public class UserService extends BaseController{
         List<String> list = userDao.getCity();
         return list;
     }
+
+    /**
+     * 插入消息
+     * @param
+     * @return
+     */
+    public String importData( Workbook wb){
+        List<BnsUserVo> list = vifyExcel(wb);
+        int i=0,j=0;
+        for(BnsUserVo info:list){
+            //验证是否存在
+//            int count = userDao.selectCountByIdCard(info.getIdCard());
+            try {
+                userDao.insertVo(info);
+                i++;
+                continue;
+            }catch (Exception e){
+                j++;
+            }
+        }
+        return "文件导入完成！成功"+i+"条，失败"+j+"条";
+    }
+
+    public List<BnsUserVo> vifyExcel(Workbook wb){
+        List<BnsUserVo> list = new ArrayList<BnsUserVo>();
+        //设置背景色
+        CellStyle cellStyle = wb.createCellStyle();
+        cellStyle.setFillForegroundColor(IndexedColors.RED.getIndex());
+        cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        //设置背景色
+        if(wb != null){
+            //用来存放表中数据
+            //获取第一个sheet
+            Sheet sheet = wb.getSheetAt(0);
+            //获取最大行数
+            int rownum = sheet.getPhysicalNumberOfRows();
+            for (int i = 1; i<rownum; i++) {
+                BnsUserVo info = new BnsUserVo();
+                Row row = sheet.getRow(i);
+                if(row !=null){
+                    info.setName((String) ReadExcel.getCellFormatValue(row.getCell(0)));
+                    info.setIdCard((String) ReadExcel.getCellFormatValue(row.getCell(1)));
+                    info.setMobile((String) ReadExcel.getCellFormatValue(row.getCell(2)));
+                    info.setRealName((String) ReadExcel.getCellFormatValue(row.getCell(3)));
+                    info.setRealCard((String) ReadExcel.getCellFormatValue(row.getCell(4)));
+                    info.setSex(sexFn((String) ReadExcel.getCellFormatValue(row.getCell(5))));
+                    info.setAge((String)ReadExcel.getCellFormatValue(row.getCell(6)));
+                    info.setCity((String) ReadExcel.getCellFormatValue(row.getCell(7)));
+                    info.setAddress((String) ReadExcel.getCellFormatValue(row.getCell(8)));
+                    info.setWechatCode((String) ReadExcel.getCellFormatValue(row.getCell(9)));
+                    info.setQqCode((String) ReadExcel.getCellFormatValue(row.getCell(10)));
+                    info.setEducation(educationFn((String) ReadExcel.getCellFormatValue(row.getCell(11))));
+                    info.setSource((String) ReadExcel.getCellFormatValue(row.getCell(12)));
+                    info.setSkill((String) ReadExcel.getCellFormatValue(row.getCell(13)));
+                    info.setHistory((String) ReadExcel.getCellFormatValue(row.getCell(14)));
+                    info.setJob((String) ReadExcel.getCellFormatValue(row.getCell(15)));
+                    info.setStatus(statusFn((String) ReadExcel.getCellFormatValue(row.getCell(16))));
+                    info.setEnterprise((String) ReadExcel.getCellFormatValue(row.getCell(17)));
+                    //通过企业找到Code码
+                    info.setEntryDate((String) ReadExcel.getCellFormatValue(row.getCell(18)));
+                    info.setLeaveDate((String) ReadExcel.getCellFormatValue(row.getCell(19)));
+                    info.setBankCard((String) ReadExcel.getCellFormatValue(row.getCell(20)));
+                    info.setBankName((String) ReadExcel.getCellFormatValue(row.getCell(21)));
+                    info.setContacts((String) ReadExcel.getCellFormatValue(row.getCell(22)));
+                    info.setRelation(relationFn((String) ReadExcel.getCellFormatValue(row.getCell(23))));
+                    info.setContactNumber((String) ReadExcel.getCellFormatValue(row.getCell(24)));
+                    info.setInsurance(insuranceFn((String) ReadExcel.getCellFormatValue(row.getCell(25))));
+                    info.setRemark((String) ReadExcel.getCellFormatValue(row.getCell(26)));
+                    list.add(info);
+                }else{
+                    break;
+                }
+            }
+        }
+        //遍历解析出来的list
+        for (BnsUserVo info : list) {
+            System.out.println(""+info.toString());
+        }
+        System.out.println("一共"+list.size()+"行。");
+        return list;
+    }
+
+    public static String insuranceFn(String insurance){
+        switch (insurance){
+            case "已购买保险":
+                return "1";
+            case "离职已替换":
+                return "2";
+            case "离职未替换":
+                return "3";
+            case "待购买保险":
+                return "4";
+        }
+        return null;
+    }
+    public static String relationFn(String relation){
+        switch (relation){
+            case "父亲":
+                return "1";
+            case "母亲":
+                return "2";
+            case "子女":
+                return "3";
+            case "其他亲属":
+                return "4";
+            case "朋友":
+                return "5";
+            case "其他":
+                return "6";
+        }
+        return null;
+    }
+    public static String sexFn(String sex){
+        switch (sex){
+            case "男":
+                return "0";
+            case "女":
+                return "1";
+        }
+        return null;
+    }
+    public static String educationFn(String education){
+        switch (education){
+            case "小学":
+                return "1";
+            case "初中":
+                return "2";
+            case "高中":
+                return "3";
+            case "专科":
+                return "4";
+            case "本科":
+                return "5";
+            case "研究生":
+                return "6";
+            case "研究生以上":
+                return "7";
+        }
+        return null;
+    }
+    public static String statusFn(String status){
+        switch (status){
+            case "在职":
+                return "1";
+            case "离职":
+                return "2";
+            case "已请假":
+                return "3";
+        }
+        return null;
+    }
+
 }

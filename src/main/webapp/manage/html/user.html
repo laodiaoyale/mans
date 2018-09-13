@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
     <link rel="stylesheet" href="../js/libs/build_standalone.css">
     <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/libs/jquery-form.js"></script>
     <script src="../js/libs/md5.js"></script>
     <!-- page -->
     <link rel="stylesheet" href="../iconfont/iconfont.css">
@@ -132,11 +133,30 @@
             </div>
         </div>
     </div>
-    <div class=" mb20">
-        <button class="searchBtn" id="addUserBtn" aria-label="Left Align">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            增加
-        </button>
+    <div class=" row">
+        <div class="col-md-8">
+            <button class="searchBtn" id="addUserBtn" aria-label="Left Align">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                增加
+            </button>
+        </div>
+        <div class="col-md-3">
+            <form method="POST"  enctype="multipart/form-data" id="form1" style="left: auto" >
+                <input id="upfile" type="file" name="upfile"  class="form-control" style="width: 300px; display: inline;">
+                <button class="searchBtn" id="importExcel" style="width: 60px;height: 35px;" value="上传" >
+                    <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+                    导入
+                </button>
+            </form>
+        </div>
+        <!--<div class="col-md-1">-->
+            <!--<form method="POST"  enctype="multipart/form-data" id="form2" style="left: auto" >-->
+                <!--<button class="searchBtn" id="exportExcel" style="width: 60px;height: 35px;" value="上传" >-->
+                    <!--<span class="glyphicon glyphicon-save" aria-hidden="true"></span>-->
+                    <!--导出-->
+                <!--</button>-->
+            <!--</form>-->
+        <!--</div>-->
     </div>
     <div class="feedbackList limitsTable">
         <table class="table table-hover" id="userTable">

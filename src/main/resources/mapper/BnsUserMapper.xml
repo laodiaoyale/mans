@@ -60,6 +60,29 @@
       #{realName,jdbcType=VARCHAR}, #{realCard,jdbcType=VARCHAR}
       )
   </insert>
+
+  <insert id="insertVo" parameterType="com.bns.model.user.BnsUserVo">
+    insert into bns_user (id, name, mobile,
+    id_card, sex, nation,
+    address, create_time, wechat_code,
+    qq_code, age, education,
+    source, skill, history,
+    job,city,en_no,enterprise,remark,
+    entry_date,leave_date,bank_card,bank_name,
+    contacts,relation,contact_number,insurance,
+    real_name,real_card
+    )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+    #{idCard,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{nation,jdbcType=VARCHAR},
+    #{address,jdbcType=VARCHAR}, now(), #{wechatCode,jdbcType=VARCHAR},
+    #{qqCode,jdbcType=VARCHAR}, #{age,jdbcType=TINYINT}, #{education,jdbcType=TINYINT},
+    #{source,jdbcType=VARCHAR}, #{skill,jdbcType=VARCHAR}, #{history,jdbcType=VARCHAR},
+    #{job,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{enNo,jdbcType=INTEGER},#{enterprise,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},
+    #{entryDate,jdbcType=TIMESTAMP},#{leaveDate,jdbcType=TIMESTAMP},#{bankCard,jdbcType=VARCHAR},#{bankName,jdbcType=VARCHAR},
+    #{contacts,jdbcType=VARCHAR},#{relation,jdbcType=TINYINT},#{contactNumber,jdbcType=VARCHAR},#{insurance,jdbcType=TINYINT},
+    #{realName,jdbcType=VARCHAR}, #{realCard,jdbcType=VARCHAR}
+    )
+  </insert>
   <update id="updateByPrimaryKey" parameterType="com.bns.model.user.BnsUser">
     update bns_user
     set name = #{name,jdbcType=VARCHAR},

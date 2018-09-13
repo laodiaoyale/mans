@@ -2,6 +2,7 @@ package com.bns.dao.user;
 
 import com.bns.api.user.param.UserReqParam;
 import com.bns.model.user.BnsUser;
+import com.bns.model.user.BnsUserVo;
 import common.annotation.MyBatisRepository;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface BnsUserDao {
     List<BnsUser> findPaging(UserReqParam userReqParam);
 
     List<String> getCity();
+
+    void insertVo(BnsUserVo info);
 }

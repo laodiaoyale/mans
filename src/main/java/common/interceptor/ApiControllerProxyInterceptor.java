@@ -38,6 +38,9 @@ public class ApiControllerProxyInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
+            if(request.getRequestURI().contains("importData")){
+                return true;
+            }
             String httpData= IOUtils.toString(request.getInputStream(),"UTF-8");
             logger.info("请求地址:"+request.getRequestURI());
             logger.info("请求报文:"+httpData);

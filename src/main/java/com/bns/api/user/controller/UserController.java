@@ -7,11 +7,26 @@ import com.github.pagehelper.PageInfo;
 import common.exception.BaseException;
 import common.message.BaseController;
 import common.message.JsonResult;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.Iterator;
+
+import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.path;
 
 /**
  * @author zhaolei
@@ -93,6 +108,36 @@ public class UserController extends BaseController{
         Integer i = Integer.valueOf(id);
         userService.delete(i);
         return initJsonResult();
+    }
+
+    /**
+     * OK
+     * @return
+     * 删除
+     */
+    @RequestMapping(value="/importData")
+    public void importData(HttpServletRequest request,HttpServletResponse response) throws Exception {
+        InputStream is=null;
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/json;charset=UTF-8");
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        if(multipartResolver.isMultipart(request)){
+            MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
+            Iterator<String> iterator = multiRequest.getFileNames();
+            while (iterator.hasNext()) {
+                MultipartFile multipartFile = multiRequest.getFile(iterator.next());
+                if(multipartFile !=null){
+                    is=new ByteArrayInputStream(multipartFile.getBytes());
+                }
+            }
+        }
+        Workbook wb=new XSSFWorkbook(is);
+        String result = userService.importData(wb);
+        PrintWriter out=response.getWriter();
+        response.setCharacterEncoding("utf-8");  //防止ajax接受到的中文信息乱码
+        out.print(result);
+        out.flush();
+        out.close();
     }
 
 }
