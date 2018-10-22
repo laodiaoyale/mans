@@ -247,6 +247,7 @@ function addUser(){
         var status = $.trim($("#status").val());
         var history = $.trim($("#history").val());
         var enterprise = $.trim($("#enterpriseAdd").find("option:selected").text());
+        if(enterprise=='请选择'){enterprise=''}
         var enNo = $.trim($("#enterpriseAdd").val());
         var remark = $.trim($("#remark").val());
         var entryDate = $.trim($("#entryDate").val());
@@ -352,6 +353,7 @@ function editUser(){
     var status = $.trim($("#status").val());
     var history = $.trim($("#history").val());
     var enterprise = $.trim($("#enterpriseAdd").find("option:selected").text());
+    if(enterprise=='请选择'){enterprise=''}
     var enNo = $.trim($("#enterpriseAdd").val());
     var remark = $.trim($("#remark").val());
 
