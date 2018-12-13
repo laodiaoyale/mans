@@ -82,7 +82,7 @@
   <select id="getEnterpriseByEnterprises" resultMap="EnterpriseVoList" parameterType="java.lang.String" >
     select *
     from sys_enterprise
-    where enterprise =  #{enterprise,jdbcType=VARCHAR}
+    where  del_flag = 1 and  enterprise =  #{enterprise,jdbcType=VARCHAR}
   </select>
 
 </mapper>

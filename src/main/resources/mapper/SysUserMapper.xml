@@ -248,7 +248,7 @@
 
   <!--对象查询-->
   <select id="selectUserParam" parameterType="java.util.Map" resultMap="BaseResultMap" >
-      select * from sys_user a where 1 =1
+      select * from sys_user a where 1 =1 AND validate_state = 1
       <if test="id !=null">
         AND  a.id=#{id,jdbcType=VARCHAR}
       </if>
