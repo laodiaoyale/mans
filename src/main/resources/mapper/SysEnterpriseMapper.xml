@@ -78,4 +78,11 @@
     from sys_enterprise
     where en_code =  #{enCode,jdbcType=VARCHAR}
   </select>
+
+  <select id="getEnterpriseByEnterprises" resultMap="EnterpriseVoList" parameterType="java.lang.String" >
+    select *
+    from sys_enterprise
+    where enterprise =  #{enterprise,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SysUserRegisterVO {
 
+    private Long id;
+
     private String userNo;
 
     private String newUserNo;
@@ -26,6 +28,14 @@ public class SysUserRegisterVO {
     private String updateUser;
 
     private String[] enNos;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNewUserNo() { return newUserNo; }
 

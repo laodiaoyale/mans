@@ -182,11 +182,13 @@ function addUser(){
 
 }
 function editUser(){
+    var id = $("#id").val();
     var newUserNo = $("#newUserNo").val();
     var userName = $("#userName").val();
     var mobile = $("#mobile").val();
     var roleId = $("#roleId").val();
     var job = $("#job").val();
+    var password = $.trim($("#password").val());
     var department = $("#department").val();
     var enNos= $('#enterprise').selectpicker('val');
     if(newUserNo==""){
@@ -194,6 +196,9 @@ function editUser(){
         return false;
     }else if(userName==""){
         showMsg('.error-msg', "请输入姓名");
+        return false;
+    }else if(!isNumAndStr(password)){
+        showMsg('.error-msg', "请输入正确格式的密码");
         return false;
     }else if(mobile==""){
         showMsg('.error-msg', "请输入手机号");
@@ -211,9 +216,11 @@ function editUser(){
         showMsg('.error-msg', "请输入正确的手机号");
     }else {
         var obj = {
+            "id":id,
             "userNo":localStorage.getItem('userNo'),
             "userName":userName,
             "newUserNo":newUserNo,
+            "password":md5(password),
             "job":job,
             "mobile":mobile,
             "enNos":enNos
@@ -443,9 +450,10 @@ function resetPassword(id) {
 }
 function initUser(){
     var permissionsInfo = JSON.parse(sessionStorage.getItem("permissionsInfo"));
+    $("#id").val(permissionsInfo.id);
     $("#newUserNo").val(permissionsInfo.user_no);
     $("#userName").val(permissionsInfo.user_name);
-    $("#password").val("******").attr("readonly",true);
+    // $("#password").val("******").attr("readonly",true);
     $("#mobile").val(permissionsInfo.mobile);
     // $("#roleId").prop('selectedIndex', permissionsInfo.role_code);
     $("#department").val(permissionsInfo.department);

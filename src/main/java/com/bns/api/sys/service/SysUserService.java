@@ -177,14 +177,13 @@ public class SysUserService {
         JsonResult jsonResult= new JsonResult();
         // 根据员工编号查询是否存在
         Map param = new HashMap();
-        param.put("userNo",vo.getNewUserNo());
+        param.put("id",vo.getId());
         SysUserDTO user = sysUserDao.selectUserParam(param);//查询员工
         if(user ==null){
             throw new BaseException("人员不存在");
         }
         SysUserDTO userNew = new SysUserDTO();
         BeanUtils.copyProperties(vo,userNew);
-        userNew.setId(user.getId());
         int num=sysUserDao.updateByIdSelective(userNew);
         if(num==0){
             throw new BaseException("信息修改失败");
@@ -203,8 +202,8 @@ public class SysUserService {
             List<SysUserEnterpriseDTO> sysUserEnterpriseDTOS = new ArrayList<>();
             for(String s :ens){
                 SysUserEnterpriseDTO dto = new SysUserEnterpriseDTO();
-                dto.setUserNo(user.getUserNo());
-                dto.setUserName(user.getUserName());
+                dto.setUserNo(userNew.getNewUserNo());
+                dto.setUserName(userNew.getUserName());
                 dto.setEnNo(s);
                 SysEnterpriseDTO sysEnterpriseDTO = sysEnterpriseDao.selectByPrimaryKey(Integer.valueOf(s));
                 dto.setEnCode(sysEnterpriseDTO.getEnCode());

@@ -38,11 +38,14 @@ public class SysEnterpriseService {
         return jsonResult;
     }
 
-    public JsonResult addOrUpdate(SysEnterpriseDTO sysEnterpriseDTO) {
+    public JsonResult addOrUpdate(SysEnterpriseDTO sysEnterpriseDTO)throws BaseException {
         JsonResult jsonResult=new JsonResult();
         jsonResult.setError(RespCodeCostant.OK);
         if(sysEnterpriseDTO.getId()==null||sysEnterpriseDTO.getId()==0){
-            //估计身份证号查询是否有录入
+            List<SysEnterpriseDTO> list = sysEnterpriseDao.getEnterpriseByEnterprises(sysEnterpriseDTO.getEnterprise());//查询员工
+            if(list !=null&& list.size()>0){
+                throw new BaseException("已存在该企业，请验证企业全称");
+            }
             sysEnterpriseDao.insert(sysEnterpriseDTO);
         }else{
             sysEnterpriseDTO.setDelFlag((byte)1);
