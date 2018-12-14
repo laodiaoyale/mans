@@ -101,8 +101,6 @@ public class UserService extends BaseController{
         List<BnsUserVo> list = vifyExcel(wb);
         int i=0,j=0;
         for(BnsUserVo info:list){
-            //验证是否存在
-//            int count = userDao.selectCountByIdCard(info.getIdCard());
             //通过企业名称找到企业编号
             if(StringUtil.isBlank(info.getEnterprise())){
                 j++;
@@ -110,6 +108,12 @@ public class UserService extends BaseController{
             }
             SysEnterpriseDTO enterpriseDTO =sysEnterpriseDao.getEnterpriseByName(info.getEnterprise());
             if(enterpriseDTO==null){
+                j++;
+                continue;
+            }
+//            验证是否存在
+            List<BnsUser> list1 = userDao.selectCountByIdCard(info.getIdCard());
+            if(list1!=null&&list1.size()>0){
                 j++;
                 continue;
             }

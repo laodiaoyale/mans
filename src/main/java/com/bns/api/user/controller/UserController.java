@@ -10,7 +10,7 @@ import common.message.JsonResult;
 import common.util.FastJsonUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -131,7 +131,7 @@ public class UserController extends BaseController{
                 }
             }
         }
-        Workbook wb=new XSSFWorkbook(is);
+        Workbook wb= WorkbookFactory.create(is);
         String result = userService.importData(wb);
         PrintWriter out=response.getWriter();
         response.setCharacterEncoding("utf-8");  //防止ajax接受到的中文信息乱码
@@ -151,7 +151,7 @@ public class UserController extends BaseController{
         //响应到客户端
         try {
             UserReqParam userReqParam = (UserReqParam)FastJsonUtil.jsonToObj(data,UserReqParam.class);
-            String fileName = "员工信息表"+System.currentTimeMillis()+".xls";
+            String fileName = "员工信息表"+System.currentTimeMillis()+".xlsx";
             HSSFWorkbook wb = userService.exportExcel(userReqParam);
             response.reset();
             response.setHeader("Content-disposition", "attachment; filename="+fileName);

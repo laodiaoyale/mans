@@ -132,6 +132,10 @@
   <select id="getCity" resultType="java.lang.String">
      select DISTINCT city from bns_user where city is not null and city !='' and del_flag =1
   </select>
+  <select id="selectCountByIdCard" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from bns_user where id_card = #{idCard} and del_flag =1
+  </select>
+
   <!-- 查询列表 cl_t_user  -->
   <select id="findPaging" parameterType="com.bns.api.user.param.UserReqParam" resultMap="BaseResultMap">
     select *

@@ -24,4 +24,7 @@ public interface BnsUserDao {
     List<String> getCity();
 
     void insertVo(BnsUserVo info);
+
+    List<BnsUser> selectCountByIdCard(String idCard);
+
 }

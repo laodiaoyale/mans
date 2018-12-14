@@ -70,13 +70,13 @@
 
   <select id="getEnterPrise" resultType="java.lang.String" parameterType="java.lang.String" >
       SELECT GROUP_CONCAT(a.en_code SEPARATOR '、') as en_code
-      FROM sys_user_enterprise a  where a.user_no = #{userNo}
+      FROM sys_user_enterprise a  where a.user_no = #{userNo} and del_flag = 1
   </select>
 
   <select id="getEnterpriseByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select *
     from sys_enterprise
-    where en_code =  #{enCode,jdbcType=VARCHAR}
+    where en_code =  #{enCode,jdbcType=VARCHAR} and del_flag = 1
   </select>
 
   <select id="getEnterpriseByEnterprises" resultMap="EnterpriseVoList" parameterType="java.lang.String" >
