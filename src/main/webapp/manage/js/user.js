@@ -819,3 +819,125 @@ function setDate(date){
         return"";
     return /\d{4}-\d{1,2}-\d{1,2}/g.exec(date);
 }
+//js直接导出数据，但是只限当前页面数据
+var idTmr;
+function getExplorer() {
+    var explorer = window.navigator.userAgent ;
+    //ie
+    if (explorer.indexOf("MSIE") >= 0) {
+        return 'ie';
+    }
+    //firefox
+    else if (explorer.indexOf("Firefox") >= 0) {
+        return 'Firefox';
+    }
+    //Chrome
+    else if(explorer.indexOf("Chrome") >= 0){
+        return 'Chrome';
+    }
+    //Opera
+    else if(explorer.indexOf("Opera") >= 0){
+        return 'Opera';
+    }
+    //Safari
+    else if(explorer.indexOf("Safari") >= 0){
+        return 'Safari';
+    }
+}
+function exprotExcel(tableid) {
+    if(getExplorer()=='ie')
+    {
+        var curTbl = document.getElementById(tableid);
+        var oXL = new ActiveXObject("Excel.Application");
+        var oWB = oXL.Workbooks.Add();
+        var xlsheet = oWB.Worksheets(1);
+        var sel = document.body.createTextRange();
+        sel.moveToElementText(curTbl);
+        sel.select();
+        sel.execCommand("Copy");
+        xlsheet.Paste();
+        oXL.Visible = true;
+        try {
+            var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
+        } catch (e) {
+            print("Nested catch caught " + e);
+        } finally {
+            oWB.SaveAs(fname);
+            oWB.Close(savechanges = false);
+            oXL.Quit();
+            oXL = null;
+            idTmr = window.setInterval("Cleanup();", 1);
+        }
+    }
+    else
+    {
+        tableToExcel(tableid)
+    }
+}
+function Cleanup() {
+    window.clearInterval(idTmr);
+    CollectGarbage();
+}
+var tableToExcel = (function() {
+    var uri = 'data:application/vnd.ms-excel;base64,',
+        template = '<html><head><meta charset="UTF-8"></head><body><table>{table}</table></body></html>',
+        base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },
+        format = function(s, c) {
+            return s.replace(/{(\w+)}/g,
+                function(m, p) { return c[p]; }) }
+    return function(table, name) {
+        if (!table.nodeType) table = document.getElementById(table)
+        var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+        window.location.href = uri + base64(format(template, ctx))
+    }
+})()
+
+
+function exprotExcel1(){
+    var roleId = $("#selectRole").attr("roleId") ;
+    var userName = $.trim($("#inpName").val());
+    department = localStorage.getItem("LoginDepartment");
+    roleCode = localStorage.getItem("LoginRoleCode");
+    roleName = localStorage.getItem("LoginRoleName");
+
+    var startEntryDate = $('#startEntryDate').val();
+    var endEntryDate = $("#endEntryDate").val();
+    var startLeaveDate = $('#startLeaveDate').val();
+    var endLeaveDate = $("#endLeaveDate").val();
+    var enNos= $('#enterprise').selectpicker('val');
+    if(startEntryDate!=null&&endEntryDate!=null&&endEntryDate<startEntryDate){
+        showMsg($('.error-msg'), "开始时间必须小于结束时间");
+        return;
+    }
+    if(startLeaveDate!=null&&endLeaveDate!=null&&endLeaveDate<startLeaveDate){
+        showMsg($('.error-msg'), "开始时间必须小于结束时间");
+        return;
+    }
+    if(roleName=="管理员"||roleCode=="user"){
+        department='';
+    }
+    var sex = $.trim($("#sex").val());
+    var insurance = $.trim($("#insurance").val());
+    var _obj = JSON.stringify({
+        "name":userName,
+        "sex":sex,
+        "minAge":$.trim($("#minAge").val()),
+        "maxAge":$.trim($("#maxAge").val()),
+        "status":$.trim($("#status").val()),
+        "idCard":$.trim($("#idCard").val()),
+        "education":$.trim($("#education").val()),
+        "city":$.trim($("#city").val()),
+        "source":$.trim($("#source").val()),
+        "department":department,
+        "startEntryDate":$.trim($("#startEntryDate").val()),
+        "endEntryDate":$.trim($("#endEntryDate").val()),
+        "startLeaveDate":$.trim($("#startLeaveDate").val()),
+        "endLeaveDate":$.trim($("#endLeaveDate").val()),
+        "insurance":insurance,
+        "enNos":enNos,
+        "userNo":localStorage.getItem('userNo'),
+        "roleCode":localStorage.getItem('LoginRoleCode')
+
+    }, 'utf-8');
+    location.href="/api/user/exportData?data="+_obj;//这里的result则是选取的查询条件
+}

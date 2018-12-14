@@ -38,7 +38,7 @@ public class ApiControllerProxyInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
-            if(request.getRequestURI().contains("importData")){
+            if(request.getRequestURI().contains("importData")||request.getRequestURI().contains("exportData")){
                 return true;
             }
             String httpData= IOUtils.toString(request.getInputStream(),"UTF-8");

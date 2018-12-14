@@ -7,12 +7,14 @@ import com.github.pagehelper.PageInfo;
 import common.exception.BaseException;
 import common.message.BaseController;
 import common.message.JsonResult;
+import common.util.FastJsonUtil;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -20,13 +22,11 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Iterator;
-
-import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.path;
 
 /**
  * @author zhaolei
@@ -34,7 +34,7 @@ import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.path;
  * 用户相关
  */
 @Controller
-@RequestMapping(value = "api/user",method = RequestMethod.POST)
+@RequestMapping(value = "api/user")
 public class UserController extends BaseController{
 
     @Autowired
@@ -140,4 +140,29 @@ public class UserController extends BaseController{
         out.close();
     }
 
+    /**
+     * OK
+     * @return
+     * 删除
+     */
+    @RequestMapping(value="/exportData")
+    @ResponseBody
+    public void exportData(HttpServletRequest request,HttpServletResponse response,@RequestParam String data) throws Exception {
+        //响应到客户端
+        try {
+            UserReqParam userReqParam = (UserReqParam)FastJsonUtil.jsonToObj(data,UserReqParam.class);
+            String fileName = "员工信息表"+System.currentTimeMillis()+".xls";
+            HSSFWorkbook wb = userService.exportExcel(userReqParam);
+            response.reset();
+            response.setHeader("Content-disposition", "attachment; filename="+fileName);
+            response.setContentType("application/msexcel");
+            response.addHeader("Pargam", "no-cache");
+            response.addHeader("Cache-Control", "no-cache");               OutputStream os = response.getOutputStream();
+            wb.write(os);
+            os.flush();
+            os.close();
+         } catch (Exception e) {
+            e.printStackTrace();
+         }
+    }
 }

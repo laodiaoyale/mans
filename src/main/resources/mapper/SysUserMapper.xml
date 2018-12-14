@@ -233,7 +233,7 @@
      where a.USER_NO=#{userNo,jdbcType=VARCHAR}  AND a.PASSWORD=#{password,jdbcType=VARCHAR} and a.validate_state = 1
  </select>
   <select id="selectUserByParam" resultMap="BaseResultMap" >
-    select * from sys_user a where 1=1
+    select * from sys_user a where 1=1 AND validate_state = 1
     <if test="userNo !=null">
     AND  a.USER_NO=#{userNo,jdbcType=VARCHAR}
     </if>

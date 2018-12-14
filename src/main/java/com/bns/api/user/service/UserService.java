@@ -1,6 +1,5 @@
 package com.bns.api.user.service;
 
-import com.bns.api.sys.service.SysEnterpriseService;
 import com.bns.api.sys.vo.SysEnterpriseVo;
 import com.bns.api.user.param.UserReqParam;
 import com.bns.dao.sys.SysEnterpriseDao;
@@ -14,11 +13,12 @@ import common.ReadExcel;
 import common.exception.BaseException;
 import common.message.BaseController;
 import common.util.StringUtil;
+import common.util.date.DateUtils;
+import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,29 +40,7 @@ public class UserService extends BaseController{
      * @return
      */
     public PageInfo pageLite(UserReqParam userReqParam){
-        String[] ens = userReqParam.getEnNos();
-        if(ens!=null&&ens.length>0){
-            //删除之前的记录
-            StringBuffer buf = new StringBuffer();
-            for(String s :ens){
-                buf.append(s);
-                buf.append(",");
-            }
-            userReqParam.setEnNo(buf.substring(0,buf.length()-1));
-        }
-        if(!"admin".equals(userReqParam.getRoleCode())&& StringUtil.isBlank( userReqParam.getEnNo())){
-            List<SysEnterpriseVo> list =  sysEnterpriseDao.queryEnterpriseByUserNo(userReqParam.getUserNo());
-            if(list!=null&&list.size()>0){
-                //删除之前的记录
-                StringBuffer buf = new StringBuffer();
-                for(SysEnterpriseVo s :list){
-                    buf.append(s.getId());
-                    buf.append(",");
-                }
-                userReqParam.setEnNo(buf.substring(0,buf.length()-1));
-            }
-        }
-
+        setEnNo(userReqParam);
         PageHelper.startPage(userReqParam.getPageNum(), userReqParam.getPageSize());
         List<BnsUser> pageList = userDao.findPaging(userReqParam);
         return  new PageInfo(pageList);
@@ -239,9 +217,9 @@ public class UserService extends BaseController{
     public static String sexFn(String sex){
         switch (sex){
             case "男":
-                return "0";
-            case "女":
                 return "1";
+            case "女":
+                return "2";
         }
         return null;
     }
@@ -276,4 +254,167 @@ public class UserService extends BaseController{
         return null;
     }
 
+    private void setEnNo(UserReqParam userReqParam){
+        String[] ens = userReqParam.getEnNos();
+        if(ens!=null&&ens.length>0){
+            //删除之前的记录
+            StringBuffer buf = new StringBuffer();
+            for(String s :ens){
+                buf.append(s);
+                buf.append(",");
+            }
+            userReqParam.setEnNo(buf.substring(0,buf.length()-1));
+        }
+        if(!"admin".equals(userReqParam.getRoleCode())&& StringUtil.isBlank( userReqParam.getEnNo())){
+            List<SysEnterpriseVo> list =  sysEnterpriseDao.queryEnterpriseByUserNo(userReqParam.getUserNo());
+            if(list!=null&&list.size()>0){
+                //删除之前的记录
+                StringBuffer buf = new StringBuffer();
+                for(SysEnterpriseVo s :list){
+                    buf.append(s.getId());
+                    buf.append(",");
+                }
+                userReqParam.setEnNo(buf.substring(0,buf.length()-1));
+            }
+        }
+    }
+
+    public HSSFWorkbook exportExcel(UserReqParam userReqParam) {
+        userReqParam.setPageNum(0);
+        userReqParam.setPageSize(0);
+        setEnNo(userReqParam);
+        List<BnsUser> list = userDao.findPaging(userReqParam);
+        //获取数据
+        String sheetName = "员工信息表";
+        HSSFWorkbook wb = new HSSFWorkbook();
+        HSSFSheet sheet = wb.createSheet(sheetName);
+        HSSFRow row = sheet.createRow(0);
+        HSSFCellStyle style = wb.createCellStyle();
+        style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+        //声明列对象
+        HSSFCell cell = null;
+        String[] title = {"姓名","身份证号","手机号","真实姓名","真实身份证号","性别","年龄","城市",
+                "地址","微信号","qq号","学历","来源","专业技能","曾入职企业","职位","员工状态","所属企业","入职日期","离职日期",
+                "银行卡号","银行名称","紧急联系人姓名","紧急联系人关系","紧急联系人电话","保险","备注"};
+        //创建标题
+        for(int i=0;i<title.length;i++){
+            cell = row.createCell(i);
+            cell.setCellValue(title[i]);
+            cell.setCellStyle(style);
+        }
+        //创建内容
+        for(int i=0;i<list.size();i++){
+            row = sheet.createRow(i + 1);
+            //将内容按顺序赋给对应的列对象
+            BnsUser obj = list.get(i);
+            row.createCell(0).setCellValue(obj.getName());
+            row.createCell(1).setCellValue(obj.getIdCard());
+            row.createCell(2).setCellValue(obj.getMobile());
+            row.createCell(3).setCellValue(obj.getRealName());
+            row.createCell(4).setCellValue(obj.getRealCard());
+            row.createCell(5).setCellValue(sexCn(obj.getSex()));
+            row.createCell(6).setCellValue(obj.getAge());
+            row.createCell(7).setCellValue(obj.getCity());
+            row.createCell(8).setCellValue(obj.getAddress());
+            row.createCell(9).setCellValue(obj.getWechatCode());
+            row.createCell(10).setCellValue(obj.getQqCode());
+            row.createCell(11).setCellValue(educationCn(obj.getEducation()));
+            row.createCell(12).setCellValue(obj.getSource());
+            row.createCell(13).setCellValue(obj.getSkill());
+            row.createCell(14).setCellValue(obj.getHistory());
+            row.createCell(15).setCellValue(obj.getJob());
+            row.createCell(16).setCellValue(statusCn(obj.getStatus()));
+            row.createCell(17).setCellValue(obj.getEnterprise());
+            if(obj.getEntryDate()!=null){
+                row.createCell(18).setCellValue(DateUtils.formatDate(obj.getEntryDate(),"yyyy-MM-dd"));
+            }
+            if(obj.getLeaveDate()!=null){
+                row.createCell(19).setCellValue(DateUtils.formatDate(obj.getLeaveDate(),"yyyy-MM-dd"));
+            }
+            row.createCell(20).setCellValue(obj.getBankCard());
+            row.createCell(21).setCellValue(obj.getBankName());
+            row.createCell(22).setCellValue(obj.getContacts());
+            row.createCell(23).setCellValue(relationCn(obj.getRelation()));
+            row.createCell(24).setCellValue(obj.getContactNumber());
+            row.createCell(25).setCellValue(insuranceCn(obj.getInsurance()));
+            row.createCell(26).setCellValue(obj.getRemark());
+        }
+        return  wb;
+    }
+
+
+    public static String insuranceCn(Byte insurance){
+        if(insurance==null)return null;
+        switch (insurance){
+            case 1:
+                return "已购买保险";
+            case 2:
+                return "离职已替换";
+            case 3:
+                return "离职未替换";
+            case 4:
+                return "待购买保险";
+        }
+        return null;
+    }
+    public static String relationCn(Byte relation){
+        if(relation==null)return null;
+        switch (relation){
+            case 1:
+                return "父亲";
+            case 2:
+                return "母亲";
+            case 3:
+                return "子女";
+            case 4:
+                return "其他亲属";
+            case 5:
+                return "朋友";
+            case 6:
+                return "其他";
+        }
+        return null;
+    }
+    public static String sexCn(Byte sex){
+        if(sex==null)return null;
+        switch (sex){
+            case 1:
+                return "男";
+            case 2:
+                return "女";
+        }
+        return null;
+    }
+    public static String educationCn(Byte education){
+        if(education==null)return null;
+        switch (education){
+            case 1:
+                return "小学";
+            case 2:
+                return "初中";
+            case 3:
+                return "高中";
+            case 4:
+                return "专科";
+            case 5:
+                return "本科";
+            case 6:
+                return "研究生";
+            case 7:
+                return "研究生以上";
+        }
+        return null;
+    }
+    public static String statusCn(Byte status){
+        if(status==null)return null;
+        switch (status){
+            case 1:
+                return "在职";
+            case 2:
+                return "离职";
+            case 3:
+                return "已请假";
+        }
+        return null;
+    }
 }
