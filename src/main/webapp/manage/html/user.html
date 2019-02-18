@@ -140,7 +140,7 @@
                 增加
             </button>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-5" id = "import" style="display: none">
             <form method="POST"  enctype="multipart/form-data" id="form1" style="left: auto" >
                 <input id="upfile" type="file" name="upfile"  class="form-control" style="width: 300px; display: inline;">
                 <button class="searchBtn" id="importExcel" style="width: 60px;height: 35px;" value="上传" >
@@ -149,7 +149,7 @@
                 </button>
             </form>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-1" id = "export" style="display: none">
                 <button class="searchBtn" id="exportExcel" style="width: 60px;height: 35px;" value="导出" onclick="exprotExcel1('userTable')">
                     <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                     导出

@@ -150,14 +150,16 @@ public class UserController extends BaseController{
     public void exportData(HttpServletRequest request,HttpServletResponse response,@RequestParam String data) throws Exception {
         //响应到客户端
         try {
+            String fileName = "员工信息表.xlsx";
             UserReqParam userReqParam = (UserReqParam)FastJsonUtil.jsonToObj(data,UserReqParam.class);
-            String fileName = "员工信息表"+System.currentTimeMillis()+".xlsx";
             HSSFWorkbook wb = userService.exportExcel(userReqParam);
             response.reset();
-            response.setHeader("Content-disposition", "attachment; filename="+fileName);
+            response.setHeader("Content-disposition",
+                    "attachment; filename="+java.net.URLEncoder.encode(fileName, "UTF-8"));
             response.setContentType("application/msexcel");
             response.addHeader("Pargam", "no-cache");
-            response.addHeader("Cache-Control", "no-cache");               OutputStream os = response.getOutputStream();
+            response.addHeader("Cache-Control", "no-cache");
+            OutputStream os = response.getOutputStream();
             wb.write(os);
             os.flush();
             os.close();

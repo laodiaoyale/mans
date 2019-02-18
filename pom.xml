@@ -359,6 +359,13 @@
         <!--</repository>-->
 
     <!--</repositories>-->
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>alfresco</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
     <build>
         <finalName>user-manage</finalName>
         <resources>
@@ -420,8 +427,8 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
+                <artifactId>tomcat8-maven-plugin</artifactId>
+                <version>3.0-r1756463</version>
                 <configuration>
                     <update>true</update>
                     <charset>utf-8</charset>

@@ -540,6 +540,10 @@ function getRole(){
                 if(items.roleCode=="user"){
                     $("#addUserBtn").attr("style","display:none");
                 }
+                if(items.roleCode=="admin"){
+                    $('#import').css("display","block");
+                    $('#export').css("display","block");
+                }
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
                 localStorage.removeItem("LoginToken");
@@ -939,5 +943,5 @@ function exprotExcel1(){
         "roleCode":localStorage.getItem('LoginRoleCode')
 
     }, 'utf-8');
-    location.href="/api/user/exportData?data="+_obj;//这里的result则是选取的查询条件
+    location.href="/api/user/exportData?data="+encodeURI(_obj);//这里的result则是选取的查询条件
 }

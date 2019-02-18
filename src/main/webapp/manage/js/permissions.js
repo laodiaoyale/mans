@@ -197,7 +197,7 @@ function editUser(){
     }else if(userName==""){
         showMsg('.error-msg', "请输入姓名");
         return false;
-    }else if(!isNumAndStr(password)){
+    }else if(password!="******"&&!isNumAndStr(password)){
         showMsg('.error-msg', "请输入正确格式的密码");
         return false;
     }else if(mobile==""){
@@ -215,12 +215,17 @@ function editUser(){
     }else if(!isPhoneNum(mobile) || mobile.length != 11){
         showMsg('.error-msg', "请输入正确的手机号");
     }else {
+        if(password=="******"){
+            password = "";//不修改密码
+        }else{
+            password = md5(password)
+        }
         var obj = {
             "id":id,
             "userNo":localStorage.getItem('userNo'),
             "userName":userName,
             "newUserNo":newUserNo,
-            "password":md5(password),
+            "password":password,
             "job":job,
             "mobile":mobile,
             "enNos":enNos
