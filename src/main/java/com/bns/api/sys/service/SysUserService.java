@@ -177,11 +177,12 @@ public class SysUserService {
         JsonResult jsonResult= new JsonResult();
         // 根据员工编号查询是否存在
         Map param = new HashMap();
-        param.put("id",vo.getId());
+        param.put("userNo",vo.getNewUserNo());
         SysUserDTO user = sysUserDao.selectUserParam(param);//查询员工
         if(user ==null){
             throw new BaseException("人员不存在");
         }
+        vo.setId(user.getId());
         SysUserDTO userNew = new SysUserDTO();
         BeanUtils.copyProperties(vo,userNew);
         int num=sysUserDao.updateByIdSelective(userNew);
