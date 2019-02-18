@@ -458,7 +458,7 @@ function initUser(){
     $("#id").val(permissionsInfo.id);
     $("#newUserNo").val(permissionsInfo.user_no);
     $("#userName").val(permissionsInfo.user_name);
-    // $("#password").val("******").attr("readonly",true);
+    $("#password").val("******");//.attr("readonly",true);
     $("#mobile").val(permissionsInfo.mobile);
     // $("#roleId").prop('selectedIndex', permissionsInfo.role_code);
     $("#department").val(permissionsInfo.department);
