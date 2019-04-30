@@ -231,7 +231,6 @@ function focusOrBlur(obj,ele,val1,val2) { //对象，元素，属性值1，属�
 }
 function addUser(){
         var name = $.trim($("#name").val());
-        var sex = $.trim($("#sex").val());
         var idCard = $.trim($("#idCard").val());
         var mobile = $.trim($("#mobile").val());
         var wechatCode = $.trim($("#wechatCode").val());
@@ -239,7 +238,8 @@ function addUser(){
         var entryDate = $.trim($("#entryDate").val());
         var city = $.trim($("#city").val());
         var address = $.trim($("#address").val());
-        var age = $.trim($("#age").val());
+        var age = GetAge(idCard);
+        var sex = getSex(idCard);
         var education = $.trim($("#education").val());
         var source = $.trim($("#source").val());
         var job = $.trim($("#job").val());
@@ -276,113 +276,91 @@ function addUser(){
             showMsg('.error-msg', "请输入必填项");
             return flag;
         }
-    //     if(!flag){
-    //         showMsg('.error-msg', "请选择必填项");
-    //         return flag;
-    //     }
-        // if(name==""){
-        //     showMsg('.error-msg', "请输入姓名");
-        //     return false;
-        // }else if(sex==""){
-        //     showMsg('.error-msg', "请选择性别");
-        //     return false;
-        // }else if(idCard==""){
-        //     showMsg('.error-msg', "请输入身份证号");
-        //     return false;
-        // }else if(mobile==""){
-        //     showMsg('.error-msg', "请输入手机号");
-        //     return false;
-        // }else
         if(!isPhoneNum(mobile) || mobile.length != 11){
             showMsg('.error-msg', "请输入正确格式的手机号");
             return false;
         }
-        // else if(insurance==""){
-        //     showMsg('.error-msg', "请选择商业保险");
-        //     return false;
-        // }else if(enNo==""){
-        //     showMsg('.error-msg', "请选择企业");
-        //     return false;
-        // }else if(status==""){
-        //     showMsg('.error-msg', "请选择在职状态");
-        //     return false;
-        // }else if(entryDate==""){
-        //     showMsg('.error-msg', "请选择入职时间");
-        //     return false;
-        // }
-        else{
-            var obj = {
-                "id":localStorage.getItem('id'),
-                "name":name,
-                "sex":sex,
-                "idCard":idCard,
-                "mobile":mobile,
-                "city":city,
-                "wechatCode":wechatCode,
-                "qqCode":qqCode,
-                "entryDate":entryDate,
-                "address":address,
-                "age":age,
-                "education":education,
-                "source":source,
-                "job":job,
-                "skill":skill,
-                "status":status,
-                "history":history,
-                "enterprise":enterprise,
-                "enNo":enNo,
-                "remark":remark,
-                "entryDate":entryDate,
-                "leaveDate":leaveDate,
-                "bankCard":bankCard,
-                "bankName":bankName,
-                "insurance":insurance,
-                "contacts":contacts,
-                "relation":relation,
-                "contactNumber":contactNumber,
-                "realName":  $.trim($("#realName").val()),
-                "realCard" : $.trim($("#realCard").val())
-            };
-            var _obj = JSON.stringify(obj, 'utf-8');
-            $.ajax({
-                headers: {
-                    token: localStorage.getItem('LoginToken')
-                },
-                type: "POST",
-                contentType: "text/html; charset=UTF-8",
-                url: "/api/user/addOrUpdate",//员工增加
-                data: _obj,
-                dataType: 'json',
-                success: function (data) {
-                    if (data.rspCode === '000000') {
-                        showMsg($('.error-msg'), '提交成功');
-                        setTimeout(function () {
-                            window.location.href = 'user.html' ;
-                        });
-                    } else if (data.rspCode === '-999999') {
-                        localStorage.removeItem("LoginName");
-                        localStorage.removeItem("LoginToken");
-                        localStorage.removeItem("userNo");
-                        localStorage.removeItem("LoginJob");
-                        localStorage.removeItem("LoginDepartment");
-                        localStorage.removeItem("LoginRoleName");
-                        showMsg($('.error-msg'), data.rspMsg);
-                        window.location.href = 'wechatLogin.html';
-                    } else {
-                        showMsg('.error-msg', data.rspMsg);
-                        if(data.rspMsg == "该身份证号已存在"){
-                            $("#idCard")[0].style.border="1px solid red";
-                        }
+        if(!validateIdCard(idCard)){
+            $("#idCard")[0].style.border="1px solid red";
+            showMsg('.error-msg', "请输入正确身份证号");
+            return false;
+        }
+        var realCard = $.trim($("#realCard").val());
+        if(realCard!=null&&realCard!=''&&!validateIdCard(realCard)){
+            $("#realCard")[0].style.border="1px solid red";
+            showMsg('.error-msg', "请输入正确身份证号");
+            return false;
+        }
+        var obj = {
+            "id":localStorage.getItem('id'),
+            "name":name,
+            "sex":sex,
+            "idCard":idCard,
+            "mobile":mobile,
+            "city":city,
+            "wechatCode":wechatCode,
+            "qqCode":qqCode,
+            "entryDate":entryDate,
+            "address":address,
+            "age":age,
+            "education":education,
+            "source":source,
+            "job":job,
+            "skill":skill,
+            "status":status,
+            "history":history,
+            "enterprise":enterprise,
+            "enNo":enNo,
+            "remark":remark,
+            "entryDate":entryDate,
+            "leaveDate":leaveDate,
+            "bankCard":bankCard,
+            "bankName":bankName,
+            "insurance":insurance,
+            "contacts":contacts,
+            "relation":relation,
+            "contactNumber":contactNumber,
+            "realName":  $.trim($("#realName").val()),
+            "realCard" : realCard
+        };
+        var _obj = JSON.stringify(obj, 'utf-8');
+        $.ajax({
+            headers: {
+                token: localStorage.getItem('LoginToken')
+            },
+            type: "POST",
+            contentType: "text/html; charset=UTF-8",
+            url: "/api/user/addOrUpdate",//员工增加
+            data: _obj,
+            dataType: 'json',
+            success: function (data) {
+                if (data.rspCode === '000000') {
+                    showMsg($('.error-msg'), '提交成功');
+                    setTimeout(function () {
+                        window.location.href = 'user.html' ;
+                    });
+                } else if (data.rspCode === '-999999') {
+                    localStorage.removeItem("LoginName");
+                    localStorage.removeItem("LoginToken");
+                    localStorage.removeItem("userNo");
+                    localStorage.removeItem("LoginJob");
+                    localStorage.removeItem("LoginDepartment");
+                    localStorage.removeItem("LoginRoleName");
+                    showMsg($('.error-msg'), data.rspMsg);
+                    window.location.href = 'wechatLogin.html';
+                } else {
+                    showMsg('.error-msg', data.rspMsg);
+                    if(data.rspMsg == "该身份证号已存在"){
+                        $("#idCard")[0].style.border="1px solid red";
                     }
                 }
-            });
-        }
+            }
+        });
 
 }
 function editUser(){
     var id = $.trim($("#id").val());
     var name = $.trim($("#name").val());
-    var sex = $.trim($("#sex").val());
     var idCard = $.trim($("#idCard").val());
     var mobile = $.trim($("#mobile").val());
     var wechatCode = $.trim($("#wechatCode").val());
@@ -390,7 +368,8 @@ function editUser(){
     var entryDate = $.trim($("#entryDate").val());
     var city = $.trim($("#city").val());
     var address = $.trim($("#address").val());
-    var age = $.trim($("#age").val());
+    var age = GetAge(idCard);
+    var sex = getSex(idCard);
     var education = $.trim($("#education").val());
     var source = $.trim($("#source").val());
     var job = $.trim($("#job").val());
@@ -432,73 +411,83 @@ function editUser(){
     if(!isPhoneNum(mobile) || mobile.length != 11){
         showMsg('.error-msg', "请输入正确格式的手机号");
         return false;
-    }else {
-        var obj = {
-            "id":id,
-            "name":name,
-            "sex":sex,
-            "idCard":idCard,
-            "mobile":mobile,
-            "wechatCode":wechatCode,
-            "qqCode":qqCode,
-            "entryDate":entryDate,
-            "city":city,
-            "address":address,
-            "age":age,
-            "education":education,
-            "source":source,
-            "job":job,
-            "skill":skill,
-            "status":status,
-            "history":history,
-            "enterprise":enterprise,
-            "enNo":enNo,
-            "remark":remark,
-            "entryDate":entryDate,
-            "leaveDate":leaveDate,
-            "bankCard":bankCard,
-            "bankName":bankName,
-            "insurance":insurance,
-            "contacts":contacts,
-            "relation":relation,
-            "contactNumber":contactNumber,
-            "realName":  $.trim($("#realName").val()),
-            "realCard" : $.trim($("#realCard").val())
-        };
-        var _obj = JSON.stringify(obj, 'utf-8');
-        $.ajax({
-            headers: {
-                token: localStorage.getItem('LoginToken')
-            },
-            type: "POST",
-            contentType: "text/html; charset=UTF-8",
-            url: "/api/user/addOrUpdate",//员工修改
-            data: _obj,
-            dataType: 'json',
-            success: function (data) {
-                if (data.rspCode === '000000') {
-                    showMsg($('.error-msg'), '提交成功');
-                    setTimeout(function () {
-                        window.location.href = 'user.html' ;
-                    });
-                } else if (data.rspCode === '-999999') {
-                    localStorage.removeItem("LoginName");
-                    localStorage.removeItem("LoginToken");
-                    localStorage.removeItem("userNo");
-                    localStorage.removeItem("LoginJob");
-                    localStorage.removeItem("LoginDepartment");
-                    localStorage.removeItem("LoginRoleName");
-                    showMsg($('.error-msg'), data.rspMsg);
-                    window.location.href = 'wechatLogin.html';
-                } else {
-                    showMsg('.error-msg', data.rspMsg);
-                    if(data.rspMsg == "该身份证号已存在"){
-                        $("#idCard")[0].style.border="1px solid red";
-                    }
+    }
+    if(!validateIdCard(idCard)){
+        $("#idCard")[0].style.border="1px solid red";
+        showMsg('.error-msg', "请输入正确身份证号");
+        return false;
+    }
+    var realCard = $.trim($("#realCard").val());
+    if(realCard!=null&&realCard!=''&&!validateIdCard(realCard)){
+        $("#realCard")[0].style.border="1px solid red";
+        showMsg('.error-msg', "请输入正确身份证号");
+        return false;
+    }
+    var obj = {
+        "id":id,
+        "name":name,
+        "sex":sex,
+        "idCard":idCard,
+        "mobile":mobile,
+        "wechatCode":wechatCode,
+        "qqCode":qqCode,
+        "entryDate":entryDate,
+        "city":city,
+        "address":address,
+        "age":age,
+        "education":education,
+        "source":source,
+        "job":job,
+        "skill":skill,
+        "status":status,
+        "history":history,
+        "enterprise":enterprise,
+        "enNo":enNo,
+        "remark":remark,
+        "entryDate":entryDate,
+        "leaveDate":leaveDate,
+        "bankCard":bankCard,
+        "bankName":bankName,
+        "insurance":insurance,
+        "contacts":contacts,
+        "relation":relation,
+        "contactNumber":contactNumber,
+        "realName":  $.trim($("#realName").val()),
+        "realCard" : realCard
+    };
+    var _obj = JSON.stringify(obj, 'utf-8');
+    $.ajax({
+        headers: {
+            token: localStorage.getItem('LoginToken')
+        },
+        type: "POST",
+        contentType: "text/html; charset=UTF-8",
+        url: "/api/user/addOrUpdate",//员工修改
+        data: _obj,
+        dataType: 'json',
+        success: function (data) {
+            if (data.rspCode === '000000') {
+                showMsg($('.error-msg'), '提交成功');
+                setTimeout(function () {
+                    window.location.href = 'user.html' ;
+                });
+            } else if (data.rspCode === '-999999') {
+                localStorage.removeItem("LoginName");
+                localStorage.removeItem("LoginToken");
+                localStorage.removeItem("userNo");
+                localStorage.removeItem("LoginJob");
+                localStorage.removeItem("LoginDepartment");
+                localStorage.removeItem("LoginRoleName");
+                showMsg($('.error-msg'), data.rspMsg);
+                window.location.href = 'wechatLogin.html';
+            } else {
+                showMsg('.error-msg', data.rspMsg);
+                if(data.rspMsg == "该身份证号已存在"){
+                    $("#idCard")[0].style.border="1px solid red";
                 }
             }
-        });
-    }
+        }
+    });
 }
 
 function getCity(){
@@ -1014,4 +1003,114 @@ function exprotExcel1(){
 
     }, 'utf-8');
     location.href="/api/user/exportData?data="+encodeURI(_obj);//这里的result则是选取的查询条件
+}
+
+
+function GetAge(identityCard) {
+    var len = (identityCard + "").length;
+    if (len == 0) {
+        return 0;
+    } else {
+        if ((len != 15) && (len != 18))//身份证号码只能为15位或18位其它不合法
+        {
+            return 0;
+        }
+    }
+    var strBirthday = "";
+    if (len == 18)//处理18位的身份证号码从号码中得到生日和性别代码
+    {
+        strBirthday = identityCard.substr(6, 4) + "/" + identityCard.substr(10, 2) + "/" + identityCard.substr(12, 2);
+    }
+    if (len == 15) {
+        strBirthday = "19" + identityCard.substr(6, 2) + "/" + identityCard.substr(8, 2) + "/" + identityCard.substr(10, 2);
+    }
+    //时间字符串里，必须是“/”
+    var birthDate = new Date(strBirthday);
+    var nowDateTime = new Date();
+    var age = nowDateTime.getFullYear() - birthDate.getFullYear();
+    //再考虑月、天的因素;.getMonth()获取的是从0开始的，这里进行比较，不需要加1
+    if (nowDateTime.getMonth() < birthDate.getMonth() || (nowDateTime.getMonth() == birthDate.getMonth() && nowDateTime.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
+
+function getSex(val) {
+        birthdayValue=val.charAt(6)+val.charAt(7)+val.charAt(8)+val.charAt(9)+'-'+val.charAt(10)+val.charAt(11)
+            +'-'+val.charAt(12)+val.charAt(13);
+        if(parseInt(val.charAt(16)/2)*2!=val.charAt(16))
+            return 1;
+        else
+            return 2;
+}
+
+// 18位身份证号最后一位校验
+function IDCard(Num)
+{
+    if (Num.length!=18)
+        return false;
+    var x=0;
+    var y='';
+
+    for(i=18;i>=2;i--)
+        x = x + (square(2,(i-1))%11)*parseInt(Num.charAt(19-i-1));
+    x%=11;
+    y=12-x;
+    if (x==0)
+        y='1';
+    if (x==1)
+        y='0';
+    if (x==2)
+        y='X';
+    return y;
+}
+
+// 求得x的y次方
+function square(x,y)
+{
+    var i=1;
+    for (j=1;j<=y;j++)
+        i*=x;
+    return i;
+}
+
+function validateIdCard(idCard) {
+    //15位和18位身份证号码的正则表达式
+    var regIdCard = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
+    //如果通过该验证，说明身份证格式正确，但准确性还需计算
+    if (regIdCard.test(idCard)) {
+        if (idCard.length == 18) {
+            var idCardWi = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2); //将前17位加权因子保存在数组里
+            var idCardY = new Array(1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2); //这是除以11后，可能产生的11位余数、验证码，也保存成数组
+            var idCardWiSum = 0; //用来保存前17位各自乖以加权因子后的总和
+            for (var i = 0; i < 17; i++) {
+                idCardWiSum += idCard.substring(i, i + 1) * idCardWi[i];
+            }
+            var idCardMod = idCardWiSum % 11;//计算出校验码所在数组的位置
+            var idCardLast = idCard.substring(17);//得到最后一位身份证号码
+            //如果等于2，则说明校验码是10，身份证号码最后一位应该是X
+            if (idCardMod == 2) {
+                if (idCardLast == "X" || idCardLast == "x") {
+                    return true;
+                    //alert("恭喜通过验证啦！");
+                } else {
+                    return false;
+                    //alert("身份证号码错误！");
+                }
+            } else {
+                //用计算出的验证码与最后一位身份证号码匹配，如果一致，说明通过，否则是无效的身份证号码
+                if (idCardLast == idCardY[idCardMod]) {
+                    //alert("恭喜通过验证啦！");
+                    return true;
+                } else {
+                    return false;
+                    //alert("身份证号码错误！");
+                }
+            }
+        }
+    } else {
+        //alert("身份证格式不正确!");
+        return false;
+    }
 }

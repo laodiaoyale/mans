@@ -33,29 +33,38 @@
                     <label class="com-lab">姓名</label>
                     <input class="com-span"  id="name" required/>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 ">
-                    <label class="com-lab" for="sex"> 性别</label>
-                    <select class="com-span" id="sex" required>
-                        <option value="0">-请选择-</option>
-                        <option value="1">男</option>
-                        <option value="2">女</option>
-                    </select>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 ">
-                    <label class="com-lab">年龄</label>
-                    <input class="com-span"  id="age"/>
-                    <!--<select class="form-control " id="age"  onmousedown="if(this.options.length>6){this.size=7}" onblur="this.size=0" onchange="this.size=0"/>-->
-                </div>
-            </div>
-            <div class="row">
-
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">身份号</label>
-                    <input class="com-span"  id="idCard"  required/>
+                    <input class="com-span"  id="idCard" maxlength="18" required />
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">手机号</label>
                     <input class="com-span" id="mobile" maxlength="11"  onkeyup="value=value.replace(/[^\d]/g,'')" required/>
+                </div>
+                <!--<div class="col-lg-4 col-md-4 col-sm-4 ">-->
+                    <!--<label class="com-lab" for="sex"> 性别</label>-->
+                    <!--<select class="com-span" id="sex" required>-->
+                        <!--<option value="0">-请选择-</option>-->
+                        <!--<option value="1">男</option>-->
+                        <!--<option value="2">女</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+                <!--<div class="col-lg-4 col-md-4 col-sm-4 ">-->
+                    <!--<label class="com-lab">年龄</label>-->
+                    <!--<input class="com-span"  id="age"/>-->
+                    <!--&lt;!&ndash;<select class="form-control " id="age"  onmousedown="if(this.options.length>6){this.size=7}" onblur="this.size=0" onchange="this.size=0"/>&ndash;&gt;-->
+                <!--</div>-->
+            </div>
+            <div class="row">
+
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab" for="realName"> 真实姓名</label>
+                    <input class="com-span"  id="realName"/>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab" for="realCard"> 真实身份证</label>
+                    <input class="com-span"  id="realCard" maxlength="18"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab" >学历</label>
@@ -137,7 +146,7 @@
                     <input class="com-span"  id="bankCard"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                    <label class="com-lab">开卡行</label>
+                    <label class="com-lab">账户名</label>
                     <input class="com-span-5"  id="bankName"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 detailBox endTime">
@@ -177,15 +186,6 @@
                         <option value="3">离职未替换</option>
                         <option value="4">待购买保险</option>
                     </select>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <label class="com-lab" for="realName"> 真实姓名</label>
-                    <input class="com-span"  id="realName"/>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <label class="com-lab" for="realCard"> 真实身份证</label>
-                    <input class="com-span"  id="realCard"/>
                 </div>
 
             </div>
