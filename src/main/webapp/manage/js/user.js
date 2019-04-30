@@ -684,7 +684,7 @@ function queryUserList(roleId,userName,page){
                         var str =  '         <td>' + parseInt((page - 1) * 10 +i+1) + '</td>' +
                             '                <td>' + this.name + '</td>' +
                             '                <td>' + sexAction(this.sex) + '</td>' +
-                            '                <td>' + this.age + '</td>' +
+                            '                <td>' + GetAge(this.idCard) + '</td>' +
                             '                <td>' + this.idCard + '</td>' +
                             '                <td>' + this.mobile + '</td>' +
                             '                <td>' + this.enterprise + '</td>' +
@@ -857,7 +857,7 @@ function initUser(){
     $("#wechatCode").val(user.wechatCode);
     $("#qqCode").val(user.qqCode);
     $('#address').val(user.address);
-    $("#age").val(user.age);
+    $("#age").val(GetAge(user.idCard));
     $("#education").val(user.education);
     $("#source").val(user.source);
     $('#skill').val(user.skill);
