@@ -262,6 +262,13 @@ function addUser(){
         var flag = true;
         $('input[required]').each(function() {
             if($(this).val() == ""){
+                $(this)[0].style.border="1px solid red";
+                flag =  false;
+            }
+        });
+        $('select[required]').each(function() {
+            if($(this).val() == 0){
+                $(this)[0].style.border="1px solid red";
                 flag =  false;
             }
         });
@@ -269,15 +276,10 @@ function addUser(){
             showMsg('.error-msg', "请输入必填项");
             return flag;
         }
-        $('select[required]').each(function() {
-            if($(this).val() == 0){
-                flag =  false;
-            }
-        });
-        if(!flag){
-            showMsg('.error-msg', "请选择必填项");
-            return flag;
-        }
+    //     if(!flag){
+    //         showMsg('.error-msg', "请选择必填项");
+    //         return flag;
+    //     }
         // if(name==""){
         //     showMsg('.error-msg', "请输入姓名");
         //     return false;
@@ -368,6 +370,9 @@ function addUser(){
                         window.location.href = 'wechatLogin.html';
                     } else {
                         showMsg('.error-msg', data.rspMsg);
+                        if(data.rspMsg == "该身份证号已存在"){
+                            $("#idCard")[0].style.border="1px solid red";
+                        }
                     }
                 }
             });
@@ -406,11 +411,27 @@ function editUser(){
     var relation =  $.trim($("#relation").val());
     var contactNumber =  $.trim($("#contactNumber").val());
 
-    if(name==""){
-        showMsg('.error-msg', "请输入姓名");
+    var flag = true;
+    $('input[required]').each(function() {
+        if($(this).val() == ""){
+            $(this)[0].style.border="1px solid red";
+            flag =  false;
+        }
+    });
+    $('select[required]').each(function() {
+        if($(this).val() == 0){
+            $(this)[0].style.border="1px solid red";
+            flag =  false;
+        }
+    });
+    if(!flag){
+        showMsg('.error-msg', "请输入必填项");
+        return flag;
+    }
+
+    if(!isPhoneNum(mobile) || mobile.length != 11){
+        showMsg('.error-msg', "请输入正确格式的手机号");
         return false;
-    }else if(idCard==""){
-        showMsg('.error-msg', "请输入身份证号");
     }else {
         var obj = {
             "id":id,
@@ -471,6 +492,9 @@ function editUser(){
                     window.location.href = 'wechatLogin.html';
                 } else {
                     showMsg('.error-msg', data.rspMsg);
+                    if(data.rspMsg == "该身份证号已存在"){
+                        $("#idCard")[0].style.border="1px solid red";
+                    }
                 }
             }
         });
@@ -740,6 +764,12 @@ function statusAction(status){
             break;
         case 3:
             res='已请假'
+            break;
+        case 4:
+            res='工作未满七天'
+            break;
+        case 5:
+            res='未满七已处理'
             break;
     }
     return res

@@ -4,9 +4,29 @@ import java.util.Date;
 
 public class UserReqParam {
 
+    private Integer id;
+
     private String userNo;
 
     private String roleCode;
+
+    private Integer notThisId;
+
+    public Integer getNotThisId() {
+        return notThisId;
+    }
+
+    public void setNotThisId(Integer notThisId) {
+        this.notThisId = notThisId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getUserNo() {
         return userNo;
