@@ -101,7 +101,8 @@
     from sys_role 		t1, sys_role_user t2,sys_user t3
     where t1.id = t2.role_id
     and  t1.validate_state='1'
-    and t2.target_id = t3.id and t3.user_no = #{userNo,jdbcType=VARCHAR}
+    and t2.target_id = t3.id
+    and t3.user_no = #{userNo,jdbcType=VARCHAR}
   </select>
   <!--角色查詢-->
   <select id="selectRole" resultType="java.util.Map" >

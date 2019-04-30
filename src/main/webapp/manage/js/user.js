@@ -247,7 +247,7 @@ function addUser(){
         var status = $.trim($("#status").val());
         var history = $.trim($("#history").val());
         var enterprise = $.trim($("#enterpriseAdd").find("option:selected").text());
-        if(enterprise=='请选择'){enterprise=''}
+        if(enterprise=='-请选择-'){enterprise=''}
         var enNo = $.trim($("#enterpriseAdd").val());
         var remark = $.trim($("#remark").val());
         var entryDate = $.trim($("#entryDate").val());
@@ -258,16 +258,56 @@ function addUser(){
         var contacts =  $.trim($("#contacts").val());
         var relation =  $.trim($("#relation").val());
         var contactNumber =  $.trim($("#contactNumber").val());
-        if(name==""){
-            showMsg('.error-msg', "请输入姓名");
-            return false;
-        }else if(idCard==""){
-            showMsg('.error-msg', "请输入身份证号");
-            return false;
-        }else if(enNo==""){
-            showMsg('.error-msg', "请输入企业");
+
+        var flag = true;
+        $('input[required]').each(function() {
+            if($(this).val() == ""){
+                flag =  false;
+            }
+        });
+        if(!flag){
+            showMsg('.error-msg', "请输入必填项");
+            return flag;
+        }
+        $('select[required]').each(function() {
+            if($(this).val() == 0){
+                flag =  false;
+            }
+        });
+        if(!flag){
+            showMsg('.error-msg', "请选择必填项");
+            return flag;
+        }
+        // if(name==""){
+        //     showMsg('.error-msg', "请输入姓名");
+        //     return false;
+        // }else if(sex==""){
+        //     showMsg('.error-msg', "请选择性别");
+        //     return false;
+        // }else if(idCard==""){
+        //     showMsg('.error-msg', "请输入身份证号");
+        //     return false;
+        // }else if(mobile==""){
+        //     showMsg('.error-msg', "请输入手机号");
+        //     return false;
+        // }else
+        if(!isPhoneNum(mobile) || mobile.length != 11){
+            showMsg('.error-msg', "请输入正确格式的手机号");
             return false;
         }
+        // else if(insurance==""){
+        //     showMsg('.error-msg', "请选择商业保险");
+        //     return false;
+        // }else if(enNo==""){
+        //     showMsg('.error-msg', "请选择企业");
+        //     return false;
+        // }else if(status==""){
+        //     showMsg('.error-msg', "请选择在职状态");
+        //     return false;
+        // }else if(entryDate==""){
+        //     showMsg('.error-msg', "请选择入职时间");
+        //     return false;
+        // }
         else{
             var obj = {
                 "id":localStorage.getItem('id'),
@@ -353,7 +393,7 @@ function editUser(){
     var status = $.trim($("#status").val());
     var history = $.trim($("#history").val());
     var enterprise = $.trim($("#enterpriseAdd").find("option:selected").text());
-    if(enterprise=='请选择'){enterprise=''}
+    if(enterprise=='-请选择-'){enterprise=''}
     var enNo = $.trim($("#enterpriseAdd").val());
     var remark = $.trim($("#remark").val());
 

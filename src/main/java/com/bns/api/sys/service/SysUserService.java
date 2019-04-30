@@ -236,6 +236,8 @@ public class SysUserService {
         newUser.setId(user.getId());
         newUser.setValidateState("0");
         int num = sysUserDao.updateByIdSelective(newUser);
+        //删除rule权限表数据
+        sysRoleUserDao.delRoleByTargetId(user.getId());
         if(num==0){
             throw new BaseException("信息修改失败");
         }

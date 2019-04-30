@@ -20,4 +20,6 @@ public interface SysRoleUserDao {
 
     //添加 角色用户关系
     int insertRoleUser(SysRoleUserDTO record);
+
+    void delRoleByTargetId(Long id);
 }

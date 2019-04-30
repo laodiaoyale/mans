@@ -154,4 +154,8 @@
     now(), #{createUser,jdbcType=VARCHAR}
     )
   </insert>
+
+  <delete id="delRoleByTargetId" parameterType = "long" >
+    DELETE  from sys_role_user where target_id = #{id}
+  </delete>
 </mapper>

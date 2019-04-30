@@ -31,12 +31,12 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">姓名</label>
-                    <input class="com-span"  id="name" />
+                    <input class="com-span"  id="name" required/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 ">
                     <label class="com-lab" for="sex"> 性别</label>
-                    <select class="com-span" id="sex">
-                        <option value="0">全部</option>
+                    <select class="com-span" id="sex" required>
+                        <option value="0">-请选择-</option>
                         <option value="1">男</option>
                         <option value="2">女</option>
                     </select>
@@ -51,11 +51,11 @@
 
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">身份号</label>
-                    <input class="com-span"  id="idCard" />
+                    <input class="com-span"  id="idCard"  required/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">手机号</label>
-                    <input class="com-span" id="mobile" maxlength="11"  onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                    <input class="com-span" id="mobile" maxlength="11"  onkeyup="value=value.replace(/[^\d]/g,'')" required/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab" >学历</label>
@@ -74,8 +74,8 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">在职状态</label>
-                    <select class="com-span" id="status">
-                        <option value="0">--</option>
+                    <select class="com-span" id="status" required>
+                        <option value="0">-请选择-</option>
                         <option value="1">在职</option>
                         <option value="2">离职</option>
                         <option value="3">已请假</option>
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab">所属企业</label>
-                    <select class="com-span" id="enterpriseAdd">
+                    <select class="com-span" id="enterpriseAdd" required>
                     </select>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
@@ -125,8 +125,8 @@
                     <input class="com-span-5"  id="address"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 detailBox startTime">
-                    <label class="com-lab-5">入职时间</label>
-                    <input class="com-span optionList" id="entryDate" />
+                    <label class="com-lab">入职时间</label>
+                    <input class="com-span optionList" id="entryDate" required/>
                 </div>
             </div>
             <div class="row">
@@ -168,7 +168,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <label class="com-lab" for="insurance"> 商业保险</label>
-                    <select class="com-span" id="insurance">
+                    <select class="com-span" id="insurance" required>
                         <option value="0">-请选择-</option>
                         <option value="1">已购买保险</option>
                         <option value="2">离职已替换</option>
@@ -216,7 +216,10 @@
 <!--<script src="../js/feedback.js"></script>-->
 <script src="../js/libs/bootstrap-datetimepicker.min.js"></script>
 <script src="../js/libs/bootstrap-datetimepicker.zh-CN.js"></script>
-
+<script>
+    $('input[required]').after('<span style="color:red">*</span>');
+    $('select[required]').after('<span style="color:red">*</span>');
+</script>
 <script>
      $("body").on("click",function(event){
          if(event.target.className != "cludeBox"){

@@ -102,7 +102,7 @@ function getEnterprises(){
             if (data.rspCode === '000000') {
                 var items = data.body;
                 $("#enterpriseAdd").html(""); //绑定模号下拉菜单
-                $("#enterpriseAdd").append($("<option value=\"\">请选择</option>"));
+                $("#enterpriseAdd").append($("<option value=\"\">-请选择-</option>"));
                 for (var i = 0; i < items.length; i++) {
                     $("#enterpriseAdd").append($("<option value=\"" + items[i].id + "\">" + items[i].enCode + "</option>"));
                 }
