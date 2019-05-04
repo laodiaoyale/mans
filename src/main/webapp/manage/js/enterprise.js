@@ -25,7 +25,6 @@ $(function () {
     })
 
     $("#enterpriseTable").on('click','.redactTlt',function () {
-        alert(0);
         var user =  JSON.stringify($(this).parents("tr").data());
         sessionStorage.setItem("user",user);
         window.location.href = "enterprise_add.html?type=edit";

@@ -157,7 +157,6 @@ $(function () {
             "path":extname,
         };
         var _obj = JSON.stringify(obj, 'utf-8');
-        alert(name);
         $.ajax({
             headers: {
                 token: localStorage.getItem('LoginToken')

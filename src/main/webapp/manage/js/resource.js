@@ -463,11 +463,11 @@ function queryResourceInfoList(roleId,userName,page){
                         var str =  '         <td>' + parseInt((page - 1) * 10 +i+1) + '</td>' +
                             '                <td>' + this.name + '</td>' +
                             '                <td>' + sexAction(this.sex) + '</td>' +
-                            '                <td>' + GetAge(this.idCard) + '</td>' +
+                            // '                <td>' + GetAge(this.idCard) + '</td>' +
                             '                <td>' + this.idCard + '</td>' +
+                            '                <td>' + setDistribution(this.distribution) + '</td>' +
                             '                <td>' + this.mobile1 + '</td>' +
                             '                <td>' + this.mobile2 + '</td>' +
-                            '                <td>' + setDistribution(this.distribution) + '</td>' +
                             '                <td>' + this.region + '</td>' +
                             '                <td>' + this.bankCard + '</td>' +
                             '                <td>' + this.bankName + '</td>' +
@@ -479,7 +479,7 @@ function queryResourceInfoList(roleId,userName,page){
                             if(localStorage.getItem("roleCode")=="admin"){
                                 str =str+'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
                                     '<span class="delTit">删除</span>' ;
-                            }else if(localStorage.getItem("roleCode")=="root"){
+                            }else if(localStorage.getItem("roleCode")=="001"){
                                 str =str+'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>';
                             }
                             str =str+'</td>';
