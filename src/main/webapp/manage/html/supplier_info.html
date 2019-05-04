@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>贝诺胜企业管理系统</title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="../js/libs/build_standalone.css">
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <!-- page -->
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/customerInfo.css">
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box newWrap">
+    <div class="newTitle">
+        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+        <span>资源管理 > <a href="supplier_list.html">供应商资源管理 </a><label id="path"> > 员工详情</label></span>
+    </div>
+    <div class="queryWrap addUserHtml">
+        <input type="hidden" id="id" />
+        <div class="listOfOptions">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <label class="com-lab">姓名</label>
+                    <input class="com-span"  id="name" required/>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <label class="com-lab">身份号</label>
+                    <input class="com-span"  id="idCard" maxlength="18" required />
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 ">
+                    <label class="com-lab" for="distribution"> 主要人员</label>
+                    <select class="com-span" id="distribution" required>
+                        <option value="0">-请选择-</option>
+                        <option value="1">大龄工</option>
+                        <option value="2">年轻人</option>
+                        <option value="3">均有</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 ">
+                    <label class="com-lab" for="supplier"> 供应商等级</label>
+                    <select class="com-span" id="supplier" required>
+                        <option value="0">-请选择-</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">手机号1</label>
+                    <input class="com-span" id="mobile1" maxlength="11"  onkeyup="value=value.replace(/[^\d]/g,'')" />
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">手机号2</label>
+                    <input class="com-span" id="mobile2" maxlength="11"  onkeyup="value=value.replace(/[^\d]/g,'')" />
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab" for="region"> 区域</label>
+                    <input class="com-span"  id="region" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">开户行</label>
+                    <input class="com-span"  id="bankName"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">银行卡号</label>
+                    <input class="com-span"  id="bankCard"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">开户行地址</label>
+                    <input class="com-span-5"  id="bankAddress"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">公司</label>
+                    <input class="com-span"  id="company"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <label class="com-lab">家庭住址</label>
+                    <input class="com-span" id="address"/>
+                </div>
+            </div>
+            <!--<div class="row">-->
+            <!--<div class="col-lg-12 col-md-12 col-sm-12">-->
+            <!--<label class="com-lab">备注</label>-->
+            <!--<textarea  class="com-span-12" id="remark"></textarea>-->
+            <!--</div>-->
+            <!--</div>-->
+
+        </div>
+        <div class="submitBox">
+            <button id="submitBtn_infoUser">返回</button>
+        </div>
+    </div>
+</div>
+</div>
+<div class="mask" style="display: none;"></div>
+
+<div class="error-msg"></div>
+<!--修改密码-->
+<div class="reset-password"></div>
+<script src="../js/libs/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/util.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/menu.js"></script>
+<script src="../js/supplier.js"></script>
+<script>
+     $("body").on("click",function(event){
+         if(event.target.className != "cludeBox"){
+             $(".roleSelect").hide()
+         }
+     })
+</script>
+</body>
+</html>
