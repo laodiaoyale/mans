@@ -17,7 +17,8 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 // 验证手机号是否正确
 function isPhoneNum(phoneNum) {
-    var reg = /^1(([3|8|7|5][0-9])|(5[^4|\D]))\d{8}$/;
+    // var reg = /^1(([3|8|7|5][0-9])|(5[^4|\D]))\d{8}$/;
+    var reg = /^1(([0-9][0-9])|(5[^4|\D]))\d{8}$/;
     return reg.test(phoneNum);
 }
 
