@@ -103,6 +103,7 @@
     and  t1.validate_state='1'
     and t2.target_id = t3.id
     and t3.user_no = #{userNo,jdbcType=VARCHAR}
+    and t3.validate_state = 1
   </select>
   <!--角色查詢-->
   <select id="selectRole" resultType="java.util.Map" >
