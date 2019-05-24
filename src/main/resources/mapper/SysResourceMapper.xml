@@ -64,6 +64,7 @@
     <if test="roleCode != null and roleCode != ''">
       and t4.role_code = #{roleCode}
     </if>
+    order by resource_id
   </select>
 
   <select id="querySysResource" parameterType="java.util.Map" resultMap="SysResourceTree">

@@ -29,6 +29,16 @@ public class LoginRespBo {
 
     private String roleCode;
 
+    private String homeUrl;
+
+    public String getHomeUrl() {
+        return homeUrl;
+    }
+
+    public void setHomeUrl(String homeUrl) {
+        this.homeUrl = homeUrl;
+    }
+
     public String getToken() {
         return token;
     }

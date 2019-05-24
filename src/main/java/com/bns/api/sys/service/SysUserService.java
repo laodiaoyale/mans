@@ -1,16 +1,15 @@
 package com.bns.api.sys.service;
 
-import com.bns.dao.sys.SysEnterpriseDao;
-import com.bns.model.sys.*;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.bns.api.sys.bo.LoginRespBo;
 import com.bns.api.sys.vo.LoginUserVO;
 import com.bns.api.sys.vo.SysUserRegisterVO;
 import com.bns.api.sys.vo.SysUserVo;
-import com.bns.dao.sys.SysRoleDao;
+import com.bns.dao.sys.SysEnterpriseDao;
 import com.bns.dao.sys.SysRoleUserDao;
 import com.bns.dao.sys.SysUserDao;
+import com.bns.model.sys.*;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import common.exception.BaseException;
 import common.message.JsonResult;
 import common.message.RespCodeCostant;
@@ -21,10 +20,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.*;
 
-
+/**
+ * 系统用户服务
+ */
 @Service
 public class SysUserService {
 
@@ -38,7 +38,8 @@ public class SysUserService {
     private SysRoleUserDao sysRoleUserDao;
     @Autowired
     private SysEnterpriseDao sysEnterpriseDao;
-
+    @Autowired
+    private SysResourceService sysResourceService;
 
     /***
      * 登录
@@ -59,10 +60,7 @@ public class SysUserService {
             throw new BaseException("您的账号或密码有误，请重新登陆");
         }
         String  uuid = UUID.randomUUID().toString();
-//        JYJedisCache.set(user.getUserNo(),uuid, CashloanConstants.Wechat.OUTTIME);
-//        JYJedisCache.set(uuid,user.getUserNo(), CashloanConstants.Wechat.OUTTIME);
         SysRoleDTO role = sysRoleService.queryRoleByUserId(loginUserVO.getUserNo());
-//        JYJedisCache.set(uuid+"_roleId",role.getId().toString(),CashloanConstants.Wechat.OUTTIME);
         LoginRespBo loginRespBo = new LoginRespBo();
         BeanUtils.copyProperties(user,loginRespBo);
         loginRespBo.setToken(uuid);
@@ -70,10 +68,12 @@ public class SysUserService {
         loginRespBo.setRoleCode(role.getRoleCode());
         loginRespBo.setRoleName(role.getRoleName());
         loginRespBo.setPassword(loginUserVO.getPassword());
-
+        List<SysResourceRoleDTO> urlList = sysResourceService.getSysResourceUrl(role.getRoleCode());
+        if(urlList!=null){
+            loginRespBo.setHomeUrl(urlList.get(0).getResourceUrl());
+        }
         jsonResult.setError(RespCodeCostant.OK);
         jsonResult.setBody(loginRespBo);
-        System.out.println(jsonResult.toString());
         return   jsonResult;
     }
 

@@ -66,11 +66,7 @@ function loginFn(){
                     localStorage.setItem('LoginId', login_id);
                     //记住账号
                     SaveAccount();
-                    if(_data.roleCode == '001' ){
-                        window.location.href = 'resource_list.html';
-                    }else {
-                        window.location.href = 'user.html';
-                    }
+                    window.location.href =  _data.homeUrl;
                 }else if(data.rspCode==='-999999'){
                     localStorage.removeItem("LoginName");
                     localStorage.removeItem("LoginToken");
