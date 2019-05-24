@@ -80,7 +80,7 @@ function getRoleListFn(){
     })
 }
 //渲染基本权限
-if(window.location.pathname == '/cashloan-manageH5/html/role_add.html'){
+if(window.location.pathname == '/manage/html/role_add.html'){
     getBasicPermissions();
 }
 function getBasicPermissions(callbak){
