@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>贝诺胜企业管理系统</title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="../js/libs/build_standalone.css">
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <script src="../js/libs/page/kkpager.min.js"></script>
+    <!-- page -->
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/customerInfo.css">
+    <link rel="stylesheet" href="../js/libs/css/swiper-3.4.2.min.css" />
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box newWrap">
+    <div class="newTitle">
+        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+        <span>员工管理 > <a href="user.html">员工列表</a><label id="path"> > 批量修改人员</label></span>
+    </div>
+    <div class="queryWrap addUserHtml">
+        <input type="hidden" id="id" />
+        <div class="listOfOptions">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="com-lab" for="insurance"> 商业保险</label>
+                    <select class="com-span" id="insurance" required>
+                        <option value="0">-请选择-</option>
+                        <option value="1">已购买保险</option>
+                        <option value="2">离职已替换</option>
+                        <option value="3">离职未替换</option>
+                        <option value="4">待购买保险</option>
+                    </select>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="com-lab">在职状态</label>
+                    <select class="com-span" id="status" required>
+                        <option value="0">-请选择-</option>
+                        <option value="1">在职</option>
+                        <option value="2">离职</option>
+                        <option value="3">已请假</option>
+                        <option value="4">工作未满七天</option>
+                        <option value="5">未满七已处理</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 detailBox endTime">
+                    <label class="com-lab">离职时间</label>
+                    <input class="com-span optionList" id="leaveDate" />
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <label class="com-lab">所属企业</label>
+                    <select class="com-span" id="enterpriseAdd" required>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="submitBox">
+            <button id="batch_updateUser">提交</button>
+            <button id="submitBtn_cancel">取消</button>
+        </div>
+    </div>
+</div>
+<div class="mask" style="display: none;"></div>
+
+<div class="error-msg"></div>
+<!--修改密码-->
+<div class="reset-password"></div>
+<script src="../js/libs/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/util.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/menu.js"></script>
+<script src="../js/user.js"></script>
+<script src="../js/userAdd.js"></script>
+<script src="../js/libs/swiper-3.4.2.jquery.min.js"></script>
+<!--<script src="../js/feedback.js"></script>-->
+<script src="../js/libs/bootstrap-datetimepicker.min.js"></script>
+<script src="../js/libs/bootstrap-datetimepicker.zh-CN.js"></script>
+<script>
+    $('input[required]').after('<span style="color:red">*</span>');
+    $('select[required]').after('<span style="color:red">*</span>');
+</script>
+<script>
+     $("body").on("click",function(event){
+         if(event.target.className != "cludeBox"){
+             $(".roleSelect").hide()
+         }
+     })
+</script>
+</body>
+</html>

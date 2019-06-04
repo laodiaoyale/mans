@@ -72,16 +72,14 @@ $(function () {
 
     // 点击编辑跳转到编辑页面
     $('#updateUserBtn').click(function () {
-        //TODO　记录IDS
         var allVal = $("input:checkbox:checked").map(function(index,elem) {
             return $(elem).val();
         }).get().join(',');
-
-        alert(allVal);
-        var ids = new Array();
-        for(var i=0;i<selected.length;i++){
-            ids[i] = selected[i].id;
+        if(allVal==''){
+            showMsg('.error-msg', "请至少选中一条数据");
+            return;
         }
+        sessionStorage.setItem("updateIds",allVal);
         window.location.href = 'user_update.html';
     });
     // 点击编辑跳转到编辑页面
@@ -215,6 +213,66 @@ $(function () {
                 alert("导入excel出错！");
             }
         }
+        });
+    });
+
+    $("#batch_updateUser").click(function () {
+        editUser();
+        // var ids = $.trim($("#id").val());
+        var insurance =  $.trim($("#insurance").val());
+        var status = $.trim($("#status").val());
+        var leaveDate = $.trim($("#leaveDate").val());
+        var enterprise = $.trim($("#enterpriseAdd").find("option:selected").text());
+        if(enterprise=='-请选择-'){enterprise=''}
+        var enNo = $.trim($("#enterpriseAdd").val());
+        $('select[required]').each(function() {
+            if($(this).val() == 0){
+                $(this)[0].style.border="1px solid red";
+                flag =  false;
+            }
+        });
+
+        var obj = {
+            "ids":ids,
+            "status":status,
+            "enterprise":enterprise,
+            "enNo":enNo,
+            "leaveDate":leaveDate,
+            "insurance":insurance,
+        };
+        var _obj = JSON.stringify(obj, 'utf-8');
+
+        $.ajax({
+            headers: {
+                token: localStorage.getItem('LoginToken')
+            },
+            type: "POST",
+            contentType: "text/html; charset=UTF-8",
+            url: "/api/user/batchUpdate",//员工修改
+            data: _obj,
+            dataType: 'json',
+            success: function (data) {
+                if (data.rspCode === '000000') {
+                    showMsg($('.error-msg'), '提交成功');
+                    setTimeout(function () {
+                        window.location.href = 'user.html' ;
+                    });
+                } else if (data.rspCode === '-999999') {
+                    localStorage.removeItem("LoginName");
+                    localStorage.removeItem("LoginToken");
+                    localStorage.removeItem("userNo");
+                    localStorage.removeItem("LoginJob");
+                    localStorage.removeItem("LoginDepartment");
+                    localStorage.removeItem("LoginRoleName");
+                    showMsg($('.error-msg'), data.rspMsg);
+                    window.location.href = 'wechatLogin.html';
+                } else {
+                    showMsg('.error-msg', data.rspMsg);
+                    if(data.rspMsg == "该身份证号已存在"){
+                        $("#idCard")[0].style.border="1px solid red";
+                    }
+                }
+            }
         });
     });
 
@@ -1141,7 +1199,7 @@ function validateIdCard(idCard) {
 }
 function initTableCheckbox() {
     var $thr = $('table thead tr');
-    // var $checkAllTh = $('<th><input type="checkbox" id="checkAll" name="checkAll" /></th>');
+    var $checkAllTh = $('checkAll');
     // /*将全选/反选复选框添加到表头最前，即增加一列*/
     // $thr.prepend($checkAllTh);
     /*“全选/反选”复选框*/

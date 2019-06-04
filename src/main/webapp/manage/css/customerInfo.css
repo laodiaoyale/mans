@@ -1002,6 +1002,7 @@ border-bottom:1px solid #EEEFF0;
 }
 #submitBtn_infoUser,
 #submitBtn_addUser,
+#batch_updateUser,
 #submitBtn_cancel,
 #submitBtn_addRole,
 #submitBtn_editRole{
