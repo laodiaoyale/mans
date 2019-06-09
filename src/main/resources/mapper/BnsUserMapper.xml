@@ -197,4 +197,31 @@
     </if>
     ORDER BY t1.create_time DESC
   </select>
+
+
+  <update id="batchUpdate" parameterType="com.bns.model.user.BnsUser">
+    update bns_user t1
+    <set>
+      <if test="status != null and status != 0">
+         t1.status = #{status},
+      </if>
+
+      <if test="leaveDate != null">
+         t1.leave_date = #{leaveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enNo != null and enNo != 0">
+        t1.en_no = #{enNo},
+      </if>
+      <if test="enterprise != null and enterprise != ''">
+        t1.enterprise = #{enterprise},
+      </if>
+      <if test="insurance != null and insurance != 0">
+        t1.insurance = #{insurance},
+      </if>
+    </set>
+    where id in
+    <foreach collection="bids" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+  </update>
 </mapper>

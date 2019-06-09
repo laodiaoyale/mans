@@ -10,6 +10,21 @@ public class BnsUser{
     private Integer id;
 
     /**
+     * 批量时传达
+     */
+    private String ids;
+
+    private String[] bids;
+
+    public String[] getBids() {
+        return bids;
+    }
+
+    public void setBids(String[] bids) {
+        this.bids = bids;
+    }
+
+    /**
      * 姓名
      */
     private String name;
@@ -384,4 +399,11 @@ public class BnsUser{
         this.city = city;
     }
 
+    public String getIds() {
+        return ids;
+    }
+
+    public void setIds(String ids) {
+        this.ids = ids;
+    }
 }

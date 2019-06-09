@@ -27,4 +27,5 @@ public interface BnsUserDao {
 
     List<BnsUser> selectCountByIdCard(String idCard);
 
+    void batchUpdate(BnsUser bnsUser);
 }

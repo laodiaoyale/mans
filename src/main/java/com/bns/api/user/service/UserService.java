@@ -422,4 +422,11 @@ public class UserService extends BaseController{
         }
         return null;
     }
+
+    public void batchUpdate(BnsUser bnsUser) {
+        String[] ids = bnsUser.getIds().split(",");
+        bnsUser.setBids(ids);
+        bnsUser.setDelFlag((byte)1);
+        userDao.batchUpdate(bnsUser);
+    }
 }

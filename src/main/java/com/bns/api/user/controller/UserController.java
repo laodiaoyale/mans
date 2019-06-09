@@ -71,6 +71,19 @@ public class UserController extends BaseController{
         userService.addOrUpdate(bnsUser);
         return initJsonResult();
     }
+
+    /**
+     * 批量修改数据
+     * @param bnsUser
+     * @return
+     * @throws BaseException
+     */
+    @RequestMapping(value="/batchUpdate")
+    public JsonResult batchUpdate(BnsUser bnsUser) throws BaseException {
+        userService.batchUpdate(bnsUser);
+        return initJsonResult();
+    }
+
     /**
      * OK
      * @param bnsUser

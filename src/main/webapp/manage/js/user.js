@@ -217,21 +217,24 @@ $(function () {
     });
 
     $("#batch_updateUser").click(function () {
-        editUser();
-        // var ids = $.trim($("#id").val());
+        var ids = sessionStorage.getItem('updateIds');
         var insurance =  $.trim($("#insurance").val());
         var status = $.trim($("#status").val());
         var leaveDate = $.trim($("#leaveDate").val());
         var enterprise = $.trim($("#enterpriseAdd").find("option:selected").text());
         if(enterprise=='-请选择-'){enterprise=''}
         var enNo = $.trim($("#enterpriseAdd").val());
+        var flag = true;
         $('select[required]').each(function() {
             if($(this).val() == 0){
                 $(this)[0].style.border="1px solid red";
                 flag =  false;
             }
         });
-
+        if(!flag){
+            showMsg('.error-msg', "请输入必填项");
+            return flag;
+        }
         var obj = {
             "ids":ids,
             "status":status,
