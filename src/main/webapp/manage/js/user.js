@@ -271,9 +271,6 @@ $(function () {
                     window.location.href = 'wechatLogin.html';
                 } else {
                     showMsg('.error-msg', data.rspMsg);
-                    if(data.rspMsg == "该身份证号已存在"){
-                        $("#idCard")[0].style.border="1px solid red";
-                    }
                 }
             }
         });
