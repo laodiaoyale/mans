@@ -21,6 +21,21 @@ public class ResourceReqParam {
     private Byte sex;
 
 
+    /**
+     * 区域
+     */
+    private String region;
+
+    /**
+     * 公司
+     */
+    private String company;
+
+    /**
+     * 人员
+     */
+    private String distribution;
+
     private int pageNum = 1;
 
     private int pageSize = 10;
@@ -94,5 +109,29 @@ public class ResourceReqParam {
 
     public void setSex(Byte sex) {
         this.sex = sex;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getDistribution() {
+        return distribution;
+    }
+
+    public void setDistribution(String distribution) {
+        this.distribution = distribution;
     }
 }

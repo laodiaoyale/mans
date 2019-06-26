@@ -118,6 +118,9 @@ $(function () {
         $("#inpName").val("");
         $("#sex").prop('selectedIndex', 0);
         $("#idCard").val("");
+        $("#region").prop('selectedIndex', 0);
+        $("#company").prop('selectedIndex', 0);
+        $("#distribution").prop('selectedIndex', 0);
     });
 
 
@@ -441,6 +444,9 @@ function queryResourceInfoList(roleId,userName,page){
         "pageSize":10,
         "name":userName,
         "sex":sex,
+        "region":$.trim($("#region").val()),
+        "company":$.trim($("#company").val()),
+        "distribution":$.trim($("#distribution").val()),
         "type":2,
         "idCard":$.trim($("#idCard").val()),
         "userNo":localStorage.getItem('userNo'),

@@ -57,6 +57,16 @@
     <if test="type != null and type != 0">
       and t1.type = #{type}
     </if>
+
+    <if test="company != null and company != ''">
+      and t1.company = #{company}
+    </if>
+    <if test="region != null and region != ''">
+      and t1.region = #{region}
+    </if>
+    <if test="distribution != null and distribution != 0">
+      and t1.distribution = #{distribution}
+    </if>
     ORDER BY t1.create_time DESC
   </select>
 
