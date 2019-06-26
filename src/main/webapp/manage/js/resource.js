@@ -1,6 +1,8 @@
 $(function () {
     getRole();
     if(window.location.href.indexOf("resource_list.html")>-1){
+        getCompany();
+        getRegion();
         queryResourceInfoList("","",1);
     }
     if(window.location.href.indexOf("resource_info.html")>-1){
@@ -697,4 +699,81 @@ function validateIdCard(idCard) {
         //alert("身份证格式不正确!");
         return false;
     }
+}
+
+function getCompany(){
+    var obj = {
+        "type":'1'
+    };
+    var _obj = JSON.stringify(obj, 'utf-8');
+    $.ajax({
+        headers: {
+            token: localStorage.getItem('LoginToken')
+        },
+        type: "POST",
+        contentType: "text/html; charset=UTF-8",
+        url: "/api/resource/getCompany",//获取公司下拉列表
+        dataType: 'json',
+        data: _obj,
+        aysnc:false,
+        success: function (data) {
+            if (data.rspCode === '000000') {
+                var items = data.body;
+                $("#company").html(""); //绑定模号下拉菜单
+                $("#company").append($("<option value=\"\">全部</option>"));
+                for (var i = 0; i < items.length; i++) {
+                    $("#company").append($("<option value=\"" + items[i] + "\">" + items[i] + "</option>"));
+                }
+            } else if (data.rspCode === '-999999') {
+                localStorage.removeItem("LoginName");
+                localStorage.removeItem("LoginToken");
+                localStorage.removeItem("userNo");
+                localStorage.removeItem("LoginJob");
+                localStorage.removeItem("LoginDepartment");
+                localStorage.removeItem("LoginRoleName");
+                showMsg($('.error-msg'), data.rspMsg);
+                window.location.href = 'wechatLogin.html';
+            } else {
+                showMsg('.error-msg', data.rspMsg);
+            }
+        }
+    });
+}
+function getRegion(){
+    var obj = {
+        "type":'1'
+    };
+    var _obj = JSON.stringify(obj, 'utf-8');
+    $.ajax({
+        headers: {
+            token: localStorage.getItem('LoginToken')
+        },
+        type: "POST",
+        contentType: "text/html; charset=UTF-8",
+        url: "/api/resource/getRegion",//获取公司下拉列表
+        dataType: 'json',
+        data: _obj,
+        aysnc:false,
+        success: function (data) {
+            if (data.rspCode === '000000') {
+                var items = data.body;
+                $("#region").html(""); //绑定模号下拉菜单
+                $("#region").append($("<option value=\"\">全部</option>"));
+                for (var i = 0; i < items.length; i++) {
+                    $("#region").append($("<option value=\"" + items[i] + "\">" + items[i] + "</option>"));
+                }
+            } else if (data.rspCode === '-999999') {
+                localStorage.removeItem("LoginName");
+                localStorage.removeItem("LoginToken");
+                localStorage.removeItem("userNo");
+                localStorage.removeItem("LoginJob");
+                localStorage.removeItem("LoginDepartment");
+                localStorage.removeItem("LoginRoleName");
+                showMsg($('.error-msg'), data.rspMsg);
+                window.location.href = 'wechatLogin.html';
+            } else {
+                showMsg('.error-msg', data.rspMsg);
+            }
+        }
+    });
 }

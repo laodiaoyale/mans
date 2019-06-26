@@ -677,6 +677,9 @@ function getRole(){
                     $('#import').css("display","block");
                     $('#export').css("display","block");
                 }
+                if(items.roleCode=="001"){
+                    $('#export').css("display","block");
+                }
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
                 localStorage.removeItem("LoginToken");
@@ -911,7 +914,7 @@ function deleteUser(id) {
             if (data.rspCode === '000000') {
                 showMsg($('.error-msg'), '删除成功');
                 setTimeout(function () {
-                    queryUserList("","",1);
+                    queryUserList("","",1,10);
                 });
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");

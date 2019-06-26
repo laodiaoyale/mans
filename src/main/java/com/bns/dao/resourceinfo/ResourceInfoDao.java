@@ -15,18 +15,15 @@ import java.util.List;
 @MyBatisRepository
 public interface ResourceInfoDao {
 
-    int deleteByPrimaryKey(Integer id);
-
     int insert(ResourceInfo record);
 
     ResourceInfo selectByPrimaryKey(Integer id);
-
-    List<BnsUser> selectAll();
 
     int updateByPrimaryKey(ResourceInfo record);
 
     List<BnsUser> findPaging(ResourceReqParam userReqParam);
 
-    List<String> getCity();
+    List<String> getCompany(Integer type);
 
+    List<String> getRegion(Integer type);
 }

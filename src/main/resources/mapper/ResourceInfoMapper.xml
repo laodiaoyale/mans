@@ -85,4 +85,12 @@
     from resource_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="getCompany" resultType="java.lang.String" parameterType="java.lang.Integer">
+    select DISTINCT company from resource_info where company is not null and company !='' and del_flag =1 and type = #{type}
+  </select>
+
+  <select id="getRegion" resultType="java.lang.String"  parameterType="java.lang.Integer">
+    select DISTINCT region from resource_info where region is not null and region !='' and del_flag =1 and type = #{type}
+  </select>
 </mapper>

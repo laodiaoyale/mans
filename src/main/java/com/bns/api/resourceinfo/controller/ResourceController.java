@@ -63,4 +63,27 @@ public class ResourceController extends BaseController{
         return initJsonResult();
     }
 
+    /**
+     * @param type
+     * @return
+     * 获取公司下拉列表
+     */
+    @RequestMapping(value="/getCompany")
+    public JsonResult getCompany(String type) throws BaseException {
+        JsonResult json = initJsonResult();
+        json.setBody(resourceService.getCompany(Integer.valueOf(type)));
+        return json;
+    }
+
+    /**
+     * @param type
+     * @return
+     * 获取区域下拉框
+     */
+    @RequestMapping(value="/getRegion")
+    public JsonResult getRegion(String type) throws BaseException {
+        JsonResult json = initJsonResult();
+        json.setBody(resourceService.getRegion(Integer.valueOf(type)));
+        return json;
+    }
 }

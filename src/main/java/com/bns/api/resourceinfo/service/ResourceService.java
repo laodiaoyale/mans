@@ -71,4 +71,15 @@ public class ResourceService extends BaseController{
         }
     }
 
+    public List<String> getCompany(Integer type) {
+        List<String> list = resourceInfoDao.getCompany(type);
+        return list;
+    }
+
+    public List<String> getRegion(Integer type) {
+        List<String> list = resourceInfoDao.getRegion(type);
+        return list;
+    }
+
+
 }
