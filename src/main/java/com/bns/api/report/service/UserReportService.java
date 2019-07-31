@@ -6,6 +6,7 @@ import com.bns.api.user.param.UserReqParam;
 import com.bns.dao.report.BnsUserReportDao;
 import com.bns.dao.sys.SysEnterpriseDao;
 import com.bns.dao.user.BnsUserDao;
+import com.bns.model.report.BnsUserReport;
 import com.bns.model.sys.SysEnterpriseDTO;
 import com.bns.model.user.BnsUser;
 import com.bns.model.user.BnsUserVo;
@@ -47,13 +48,13 @@ public class UserReportService extends BaseController{
         setEnNo(param);
         PageHelper.startPage(param.getPageNum(), param.getPageSize());
         //判断是实时查询，还是查询历史数据
-        if(param.isFlag()){
+        if(!param.isFlag()){
             //实时数据统计
-            List<BnsUser> pageList = userReportDao.findPagingByTime(param);
+            List<BnsUserReport> pageList = userReportDao. findPagingByTime(param);
             return  new PageInfo(pageList);
         }else{
             //查询历史数据统计
-            List<BnsUser> pageList = userReportDao.findPaging(param);
+            List<BnsUserReport> pageList = userReportDao.findPaging(param);
             return  new PageInfo(pageList);
         }
     }

@@ -10,9 +10,9 @@ import java.util.List;
 @MyBatisRepository
 public interface BnsUserReportDao {
 
-    List<BnsUser> findPaging(UserReportParam param);
+    List<BnsUserReport> findPaging(UserReportParam param);
 
-    List<BnsUser> findPagingByTime(UserReportParam param);
+    List<BnsUserReport> findPagingByTime(UserReportParam param);
 
     int deleteByPrimaryKey(Integer id);
 

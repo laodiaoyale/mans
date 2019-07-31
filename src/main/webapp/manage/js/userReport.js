@@ -695,51 +695,16 @@ function getRole(){
 }
 
 function queryUserList(roleId,userName,page){
-    userName = $.trim($("#inpName").val());
     department = localStorage.getItem("LoginDepartment");
     roleCode = localStorage.getItem("LoginRoleCode");
     roleName = localStorage.getItem("LoginRoleName");
-
-    var startEntryDate = $('#startEntryDate').val();
-    var endEntryDate = $("#endEntryDate").val();
-    var startLeaveDate = $('#startLeaveDate').val();
-    var endLeaveDate = $("#endLeaveDate").val();
-    var enNos= $('#enterprise').selectpicker('val');
-    if(startEntryDate!=null&&endEntryDate!=null&&endEntryDate<startEntryDate){
-        showMsg($('.error-msg'), "开始时间必须小于结束时间");
-        return;
-    }
-    if(startLeaveDate!=null&&endLeaveDate!=null&&endLeaveDate<startLeaveDate){
-        showMsg($('.error-msg'), "开始时间必须小于结束时间");
-        return;
-    }
-
-    if(roleName=="管理员"||roleCode=="user"){
-        department='';
-    }
-    var sex = $.trim($("#sex").val());
-    var insurance = $.trim($("#insurance").val());
+    var type = $.trim($("#type").val());
     var _obj = JSON.stringify({
         "pageNum":page,
         "pageSize":10,
-        "name":userName,
-        "sex":sex,
-        "minAge":$.trim($("#minAge").val()),
-        "maxAge":$.trim($("#maxAge").val()),
-        "status":$.trim($("#status").val()),
-        "idCard":$.trim($("#idCard").val()),
-        "education":$.trim($("#education").val()),
-        "city":$.trim($("#city").val()),
-        "source":$.trim($("#source").val()),
-        "department":department,
-        "startEntryDate":$.trim($("#startEntryDate").val()),
-        "endEntryDate":$.trim($("#endEntryDate").val()),
-        "startLeaveDate":$.trim($("#startLeaveDate").val()),
-        "endLeaveDate":$.trim($("#endLeaveDate").val()),
-        "insurance":insurance,
-        "enNos":enNos,
-        "userNo":localStorage.getItem('userNo'),
-        "roleCode":localStorage.getItem('LoginRoleCode')
+        "type":type,
+        "startDate":$.trim($("#startDate").val()),
+        "endDate":$.trim($("#endDate").val())
 
     }, 'utf-8');
     $.ajax({
@@ -764,25 +729,12 @@ function queryUserList(roleId,userName,page){
                         var _tr = $("<tr>");
                         var str =  '         <td><input type="checkbox" name="checkItem" value="'+this.id+'"/></td>      ' +
                             '                <td>' + parseInt((page - 1) * 10 +i+1) + '</td>' +
-                            '                <td>' + this.name + '</td>' +
-                            '                <td>' + sexAction(this.sex) + '</td>' +
-                            '                <td>' + GetAge(this.idCard) + '</td>' +
-                            '                <td>' + this.idCard + '</td>' +
-                            '                <td>' + this.mobile + '</td>' +
-                            '                <td>' + this.enterprise + '</td>' +
-                            '                <td>' + this.source + '</td>' +
-                            '                <td>' + statusAction(this.status) + '</td>' +
-                            '                <td>' + setDate(this.entryDate) + '</td>' +
-                            '                <td>' + setDate(this.leaveDate) + '</td>' +
-                            '                <td>' + insuranceAction(this.insurance) + '</td>' +
-                            '                <td id="' + this.id +'">' +
-                            '<span class="infoTlt"><a href="javascript:void(0);">详情</a></span>';
-                            if(localStorage.getItem("roleCode")=="admin"){
-                                str =str+'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
-                                    '<span class="delTit">删除</span>' ;
-                            }else if(localStorage.getItem("roleCode")=="root"){
-                                str =str+'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>';
-                            }
+                            '                <td>' + this.enName + '</td>' +
+                            '                <td>' + this.inNum + '</td>' +
+                            '                <td>' + this.outNum + '</td>' +
+                            '                <td>' + this.sumNum + '</td>' +
+                            '                <td>' + this.rate + '</td>' +
+                            '                <td id="' + this.id +'">' ;
                             str =str+'</td>';
                         _tr.html(str).data(list[i]);
                         $("#userTable tbody").append(_tr);
