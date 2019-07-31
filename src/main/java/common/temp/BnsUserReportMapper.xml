@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.temp.BnsUserReportDao">
+  <resultMap id="BaseResultMap" type="common.temp.BnsUserReport">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_no" jdbcType="INTEGER" property="userNo" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="en_id" jdbcType="INTEGER" property="enId" />
+    <result column="en_name" jdbcType="VARCHAR" property="enName" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="sum_num" jdbcType="INTEGER" property="sumNum" />
+    <result column="in_num" jdbcType="INTEGER" property="inNum" />
+    <result column="out_num" jdbcType="INTEGER" property="outNum" />
+    <result column="rate" jdbcType="DECIMAL" property="rate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bns_user_report
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="common.temp.BnsUserReport">
+    insert into bns_user_report (id, user_no, user_name, 
+      en_id, en_name, type, 
+      create_time, sum_num, in_num, 
+      out_num, rate)
+    values (#{id,jdbcType=INTEGER}, #{userNo,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{enId,jdbcType=INTEGER}, #{enName,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{sumNum,jdbcType=INTEGER}, #{inNum,jdbcType=INTEGER}, 
+      #{outNum,jdbcType=INTEGER}, #{rate,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="common.temp.BnsUserReport">
+    update bns_user_report
+    set user_no = #{userNo,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      en_id = #{enId,jdbcType=INTEGER},
+      en_name = #{enName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      sum_num = #{sumNum,jdbcType=INTEGER},
+      in_num = #{inNum,jdbcType=INTEGER},
+      out_num = #{outNum,jdbcType=INTEGER},
+      rate = #{rate,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, user_no, user_name, en_id, en_name, type, create_time, sum_num, in_num, 
+    out_num, rate
+    from bns_user_report
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_no, user_name, en_id, en_name, type, create_time, sum_num, in_num, 
+    out_num, rate
+    from bns_user_report
+  </select>
+</mapper>

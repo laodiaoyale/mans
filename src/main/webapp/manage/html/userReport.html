@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>贝诺胜企业管理系统</title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/bootstrap/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../js/libs/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="../js/libs/build_standalone.css">
+    <script src="../js/libs/jquery-1.11.1.min.js"></script>
+    <script src="../js/libs/jquery-form.js"></script>
+    <script src="../js/libs/md5.js"></script>
+    <!-- page -->
+    <link rel="stylesheet" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/customerInfo.css">
+</head>
+<body>
+<div class="loan-header" id="header"></div>
+<div class="menu-box" id="menu"></div>
+<div class="customer-box newWrap">
+    <div class="newTitle">
+        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+        员工管理 > 员工列表
+
+    </div>
+    <div class="listOfOptions">
+        <div class="row">
+            <div class="col-md-3" style="height: 30px;">
+                <label class="com-lab" for="inpName"> 姓名</label>
+                <input class="com-span" id="inpName" type="text">
+            </div>
+            <div class="col-md-2 ">
+                <label class="com-lab " for="sex"> 性别</label>
+                <select class="com-span-2" id="sex">
+                    <option value="0">全部</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="com-lab" > 年龄</label>
+                <input class="com-span" style="width: 50px" id="minAge" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                -
+                <input class="com-span" style="width: 50px" id="maxAge" maxlength="2" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                <span class="reminder">岁</span>
+            </div>
+            <div class="col-md-3">
+                <label class="com-lab" for="idCard"> 身份证号</label>
+                <input class="com-span" id="idCard" type="text">
+            </div>
+            <div class="col-md-1">
+                <button class="searchBtn" id="searchBtn"  aria-label="Left Align">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    搜索
+                </button>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <label class="com-lab" for="education"> 学历</label>
+                <select class="com-span" id="education">
+                    <option value="0">全部</option>
+                    <option value="1">小学</option>
+                    <option value="2">初中</option>
+                    <option value="3">高中</option>
+                    <option value="4">专科</option>
+                    <option value="5">本科</option>
+                    <option value="6">研究生</option>
+                    <option value="7">研究生以上</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="com-lab" for="status">在职状态</label>
+                <select class="com-span-2" id="status">
+                    <option value="0">全部</option>
+                    <option value="1">在职</option>
+                    <option value="2">离职</option>
+                    <option value="3">已请假</option>
+                    <option value="4">工作未满七天</option>
+                    <option value="5">未满七已处理</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="com-lab" for="city"> 城市</label>
+                <select  class="com-span"  id="city">
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="com-lab" for="source"> 渠道</label>
+                <input class="com-span" id="source" type="text">
+            </div>
+            <div class="col-md-1">
+                <button class="searchBtn" id="resetBtn"  aria-label="Left Align">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                    重置
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <label class="com-lab" for="insurance"> 商业保险</label>
+                <select class="com-span" id="insurance">
+                    <option value="0">-请选择-</option>
+                    <option value="1">已购买保险</option>
+                    <option value="2">离职已替换</option>
+                    <option value="3">离职未替换</option>
+                    <option value="4">待购买保险</option>
+                </select>
+            </div>
+            <div class="col-md-4 detailBox startTime">
+                <label class="com-lab">入职时间</label>
+                <input class="com-span-3 optionList" id="startEntryDate" onchange="changeValue()"/>
+                -
+                <input class="com-span-3 optionList" id="endEntryDate" onchange="changeValue()"/>
+            </div>
+            <div class="col-md-4 detailBox endTime">
+                <label class="com-lab">离职时间</label>
+                <input class="com-span-3 optionList" id="startLeaveDate" onchange="changeValue()"/>
+                -
+                <input class="com-span-3 optionList" id="endLeaveDate" onchange="changeValue()"/>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label class="com-lab" for="enterprise"> 所属企业</label>
+                <select class="selectpicker" data-none-selected-text="全部" multiple id="enterprise">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="feedbackList limitsTable">
+        <table class="table table-bordered table-hover" id="userTable" name = "userTable">
+            <thead>
+            <tr>
+                <th><input type="checkbox" id="checkAll" name="checkAll" /></th>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>身份号</th>
+                <th>手机号</th>
+                <th>所属企业</th>
+                <th>来源渠道</th>
+                <th>在职状态</th>
+                <th>入职日期</th>
+                <th>离职日期</th>
+                <th>商业保险</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <!--页码-->
+    <div class="page-nav-box noselect" id="kkpager">分页</div>
+</div>
+<div class="mask" style="display: none;"></div>
+<div class="sureDel" style="display: none;">
+    <div class="sureDelREC">
+        <p>确认删除吗？</p>
+        <div>
+            <button class="del_sure">确定</button>
+            <button class="del_cancel">取消</button>
+        </div>
+    </div>
+    <div class="sureDelSicircle"></div>
+    <img src="../images/del.png">
+</div>
+<div class="error-msg"></div>
+<!--修改密码-->
+<div class="reset-password"></div>
+<script src="../js/libs/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/libs/vendor/bootstrap/js/bootstrap-select.min.js"></script>
+<script src="../js/util.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/menu.js"></script>
+<script src="../js/libs/page/kkpager.min.js"></script>
+<link rel="stylesheet" href="../js/libs/page/kkpager.css" />
+<script src="../js/userAdd.js"></script>
+<script src="../js/libs/swiper-3.4.2.jquery.min.js"></script>
+<!--<script src="../js/feedback.js"></script>-->
+<script src="../js/libs/bootstrap-datetimepicker.min.js"></script>
+<script src="../js/libs/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="../js/userReport.js"></script>
+<script>
+    //点击其他地方收起下拉框
+    $("body").on("click",function(event){
+        if( event.target.className != "cludeBox" ){
+            $(".roleSelect").hide();
+            $('body').removeClass('ovfHiden');//使网页可滚动
+        }else {
+            $('body').addClass('ovfHiden');//使网页不可滚动
+        }
+    })
+
+</script>
+</body>
+</html>
