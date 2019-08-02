@@ -1191,3 +1191,26 @@ function initTableCheckbox() {
         $(this).find('input').click();
     });
 }
+
+function showQueyBytype() {
+    var type = $.trim($("#type").val());
+    if(type==2){
+        $("#monthDiv").show();
+        $("#yearDiv").hide();
+        $("#dateTime").hide();
+        return;
+    }
+    if(type==3){
+        $("#yearDiv").show();
+        $("#monthDiv").hide();
+        $("#dateTime").hide();
+        return;
+    }
+    if(type==4){
+        $("#yearDiv").hide();
+        $("#monthDiv").hide();
+        $("#dateTime").show();
+        return;
+    }
+
+}

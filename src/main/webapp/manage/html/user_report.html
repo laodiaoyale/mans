@@ -28,13 +28,9 @@
     </div>
     <div class="listOfOptions">
         <div class="row">
-
-        </div>
-
-        <div class="row">
             <div class="col-md-3">
                 <label class="com-lab" for="type"> 周期类型</label>
-                <select class="com-span" id="type">
+                <select class="com-span" id="type" name="type" onchange="showQueyBytype()">
                     <option value="0">全部</option>
                     <option value="1">周</option>
                     <option value="2">月</option>
@@ -42,25 +38,53 @@
                     <option value="4">自定义</option>
                 </select>
             </div>
-            <div class="col-md-4 detailBox startTime">
-                <label class="com-lab">入职时间</label>
+            <div class="col-md-2"  style="display: none;" id ="yearDiv">
+                <select class="com-span" id="year">
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                </select>
+                <label class="com-lab" for="year"> 年</label>
+            </div>
+            <div class="col-md-2"  style="display: none;" id ="monthDiv">
+                <select class="com-span" id="month">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+                <label class="com-lab" for="month"> 月</label>
+            </div>
+            <div class="col-md-4 detailBox startTime" style="display: none;" id="dateTime">
+                <label class="com-lab">时间范围</label>
                 <input class="com-span-3 optionList" id="startEntryDate" onchange="changeValue()"/>
                 -
                 <input class="com-span-3 optionList" id="endEntryDate" onchange="changeValue()"/>
             </div>
-            <div class="col-md-1">
-                <button class="searchBtn" id="searchBtn"  aria-label="Left Align">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    搜索
-                </button>
-            </div>
-            <div class="col-md-1">
-                <button class="searchBtn" id="resetBtn"  aria-label="Left Align">
-                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                    重置
-                </button>
-            </div>
         </div>
+        <!--<div class="row">-->
+            <!--<div class="col-md-3">-->
+                <!--<button class="searchBtn" id="searchBtn"  aria-label="Left Align">-->
+                    <!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span>-->
+                    <!--搜索-->
+                <!--</button>-->
+            <!--</div>-->
+            <!--<div class="col-md-3">-->
+                <!--<button class="searchBtn" id="resetBtn"  aria-label="Left Align">-->
+                    <!--<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>-->
+                    <!--重置-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+
     </div>
     <div class="feedbackList limitsTable">
         <table class="table table-bordered table-hover" id="userTable" name = "userTable">
