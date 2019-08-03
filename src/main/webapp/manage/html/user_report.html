@@ -23,7 +23,7 @@
 <div class="customer-box newWrap">
     <div class="newTitle">
         <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-        员工管理 > 员工列表
+        企业动态 > 人员汇总
 
     </div>
     <div class="listOfOptions">
@@ -31,22 +31,24 @@
             <div class="col-md-3">
                 <label class="com-lab" for="type"> 周期类型</label>
                 <select class="com-span" id="type" name="type" onchange="showQueyBytype()">
-                    <option value="0">全部</option>
-                    <option value="1">周</option>
-                    <option value="2">月</option>
-                    <option value="3">年</option>
-                    <option value="4">自定义</option>
+                    <!--<option value="0">全部</option>-->
+                    <!--<option value="1">周</option>-->
+                    <option value="1" selected>年</option>
+                    <option value="2" >月</option>
+                    <option value="3">自定义</option>
                 </select>
             </div>
-            <div class="col-md-2"  style="display: none;" id ="yearDiv">
+            <div class="col-md-3"  id ="yearDiv">
+                <!--<select class="com-span" id="year" onchange="showByYear()">-->
                 <select class="com-span" id="year">
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
                     <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
                 </select>
                 <label class="com-lab" for="year"> 年</label>
             </div>
-            <div class="col-md-2"  style="display: none;" id ="monthDiv">
+            <div class="col-md-3" style="display: none;" id ="monthDiv">
+                <!--<select class="com-span" id="month" onchange="showByMonth()">-->
                 <select class="com-span" id="month">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -65,25 +67,32 @@
             </div>
             <div class="col-md-4 detailBox startTime" style="display: none;" id="dateTime">
                 <label class="com-lab">时间范围</label>
-                <input class="com-span-3 optionList" id="startEntryDate" onchange="changeValue()"/>
+                <input class="com-span-3 optionList" id="startDate" onchange="changeValue()"/>
                 -
-                <input class="com-span-3 optionList" id="endEntryDate" onchange="changeValue()"/>
+                <input class="com-span-3 optionList" id="endDate" onchange="changeValue()"/>
             </div>
         </div>
-        <!--<div class="row">-->
-            <!--<div class="col-md-3">-->
-                <!--<button class="searchBtn" id="searchBtn"  aria-label="Left Align">-->
-                    <!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span>-->
-                    <!--搜索-->
-                <!--</button>-->
-            <!--</div>-->
-            <!--<div class="col-md-3">-->
-                <!--<button class="searchBtn" id="resetBtn"  aria-label="Left Align">-->
-                    <!--<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>-->
-                    <!--重置-->
-                <!--</button>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="row">
+            <div class="col-md-12">
+                <label class="com-lab" for="enterprise"> 所属企业</label>
+                <select class="selectpicker" data-none-selected-text="全部" multiple id="enterprise">
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <button class="searchBtn" id="searchBtn"  aria-label="Left Align">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    搜索
+                </button>
+            </div>
+            <div class="col-md-3">
+                <button class="searchBtn" id="resetBtn"  aria-label="Left Align">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                    重置
+                </button>
+            </div>
+        </div>
 
     </div>
     <div class="feedbackList limitsTable">

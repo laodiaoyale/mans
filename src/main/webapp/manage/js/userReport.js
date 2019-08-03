@@ -1,53 +1,13 @@
 $(function () {
     getRole();
-    if(window.location.href.indexOf("user.html")>-1){
+    var date=new Date;
+    var nowYear=date.getFullYear();
+    $("#year").val(nowYear)
+    // var nowMonth=date.getMonth()+1;
+    // $("#month").val(nowMonth)
+    if(window.location.href.indexOf("user_report.html")>-1){
+        getEnterprise();
         queryUserList("","",1);
-    }
-    if(window.location.href.indexOf("user_info.html")>-1){
-        $("#path").html(" > 人员信息");
-        $('#name').attr({'display' : 'disabled'});
-        $('#sex').attr({'disabled' : 'disabled'});
-        $('#job').attr({'disabled' : 'disabled'});
-        $('#mobile').css({'color' : '#999'});
-        $('#idCard').css({'color' : '#999'});
-        initUser();
-        //点击其他地方收起下拉框
-        $("body").on("click",function(event){
-            if(event.target.className != "cludeBox"){
-                $(".roleSelect").hide()
-            }
-        })
-    }
-    if(window.location.href.indexOf("user_add.html")>-1){
-        if(localStorage.getItem('LoginDepartment')!="admin"){
-            $('#enterprise').attr({'disabled' : 'disabled'});
-            $("#enterprise").val(localStorage.getItem('LoginDepartment'));
-        }
-        $('#userName').attr({'disabled' : 'disabled'});
-        $('#newUserNo').css({'color' : '#999'});
-        $('#userName').css({'color' : '#999'});
-        // initUser();
-        //点击其他地方收起下拉框
-        $("body").on("click",function(event){
-            if(event.target.className != "cludeBox"){
-                $(".roleSelect").hide()
-            }
-        })
-    }
-    if(window.location.href.indexOf("user_add.html?type=edit")>-1){
-        $("#path").html(" > 人员修改");
-        $('#passwordItem').css({'display' : 'none'});
-        $('#newUserNo').attr({'disabled' : 'disabled'});
-        $('#userName').attr({'disabled' : 'disabled'});
-        $('#newUserNo').css({'color' : '#999'});
-        $('#userName').css({'color' : '#999'});
-        initUser();
-        //点击其他地方收起下拉框
-        $("body").on("click",function(event){
-            if(event.target.className != "cludeBox"){
-                $(".roleSelect").hide()
-            }
-        })
     }
     // 权限管理 > 权限列表 > 增加人员 点击下拉框选择li
     // 权限管理 > 权限列表 > 权限人员修改 点击下拉框选择li
@@ -63,136 +23,28 @@ $(function () {
         });
     });
 
-    // 点击编辑跳转到编辑页面
-    $('#addUserBtn').click(function () {
-        window.location.href = 'user_add.html';
-    });
+    $("#resetBtn").click(function () {
+        $("#type").val(3)
+        var date=new Date;
+        var nowYear=date.getFullYear();
+        $("#year").val(nowYear)
+        // var nowMonth=date.getMonth()+1;
+        // $("#month").val(nowMonth)
+        // $('#enterprise').selectpicker('refresh');
+        getEnterprise();
+        $('#startDate').val("");
+        $("#endDate").val("");
+        $("#month").val("");
 
-    // 点击编辑跳转到编辑页面
-    $('#updateUserBtn').click(function () {
-        var allVal = $("input:checkbox:checked").map(function(index,elem) {
-            return $(elem).val();
-        }).get().join(',');
-        if(allVal==''){
-            showMsg('.error-msg', "请至少选中一条数据");
-            return;
-        }
-        sessionStorage.setItem("updateIds",allVal);
-        window.location.href = 'user_update.html';
-    });
-    // 点击编辑跳转到编辑页面
-    $('#submitBtn_infoUser').click(function () {
-        window.location.href = 'user.html';
-    });
-    // 点击编辑跳转到编辑页面
-    $('#submitBtn_cancel').click(function () {
-        window.location.href = 'user.html';
-    });
-    var DelId = "";
-    // 点击删除弹出二级确认页
-    $("#userTable").on('click','.delTit',function () {
-        DelId = $(this).parents("td").attr("id");
-        $('.mask').show();
-        $('.sureDel').show();
-    });
-    $("#userTable").on('click','.infoTlt',function () {
-        var user =  JSON.stringify($(this).parents("tr").data());
-        sessionStorage.setItem("user",user);
-        window.location.href = "user_info.html";
-    });
-    $("#userTable").on('click','.redactTlt',function () {
-        var user =  JSON.stringify($(this).parents("tr").data());
-        sessionStorage.setItem("user",user);
-        window.location.href = "user_add.html?type=edit";
-    });
-
-    // 点击二级确认页上取消按钮，关闭二级确认页
-    $('.del_cancel').click(function () {
-        $('.mask').hide();
-        $('.sureDel').hide();
-    });
-    $(".del_sure").click(function(){
-        $('.mask').hide();
-        $('.sureDel').hide();
-        deleteUser(DelId);
-    });
-    focusOrBlur($('#inpName'),'border-color','#398BF8','#D9D9D9');
-    focusOrBlur($('.listOfOptions .com-span'),'border-color','#398BF8','#D9D9D9');
-    $("#submitBtn_addUser").click(function () {
-        if(window.location.href.indexOf("user_add.html?type=edit")>-1){
-            editUser();
-        }else {
-            addUser();
-        }
+        $('#dateTime').hide();
+        $("#monthDiv").hide();
     });
     $("#searchBtn").click(function () {
         var roleId = $("#selectRole").attr("roleId") ;
         var userName = $.trim($("#inpName").val());
-        var sex = $.trim($("#sex").val());
-        console.log(sex)
-        var enterprise= $('#enterprise').selectpicker('val');
-        console.log(enterprise)
         queryUserList(roleId,userName,1);
     });
 
-    $("#resetBtn").click(function () {
-        $("#inpName").val("");
-        $("#sex").prop('selectedIndex', 0);
-        $('#minAge').val("");
-        $('#maxAge').val("");
-        $("#idCard").val("");
-        $("#education").prop('selectedIndex', 0);
-        $('#status').prop('selectedIndex', 0);
-        $('#city').val("");
-        $("#source").val("");
-        // $('#enterprise').selectpicker('refresh');
-        getEnterprise();
-        $("#insurance").prop('selectedIndex', 0);
-        $('#startEntryDate').val("");
-        $("#endEntryDate").val("");
-        $('#startLeaveDate').val("");
-        $("#endLeaveDate").val("");
-    });
-
-    //导入excel文件
-    $("#saveZipButton").on('click', function(){
-        var filepath = encodeURI(encodeURI($("#articleImageFile").val()));
-        var extname = filepath.substring(filepath.lastIndexOf(".")+1,filepath.length);//文件后缀
-        extname = extname.toLowerCase();//处理了大小写
-        if(extname!= "xls" && extname!= "xlsm" && extname!= "xlsx"){
-            alert("导入文件格式不对,请按模版导入！");
-            return;
-        }
-        var obj = {
-            "id":localStorage.getItem('id'),
-            "path":extname,
-        };
-        var _obj = JSON.stringify(obj, 'utf-8');
-        $.ajax({
-            headers: {
-                token: localStorage.getItem('LoginToken')
-            },
-            type: "POST",
-            contentType: "text/html; charset=UTF-8",
-            url: "/api/user/importData",//员工增加
-            data: _obj,
-            dataType: 'json',
-            // 告诉jQuery不要去处理发送的数据
-            processData : false,
-            // 告诉jQuery不要去设置Content-Type请求头
-            contentType : false,
-            beforeSend:function(){
-                console.log("正在进行，请稍候");
-            },
-            success : function(responseStr) {
-                if(responseStr=="01"){
-                    alert("导入成功");
-                }else{
-                    alert("导入失败");
-                }
-            }
-        });
-    });
 
     $(document).ready(function(){
         $("#importExcel").click(function(){ if(checkData()){
@@ -698,11 +550,28 @@ function queryUserList(roleId,userName,page){
     department = localStorage.getItem("LoginDepartment");
     roleCode = localStorage.getItem("LoginRoleCode");
     roleName = localStorage.getItem("LoginRoleName");
+    var year = $.trim($("#year").val());
     var type = $.trim($("#type").val());
+    var month = $.trim($("#month").val());
+    var flag = true;
+    var date=new Date;
+    var nowYear=date.getFullYear();
+    // if(!year == nowYear){
+    //     flag = false;
+    // }
+    // var nowMonth=date.getMonth()+1;
+    // if(month != ''&& month!=null &&month!=nowMonth){
+    //     flag = false;
+    // }
+    var enNos= $('#enterprise').selectpicker('val');
     var _obj = JSON.stringify({
         "pageNum":page,
         "pageSize":10,
         "type":type,
+        "year":year,
+        "month":month,
+        "flag":flag,
+        "enNos":enNos,
         "startDate":$.trim($("#startDate").val()),
         "endDate":$.trim($("#endDate").val())
 
@@ -727,14 +596,13 @@ function queryUserList(roleId,userName,page){
                 if(list.length>0) {
                     $.each(list, function (i) {
                         var _tr = $("<tr>");
-                        var str =  '         <td><input type="checkbox" name="checkItem" value="'+this.id+'"/></td>      ' +
+                        var str =  
                             '                <td>' + parseInt((page - 1) * 10 +i+1) + '</td>' +
                             '                <td>' + this.enName + '</td>' +
                             '                <td>' + this.inNum + '</td>' +
                             '                <td>' + this.outNum + '</td>' +
                             '                <td>' + this.sumNum + '</td>' +
-                            '                <td>' + this.rate + '</td>' +
-                            '                <td id="' + this.id +'">' ;
+                            '                <td>' + this.rate + '%</td>' ;
                             str =str+'</td>';
                         _tr.html(str).data(list[i]);
                         $("#userTable tbody").append(_tr);
@@ -1194,23 +1062,239 @@ function initTableCheckbox() {
 
 function showQueyBytype() {
     var type = $.trim($("#type").val());
-    if(type==2){
-        $("#monthDiv").show();
-        $("#yearDiv").hide();
-        $("#dateTime").hide();
-        return;
-    }
-    if(type==3){
+    if(type==1){//年
         $("#yearDiv").show();
         $("#monthDiv").hide();
         $("#dateTime").hide();
         return;
     }
-    if(type==4){
+    if(type==2){//月
+        $("#yearDiv").show();
+        $("#monthDiv").show();
+        $("#dateTime").hide();
+
+        $('#month').val("");
+        return;
+    }
+    if(type==3){//自定义
         $("#yearDiv").hide();
         $("#monthDiv").hide();
         $("#dateTime").show();
         return;
     }
 
+}
+
+// function showByYear() {
+//     var roleId = $("#selectRole").attr("roleId") ;
+//     var userName = $.trim($("#inpName").val());
+//     queryUserList(roleId,userName,1);
+// }
+
+function getStatisticDataList() {
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    // 指定图表的配置项和数据
+    var names = [];    //类别数组（实际用来盛放X轴坐标值）
+    var series1 = [];
+    var series2 = [];
+    var series3 = [];
+    var series4 = [];
+    var series5 = [];
+    var series6 = [];
+    var series7 = [];
+    var series8 = [];
+    var series9 = [];
+    var series10 = [];
+    var series11 = [];
+    var series12 = [];
+    var stageType;
+    var option = {
+        title: {
+            text: ''
+        },
+        tooltip : {
+            enterable:true,
+            trigger: 'axis',
+            axisPointer : { // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'// 默认为直线，可选为：'line' | 'shadow'
+            },
+            formatter:function(params)//数据格式
+            {
+                var relVal = params[0].name+ '&nbsp;&nbsp;' +stageType;
+                relVal+='<table style="color: white;font-size: 14px">'
+                for(i= 0 ;i<params.length;i++){
+                    relVal += '<tr><td>'+(i+1)+'.</td><td>&nbsp;&nbsp;</td><td>';
+                    relVal += params[i].seriesName+'</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>';
+                    relVal += params[i].value +'人</td></tr>';
+                }
+                relVal+='</table>';
+                return relVal;
+            }
+        },
+        legend: [
+            {data: ['0-5分钟(含)', '5-30分钟(含)', '30分钟-1小时(含)', '1-12小时(含)', '12-24小时(含)', '1-3天(含)']},
+            {top: '20', data: ['3-7天(含)', '7-14天(含)', '14-30天(含)', '30-60天(含)', '60-90天(含)', '90天以上']}
+        ],
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                //保存图片
+//                    saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: '0-5分钟(含)',
+                type: 'line',
+                data: series1
+            },
+            {
+                name: '5-30分钟(含)',
+                type: 'line',
+                data: series2
+            },
+            {
+                name: '30分钟-1小时(含)',
+                type: 'line',
+                data: series3
+            },
+            {
+                name: '1-12小时(含)',
+                type: 'line',
+                data: series4
+            },
+            {
+                name: '12-24小时(含)',
+                type: 'line',
+                data: series6
+            },
+            {
+                name: '1-3天(含)',
+                type: 'line',
+                data: series6
+            },
+
+            {
+                name: '3-7天(含)',
+                type: 'line',
+                data: series7
+            },
+            {
+                name: '7-14天(含)',
+                type: 'line',
+                data: series8
+            },
+            {
+                name: '14-30天(含)',
+                type: 'line',
+                data: series9
+            },
+            {
+                name: '30-60天(含)',
+                type: 'line',
+                data: series10
+            },
+            {
+                name: '60-90天(含)',
+                type: 'line',
+                data: series11
+            },
+            {
+                name: '90天以上',
+                type: 'line',
+                data: series12
+            }
+        ]
+    };
+    myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+    $.ajax({
+        type: 'post',
+        url: getAbsolutePathWithProtocol("/sjpTWmsUserBehavior/getxAxis"),//请求数据的地址
+        data: {"startDate":$("#startDate").val(),"endDate":$("#endDate").val(),"stageType":$("#stageType").val()},
+        dataType: "json",        //返回数据形式为json
+        success: function (result) {
+            stageType = result.data.stageType;
+            //请求成功时执行该函数内容，result即为服务器返回的json对象
+            $.each(result.data.xAxis, function (index, item) {
+                names.push(item);    //挨个取出类别并填入类别数组
+            });
+            $.each(result.data.series[0], function (index, item) {
+                series1.push(item);
+            });
+            $.each(result.data.series[1], function (index, item) {
+                series2.push(item);
+            });
+            $.each(result.data.series[2], function (index, item) {
+                series3.push(item);
+            });
+            $.each(result.data.series[3], function (index, item) {
+                series4.push(item);
+            });
+            $.each(result.data.series[4], function (index, item) {
+                series5.push(item);
+            });
+            $.each(result.data.series[5], function (index, item) {
+                series6.push(item);
+            });
+            $.each(result.data.series[6], function (index, item) {
+                series7.push(item);
+            });
+            $.each(result.data.series[7], function (index, item) {
+                series8.push(item);
+            });
+            $.each(result.data.series[8], function (index, item) {
+                series9.push(item);
+            });
+            $.each(result.data.series[9], function (index, item) {
+                series10.push(item);
+            });
+            $.each(result.data.series[10], function (index, item) {
+                series11.push(item);
+            });
+            $.each(result.data.series[11], function (index, item) {
+                series12.push(item);
+            });
+            myChart.hideLoading();    //隐藏加载动画
+            myChart.setOption({        //加载数据图表
+                xAxis: {
+                    data: names
+                },
+
+                series: [
+                    {data: series1},
+                    {data: series2},
+                    {data: series3},
+                    {data: series4},
+                    {data: series5},
+                    {data: series6},
+                    {data: series7},
+                    {data: series8},
+                    {data: series9},
+                    {data: series10},
+                    {data: series11},
+                    {data: series12}
+                ]
+            });
+        },
+        error: function (errorMsg) {
+            //请求失败时执行该函数
+            alert("图表请求数据失败!");
+            myChart.hideLoading();
+        }
+    });
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
 }

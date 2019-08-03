@@ -17,14 +17,13 @@ import common.exception.BaseException;
 import common.message.BaseController;
 import common.util.StringUtil;
 import common.util.date.DateUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author zhaolei
@@ -48,7 +47,7 @@ public class UserReportService extends BaseController{
         setEnNo(param);
         PageHelper.startPage(param.getPageNum(), param.getPageSize());
         //判断是实时查询，还是查询历史数据
-        if(!param.isFlag()){
+        if(param.isFlag()){
             //实时数据统计
             List<BnsUserReport> pageList = userReportDao. findPagingByTime(param);
             return  new PageInfo(pageList);
@@ -58,6 +57,66 @@ public class UserReportService extends BaseController{
             return  new PageInfo(pageList);
         }
     }
+//    public Map searchUserBehavior(String startDate, String endDate, Integer stageType) {
+//        List<SysEnterpriseVo> list =  sysEnterpriseDao.queryEnterpriseByUserNo(userReportParam.getUserNo());
+//        if(CollectionUtils.isNotEmpty(list)){
+//
+//        }
+//        Map params = new HashMap();
+//        params.put("startDate",startDate);
+//        params.put("endDate",endDate);
+//        params.put("stageType",stageType);
+//        params.put("asc","ASC");
+//        List<SjpTwmsUserBehaviorDTO> list = sjpTwmsUserBehaviorDao.searchUserBehavior(params);
+//        //定义X轴
+//        List xAxis = new ArrayList();
+//        int[] y1 = new int[list.size()];
+//        int[] y2 = new int[list.size()];
+//        int[] y3 = new int[list.size()];
+//        int[] y4 = new int[list.size()];
+//        int[] y5 = new int[list.size()];
+//        int[] y6 = new int[list.size()];
+//        int[] y7 = new int[list.size()];
+//        int[] y8 = new int[list.size()];
+//        int[] y9 = new int[list.size()];
+//        int[] y10 = new int[list.size()];
+//        int[] y11 = new int[list.size()];
+//        int[] y12 = new int[list.size()];
+//        for(int i = 0;i<list.size();i++){
+//            SjpTwmsUserBehaviorDTO dto = list.get(i);
+//            xAxis.add(DateUtil.formatDate(dto.getDataDate(),"yyyy-MM-dd"));
+//            y1[i] = dto.getFiveMinutes();
+//            y2[i] = dto.getHalfHour();
+//            y3[i] = dto.getOneHour();
+//            y4[i] = dto.getHalfDay();
+//            y5[i] = dto.getOneDay();
+//            y6[i] = dto.getThreeDays();
+//            y7[i] = dto.getOneWeek();
+//            y8[i] = dto.getTwoWeeks();
+//            y9[i] = dto.getOneMonth();
+//            y10[i] = dto.getTwoMonths();
+//            y11[i] = dto.getThreeMonths();
+//            y12[i] = dto.getMoreThan();
+//        }
+//        List series = new ArrayList();
+//        series.add(y1);//五分钟内的数据
+//        series.add(y2);
+//        series.add(y3);
+//        series.add(y4);
+//        series.add(y5);
+//        series.add(y6);
+//        series.add(y7);
+//        series.add(y8);
+//        series.add(y9);
+//        series.add(y10);
+//        series.add(y11);
+//        series.add(y12);
+//        Map map = new HashMap();
+//        map .put("xAxis",xAxis);
+//        map .put("series",series);
+//        map.put("stageType",UserBehavior.getName(stageType));
+//        return map;
+//    }
 
 
 //    public List<String> getCity() {

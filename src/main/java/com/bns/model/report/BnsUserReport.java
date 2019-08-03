@@ -21,7 +21,7 @@ public class BnsUserReport {
     /**
      * 企业编号
      */
-    private Integer enId;
+    private Integer enNo;
 
     /**
      * 企业名称
@@ -82,12 +82,12 @@ public class BnsUserReport {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public Integer getEnId() {
-        return enId;
+    public Integer getEnNo() {
+        return enNo;
     }
 
-    public void setEnId(Integer enId) {
-        this.enId = enId;
+    public void setEnNo(Integer enNo) {
+        this.enNo = enNo;
     }
 
     public String getEnName() {

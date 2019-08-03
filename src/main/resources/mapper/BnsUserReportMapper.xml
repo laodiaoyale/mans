@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_no" jdbcType="INTEGER" property="userNo" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="en_id" jdbcType="INTEGER" property="enId" />
+    <result column="en_no" jdbcType="INTEGER" property="enNo" />
     <result column="en_name" jdbcType="VARCHAR" property="enName" />
     <result column="type" jdbcType="TINYINT" property="type" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -18,31 +18,35 @@
   <select id="findPagingByTime" parameterType="com.bns.model.report.BnsUserReport" resultMap="BaseResultMap">
       SELECT
           t.en_no,
-          t.enterprise,
+          t.enterprise as en_name,
           sum( 1 ) AS sum_num,
-          sum( CASE WHEN STATUS IN ( 0, 1, 4, 5 ) THEN 1 ELSE 0 END ) AS in_num  ,
-          sum( CASE WHEN STATUS = 2 OR STATUS = 3 THEN 1 ELSE 0 END ) AS out_num ,
-          concat(ROUND(sum( CASE WHEN STATUS IN ( 0, 1, 4, 5 ) THEN 1 ELSE 0 END )/sum( 1 )*100,2),'%')  as rate
+          sum( CASE WHEN STATUS = 1 THEN 1 ELSE 0 END ) AS in_num  ,
+          sum( CASE WHEN STATUS != 1 THEN 1 ELSE 0 END ) AS out_num ,
+          ROUND(sum( CASE WHEN STATUS = 1 THEN 1 ELSE 0 END )/sum( 1 )*100,2) as rate
       FROM
           bns_user t
       WHERE t.en_no IS NOT NULL
           <!--周-->
           <if test="type != null and type == 1">
-            and t.entry_date >= date_add(curdate(),INTERVAL -weekday(curdate()) day)
+            and t.entry_date = date_add(curdate(),INTERVAL -weekday(curdate()) day)
           </if>
           <!--月-->
           <if test="type != null and type == 2">
-            and t.entry_date >=  concat(year(curdate()),'-',month(curdate()),'-','1')
+
+              and date_format(t.entry_date,'%Y-%c') =  concat(#{year},'-',#{month})
           </if>
           <!--年-->
           <if test="type != null and type == 3">
-            and t.entry_date >=  concat(year(curdate()),'-','01','-','01')
+              and date_format(t.entry_date,'%Y') =  #{year}
           </if>
           <if test="startDate != null and startDate != ''">
             and t.entry_date >=  #{startDate}
           </if>
           <if test="endDate != null and endDate != ''">
             <![CDATA[ and t.entry_date <=  #{endDate} ]]>
+          </if>
+          <if test="enNo != null and enNo != ''">
+              and t.en_no in (${enNo} )
           </if>
       GROUP BY
           t.en_no,
