@@ -27,23 +27,25 @@
           bns_user t
       WHERE t.en_no IS NOT NULL
           <!--周-->
+          <!--<if test="type != null and type == 1">-->
+            <!--and t.entry_date = date_add(curdate(),INTERVAL -weekday(curdate()) day)-->
+          <!--</if>-->
+          <!--年-->
           <if test="type != null and type == 1">
-            and t.entry_date = date_add(curdate(),INTERVAL -weekday(curdate()) day)
+              and date_format(t.entry_date,'%Y') =  #{year}
           </if>
           <!--月-->
           <if test="type != null and type == 2">
-
               and date_format(t.entry_date,'%Y-%c') =  concat(#{year},'-',#{month})
           </if>
-          <!--年-->
+
           <if test="type != null and type == 3">
-              and date_format(t.entry_date,'%Y') =  #{year}
-          </if>
-          <if test="startDate != null and startDate != ''">
-            and t.entry_date >=  #{startDate}
-          </if>
-          <if test="endDate != null and endDate != ''">
-            <![CDATA[ and t.entry_date <=  #{endDate} ]]>
+              <if test="startDate != null and startDate != ''">
+                and t.entry_date >=  #{startDate}
+              </if>
+              <if test="endDate != null and endDate != ''">
+                <![CDATA[ and t.entry_date <=  #{endDate} ]]>
+              </if>
           </if>
           <if test="enNo != null and enNo != ''">
               and t.en_no in (${enNo} )

@@ -24,7 +24,7 @@ $(function () {
     });
 
     $("#resetBtn").click(function () {
-        $("#type").val(3)
+        $("#type").val(1)
         var date=new Date;
         var nowYear=date.getFullYear();
         $("#year").val(nowYear)
@@ -572,6 +572,8 @@ function queryUserList(roleId,userName,page){
         "month":month,
         "flag":flag,
         "enNos":enNos,
+        "userNo":localStorage.getItem('userNo'),
+        "roleCode":localStorage.getItem('LoginRoleCode'),
         "startDate":$.trim($("#startDate").val()),
         "endDate":$.trim($("#endDate").val())
 
@@ -1073,7 +1075,7 @@ function showQueyBytype() {
         $("#monthDiv").show();
         $("#dateTime").hide();
 
-        $('#month').val("");
+        $('#month').val(1);
         return;
     }
     if(type==3){//自定义
