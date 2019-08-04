@@ -564,6 +564,8 @@ function queryUserList(roleId,userName,page){
     //     flag = false;
     // }
     var enNos= $('#enterprise').selectpicker('val');
+    var startDate = $('#startDate').val();
+    var endDate = $("#endDate").val();
     var _obj = JSON.stringify({
         "pageNum":page,
         "pageSize":10,
@@ -572,6 +574,8 @@ function queryUserList(roleId,userName,page){
         "month":month,
         "flag":flag,
         "enNos":enNos,
+        "startDate":startDate,
+        "endDate":endDate,
         "userNo":localStorage.getItem('userNo'),
         "roleCode":localStorage.getItem('LoginRoleCode'),
         "startDate":$.trim($("#startDate").val()),
@@ -1299,4 +1303,38 @@ function getStatisticDataList() {
     });
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
+}
+
+// 点击显示日历
+$('#startDate').datetimepicker({
+    format: 'yyyy-mm-dd',
+    minView: 2,
+    language: 'zh-CN',
+    endDate: getNowFormatDate(),
+    autoclose: true
+});
+$('#endDate').datetimepicker({
+    format: 'yyyy-mm-dd',
+    minView: 2,
+    language: 'zh-CN',
+    endDate: getNowFormatDate(),
+    autoclose: true
+});
+// 显示日历函数
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+        + " " + date.getHours() + seperator2 + date.getMinutes()
+        + seperator2 + date.getSeconds();
+    return currentdate;
 }
