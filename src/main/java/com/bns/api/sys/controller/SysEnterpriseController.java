@@ -1,5 +1,6 @@
 package com.bns.api.sys.controller;
 
+import com.bns.api.sys.param.EnterpriseParam;
 import com.bns.api.sys.service.SysEnterpriseService;
 import com.bns.api.sys.vo.SysRoleVo;
 import com.bns.model.sys.SysEnterpriseDTO;
@@ -26,9 +27,9 @@ public class SysEnterpriseController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value="/list")
-    public JsonResult queryEnterprise(SysEnterpriseDTO sysEnterpriseDTO) throws Exception {
+    public JsonResult queryEnterprise(EnterpriseParam param) throws Exception {
         JsonResult json = initJsonResult();
-        json=sysEnterpriseService.queryEnterprise(sysEnterpriseDTO);
+        json=sysEnterpriseService.queryEnterprise(param);
         return json;
     }
 

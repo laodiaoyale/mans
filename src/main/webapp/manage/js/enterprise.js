@@ -1,4 +1,7 @@
 $(function () {
+    if(window.location.href.indexOf("enterprise.html")>-1){
+        queryUserList(1);
+    }
     // 点击跳转到编辑页
     $('.limitsWrap').click(function () {
         window.location.href = 'enterprise_add.html';
@@ -25,7 +28,7 @@ $(function () {
     })
 
     $("#searchBtn").click(function () {
-        getRoleListFn();
+        queryUserList(1);
     });
 
     $("#enterpriseTable").on('click','.redactTlt',function () {
@@ -58,45 +61,56 @@ function focusOrBlur(obj,ele,val1,val2) { //对象，元素，属性值1，属�
         $(this).css(ele,val2);
     });
 }
-//角色列表渲染
-getRoleListFn();
-function getRoleListFn(){
-    var status = $('#status').val();
-    var obj = {
+
+function queryUserList(page){
+    var status = $.trim($("#status").val());
+    var _obj = JSON.stringify({
+        "pageNum":page,
+        "pageSize":10,
         "status":status
-    };
-    var _obj = JSON.stringify(obj,'utf-8');
+    }, 'utf-8');
     $.ajax({
         headers: {
-            token:localStorage.getItem('LoginToken')
+            token: localStorage.getItem('LoginToken')
         },
         type: "POST",
         contentType: "text/html; charset=UTF-8",
-        url: "/api/sysEnterprise/list",//角色列表接口
-        data: _obj,
+        url: "/api/sysEnterprise/list",//获取角色下拉框
         dataType: 'json',
-        success : function(data){
-            if(data.rspCode==='000000'){
-                var roleListData = data.body;
-                if(roleListData){
-                    var roleList = $.map(roleListData,function(o,i){
-                        var str ='<td>' +
-                            // '<span class="redactTlt"><a href="javascript:void(0);"><img src="../images/compile.svg" />编辑</a></span>' +
-                            '<span class="delTit noselect" data-id = "'+o.id +'"><img src="../images/delete.svg" />删除</span></td>' ;
-                        return '<tr>' +
-                            '                <td>'+(i+1)+'</td>' +
-                            '                <td>'+ o.enCode +'</td>' +
-                            '                <td>'+ o.enterprise +'</td>' +
-                            '                <td>'+ o.createDate +'</td>' +
-                            '                <td>'+ GetStatus(o.status)  +'</td>' +
-                            str +
-                            '            </tr>';
-                    }).join('');
-                    $('.role-list').html(roleList);
+        data: _obj,
+        success: function (data) {
+            if (data.rspCode === '000000') {
+                var list = data.body.list;
+                totalPage =data.body.lastPage;
+                definedPaginator(page, totalPage, "kkpager", function (n) {
+                    queryUserList(n);
+                });
+                $("#enterpriseTable tbody").html("");
+                if(list.length>0) {
+                    $.each(list, function (i) {
+                        var _tr = $("<tr>");
+                        var str =
+                            '                <td>' + parseInt((page - 1) * 10 +i+1) + '</td>' +
+                            '                <td>'+ this.enCode +'</td>' +
+                            '                <td>'+ this.enterprise +'</td>' +
+                            '                <td>'+ this.createDate +'</td>' +
+                            '                <td>'+ GetStatus(this.status)  +'</td>' +
+                            '                <td id="' + this.id +'">' ;
+                            if(localStorage.getItem("roleCode")=="admin"){
+                                str =str+'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>' +
+                                    '<span class="delTit">删除</span>' ;
+                            }else if(localStorage.getItem("roleCode")=="root"){
+                                str =str+'<span class="redactTlt"><a href="javascript:void(0);">编辑</a></span>';
+                            }
+                        str =str+'</td>';
+                        _tr.html(str).data(list[i]);
+                        $("#enterpriseTable tbody").append(_tr);
+                    });
                 }else{
-                    $('.role-list').html('<p class="empt-msg">暂无数据</p>');
+                    $("#enterpriseTable tbody").append('<tr class="table_null"><td style="padding-left: 15px; text-align: left;" colspan=\'15\'>暂无数据</td></tr>');
                 }
-            }else if(data.rspCode==='-999999'){
+
+            } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
                 localStorage.removeItem("LoginToken");
                 localStorage.removeItem("userNo");
@@ -104,12 +118,12 @@ function getRoleListFn(){
                 localStorage.removeItem("LoginDepartment");
                 localStorage.removeItem("LoginRoleName");
                 showMsg($('.error-msg'), data.rspMsg);
-                window.location.href = 'login.html';
-            }else{
-                showMsg($('.error-msg'), data.rspMsg);
+                window.location.href = 'wechatLogin.html';
+            } else {
+                showMsg('.error-msg', data.rspMsg);
             }
         }
-    })
+    });
 }
 
 function GetStatus(status) {
@@ -175,6 +189,7 @@ function roleAddFn(){
     var enCode = $('#enCode').val(),
         enterprise = $('#enterprise').val(),
         remark = $('#remark').val();
+    var id = $('#id').val();
     var status = $('#status').val();
     if(enCode==''){
         showMsg($('.error-msg'), '公司简称不能为空');
@@ -185,7 +200,8 @@ function roleAddFn(){
             'enCode':enCode,
             'enterprise':enterprise,
             'status':status,
-            'remark':remark
+            'remark':remark,
+            'id':id
         };
         var _obj = JSON.stringify(obj,'utf-8');
         $.ajax({
@@ -260,6 +276,7 @@ function roleDelteFn(){
 
 function initUser(){
     var enterprise = JSON.parse(sessionStorage.getItem("enterprise"));
+    debugger;
     $("#id").val(enterprise.id);
     $("#enCode").val(enterprise.enCode);
     $("#enterprise").val(enterprise.enterprise);

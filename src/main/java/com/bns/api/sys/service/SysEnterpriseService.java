@@ -1,6 +1,7 @@
 package com.bns.api.sys.service;
 
 import com.bns.api.sys.bo.MenuRespBo;
+import com.bns.api.sys.param.EnterpriseParam;
 import com.bns.api.sys.vo.SysEnterpriseVo;
 import com.bns.api.sys.vo.SysRoleVo;
 import com.bns.dao.sys.SysEnterpriseDao;
@@ -11,6 +12,8 @@ import com.bns.model.sys.SysResourceRoleDTO;
 import com.bns.model.sys.SysRoleDTO;
 import com.bns.model.sys.SysUserDTO;
 import com.bns.model.user.BnsUser;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import common.exception.BaseException;
 import common.message.JsonResult;
 import common.message.RespCodeCostant;
@@ -30,10 +33,11 @@ public class SysEnterpriseService {
     @Autowired
     private SysEnterpriseDao sysEnterpriseDao;
 
-    public JsonResult queryEnterprise(SysEnterpriseDTO sysEnterpriseDTO) throws Exception {
+    public JsonResult queryEnterprise(EnterpriseParam param) throws Exception {
+        PageHelper.startPage(param.getPageNum(), param.getPageSize());
         JsonResult jsonResult=new JsonResult();
-        List<SysEnterpriseDTO> roleList = sysEnterpriseDao.queryEnterprise(sysEnterpriseDTO);
-        jsonResult.setBody(roleList);
+        List<SysEnterpriseDTO> roleList = sysEnterpriseDao.queryEnterprise(param);
+        jsonResult.setBody(new PageInfo(roleList));
         jsonResult.setError(RespCodeCostant.OK);
         return jsonResult;
     }

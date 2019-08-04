@@ -1,5 +1,6 @@
 package com.bns.dao.sys;
 
+import com.bns.api.sys.param.EnterpriseParam;
 import com.bns.api.sys.vo.SysEnterpriseVo;
 import com.bns.model.sys.SysEnterpriseDTO;
 import com.bns.model.sys.SysUserEnterpriseDTO;
@@ -10,7 +11,7 @@ import java.util.List;
 @MyBatisRepository
 public interface SysEnterpriseDao {
 
-    List<SysEnterpriseDTO> queryEnterprise(SysEnterpriseDTO sysEnterpriseDTO);
+    List<SysEnterpriseDTO> queryEnterprise(EnterpriseParam param);
 
     int deleteByPrimaryKey(Integer id);
 
