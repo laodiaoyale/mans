@@ -13,6 +13,7 @@
     <result column="in_num" jdbcType="INTEGER" property="inNum" />
     <result column="out_num" jdbcType="INTEGER" property="outNum" />
     <result column="rate" jdbcType="VARCHAR" property="rate" />
+      <result column="data_time" jdbcType="VARCHAR" property="dataTime" />
   </resultMap>
   
   <select id="findPagingByTime" parameterType="com.bns.model.report.BnsUserReport" resultMap="BaseResultMap">
@@ -78,11 +79,11 @@
   </delete>
   <insert id="insert" parameterType="com.bns.model.report.BnsUserReport">
     insert into bns_user_report (id, user_no, user_name, 
-      en_id, en_name, type, 
+      en_no, en_name, type,
       create_time, sum_num, in_num, 
       out_num, rate)
     values (#{id,jdbcType=INTEGER}, #{userNo,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
-      #{enId,jdbcType=INTEGER}, #{enName,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
+      #{enNo,jdbcType=INTEGER}, #{enName,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT},
       #{createTime,jdbcType=TIMESTAMP}, #{sumNum,jdbcType=INTEGER}, #{inNum,jdbcType=INTEGER}, 
       #{outNum,jdbcType=INTEGER}, #{rate,jdbcType=DECIMAL})
   </insert>
@@ -90,7 +91,7 @@
     update bns_user_report
     set user_no = #{userNo,jdbcType=INTEGER},
       user_name = #{userName,jdbcType=VARCHAR},
-      en_id = #{enId,jdbcType=INTEGER},
+      en_no = #{enNo,jdbcType=INTEGER},
       en_name = #{enName,jdbcType=VARCHAR},
       type = #{type,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -101,14 +102,22 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, user_no, user_name, en_id, en_name, type, create_time, sum_num, in_num, 
+    select id, user_no, user_name, en_no, en_name, type, create_time, sum_num, in_num,
     out_num, rate
     from bns_user_report
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, user_no, user_name, en_id, en_name, type, create_time, sum_num, in_num, 
+  <select id="selectAll" parameterType="com.bns.model.report.BnsUserReport" resultMap="BaseResultMap" >
+    select id, user_no, user_name, en_no, en_name, type, create_time, sum_num, in_num,
     out_num, rate
     from bns_user_report
+    where 1=1
+      <if test="userNo != null and userNo != ''">
+          user_no =#{userNo,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null and type != 0">
+          type =#{type,jdbcType=TINYINT}
+      </if>
+      order by data_time ,en_no
   </select>
 </mapper>

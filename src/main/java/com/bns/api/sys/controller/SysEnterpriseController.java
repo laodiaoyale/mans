@@ -26,9 +26,9 @@ public class SysEnterpriseController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value="/list")
-    public JsonResult queryEnterprise() throws Exception {
+    public JsonResult queryEnterprise(SysEnterpriseDTO sysEnterpriseDTO) throws Exception {
         JsonResult json = initJsonResult();
-        json=sysEnterpriseService.queryEnterprise();
+        json=sysEnterpriseService.queryEnterprise(sysEnterpriseDTO);
         return json;
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 @MyBatisRepository
 public interface SysEnterpriseDao {
 
-    List<SysEnterpriseDTO> queryEnterprise();
+    List<SysEnterpriseDTO> queryEnterprise(SysEnterpriseDTO sysEnterpriseDTO);
 
     int deleteByPrimaryKey(Integer id);
 

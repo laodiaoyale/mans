@@ -10,11 +10,21 @@ public class SysEnterpriseDTO {
 
     private String enterprise;
 
+    private Byte status;
+
     private Date createDate;
 
     private Date updateDate;
 
     private String remark;
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
 
     public Byte getDelFlag() {
         return delFlag;

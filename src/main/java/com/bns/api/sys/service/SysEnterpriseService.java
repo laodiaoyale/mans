@@ -30,9 +30,9 @@ public class SysEnterpriseService {
     @Autowired
     private SysEnterpriseDao sysEnterpriseDao;
 
-    public JsonResult queryEnterprise() throws Exception {
+    public JsonResult queryEnterprise(SysEnterpriseDTO sysEnterpriseDTO) throws Exception {
         JsonResult jsonResult=new JsonResult();
-        List<SysEnterpriseDTO> roleList = sysEnterpriseDao.queryEnterprise();
+        List<SysEnterpriseDTO> roleList = sysEnterpriseDao.queryEnterprise(sysEnterpriseDTO);
         jsonResult.setBody(roleList);
         jsonResult.setError(RespCodeCostant.OK);
         return jsonResult;

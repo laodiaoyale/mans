@@ -24,13 +24,17 @@ $(function () {
         roleDelteFn();
     })
 
+    $("#searchBtn").click(function () {
+        getRoleListFn();
+    });
+
     $("#enterpriseTable").on('click','.redactTlt',function () {
-        var user =  JSON.stringify($(this).parents("tr").data());
-        sessionStorage.setItem("user",user);
+        var enterprise =  JSON.stringify($(this).parents("tr").data());
+        sessionStorage.setItem("enterprise",enterprise);
         window.location.href = "enterprise_add.html?type=edit";
     });
     if(window.location.href.indexOf("enterprise_add.html?type=edit")>-1){
-        $("#path").html(" > 人员修改");
+        $("#path").html(" > 企业修改");
         $('#passwordItem').css({'display' : 'none'});
         $('#newUserNo').attr({'disabled' : 'disabled'});
         $('#userName').attr({'disabled' : 'disabled'});
@@ -57,7 +61,10 @@ function focusOrBlur(obj,ele,val1,val2) { //对象，元素，属性值1，属�
 //角色列表渲染
 getRoleListFn();
 function getRoleListFn(){
-    var obj = new Object();
+    var status = $('#status').val();
+    var obj = {
+        "status":status
+    };
     var _obj = JSON.stringify(obj,'utf-8');
     $.ajax({
         headers: {
@@ -74,13 +81,14 @@ function getRoleListFn(){
                 if(roleListData){
                     var roleList = $.map(roleListData,function(o,i){
                         var str ='<td>' +
-                            //'<span class="redactTlt"><a href="javascript:void(0);"><img src="../images/compile.svg" />编辑</a></span>' +
+                            // '<span class="redactTlt"><a href="javascript:void(0);"><img src="../images/compile.svg" />编辑</a></span>' +
                             '<span class="delTit noselect" data-id = "'+o.id +'"><img src="../images/delete.svg" />删除</span></td>' ;
                         return '<tr>' +
                             '                <td>'+(i+1)+'</td>' +
                             '                <td>'+ o.enCode +'</td>' +
                             '                <td>'+ o.enterprise +'</td>' +
                             '                <td>'+ o.createDate +'</td>' +
+                            '                <td>'+ GetStatus(o.status)  +'</td>' +
                             str +
                             '            </tr>';
                     }).join('');
@@ -104,6 +112,22 @@ function getRoleListFn(){
     })
 }
 
+function GetStatus(status) {
+    var res='';
+    switch (status) {
+        case 0:
+            res='未知'
+            break;
+        case 1:
+            res='正在合作'
+            break;
+        case 2:
+            res='曾经合作'
+            break;
+    }
+    return res
+    
+}
 
 function getBasicPermissions(callbak){
     var obj = new Object();
@@ -150,7 +174,8 @@ function getBasicPermissions(callbak){
 function roleAddFn(){
     var enCode = $('#enCode').val(),
         enterprise = $('#enterprise').val(),
-        remark = $('#remark').val()
+        remark = $('#remark').val();
+    var status = $('#status').val();
     if(enCode==''){
         showMsg($('.error-msg'), '公司简称不能为空');
     }if(enterprise==''){
@@ -159,6 +184,7 @@ function roleAddFn(){
         var obj = {
             'enCode':enCode,
             'enterprise':enterprise,
+            'status':status,
             'remark':remark
         };
         var _obj = JSON.stringify(obj,'utf-8');
@@ -233,10 +259,10 @@ function roleDelteFn(){
 
 
 function initUser(){
-    var user = JSON.parse(sessionStorage.getItem("enterprise"));
+    var enterprise = JSON.parse(sessionStorage.getItem("enterprise"));
     $("#id").val(enterprise.id);
-    $("#name").val(user.name);
-    $("#mobile").val(user.mobile);
-    $('#sex').val(user.sex);
-    $("#idCard").val(user.idCard);
+    $("#enCode").val(enterprise.enCode);
+    $("#enterprise").val(enterprise.enterprise);
+    $('#status').val(enterprise.status);
+    $("#remark").val(enterprise.remark);
 }

@@ -9,6 +9,7 @@
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
     <result property="remark" column="remark" jdbcType="VARCHAR" />
     <result column="del_flag" jdbcType="TINYINT" property="delFlag" />
+    <result property="status" column="status" jdbcType="TINYINT" />
   </resultMap>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select *
@@ -21,9 +22,9 @@
   </delete>
 
   <insert id="insert" parameterType="com.bns.model.sys.SysEnterpriseDTO" >
-    insert into sys_enterprise (en_code, enterprise,
+    insert into sys_enterprise (en_code, enterprise,status,
     create_date, remark)
-    values (#{enCode,jdbcType=VARCHAR}, #{enterprise,jdbcType=VARCHAR},
+    values (#{enCode,jdbcType=VARCHAR}, #{enterprise,jdbcType=VARCHAR},#{status,jdbcType=TINYINT},
     now(),#{remark,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.bns.model.sys.SysEnterpriseDTO" >
@@ -31,6 +32,7 @@
     set en_code = #{enCode,jdbcType=VARCHAR},
       enterprise = #{enterprise,jdbcType=VARCHAR},
       update_date = now(),
+      status  = #{status,jdbcType=TINYINT},
       remark = #{remark,jdbcType=VARCHAR},
       del_flag = #{delFlag,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
@@ -38,6 +40,9 @@
 
   <select id="queryEnterprise" resultMap="BaseResultMap">
       select * from sys_enterprise where del_flag = 1
+      <if test="status != null and status != 0">
+        and status = #{status}
+      </if>
   </select>
 
   <resultMap id="EnterpriseVoList" type="com.bns.api.sys.vo.SysEnterpriseVo" >

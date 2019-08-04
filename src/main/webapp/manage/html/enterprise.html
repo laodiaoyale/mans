@@ -23,6 +23,22 @@
         <img src="../images/address.png" />
         <span>权限管理 > 角色列表</span>
     </div>
+    <div class="searchBox ">
+        <div class="listOfOptions" style="width: 100%">
+            <div class="row ">
+                <div class="col-md-3" style="height: 30px;">
+                    <label class="com-lab" for="status"> 合作状态</label>
+                    <select class="com-span" id="status">
+                        <option value="0">全部</option>
+                        <option value="1">正在合作</option>
+                        <option value="2">曾经合作</option>
+                    </select>
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3 text-right"> <button class="searchBtn" id="searchBtn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜索</button></div>
+            </div>
+        </div>
+    </div>
     <div class="queryWrap limitsWrap">
         <p class="add_user_tit">新增企业<img class="add_role_btn" src="../images/add.png" /></p>
     </div>
@@ -34,7 +50,7 @@
                 <th>企业简称</th>
                 <th>企业全称</th>
                 <th>创建时间</th>
-                <!--<th>备注</th>-->
+                <th>状态</th>
                 <th>操作</th>
             </tr>
             </thead>

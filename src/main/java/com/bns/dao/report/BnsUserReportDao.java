@@ -20,7 +20,7 @@ public interface BnsUserReportDao {
 
     BnsUserReport selectByPrimaryKey(Integer id);
 
-    List<BnsUserReport> selectAll();
+    List<BnsUserReport> selectAll(UserReportParam param);
 
     int updateByPrimaryKey(BnsUserReport record);
 }

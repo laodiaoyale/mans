@@ -57,17 +57,14 @@ public class UserReportService extends BaseController{
             return  new PageInfo(pageList);
         }
     }
-//    public Map searchUserBehavior(String startDate, String endDate, Integer stageType) {
-//        List<SysEnterpriseVo> list =  sysEnterpriseDao.queryEnterpriseByUserNo(userReportParam.getUserNo());
-//        if(CollectionUtils.isNotEmpty(list)){
+//    public Map searchUserBehavior(UserReportParam param) {
+//
+//        //获取当前用户下的企业
+//        List<SysEnterpriseVo> list =  sysEnterpriseDao.queryEnterpriseByUserNo(param.getUserNo());
+//        if(list!=null&&list.size()>0){
 //
 //        }
-//        Map params = new HashMap();
-//        params.put("startDate",startDate);
-//        params.put("endDate",endDate);
-//        params.put("stageType",stageType);
-//        params.put("asc","ASC");
-//        List<SjpTwmsUserBehaviorDTO> list = sjpTwmsUserBehaviorDao.searchUserBehavior(params);
+//        List<BnsUserReport> list = userReportDao.selectAll(param);
 //        //定义X轴
 //        List xAxis = new ArrayList();
 //        int[] y1 = new int[list.size()];
@@ -83,8 +80,15 @@ public class UserReportService extends BaseController{
 //        int[] y11 = new int[list.size()];
 //        int[] y12 = new int[list.size()];
 //        for(int i = 0;i<list.size();i++){
-//            SjpTwmsUserBehaviorDTO dto = list.get(i);
-//            xAxis.add(DateUtil.formatDate(dto.getDataDate(),"yyyy-MM-dd"));
+//            BnsUserReport dto = list.get(i);
+//            String dataTime = dto.getDataTime();
+//            //判断日期，x轴时间
+//            if(i==0 || !dataTime.equals(list.get(i-1).getDataTime())){
+//                xAxis.add(dataTime);
+//                continue;
+//            }
+//            //公司名称
+//            String enName = dto.getEnName();
 //            y1[i] = dto.getFiveMinutes();
 //            y2[i] = dto.getHalfHour();
 //            y3[i] = dto.getOneHour();
@@ -99,8 +103,8 @@ public class UserReportService extends BaseController{
 //            y12[i] = dto.getMoreThan();
 //        }
 //        List series = new ArrayList();
-//        series.add(y1);//五分钟内的数据
-//        series.add(y2);
+//        series.add(y1);//公司1
+//        series.add(y2);//公司2
 //        series.add(y3);
 //        series.add(y4);
 //        series.add(y5);

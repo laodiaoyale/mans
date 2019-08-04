@@ -58,6 +58,16 @@ public class BnsUserReport {
      */
     private String rate;
 
+    private String dataTime;
+
+    public String getDataTime() {
+        return dataTime;
+    }
+
+    public void setDataTime(String dataTime) {
+        this.dataTime = dataTime;
+    }
+
     public Integer getId() {
         return id;
     }
