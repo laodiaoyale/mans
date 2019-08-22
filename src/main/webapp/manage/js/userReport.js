@@ -158,7 +158,7 @@ function getUserCount(){
 
                 setTimeout(function () {
                     getUserCount();
-                }, 1000)
+                }, 1000*60)
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
                 localStorage.removeItem("LoginToken");
