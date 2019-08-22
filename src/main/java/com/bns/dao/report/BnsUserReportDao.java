@@ -2,7 +2,6 @@ package com.bns.dao.report;
 
 import com.bns.api.report.param.UserReportParam;
 import com.bns.model.report.BnsUserReport;
-import com.bns.model.user.BnsUser;
 import common.annotation.MyBatisRepository;
 
 import java.util.List;
@@ -23,4 +22,6 @@ public interface BnsUserReportDao {
     List<BnsUserReport> selectAll(UserReportParam param);
 
     int updateByPrimaryKey(BnsUserReport record);
+
+    BnsUserReport queryUserCount(BnsUserReport param);
 }

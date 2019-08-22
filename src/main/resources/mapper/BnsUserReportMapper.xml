@@ -120,4 +120,23 @@
       </if>
       order by data_time ,en_no
   </select>
+    
+    <select id="queryUserCount"  parameterType="com.bns.model.report.BnsUserReport" resultMap="BaseResultMap">
+        SELECT
+          sum( 1 ) AS sum_num,
+          sum( CASE WHEN STATUS = 1
+            <if test="type != null and type == 1">
+                and TO_DAYS(entry_date) = TO_DAYS(NOW())
+            </if>
+            THEN 1 ELSE 0 END ) AS in_num  ,
+          sum( CASE WHEN STATUS != 1
+            <if test="type != null and type == 1">
+                and TO_DAYS(leave_date) = TO_DAYS(NOW())
+            </if>
+            THEN 1 ELSE 0 END ) AS out_num ,
+          ROUND(sum( CASE WHEN STATUS = 1 THEN 1 ELSE 0 END )/sum( 1 )*100,2) as rate
+      FROM
+          bns_user t
+      WHERE t.en_no IS NOT NULL
+    </select>
 </mapper>

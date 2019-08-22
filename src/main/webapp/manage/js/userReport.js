@@ -7,6 +7,7 @@ $(function () {
     // $("#month").val(nowMonth)
     if(window.location.href.indexOf("user_report.html")>-1){
         getEnterprise();
+        getUserCount();
         queryUserList("","",1);
     }
     // 权限管理 > 权限列表 > 增加人员 点击下拉框选择li
@@ -127,6 +128,53 @@ $(function () {
     });
 
 });
+
+function getUserCount(){
+    var obj = {
+        "userNo":localStorage.getItem('userNo')
+    };
+    var _obj = JSON.stringify(obj, 'utf-8');
+    $.ajax({
+        headers: {
+            token: localStorage.getItem('LoginToken')
+        },
+        type: "POST",
+        contentType: "text/html; charset=UTF-8",
+        url: "/api/userReport/getUserCount",//获取城市下拉列表
+        dataType: 'json',
+        data: _obj,
+        aysnc:false,
+        success: function (data) {
+            if (data.rspCode === '000000') {
+                var items = data.body;
+                if(items.reportAll!=null){
+                    $('#allInNum').html(items.reportAll.inNum);
+                    $('#allOutNum').html(items.reportAll.outNum);
+                }
+                if(items.reportToday!=null){
+                    $('#todayInNum').html(items.reportToday.inNum);
+                    $('#todayOutNum').html(items.reportToday.outNum);
+                }
+
+                setTimeout(function () {
+                    getUserCount();
+                }, 1000)
+            } else if (data.rspCode === '-999999') {
+                localStorage.removeItem("LoginName");
+                localStorage.removeItem("LoginToken");
+                localStorage.removeItem("userNo");
+                localStorage.removeItem("LoginJob");
+                localStorage.removeItem("LoginDepartment");
+                localStorage.removeItem("LoginRoleName");
+                showMsg($('.error-msg'), data.rspMsg);
+                window.location.href = 'wechatLogin.html';
+            } else {
+                showMsg('.error-msg', data.rspMsg);
+            }
+        }
+    });
+}
+
 //JS校验form表单信息
 function checkData(){
     var fileDir = $("#upfile").val();

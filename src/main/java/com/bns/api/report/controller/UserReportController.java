@@ -33,6 +33,13 @@ public class UserReportController extends BaseController{
         return  ResultGenerator.goSuccessResult(userReportService.pageLite(param));
     }
 
+    @RequestMapping(value="/getUserCount")
+    public JsonResult getEnterprise() throws BaseException {
+        JsonResult json = initJsonResult();
+        json.setBody(userReportService.getUserCount());
+        return json;
+    }
+
 
     /**
      * OK

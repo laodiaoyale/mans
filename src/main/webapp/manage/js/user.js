@@ -3,6 +3,7 @@ $(function () {
     if(window.location.href.indexOf("user.html")>-1){
         getCity();
         getEnterprise();
+        // getUserCount();
         queryUserList("","",1);
     }
     if(window.location.href.indexOf("user_info.html")>-1){
@@ -503,6 +504,11 @@ function editUser(){
         showMsg('.error-msg', "请输入正确身份证号");
         return false;
     }
+    if(status==2&&leaveDate==''){
+        $("#leaveDate")[0].style.border="1px solid red";
+        showMsg('.error-msg', "请输入离职日期");
+        return false;
+    }
     var obj = {
         "id":id,
         "name":name,
@@ -593,6 +599,53 @@ function getCity(){
                 for (var i = 0; i < items.length; i++) {
                     $("#city").append($("<option value=\"" + items[i] + "\">" + items[i] + "</option>"));
                 }
+            } else if (data.rspCode === '-999999') {
+                localStorage.removeItem("LoginName");
+                localStorage.removeItem("LoginToken");
+                localStorage.removeItem("userNo");
+                localStorage.removeItem("LoginJob");
+                localStorage.removeItem("LoginDepartment");
+                localStorage.removeItem("LoginRoleName");
+                showMsg($('.error-msg'), data.rspMsg);
+                window.location.href = 'wechatLogin.html';
+            } else {
+                showMsg('.error-msg', data.rspMsg);
+            }
+        }
+    });
+}
+
+
+function getUserCount(){
+    var obj = {
+        "userNo":localStorage.getItem('userNo')
+    };
+    var _obj = JSON.stringify(obj, 'utf-8');
+    $.ajax({
+        headers: {
+            token: localStorage.getItem('LoginToken')
+        },
+        type: "POST",
+        contentType: "text/html; charset=UTF-8",
+        url: "/api/userReport/getUserCount",//获取城市下拉列表
+        dataType: 'json',
+        data: _obj,
+        aysnc:false,
+        success: function (data) {
+            if (data.rspCode === '000000') {
+                var items = data.body;
+                if(items.reportAll!=null){
+                    $('#allInNum').html(items.reportAll.inNum);
+                    $('#allOutNum').html(items.reportAll.outNum);
+                }
+                if(items.reportToday!=null){
+                    $('#todayInNum').html(items.reportToday.inNum);
+                    $('#todayOutNum').html(items.reportToday.outNum);
+                }
+
+                setTimeout(function () {
+                    getUserCount();
+                }, 1000)
             } else if (data.rspCode === '-999999') {
                 localStorage.removeItem("LoginName");
                 localStorage.removeItem("LoginToken");

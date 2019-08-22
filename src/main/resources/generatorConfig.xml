@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 	<!--加载配置项或者配置文件 -->
-	<properties resource="jdbc.properties" />
+	<properties resource="jdbc-oracle.properties" />
 
 	<!-- 在MBG工作的时候，需要额外加载的依赖包 location属性指明加载jar/zip包的全路径 -->
 	<classPathEntry location="${mysql.jdbc.driverLocation}" />
@@ -22,6 +22,7 @@
 		<!--数据库链接地址账号密码 -->
 		<jdbcConnection driverClass="${mysql.jdbc.driverClass}"
 			connectionURL="${mysql.jdbc.url}" userId="${mysql.jdbc.user}" password="${mysql.jdbc.password}">
+			<property name="remarksReporting" value="true"></property>
 		</jdbcConnection>
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
@@ -66,9 +67,9 @@
 
 		<!--生成对应表及类名 -->
 		<!--  mapperName="{0}Dao" -->
-		<table tableName="bns_user_report" mapperName="{0}Dao" enableSelectByExample="false"
+		<table schema="LCKF" tableName="wms_t_loan_plan_info" mapperName="{0}DAO" enableSelectByExample="false"
 			enableDeleteByExample="false" enableCountByExample="false"
-			enableUpdateByExample="false" selectByExampleQueryId="false">
+			enableUpdateByExample="false" selectByExampleQueryId="false" >
 			<columnOverride column="status" javaType="Integer" />
 		</table>
 	</context>

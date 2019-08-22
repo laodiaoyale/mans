@@ -49,7 +49,7 @@ public class UserReportService extends BaseController{
         //判断是实时查询，还是查询历史数据
         if(param.isFlag()){
             //实时数据统计
-            List<BnsUserReport> pageList = userReportDao. findPagingByTime(param);
+            List<BnsUserReport> pageList = userReportDao.findPagingByTime(param);
             return  new PageInfo(pageList);
         }else{
             //查询历史数据统计
@@ -153,4 +153,14 @@ public class UserReportService extends BaseController{
         }
     }
 
+    public Map<String ,Object> getUserCount() {
+        Map<String ,Object> map  = new HashMap<>();
+        BnsUserReport param = new BnsUserReport();
+        BnsUserReport reportAll = userReportDao.queryUserCount(param);
+        map.put("reportAll",reportAll);
+        param.setType((byte) 1);
+        BnsUserReport reportToday = userReportDao.queryUserCount(param);
+        map.put("reportToday",reportToday);
+        return map;
+    }
 }
