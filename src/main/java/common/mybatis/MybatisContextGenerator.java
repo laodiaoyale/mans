@@ -3,9 +3,13 @@ package common.mybatis;
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.logging.Logger;
 
+import org.mybatis.generator.api.ProgressCallback;
+import org.mybatis.generator.codegen.AbstractJavaGenerator;
 import org.mybatis.generator.codegen.mybatis3.IntrospectedTableMyBatis3SimpleImpl;
+import org.mybatis.generator.codegen.mybatis3.model.SimpleModelGenerator;
 
 /**
  * 可以通过MBG1.3.4+版本提供的table元素的mapperName属性设置统一的名称，使用{0}作为实体类名的占位符。
@@ -88,5 +92,13 @@ public class MybatisContextGenerator extends IntrospectedTableMyBatis3SimpleImpl
             sb.append("SqlProvider"); //$NON-NLS-1$
         }
         setMyBatis3SqlProviderType(sb.toString());
+
     }
+    @Override
+    protected void calculateJavaModelGenerators(List<String> warnings, ProgressCallback progressCallback) {
+        AbstractJavaGenerator javaGenerator = new SimpleModelGenerator();
+        this.initializeAbstractGenerator(javaGenerator, warnings, progressCallback);
+        this.javaModelGenerators.add(javaGenerator);
+    }
+
 }
